@@ -1,9 +1,8 @@
 #pragma once
 #include <vector>
 #include "Item.h"
-//추상 클래스 구현 class IInventory
 
-
+//추상 클래스 구현 class I_Inventory
 
 
 

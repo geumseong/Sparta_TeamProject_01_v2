@@ -4,7 +4,7 @@
 
 using namespace std;
 
-enum Type
+enum E_Type
 {
 	Potion,
 	Equip,
@@ -18,10 +18,10 @@ private:
 	string name;
 	int price;
 	int count;
-	Type type;
+	E_Type type;
 
 public:
-	Item(string name, int price, int count, Type type) : name(name), price(price), count(count), type(type) {}
+	Item(string name, int price, int count, E_Type type) : name(name), price(price), count(count), type(type) {}
 	virtual void useItem(/* player */) const {}
 
 	void printInfo() const;
@@ -30,13 +30,13 @@ public:
 	string getName() { return name; }
 	int getPrice() { return price; }
 	int getCount() { return count; }
-	Type getType() { return type; }
+	E_Type getType() { return type; }
 
 	//setter
 	void setName(string name);
 	void setPrice(int price);
 	void setCount(int count);
-	void setType(Type type);
+	void setType(E_Type type);
 
 };
 
@@ -45,7 +45,7 @@ class Potion : public Item
 private:
 
 public:
-	Potion(string name, int price, int count, Type type) : Item(name, price, count, type) {}
+	Potion(string name, int price, int count, E_Type type) : Item(name, price, count, type) {}
 
 	void useItem(/* player */) const override ;
 };

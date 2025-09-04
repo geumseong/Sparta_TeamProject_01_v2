@@ -22,7 +22,7 @@ void Item::setCount(int count)
 	this->count = count;
 }
 
-void Item::setType(Type type)
+void Item::setType(E_Type type)
 {
 	this->type = type;
 }
