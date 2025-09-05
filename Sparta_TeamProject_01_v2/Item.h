@@ -27,7 +27,7 @@ public:
 	Item(string name, int price, int count, E_Type type) : name(name), price(price), count(count), type(type) {}
 
 	template <typename T, typename... Args>
-	T* AddEffect(Args&&... args)
+	T* addEffect(Args&&... args)
 	{
 		auto ptr = make_unique<T>(forward<Args>(args)...);
 		T* raw = ptr.get();

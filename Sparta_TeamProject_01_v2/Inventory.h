@@ -43,22 +43,22 @@ public:
 //
 //inven.addItem(make_unique<Item>("examplePotion", 100, 1, E_Type::Consumable));
 //int num = inven.findIndex("examplePotion");
-//inven.findItem(num)->AddEffect<HealEffect>(50); // 매개변수는 힐량을 나타냄
+//inven.findItem(num)->addEffect<HealEffect>(50); // 매개변수는 힐량을 나타냄
 //inven.findItem(num)->useItem();
 //
 //inven.addItem(make_unique<Item>("exampleAccessory", 500, 1, E_Type::Accessory));
 //num = inven.findIndex("exampleAccessory");
-//inven.findItem(num)->AddEffect<BuffEffect>(50, 50, 50);//순서대로 공, 방, 속 옵션
+//inven.findItem(num)->addEffect<BuffEffect>(50, 50, 50);//순서대로 공, 방, 속 옵션
 //inven.findItem(num)->useItem();
 //
 //inven.addItem(make_unique<Item>("exampleEquipment", 300, 1, E_Type::Equipment));
 //num = inven.findIndex("exampleEquipment");
-//inven.findItem(num)->AddEffect<BuffEffect>(50, 30, 30);
+//inven.findItem(num)->addEffect<BuffEffect>(50, 30, 30);
 //inven.findItem(num)->useItem();
 //
 //inven.addItem(make_unique<Item>("exampleMaterial", 50, 10, E_Type::Material));
 //num = inven.findIndex("exampleMaterial");
-//inven.findItem(num)->AddEffect<HealEffect>(50);
+//inven.findItem(num)->addEffect<HealEffect>(50);
 //inven.findItem(num)->useItem(); //재료는 사용해도 아무런 효과가 없음
 //
 //inven.setGold(50000);
