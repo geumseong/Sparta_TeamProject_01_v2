@@ -1,15 +1,17 @@
 #pragma once
 #include <string>
+#include <vector>
 #include <iostream>
+#include "ItemEffect.h"
 
 using namespace std;
 
 enum E_Type
 {
-	Potion,
-	Equip,
-	Stuff,
-
+	Consumable,
+	Equipment,
+	Accessory,
+	Material,
 };
 
 class Item
@@ -19,10 +21,21 @@ private:
 	int price;
 	int count;
 	E_Type type;
+	vector<unique_ptr<I_Effect>> effects;
 
 public:
 	Item(string name, int price, int count, E_Type type) : name(name), price(price), count(count), type(type) {}
-	virtual void useItem(/* player */) const {}
+
+	template <typename T, typename... Args>
+	T* AddEffect(Args&&... args)
+	{
+		auto ptr = make_unique<T>(forward<Args>(args)...);
+		T* raw = ptr.get();
+		effects.push_back(move(ptr));
+		return raw;
+	}
+
+	void useItem(/*Character& character*/);
 
 	void printInfo() const;
 
@@ -38,14 +51,4 @@ public:
 	void setCount(int count);
 	void setType(E_Type type);
 
-};
-
-class Potion : public Item
-{
-private:
-
-public:
-	Potion(string name, int price, int count, E_Type type) : Item(name, price, count, type) {}
-
-	void useItem(/* player */) const override ;
 };
