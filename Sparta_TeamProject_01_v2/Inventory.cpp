@@ -5,9 +5,9 @@ void Inventory::setGold(int gold)
 	this->gold = gold;
 }
 
-void Inventory::addItem(unique_ptr<Item> item)
+void Inventory::addItem(Item* item)
 {
-	this->itemList.push_back(move(item));
+	this->itemList.push_back(item);
 }
 
 void Inventory::removeItem(int index)
@@ -15,7 +15,7 @@ void Inventory::removeItem(int index)
 	this->itemList.erase(itemList.begin() + index);
 }
 
-void Inventory::printItemlist()
+void Inventory::printitemList()
 {
 	for (int i = 0; i < this->itemList.size(); i++)
 	{
@@ -33,10 +33,4 @@ int Inventory::findIndex(string name)
 		}
 	}
 	return -1;
-}
-
-Item* Inventory::findItem(int index)
-{
-	return itemList[index].get();
-
 }

@@ -137,7 +137,6 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="ItemEffect.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Shop.h" />
   </ItemGroup>
