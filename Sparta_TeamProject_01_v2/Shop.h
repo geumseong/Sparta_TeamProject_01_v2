@@ -1,16 +1,25 @@
 #pragma once
+#include <iostream>
 #include <vector>
-class Inventory;
-class Item;
+#include <string>
+#include "Item.h"
+#include "Inventory.h"
 
-class Shop { // 상점 클래스
+class Shop 
+{
 private:
-	std::vector<Item*> availableItems;
+    std::vector<Item*> availableItems; // 현재 상점 재고
 
+public:
+    Shop() = default;
+    ~Shop();
 
-public: // 상점에서 구매 가능한 아이템 목록
-	Shop();
-	//void displayItems();
-	void buyItem(int index, Inventory& inven);
-	//void sellItem(int index, Character* player);
+    void openShop(); // 상점 열기(랜덤 라인업 생성)
+    void buyItem(int index, Inventory& inven);
+    void sellItem(int index, Inventory& inven);
+    void showItem(int index);
+    void displayItems();
+
+    //  추가: 아이템 이름 가져오기
+    std::string getItemName(int index) const;
 };
