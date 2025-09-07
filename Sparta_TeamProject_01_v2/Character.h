@@ -9,11 +9,12 @@ class Character
 public:
 	Character();
 
-    virtual void attack() = 0;
     void displayStatus();
     void levelUp();
     void useItem(int index);
     void visitShop();
+    void characterDeath();
+    void characterAttack();
 
     // getter ÇÔ¼ö
     string getName() const;
