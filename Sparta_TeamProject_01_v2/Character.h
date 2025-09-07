@@ -7,7 +7,7 @@ using namespace std;
 class Character
 {
 public:
-	Character(string _name);
+	Character();
 
     void displayStatus();
     void levelUp();
