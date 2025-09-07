@@ -1,7 +1,7 @@
 #include "Character.h"
 #include <iostream>
 
-Character::Character()
+Character::Character(string _name) : name(_name)
 {
 	level = 1;
 	health = 200;
