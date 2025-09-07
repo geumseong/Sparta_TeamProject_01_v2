@@ -3,16 +3,16 @@
 #include "item.h"
 #include "Character.h"
 
-class Shop{
-private :
-	std::vector<Item*> availableItems;
+class Shop { // 상점 클래스
+private: 
+	std::vector<Item*> availableItems; 
 
 
-public :
-	Shop();
+public: // 상점에서 구매 가능한 아이템 목록
+	Shop(); 
 	void displayItems();
-	void buyItem(int index, Character* player);
-	void sellItem(int index, Character* player);
+	void buyItem(int index, Character* player); 
+	void sellItem(int index, Character* player); 
 };
 
 
