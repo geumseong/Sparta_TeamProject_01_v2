@@ -1,15 +1,17 @@
 #pragma once
 #include <string>
+#include <vector>
 #include <iostream>
+#include "ItemEffect.h"
 
 using namespace std;
 
-enum Type
+enum E_Type
 {
-	Potion,
-	Equip,
-	Stuff,
-
+	Consumable,
+	Equipment,
+	Accessory,
+	Material,
 };
 
 class Item
@@ -18,11 +20,22 @@ private:
 	string name;
 	int price;
 	int count;
-	Type type;
+	E_Type type;
+	vector<unique_ptr<I_Effect>> effects;
 
 public:
-	Item(string name, int price, int count, Type type) : name(name), price(price), count(count), type(type) {}
-	virtual void useItem(/* player */) const {}
+	Item(string name, int price, int count, E_Type type) : name(name), price(price), count(count), type(type) {}
+
+	template <typename T, typename... Args>
+	T* addEffect(Args&&... args)
+	{
+		auto ptr = make_unique<T>(forward<Args>(args)...);
+		T* raw = ptr.get();
+		effects.push_back(move(ptr));
+		return raw;
+	}
+
+	void useItem(/*Character& character*/);
 
 	void printInfo() const;
 
@@ -30,22 +43,12 @@ public:
 	string getName() { return name; }
 	int getPrice() { return price; }
 	int getCount() { return count; }
-	Type getType() { return type; }
+	E_Type getType() { return type; }
 
 	//setter
 	void setName(string name);
 	void setPrice(int price);
 	void setCount(int count);
-	void setType(Type type);
+	void setType(E_Type type);
 
-};
-
-class Potion : public Item
-{
-private:
-
-public:
-	Potion(string name, int price, int count, Type type) : Item(name, price, count, type) {}
-
-	void useItem(/* player */) const override ;
 };
