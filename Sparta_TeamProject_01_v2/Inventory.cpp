@@ -5,9 +5,18 @@ void Inventory::setGold(int gold)
 	this->gold = gold;
 }
 
-void Inventory::addItem(Item* item)
+void Inventory::addItem(unique_ptr<Item> item) // 아이템이 존재하지 않으면 맨 뒤에 추가
 {
-	this->itemList.push_back(item);
+	int index = findIndex(item->getName());
+	if (index == -1) 
+	{
+		this->itemList.push_back(move(item));
+	}
+	else // 아이템이 존재한다면 인벤에 있는 아이템의 개수를 추가할 아이템 개수만큼 증가
+	{
+		auto invenitem = findItem(index);
+		invenitem->setCount(invenitem->getCount() + item->getCount());
+	}
 }
 
 void Inventory::removeItem(int index)
@@ -15,7 +24,7 @@ void Inventory::removeItem(int index)
 	this->itemList.erase(itemList.begin() + index);
 }
 
-void Inventory::printitemList()
+void Inventory::printItemlist()
 {
 	for (int i = 0; i < this->itemList.size(); i++)
 	{
@@ -33,4 +42,10 @@ int Inventory::findIndex(string name)
 		}
 	}
 	return -1;
+}
+
+Item* Inventory::findItem(int index)
+{
+	return itemList[index].get();
+
 }
