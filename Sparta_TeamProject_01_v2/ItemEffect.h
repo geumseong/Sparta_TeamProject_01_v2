@@ -15,7 +15,7 @@ public:
     HealEffect(int heal) : heal(heal) {}
     void onConsume(/*Character& character*/) override
     {
-        //character->setHealth( min(character->getHealth() + heal, character->getMaxhealth() );
+        //character->setHealth( min(character->getHealth() + heal, character->getMaxHealth() );
     }
 };
 
