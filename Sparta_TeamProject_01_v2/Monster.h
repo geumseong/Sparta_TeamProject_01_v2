@@ -46,8 +46,8 @@ public:
 	// getter 함수
 	// 몬스터의 속성값을 리턴
 	std::string getName() { return name; }
-	int getHealth() { return health; }
-	int getAttack() { return attack; }
+	int getHealth() const { return health; }
+	int getAttack() const { return attack; }
 
 	// setter 함수?
 	// 몬스터의 속성값을 변경
@@ -60,12 +60,17 @@ public:
 	// 몬스터의 행동을 정의 하는 함수
 	
 	// 몬스터의 사망 여부를 확인하는 함수
-	bool isDead() { return health <= 0; } // 사망
+	bool isDead() const { return health <= 0; } // 사망
 	
 	// 몬스터가 죽었을 때 아이템을 드롭하는 함수
-	void dropItem() { /* 아이템 드랍 로직 */ return nullptr; } // 아이템 드랍
+	//void dropItem() { /* 아이템 드랍 로직 */ return nullptr; } // 아이템 드랍
 
-
+	// 몬스터의 일반 행동 (기본 구현)
+	virtual void performAction()
+	{
+		// 기본 행동: 몬스터가 공격하는 행동
+		std::cout << name << " attacks for " << attack << " damage!" << std::endl;
+	}
 
 };
 
