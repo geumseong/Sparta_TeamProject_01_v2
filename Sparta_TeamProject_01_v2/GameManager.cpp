@@ -3,8 +3,8 @@
 #include <random>
 #include <vector>
 #include <string>
-#include "Character.h"
 #include "Magician.h"
+#include "Monster.h"
 using namespace std;
 
 GameManager* GameManager::instance_ = nullptr;
@@ -50,7 +50,7 @@ void GameManager::inputLog(string& input)
     log.push_back(input);
 }
 
-Monster* GameManager::generateMonster(int level)
+Monster* GameManager::generateMonster()
 {
     int rd = 0;
     while (rd != 0)
@@ -61,14 +61,17 @@ Monster* GameManager::generateMonster(int level)
     {
     case 1:
         cout << "* 몬스터 타입 1 생성!" << endl;
-        //return new Monster();  // 몬스터 타입 1
+        return new Monster("Type1Monster", 10, 10);  // 몬스터 타입 1
     case 2:
         cout << "* 몬스터 타입 2 생성!" << endl;
-        //return new Monster();  // 몬스터 타입 2
+        return new Monster("Type2Monster", 10, 10);  // 몬스터 타입 2
     case 3:
         cout << "* 몬스터 타입 3 생성!" << endl;
-        //return new Monster();  // 몬스터 타입 3
+        return new Monster("Type2Monster", 10, 10);  // 몬스터 타입 3
+    default:
+        return new Monster("", 1, 1);
     }
+    
 }
 
 /*
@@ -93,11 +96,12 @@ int main()
 {
     GameManager* Game = GameManager::getInstance();
     Character* Character_;
-    Game->Character_ = Character_;
+    Monster* currentMonster;
     string input;
     Game->outputLog("** 캐릭터 이름을 정하십시오.");
     Game->inputLog(input);
     Character_ = new Magician(input);
+    Game->character_ = Character_;
     Game->outputLog("캐릭터가 생성되었습니다.");
     Game->updateState(GameManager::Resting);
     while (true)
@@ -156,9 +160,12 @@ int main()
                 "제작소에 입장했습니다. 다음 행동을 선택하세요."
             );
         case GameManager::Battle:   //Game 전투/싸움 State
-            Monster* monster = Game->generateMonster();
+            currentMonster = Game->generateMonster();
             Game->roundTracker++;
-            if(Character_->getAttackSpeed() < monster->getAttackSpeed)
+            if (Character_->getAttackSpeed() < currentMonster->getAttackSpeed())
+            {
+
+            }
             Game->outputLog(
                 "던전에 입장했습니다. \n"
                 "적 ****와 조우!"
