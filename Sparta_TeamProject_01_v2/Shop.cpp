@@ -1,10 +1,11 @@
 #include "Shop.h"
-#include <algorithm>
-#include <random>
-#include <chrono>
+#include <algorithm> // std::shuffle을 위한 헤더
+#include <random>    // 난수 생성기 및 셔플에 필요한 mt19937
+#include <chrono>    // 시드 생성을 위한 현재 시간
 #include <iostream>
 
-void Shop::openShop() {
+void Shop::openShop()
+{
     for (auto item : availableItems) {
         delete item;
     }
@@ -19,15 +20,15 @@ void Shop::openShop() {
         new Item("가죽 갑옷", 50, 1, E_Type::Equipment),
         new Item("강철 갑옷", 100, 1, E_Type::Equipment),
         new Item("미스릴 갑옷", 250, 1, E_Type::Equipment),
+
         new Item("소형 HP 포션", 10, 10, E_Type::Consumable),
         new Item("중형 HP 포션", 30, 10, E_Type::Consumable),
         new Item("대형 HP 포션", 60, 10, E_Type::Consumable),
-        new Item("소형 MP 포션", 20, 5, E_Type::Consumable),
-        new Item("중형 MP 포션", 50, 5, E_Type::Consumable),
-        new Item("대형 MP 포션", 80, 5, E_Type::Consumable),
+
         new Item("철 목걸이", 60, 1, E_Type::Accessory),
         new Item("은 반지", 120, 1, E_Type::Accessory),
         new Item("황금 왕관", 300, 1, E_Type::Accessory),
+
         new Item("나무 조각", 5, 20, E_Type::Material),
         new Item("철 조각", 15, 15, E_Type::Material),
         new Item("은 조각", 30, 10, E_Type::Material),
@@ -48,16 +49,16 @@ void Shop::openShop() {
     }
 }
 
-Shop::~Shop() {
+Shop::~Shop()
+{
     for (auto item : availableItems) {
         delete item;
     }
     availableItems.clear();
 }
 
-void Shop::buyItem(int userIndex, Inventory& inven) {
-    int index = userIndex - 1; // 유저 입력 보정
-
+void Shop::buyItem(int index, Inventory& inven)
+{
     if (index < 0 || index >= availableItems.size()) {
         std::cout << "[NPC]: 그런 물건은 없네.\n";
         return;
@@ -67,9 +68,7 @@ void Shop::buyItem(int userIndex, Inventory& inven) {
 
     if (inven.getGold() >= item->getPrice()) {
         std::string boughtName = item->getName();
-
-        auto inputItem = std::make_unique<Item>(
-            item->getName(), item->getPrice(), 1, item->getType());
+        auto inputItem = std::make_unique<Item>(item->getName(), item->getPrice(), 1, item->getType());
 
         inven.addItem(std::move(inputItem));
         inven.setGold(inven.getGold() - item->getPrice());
@@ -89,7 +88,8 @@ void Shop::buyItem(int userIndex, Inventory& inven) {
     }
 }
 
-void Shop::sellItem(int index, Inventory& inven) {
+void Shop::sellItem(int index, Inventory& inven)
+{
     Item* item = inven.findItem(index);
 
     if (!item) {
@@ -125,7 +125,8 @@ void Shop::sellItem(int index, Inventory& inven) {
     std::cout << "[NPC]: " << itemName << "을 " << sellPrice << "골드에 사겠네.\n";
 }
 
-void Shop::showItem(int index) {
+void Shop::showItem(int index)
+{
     if (index >= 0 && index < availableItems.size()) {
         availableItems[index]->printInfo();
     }
@@ -134,23 +135,26 @@ void Shop::showItem(int index) {
     }
 }
 
-void Shop::displayItems() {
+void Shop::displayItems()
+{
     std::cout << "[NPC]: 이것이 오늘의 상품이네! 천천히 보게나.\n\n";
     for (int i = 0; i < availableItems.size(); ++i) {
-        std::cout << (i + 1) << ": ";
+        std::cout << i << ": ";
         availableItems[i]->printInfo();
         std::cout << "\n";
     }
     std::cout << "\n";
 }
 
-std::string Shop::getItemName(int index) const {
+std::string Shop::getItemName(int index) const
+{
     if (index >= 0 && index < availableItems.size()) {
         return availableItems[index]->getName();
     }
     return "(없는 아이템)";
 }
 
-int Shop::getItemCount() const {
+int Shop::getItemCount() const
+{
     return static_cast<int>(availableItems.size());
 }
