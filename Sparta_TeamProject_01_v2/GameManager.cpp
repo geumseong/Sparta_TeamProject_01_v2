@@ -5,10 +5,13 @@
 #include <string>
 #include "Magician.h"
 #include "Monster.h"
+#include "Inventory.h"
 
 class Orc;
 
+// Instances
 GameManager* GameManager::instance_ = nullptr;
+Inventory* inventory_ = new Inventory(100, 10);
 
 GameManager::GameManager()
 {
@@ -17,7 +20,7 @@ GameManager::GameManager()
 }
 
 
-
+// StateMachine
 void GameManager::updateState(States stateName)
 {
     string stateStr = "";
@@ -37,51 +40,49 @@ void GameManager::updateState(States stateName)
     this->currentState = stateName;
 }
 
+// cout print
 void GameManager::outputLog(string navDialogue)
 {
     cout << navDialogue << endl;
-    log.push_back(navDialogue);
+    //log.push_back(navDialogue);
 }
 
+//cin input
 void GameManager::inputLog(string& input)
 {
-    cin.ignore();
-    cin >> input;
-    //getline(cin, input);
-    log.push_back(input);
+    //cin.ignore();
+    //cin >> input;
+    getline(cin, input);
+    //log.push_back(input);
 }
 
 int generatorRandInt(int max)
 {
-    int rd = 0;
-    while (rd != 0)
-    {
-        rd = rand() % max + 1;
-    }
+    int rd = rand() % max + 1;
     return rd;
 }
 
-Monster* GameManager::generateMonster()
+/*Monster**/ void GameManager::generateMonster()
 {
-    switch (generatorRandInt(1))
+    switch (generatorRandInt(3))
     {
     case 1:
         outputLog("오크 몬스터 생성!");
-        int rd = generatorRandInt(3);
-        switch (rd)
-        {
-        case 1:     // 일반 오크 생성
-            return new Orc("일반", GameManager::character_->getLevel(), "일반");
-            break;
-        case 2:     // 야만적인 오크 생성
-            return new Orc("야만적인", GameManager::character_->getLevel(), "야만적인");
-            break;
-        case 3:     // 광전사 오크 생성
-            return new Orc("광전사", GameManager::character_->getLevel(), "광전사");
-            break;
-        }
+        //int rd = generatorRandInt(3);
+        //switch (rd)
+        //{
+        //case 1:     // 일반 오크 생성
+        //    return new Orc("일반", GameManager::character_->getLevel(), "일반");
+        //    break;
+        //case 2:     // 야만적인 오크 생성
+        //    return new Orc("야만적인", GameManager::character_->getLevel(), "야만적인");
+        //    break;
+        //case 3:     // 광전사 오크 생성
+        //    return new Orc("광전사", GameManager::character_->getLevel(), "광전사");
+        //    break;
+        //}
     case 2:
-        //outputLog("고블린 몬스터 생성!");
+        outputLog("고블린 몬스터 생성!");
         //int rd = generatorRandInt(4);
         //switch (rd)
         //{
@@ -102,7 +103,7 @@ Monster* GameManager::generateMonster()
         //    break;
         //}
     case 3:     // 드래곤 생성
-        cout << "* 몬스터 타입 3 생성!" << endl;
+        outputLog("드래곤 몬스터 생성!");
         break;
     }
 
@@ -144,57 +145,101 @@ int main()
         {
         case GameManager::Start:    //Game 시작 State
             break;
-        case GameManager::Resting:  //Game 휴식 State
-            Game->outputLog(
-                "** 다음 행선지를 선택하세요. \n"
-                "1. 던전 입장\n"
-                "2. 상점 입장\n"
-                "3. 제작소 입장\n"
-                "4. 상태창"
-            );
 
+        case GameManager::Resting:  //Game 휴식 State
             while (true)
             {
+                Game->outputLog(
+                    "** 다음 행선지를 선택하세요. \n"
+                    "1. 던전 입장\n"    //GameManager::Battle로 State 변경 / 던전으로 이동.
+                    "2. 상점 입장\n"    //GameManager::Shopping으로 State 변경 / 상점으로 이동.
+                    "3. 제작소 입장\n"  //GameManager::Crafting으로 State 변경 / 제작소로 이동.
+                    "4. 상태창\n"       //GameManager::Resting에 남아 있지만, 상태창 한 번 출력.
+                    "5. 인벤토리 열기\n"  //GameManager::Resting에 남아 있지만, 인벤토리 한 번 출력.
+                    "0. 끝내기"    //GameManager::End로 State 변경 / 게임을 끝냄.
+                );
+                // Resting에서 선택지의 결과 코드
+                #pragma region RestChoiceResults
                 Game->inputLog(input);
-                if (input == "1")
+                if (input == "1" || input == "던전 입장")
                 {
                     Game->updateState(GameManager::Battle);
+                    break;
                 }
-                else if (input == "2")
+                else if (input == "2" || input == "상점 입장")
                 {
                     Game->updateState(GameManager::Shopping);
+                    break;
                 }
-                else if (input == "3")
+                else if (input == "3" || input == "제작소 입장")
                 {
                     Game->updateState(GameManager::Crafting);
+                    break;
                 }
-                else if (input == "4")
+                else if (input == "4" || input == "상태창")
                 {
                     Game->outputLog("상태창 출력.");
                     Character_->displayStatus();
+                    system("pause");
+                    break;
+                }
+                else if (input == "5" || input == "인벤토리 열기")
+                {
+                    Game->outputLog("**인벤토리 목록:");
+                    inventory_->printItemlist();
+                    system("pause");
+                    break;
+                }
+                else if (input == "0" || input == "끝내기")
+                {
+                    Game->updateState(GameManager::End);
+                    break;
                 }
                 else
                 {
                     Game->outputLog("잘못된 입력입니다.");
                 }
-                break;
+                #pragma endregion  RestChoiceResults
             }
+            // Game->updateState(GameManager::End);
+            break;
 
-            Game->updateState(GameManager::End);
-            break;
         case GameManager::Shopping: //Game 상점/쇼핑 State
-            Game->outputLog(
-                "상점에 입장했습니다. 다음 행동을 선택하세요. \n"
-                "1. 아이템 구매\n"
-                "2. 상점 입장"
-            );
+            while (true)
+            {
+                Game->outputLog(
+                    "상점에 입장했습니다. 다음 행동을 선택하세요. \n"
+                    "1. 아이템 구매\n"
+                    "2. 아이템 판매"
+                );
+                Game->inputLog(input);
+                if (input == "1" || input == "아이템 구매")
+                {
+
+                }
+                else if (input == "1" || input == "아이템 판매")
+                {
+
+                }
+                else
+                {
+                    Game->outputLog("잘못된 입력입니다.");
+                }
+            }
             break;
+
         case GameManager::Crafting:
             Game->outputLog(
                 "제작소에 입장했습니다. 다음 행동을 선택하세요."
             );
+            break;
+
+        case GameManager::Inventory:
+            break;
+
         case GameManager::Battle:   //Game 전투/싸움 State
-            currentMonster = Game->generateMonster();
+            //currentMonster = Game->generateMonster();
+            Game->generateMonster();
             Game->roundTracker++;
             /*if (Character_->getAttackSpeed() < currentMonster->getAttackSpeed())
             {
@@ -206,7 +251,7 @@ int main()
                 "1. 공격\n"
                 "2. 아이템 사용"
             );
-            Game->updateState(GameManager::End);
+            system("pause");
             break;
         case GameManager::End:      //Game 끝.
             cout << "게임이 끝납니다..." << endl;

@@ -33,7 +33,7 @@ public:
 
     Character* character_;
 
-    enum States { Start, Battle, Shopping, Resting, Crafting, End };
+    enum States { Start, Battle, Shopping, Resting, Crafting, Inventory, End };
     States currentState;
     int roundTracker;
 
@@ -41,7 +41,7 @@ public:
     void outputLog(string navDialogue);
     void inputLog(string& input);
 
-    Monster* generateMonster();
+    /*Monster**/ void generateMonster();
     //Monster* generateMonster();
     void updateState(States stateName);
     //BossMonster* generateBossMonster(int level);
