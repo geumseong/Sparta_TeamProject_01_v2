@@ -8,7 +8,7 @@ public:
 	Magician(string nickName);
 
 	void attack() override;
-
+	void attack(Monster* monster) override;
 
 };
 
