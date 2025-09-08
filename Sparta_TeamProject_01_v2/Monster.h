@@ -56,9 +56,9 @@ public:
 	{ 
 		health -= damage;
 		
-		if (heal
-			health = 0; th < 0)
-		{ 
+		if (health < 0);
+		{
+			health = 0;
 		}
 	} // ÇÇÇØ
 	
