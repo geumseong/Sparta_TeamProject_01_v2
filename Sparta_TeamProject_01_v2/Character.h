@@ -2,8 +2,10 @@
 
 #include <string>
 #include <vector>
+#include "Monster.h"
 using namespace std;
 
+class Monster;
 class Character
 {
 public:
@@ -12,11 +14,11 @@ public:
     Character(string name);
 
     virtual void attack() = 0;
+    virtual void attack(Monster* monster) = 0;
     void displayStatus();
     void levelUp();
     void visitShop();
     void characterDeath();
-    void characterAttack();
 
     // getter ÇÔ¼ö
     string getName() const;
