@@ -1,79 +1,160 @@
-#include <iostream>
 #include "Shop.h"
-#include "Item.h"
-#include "Character.h"
+#include <algorithm> // std::shuffle을 위한 헤더
+#include <random>    // 난수 생성기 및 셔플에 필요한 mt19937
+#include <chrono>    // 시드 생성을 위한 현재 시간
+#include <iostream>
 
-Shop::Shop() // 상점에 아이템 추가
+void Shop::openShop()
 {
-	availableItems.push_back(new Item("기본 검", 50, 2, Equip ));
-	availableItems.push_back(new Item("기본 활", 50 ,2, Equip));
-	availableItems.push_back(new Item("기본 단검", 50, 2, Equip));
-	availableItems.push_back(new Item("기본 지팡이", 50, 2, Equip));
-	availableItems.push_back(new Item("영웅의 검", 100, 2, Equip));
-	availableItems.push_back(new Item("영웅의 활", 100, 2, Equip));
-	availableItems.push_back(new Item("영웅의 단검", 100, 2, Equip));
-	availableItems.push_back(new Item("영웅의 지팡이", 100, 2, Equip));
+    for (auto item : availableItems) {
+        delete item;
+    }
+    availableItems.clear();
 
-	availableItems.push_back(new Item("소형 HP 포션", 10,10, Potion));
-	availableItems.push_back(new Item("소형 MP 포션", 10, 10, Potion));
-	availableItems.push_back(new Item("중형 HP 포션", 20, 10, Potion));
+    std::vector<Item*> itemPool = {
+        new Item("녹슨 검", 50, 1, E_Type::Equipment),
+        new Item("강철 검", 150, 1, E_Type::Equipment),
+        new Item("듀랑달", 200, 1, E_Type::Equipment),
+        new Item("타르빙", 300, 1, E_Type::Equipment),
+        new Item("엑스칼리버", 350, 1, E_Type::Equipment),
+        new Item("가죽 갑옷", 50, 1, E_Type::Equipment),
+        new Item("강철 갑옷", 100, 1, E_Type::Equipment),
+        new Item("미스릴 갑옷", 250, 1, E_Type::Equipment),
 
-	availableItems.push_back(new Item("중형 MP 포션", 20, 10, Potion));
-	availableItems.push_back(new Item("대형 HP 포션", 30, 10, Potion));
-	availableItems.push_back(new Item("대형 MP 포션", 30, 10, Potion));
+        new Item("소형 HP 포션", 10, 10, E_Type::Consumable),
+        new Item("중형 HP 포션", 30, 10, E_Type::Consumable),
+        new Item("대형 HP 포션", 60, 10, E_Type::Consumable),
 
-	availableItems.push_back(new Item("공격력 강화", 15,50, Stuff));
-	availableItems.push_back(new Item("방어력 강화", 15,50, Stuff));
-	availableItems.push_back(new Item("명중률 강화", 15, 50,Stuff));
+        new Item("철 목걸이", 60, 1, E_Type::Accessory),
+        new Item("은 반지", 120, 1, E_Type::Accessory),
+        new Item("황금 왕관", 300, 1, E_Type::Accessory),
 
+        new Item("나무 조각", 5, 20, E_Type::Material),
+        new Item("철 조각", 15, 15, E_Type::Material),
+        new Item("은 조각", 30, 10, E_Type::Material),
+        new Item("미스릴 조각", 50, 5, E_Type::Material)
+    };
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 g(seed);
+    std::shuffle(itemPool.begin(), itemPool.end(), g);
+
+    int numItems = 5;
+    for (int i = 0; i < numItems && i < itemPool.size(); ++i) {
+        availableItems.push_back(itemPool[i]);
+    }
+
+    for (int i = numItems; i < itemPool.size(); ++i) {
+        delete itemPool[i];
+    }
 }
 
-void Shop::displayItems() // 상점에 있는 아이템 출력
+Shop::~Shop()
 {
-	std::cout << "===== 상점에 오신것을 환영합니다! =====\n";
-	for (size_t i = 0; i < availableItems.size(); ++i)
-	{
-		std::cout << i << ": ";
-		availableItems[i]->printInfo();
-
-	}
+    for (auto item : availableItems) {
+        delete item;
+    }
+    availableItems.clear();
 }
 
-void Shop::buyItem(int index, Character* player) // 플레이어가 아이템 구매
+void Shop::buyItem(int index, Inventory& inven)
 {
-	Item* item = availableItems[index];
-{
-	if (index < 0 || index >= availableItems.size())
-	{
-		std::cout << "잘못된 아이템 번호입니다.\n";
-		return;
-	}
+    if (index < 0 || index >= availableItems.size()) {
+        std::cout << "[NPC]: 그런 물건은 없네.\n";
+        return;
+    }
 
-	if (player->getGold() >= item->getprice()) // 구매 가능 여부 확인
-	{
-		player->addItem(item);
-		player->spendGold(item->getprice());
-		std::cout << "당신은 " << item->getName() << " 을 구매 했습니다" << "!\n";
-	}
-	else
-	{
-		std::cout << "소지한 골드가 부족합니다.\n";
-	}
+    Item* item = availableItems[index];
+
+    if (inven.getGold() >= item->getPrice()) {
+        std::string boughtName = item->getName();
+        auto inputItem = std::make_unique<Item>(item->getName(), item->getPrice(), 1, item->getType());
+
+        inven.addItem(std::move(inputItem));
+        inven.setGold(inven.getGold() - item->getPrice());
+
+        if (item->getCount() > 1) {
+            item->setCount(item->getCount() - 1);
+        }
+        else {
+            delete availableItems[index];
+            availableItems.erase(availableItems.begin() + index);
+        }
+
+        std::cout << "[NPC]: " << boughtName << "(이)라… 좋은 선택이군!\n";
+    }
+    else {
+        std::cout << "[NPC]: 골드가 부족하네. 다음에 다시 오게나.\n";
+    }
 }
 
-void Shop::sellItem(int index, Character * player) // 플레이어가 아이템 판매
+void Shop::sellItem(int index, Inventory& inven)
 {
-	Item* item = player->removeItem(index); // 인벤토리 아이템 제거
-	if (item) // 아이템이 존재할 경우
-	{
-		int sellPrice = static_cast<int>(item->getPrice() * 0.6); // 60% 환급
-		player->earnGold(sellPrice); 
-		availableItems.push_back(item); 
-		std::cout << "당신은 " << item->getName() << "을 " << sellPrice << " 골드에 판매했습니다.\n";
-	}
-	else // 아이템이 존재하지 않을 경우
-	{
-		std::cout << "아이템을 찾을 수 없습니다.\n";
-	}
+    Item* item = inven.findItem(index);
+
+    if (!item) {
+        std::cout << "[NPC]: 그런 아이템은 없네.\n";
+        return;
+    }
+
+    std::string itemName = item->getName();
+    int sellPrice = static_cast<int>(item->getPrice() * 0.6);
+    inven.setGold(inven.getGold() + sellPrice);
+
+    bool found = false;
+    for (auto* shopItem : availableItems) {
+        if (shopItem->getName() == itemName) {
+            shopItem->setCount(shopItem->getCount() + 1);
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        availableItems.push_back(new Item(itemName, item->getPrice(), 1, item->getType()));
+    }
+
+    if (item->getCount() > 1) {
+        item->setCount(item->getCount() - 1);
+    }
+    else {
+        inven.removeItem(index);
+        item = nullptr;
+    }
+
+    std::cout << "[NPC]: " << itemName << "을 " << sellPrice << "골드에 사겠네.\n";
 }
 
+void Shop::showItem(int index)
+{
+    if (index >= 0 && index < availableItems.size()) {
+        availableItems[index]->printInfo();
+    }
+    else {
+        std::cout << "존재하지 않는 아이템입니다.\n";
+    }
+}
+
+void Shop::displayItems()
+{
+    std::cout << "[NPC]: 이것이 오늘의 상품이네! 천천히 보게나.\n\n";
+    for (int i = 0; i < availableItems.size(); ++i) {
+        std::cout << i << ": ";
+        availableItems[i]->printInfo();
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+}
+
+std::string Shop::getItemName(int index) const
+{
+    if (index >= 0 && index < availableItems.size()) {
+        return availableItems[index]->getName();
+    }
+    return "(없는 아이템)";
+}
+
+int Shop::getItemCount() const
+{
+    return static_cast<int>(availableItems.size());
+}
