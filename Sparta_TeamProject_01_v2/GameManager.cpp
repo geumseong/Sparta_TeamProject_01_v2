@@ -5,7 +5,8 @@
 #include <string>
 #include "Magician.h"
 #include "Monster.h"
-using namespace std;
+
+class Orc;
 
 GameManager* GameManager::instance_ = nullptr;
 
@@ -50,28 +51,61 @@ void GameManager::inputLog(string& input)
     log.push_back(input);
 }
 
-Monster* GameManager::generateMonster()
+int generatorRandInt(int max)
 {
     int rd = 0;
     while (rd != 0)
     {
-        rd = rand() % 4;  // 1-3 사이 랜덤 정수 생성
+        rd = rand() % max + 1;
     }
-    switch (rd)
+    return rd;
+}
+
+Monster* GameManager::generateMonster()
+{
+    switch (generatorRandInt(1))
     {
     case 1:
-        cout << "* 몬스터 타입 1 생성!" << endl;
-        return new Monster("Type1Monster", 10, 10);  // 몬스터 타입 1
+        outputLog("오크 몬스터 생성!");
+        int rd = generatorRandInt(3);
+        switch (rd)
+        {
+        case 1:     // 일반 오크 생성
+            return new Orc("일반", GameManager::character_->getLevel(), "일반");
+            break;
+        case 2:     // 야만적인 오크 생성
+            return new Orc("야만적인", GameManager::character_->getLevel(), "야만적인");
+            break;
+        case 3:     // 광전사 오크 생성
+            return new Orc("광전사", GameManager::character_->getLevel(), "광전사");
+            break;
+        }
     case 2:
-        cout << "* 몬스터 타입 2 생성!" << endl;
-        return new Monster("Type2Monster", 10, 10);  // 몬스터 타입 2
-    case 3:
+        //outputLog("고블린 몬스터 생성!");
+        //int rd = generatorRandInt(4);
+        //switch (rd)
+        //{
+        //case 1:     // 일반 고블린 생성
+        //    return new Goblin("일반", GameManager::character_->getLevel());
+        //    break;
+        //case 2:     // 겁쟁이 고블린 생성
+        //    return new Goblin("겁쟁이", GameManager::character_->getLevel());
+        //    break;
+        //case 3:     // 건방진 고블린 생성
+        //    return new Goblin("건방진", GameManager::character_->getLevel());
+        //    break;
+        //case 4:     // 사나운 고블린 생성
+        //    return new Goblin("사나운", GameManager::character_->getLevel());
+        //    break;
+        //case 5:     // 재벌 고블린 생성
+        //    return new Goblin("재벌", GameManager::character_->getLevel());
+        //    break;
+        //}
+    case 3:     // 드래곤 생성
         cout << "* 몬스터 타입 3 생성!" << endl;
-        return new Monster("Type2Monster", 10, 10);  // 몬스터 타입 3
-    default:
-        return new Monster("", 1, 1);
+        break;
     }
-    
+
 }
 
 /*
@@ -118,7 +152,7 @@ int main()
                 "3. 제작소 입장\n"
                 "4. 상태창"
             );
-            
+
             while (true)
             {
                 Game->inputLog(input);
@@ -162,16 +196,17 @@ int main()
         case GameManager::Battle:   //Game 전투/싸움 State
             currentMonster = Game->generateMonster();
             Game->roundTracker++;
-            if (Character_->getAttackSpeed() < currentMonster->getAttackSpeed())
+            /*if (Character_->getAttackSpeed() < currentMonster->getAttackSpeed())
             {
 
-            }
+            }*/
             Game->outputLog(
                 "던전에 입장했습니다. \n"
                 "적 ****와 조우!"
                 "1. 공격\n"
                 "2. 아이템 사용"
             );
+            Game->updateState(GameManager::End);
             break;
         case GameManager::End:      //Game 끝.
             cout << "게임이 끝납니다..." << endl;
