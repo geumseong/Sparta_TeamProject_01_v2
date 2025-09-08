@@ -18,7 +18,7 @@ public:
     HealEffect(int heal) : heal(heal) {}
     void onConsume(Character& character)
     {
-        character.setHealth( min(character.getHealth() + heal, character.getMaxhealth()) );
+        character.setHealth( min(character.getHealth() + heal, character.getMaxHealth()) );
     }
 };
 
@@ -33,13 +33,13 @@ public:
     {
 
         character.setAttack(character.getAttack() + atkbuff);
-        //character.setDeffence(character.getDeffence() + defbuff);
-        //character.setSpeed(character.getSpeed() + spdbuff);
+        character.setDefense(character.getDefense() + defbuff);
+        character.setAttackSpeed(character.getAttackSpeed() + spdbuff);
     }
     virtual void onUnequip(Character& character) override
     {
         character.setAttack(character.getAttack() - atkbuff);
-        //character.setDeffence(character.getDeffence() - defbuff);
-        //character.setSpeed(character.getSpeed() - spdbuff);
+        character.setDefense(character.getDefense() - defbuff);
+        character.setAttackSpeed(character.getAttackSpeed() - spdbuff);
     }
 };
