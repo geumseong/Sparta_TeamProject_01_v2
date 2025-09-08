@@ -10,7 +10,6 @@
 #include "GameManager.h"
 
 // 전방 선언
-// 
 class GameManager;
 class Character;
 class Item;

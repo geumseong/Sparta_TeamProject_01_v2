@@ -1,5 +1,4 @@
 // Orc.cpp
-// tt
 #include "Orc.h"
 #include <random>
 

@@ -9,7 +9,6 @@
 
 
 // 몬스터의 전체 행동을 결정하는 메인 함수
-//tt
 void Goblin::performAction() 
 {
     turnCount++;
