@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\CharacterJob">
+      <UniqueIdentifier>{a34248a8-e571-47ad-8869-ed3805cf3823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\CharacterJob">
+      <UniqueIdentifier>{ebce21b0-68e0-4335-ac9e-d0e4112139f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp">
@@ -39,6 +45,18 @@
     <ClCompile Include="WorkShop.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Archer.cpp">
+      <Filter>소스 파일\CharacterJob</Filter>
+    </ClCompile>
+    <ClCompile Include="Magician.cpp">
+      <Filter>소스 파일\CharacterJob</Filter>
+    </ClCompile>
+    <ClCompile Include="Thief.cpp">
+      <Filter>소스 파일\CharacterJob</Filter>
+    </ClCompile>
+    <ClCompile Include="Warrior.cpp">
+      <Filter>소스 파일\CharacterJob</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -58,6 +76,21 @@
     </ClInclude>
     <ClInclude Include="Shop.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemEffect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Archer.h">
+      <Filter>헤더 파일\CharacterJob</Filter>
+    </ClInclude>
+    <ClInclude Include="Magician.h">
+      <Filter>헤더 파일\CharacterJob</Filter>
+    </ClInclude>
+    <ClInclude Include="Thief.h">
+      <Filter>헤더 파일\CharacterJob</Filter>
+    </ClInclude>
+    <ClInclude Include="Warrior.h">
+      <Filter>헤더 파일\CharacterJob</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
