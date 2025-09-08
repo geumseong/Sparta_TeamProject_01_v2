@@ -4,6 +4,7 @@
 #include <iostream>
 #include "ItemEffect.h"
 
+
 using namespace std;
 
 enum E_Type
@@ -35,7 +36,8 @@ public:
 		return raw;
 	}
 
-	void useItem(/*Character& character*/);
+	void useItem(Character& character);
+	void unequipItem(Character& character);
 
 	void printInfo() const;
 
