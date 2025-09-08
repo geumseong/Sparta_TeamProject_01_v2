@@ -90,7 +90,7 @@ public:
         // ptr->id = itemId;
         return ptr;
     }
-/
+
 
     vector<Item> getShopTable(const std::string& shoptableName) const { // 상점 테이플 리턴
         vector<Item> list;
