@@ -5,7 +5,7 @@
 
 // --- 생성자 구현 ---
 Dragon::Dragon(int level)
-    : Monster(level), turnCount(0), fireBreathCooldown(0) // 턴과 쿨타임 초기화
+    : Monster(level), turnCount(0), fireBreathCooldown(0), isEnraged(false) // 턴과 쿨타임 초기화
 {
     // 1. 보스에 걸맞은 기본 능력치 설정
     int baseHealth = 500;
@@ -17,7 +17,7 @@ Dragon::Dragon(int level)
     // 2. 레벨 스케일링 적용 (보스는 일반 몬스터보다 성장률이 높음)
     this->health = baseHealth + (this->level * 20);
     this->attack = baseAttack + (this->level * 5);
-
+    this->maxHealth = this->health;
     // 3. 이름 설정
     this->name = "Lv." + std::to_string(this->level) + " 드래곤";
 
@@ -35,9 +35,30 @@ int Dragon::performAction()
 {
     turnCount++; // 턴 증가
 
+    if (!isEnraged && this->health <= this->maxHealth / 2)
+    {
+        // 2페이즈 진입
+        isEnraged = true; // 분노 상태로 변경
+        std::cout << name << "가 포효하며 형태를 변화합니다! 주변의 공기가 뜨거워집니다!" << std::endl;
+
+            // 공격력을 영구적으로 50% 상승
+            this->attack = static_cast<int>(this->attack * 1.5);
+    }
+
     // 화염 브레스 쿨타임이 0이면 특수 공격 사용
-    if (fireBreathCooldown == 0) {
-        fireBreathCooldown = 3; // 쿨타임을 3턴으로 다시 설정
+    // 2페이즈 시 공격 패턴 강화
+    if (fireBreathCooldown == 0)
+    {
+        // 2페이즈일 때는 쿨타임을 2턴으로, 아닌 때는 3턴으로 설정
+        if (isEnraged)
+        {
+            fireBreathCooldown = 2;
+        }
+        else
+        {
+            fireBreathCooldown = 3; // 쿨타임을 3턴으로 다시 설정
+        }
+
         return fireBreathAttack();
     }
     // 쿨타임이 남아있으면 일반 공격 사용
