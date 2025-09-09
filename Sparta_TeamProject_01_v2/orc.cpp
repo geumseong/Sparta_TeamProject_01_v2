@@ -30,18 +30,19 @@ int Orc::performSavageAction()
     }
 }
 
-int Orc::performBerserkerAction() 
+int Orc::performBerserkerAction()
 {
-    if (!isCharging) 
+    if (!isCharging)
     {
         std::cout << name << "가 돌진을 준비합니다! 다음 공격이 매우 강력해집니다!" << std::endl;
         isCharging = true;
         return 0; // 준비 상태, 데미지 없음
     }
-    else 
+
+    else
     {
         std::cout << name << "가 돌진하며 당신을 맹공격합니다! 공격력: " << attack * 2 << std::endl;
         isCharging = false; // 돌진 후 상태 초기화
-		return attack * 2;
+        return attack * 2;
     }
 }
