@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <vector>
 #include <string>
 #include "Item.h"
@@ -7,18 +7,18 @@
 class Shop
 {
 private:
-    std::vector<Item*> availableItems; // ÇöÀç »óÁ¡ Àç°í
+    //std::vector<Item*> availableItems; // í˜„ì¬ ìƒì  ì¬ê³ 
 
 public:
     Shop() = default;
     ~Shop();
 
-    void openShop(); // »óÁ¡ ¿­±â(·£´ı ¶óÀÎ¾÷ »ı¼º)
-    void buyItem(int index, Inventory& inven); // ¾ÆÀÌÅÛ ±¸¸Å
-    void sellItem(int index, Inventory& inven); // ¾ÆÀÌÅÛ ÆÇ¸Å
-    void showItem(int index); // Æ¯Á¤ ¾ÆÀÌÅÛ Á¤º¸ Ãâ·Â
-    void displayItems(); // »óÁ¡ ¾ÆÀÌÅÛ ¸ñ·Ï Ãâ·Â
+    void openShop(); // ìƒì  ì—´ê¸°(ëœë¤ ë¼ì¸ì—… ìƒì„±)
+    //void buyItem(int index, Inventory& inven); // ì•„ì´í…œ êµ¬ë§¤
+    //void sellItem(int index, Inventory& inven); // ì•„ì´í…œ íŒë§¤
+    void showItem(int index); // íŠ¹ì • ì•„ì´í…œ ì •ë³´ ì¶œë ¥
+    void displayItems(); // ìƒì  ì•„ì´í…œ ëª©ë¡ ì¶œë ¥
 
-    std::string getItemName(int index) const; // ¾ÆÀÌÅÛ ÀÌ¸§ °¡Á®¿À±â
-    int getItemCount() const; // ¾ÆÀÌÅÛ °³¼ö °¡Á®¿À±â
+    std::string getItemName(int index) const; // ì•„ì´í…œ ì´ë¦„ ê°€ì ¸ì˜¤ê¸°
+    int getItemCount() const; // ì•„ì´í…œ ê°œìˆ˜ ê°€ì ¸ì˜¤ê¸°
 };

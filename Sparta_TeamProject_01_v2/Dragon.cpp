@@ -1,81 +1,81 @@
-// Dragon.cpp
+ï»¿// Dragon.cpp
 #include "Dragon.h"
-#include "Item.h" // .cpp ÆÄÀÏ¿¡¼­ include
+#include "Item.h" // .cpp íŒŒì¼ì—ì„œ include
 #include <iostream>
 
-// --- »ı¼ºÀÚ ±¸Çö ---
+// --- ìƒì„±ì êµ¬í˜„ ---
 Dragon::Dragon(int level)
-    : Monster(level), turnCount(0), fireBreathCooldown(0), isEnraged(false) // ÅÏ°ú ÄğÅ¸ÀÓ ÃÊ±âÈ­
+    : Monster(level), turnCount(0), fireBreathCooldown(0), isEnraged(false) // í„´ê³¼ ì¿¨íƒ€ì„ ì´ˆê¸°í™”
 {
-    // 1. º¸½º¿¡ °É¸ÂÀº ±âº» ´É·ÂÄ¡ ¼³Á¤
+    // 1. ë³´ìŠ¤ì— ê±¸ë§ì€ ê¸°ë³¸ ëŠ¥ë ¥ì¹˜ ì„¤ì •
     int baseHealth = 500;
     int baseAttack = 40;
     
-    this->baseExp = 300; // ±âº» °æÇèÄ¡ Ãß°¡
-    this->baseGold = 500; // ±âº» °ñµå Ãß°¡
+    this->baseExp = 300; // ê¸°ë³¸ ê²½í—˜ì¹˜ ì¶”ê°€
+    this->baseGold = 500; // ê¸°ë³¸ ê³¨ë“œ ì¶”ê°€
 
-    // 2. ·¹º§ ½ºÄÉÀÏ¸µ Àû¿ë (º¸½º´Â ÀÏ¹İ ¸ó½ºÅÍº¸´Ù ¼ºÀå·üÀÌ ³ôÀ½)
+    // 2. ë ˆë²¨ ìŠ¤ì¼€ì¼ë§ ì ìš© (ë³´ìŠ¤ëŠ” ì¼ë°˜ ëª¬ìŠ¤í„°ë³´ë‹¤ ì„±ì¥ë¥ ì´ ë†’ìŒ)
     this->health = baseHealth + (this->level * 20);
     this->attack = baseAttack + (this->level * 5);
     this->maxHealth = this->health;
-    // 3. ÀÌ¸§ ¼³Á¤
-    this->name = "Lv." + std::to_string(this->level) + " µå·¡°ï";
+    // 3. ì´ë¦„ ì„¤ì •
+    this->name = "Lv." + std::to_string(this->level) + " ë“œë˜ê³¤";
 
-    // 4. º¸½º Àü¿ë Æ¯º° µå·Ó ¾ÆÀÌÅÛ ¼³Á¤
-    dropItem.push_back(Item("µå·¡°ïÀÇ ºñ´Ã", 1000, 1, E_Type::Material));
-    dropItem.push_back(Item("µå·¡°ïÀÇ »Ô", 3000, 1, E_Type::Material));
-    dropItem.push_back(Item("µå·¡°ïÀÇ ¹ßÅé", 2000, 1, E_Type::Material));
-    dropItem.push_back(Item("µå·¡°ïÀÇ ´«¾Ë", 5000, 1, E_Type::Material));
-    dropItem.push_back(Item("µå·¡°ïÀÇ ³¯°³", 5000, 1, E_Type::Material));
-    dropItem.push_back(Item("µå·¡°ïÀÇ ½ÉÀå", 10000, 1, E_Type::Material));
+    // 4. ë³´ìŠ¤ ì „ìš© íŠ¹ë³„ ë“œë¡­ ì•„ì´í…œ ì„¤ì •
+    /*dropItem.push_back(Item("ë“œë˜ê³¤ì˜ ë¹„ëŠ˜", 1000, 1, E_Type::Material));
+    dropItem.push_back(Item("ë“œë˜ê³¤ì˜ ë¿”", 3000, 1, E_Type::Material));
+    dropItem.push_back(Item("ë“œë˜ê³¤ì˜ ë°œí†±", 2000, 1, E_Type::Material));
+    dropItem.push_back(Item("ë“œë˜ê³¤ì˜ ëˆˆì•Œ", 5000, 1, E_Type::Material));
+    dropItem.push_back(Item("ë“œë˜ê³¤ì˜ ë‚ ê°œ", 5000, 1, E_Type::Material));
+    dropItem.push_back(Item("ë“œë˜ê³¤ì˜ ì‹¬ì¥", 10000, 1, E_Type::Material));*/
 }
 
-// --- Çàµ¿ AI ±¸Çö ---
+// --- í–‰ë™ AI êµ¬í˜„ ---
 int Dragon::performAction()
 {
-    turnCount++; // ÅÏ Áõ°¡
+    turnCount++; // í„´ ì¦ê°€
 
     if (!isEnraged && this->health <= this->maxHealth / 2)
     {
-        // 2ÆäÀÌÁî ÁøÀÔ
-        isEnraged = true; // ºĞ³ë »óÅÂ·Î º¯°æ
-        std::cout << name << "°¡ Æ÷È¿ÇÏ¸ç ÇüÅÂ¸¦ º¯È­ÇÕ´Ï´Ù! ÁÖº¯ÀÇ °ø±â°¡ ¶ß°Å¿öÁı´Ï´Ù!" << std::endl;
+        // 2í˜ì´ì¦ˆ ì§„ì…
+        isEnraged = true; // ë¶„ë…¸ ìƒíƒœë¡œ ë³€ê²½
+        std::cout << name << "ê°€ í¬íš¨í•˜ë©° í˜•íƒœë¥¼ ë³€í™”í•©ë‹ˆë‹¤! ì£¼ë³€ì˜ ê³µê¸°ê°€ ëœ¨ê±°ì›Œì§‘ë‹ˆë‹¤!" << std::endl;
 
-            // °ø°İ·ÂÀ» ¿µ±¸ÀûÀ¸·Î 50% »ó½Â
+            // ê³µê²©ë ¥ì„ ì˜êµ¬ì ìœ¼ë¡œ 50% ìƒìŠ¹
             this->attack = static_cast<int>(this->attack * 1.5);
     }
 
-    // È­¿° ºê·¹½º ÄğÅ¸ÀÓÀÌ 0ÀÌ¸é Æ¯¼ö °ø°İ »ç¿ë
-    // 2ÆäÀÌÁî ½Ã °ø°İ ÆĞÅÏ °­È­
+    // í™”ì—¼ ë¸Œë ˆìŠ¤ ì¿¨íƒ€ì„ì´ 0ì´ë©´ íŠ¹ìˆ˜ ê³µê²© ì‚¬ìš©
+    // 2í˜ì´ì¦ˆ ì‹œ ê³µê²© íŒ¨í„´ ê°•í™”
     if (fireBreathCooldown == 0)
     {
-        // 2ÆäÀÌÁîÀÏ ¶§´Â ÄğÅ¸ÀÓÀ» 2ÅÏÀ¸·Î, ¾Æ´Ñ ¶§´Â 3ÅÏÀ¸·Î ¼³Á¤
+        // 2í˜ì´ì¦ˆì¼ ë•ŒëŠ” ì¿¨íƒ€ì„ì„ 2í„´ìœ¼ë¡œ, ì•„ë‹Œ ë•ŒëŠ” 3í„´ìœ¼ë¡œ ì„¤ì •
         if (isEnraged)
         {
             fireBreathCooldown = 2;
         }
         else
         {
-            fireBreathCooldown = 3; // ÄğÅ¸ÀÓÀ» 3ÅÏÀ¸·Î ´Ù½Ã ¼³Á¤
+            fireBreathCooldown = 3; // ì¿¨íƒ€ì„ì„ 3í„´ìœ¼ë¡œ ë‹¤ì‹œ ì„¤ì •
         }
 
         return fireBreathAttack();
     }
-    // ÄğÅ¸ÀÓÀÌ ³²¾ÆÀÖÀ¸¸é ÀÏ¹İ °ø°İ »ç¿ë
+    // ì¿¨íƒ€ì„ì´ ë‚¨ì•„ìˆìœ¼ë©´ ì¼ë°˜ ê³µê²© ì‚¬ìš©
     else {
-        fireBreathCooldown--; // ÄğÅ¸ÀÓ 1 °¨¼Ò
+        fireBreathCooldown--; // ì¿¨íƒ€ì„ 1 ê°ì†Œ
         return normalAttack();
     }
 }
 
-// --- °³º° Çàµ¿ ÇÔ¼ö ±¸Çö ---
+// --- ê°œë³„ í–‰ë™ í•¨ìˆ˜ êµ¬í˜„ ---
 int Dragon::normalAttack() {
-    std::cout << this->name << "ÀÌ(°¡) °Å´ëÇÑ ¹ßÅéÀ¸·Î °ø°İÇÕ´Ï´Ù!" << std::endl;
-    return this->attack; // ±âº» °ø°İ·Â ¹İÈ¯
+    std::cout << this->name << "ì´(ê°€) ê±°ëŒ€í•œ ë°œí†±ìœ¼ë¡œ ê³µê²©í•©ë‹ˆë‹¤!" << std::endl;
+    return this->attack; // ê¸°ë³¸ ê³µê²©ë ¥ ë°˜í™˜
 }
 
 int Dragon::fireBreathAttack() {
-    int finalDamage = static_cast<int>(this->attack * 1.8); // ±âº» °ø°İ·ÂÀÇ 1.8¹è
-    std::cout << this->name << "ÀÌ(°¡) ¸ğµç °ÍÀ» ÅÂ¿ö¹ö¸± µíÇÑ È­¿° ºê·¹½º¸¦ ³»»Õ½À´Ï´Ù! (°­·ÂÇÑ °ø°İ!)" << std::endl;
-    return finalDamage; // °­È­µÈ °ø°İ·Â ¹İÈ¯
+    int finalDamage = static_cast<int>(this->attack * 1.8); // ê¸°ë³¸ ê³µê²©ë ¥ì˜ 1.8ë°°
+    std::cout << this->name << "ì´(ê°€) ëª¨ë“  ê²ƒì„ íƒœì›Œë²„ë¦´ ë“¯í•œ í™”ì—¼ ë¸Œë ˆìŠ¤ë¥¼ ë‚´ë¿œìŠµë‹ˆë‹¤! (ê°•ë ¥í•œ ê³µê²©!)" << std::endl;
+    return finalDamage; // ê°•í™”ëœ ê³µê²©ë ¥ ë°˜í™˜
 }

@@ -1,66 +1,66 @@
-#include "Ogre.h"
-#include "Item.h"
-#include <iostream>
-
-Ogre::Ogre(const std::string& type, int level)
-    : Monster(level), type(type)
-{
-    int baseHealth = 0;
-    int baseAttack = 0;
-    std::string namePrefix = "";
-
-    if (type == "ÀÏ¹Ý") {
-        namePrefix = "¿À°Å";
-        baseHealth = 200;
-        baseAttack = 30;
-        this->baseExp = 120;
-        this->baseGold = 80;
-        this->attackSpeed = 3;
-        dropItem.push_back(Item("¿À°ÅÀÇ ´ëÅð°ñ", 100, 1, E_Type::Material));
-    }
-    else if (type == "Åõ Çìµå") {
-        namePrefix = "Åõ Çìµå ¿À°Å";
-        baseHealth = 250;
-        baseAttack = 25;
-        this->baseExp = 180;
-        this->baseGold = 110;
-        this->attackSpeed = 2;
-        dropItem.push_back(Item("¿À°ÅÀÇ ½ÖµÕÀÌ ¸ñ°ÉÀÌ", 250, 1, E_Type::Accessory));
-    }
-    else if (type == "Ç®¾Æ¸Ó") {
-        namePrefix = "Ç®¾Æ¸Ó ¿À°Å";
-        baseHealth = 300;
-        baseAttack = 20;
-        this->baseExp = 200;
-        this->baseGold = 150;
-        this->attackSpeed = 1;
-        dropItem.push_back(Item("¿À¿°µÈ °­Ã¶ ÁÖ±«", 280, 1, E_Type::Material));
-        dropItem.push_back(Item("¿À°ÅÀÇ °­È­ Ã¶°©", 400, 1, E_Type::Material));
-    }
-
-    this->health = baseHealth + (this->level * 15);
-    this->attack = baseAttack + (this->level * 4);
-    this->maxHealth = this->health;
-    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
-}
-
-int Ogre::performAction()
-{
-    if (type == "Åõ Çìµå" && rand() % 3 == 0) { // 33% È®·ü·Î 2¹ø °ø°Ý
-        return doubleAttack();
-    }
-    return smashAttack();
-}
-
-int Ogre::smashAttack()
-{
-    std::cout << this->name << "ÀÌ(°¡) À°ÁßÇÑ ¸ùµÕÀÌ¸¦ ÈÖµÎ¸¨´Ï´Ù!" << std::endl;
-    return this->attack;
-}
-
-int Ogre::doubleAttack()
-{
-    int finalDamage = this->attack * 2;
-    std::cout << this->name << "ÀÇ ¸Ó¸® µÎ °³°¡ °¢ÀÚ ¼Ò¸®Ä¡¸ç µ¿½Ã¿¡ °ø°ÝÇÕ´Ï´Ù! (2È¸ °ø°Ý!)" << std::endl;
-    return finalDamage;
-}
+ï»¿//#include "Ogre.h"
+//#include "Item.h"
+//#include <iostream>
+//
+//Ogre::Ogre(const std::string& type, int level)
+//    : Monster(level), type(type)
+//{
+//    int baseHealth = 0;
+//    int baseAttack = 0;
+//    std::string namePrefix = "";
+//
+//    if (type == "ì¼ë°˜") {
+//        namePrefix = "ì˜¤ê±°";
+//        baseHealth = 200;
+//        baseAttack = 30;
+//        this->baseExp = 120;
+//        this->baseGold = 80;
+//        this->attackSpeed = 3;
+//        dropItem.push_back(Item("ì˜¤ê±°ì˜ ëŒ€í‡´ê³¨", 100, 1, E_Type::Material));
+//    }
+//    else if (type == "íˆ¬ í—¤ë“œ") {
+//        namePrefix = "íˆ¬ í—¤ë“œ ì˜¤ê±°";
+//        baseHealth = 250;
+//        baseAttack = 25;
+//        this->baseExp = 180;
+//        this->baseGold = 110;
+//        this->attackSpeed = 2;
+//        dropItem.push_back(Item("ì˜¤ê±°ì˜ ìŒë‘¥ì´ ëª©ê±¸ì´", 250, 1, E_Type::Accessory));
+//    }
+//    else if (type == "í’€ì•„ë¨¸") {
+//        namePrefix = "í’€ì•„ë¨¸ ì˜¤ê±°";
+//        baseHealth = 300;
+//        baseAttack = 20;
+//        this->baseExp = 200;
+//        this->baseGold = 150;
+//        this->attackSpeed = 1;
+//        dropItem.push_back(Item("ì˜¤ì—¼ëœ ê°•ì²  ì£¼ê´´", 280, 1, E_Type::Material));
+//        dropItem.push_back(Item("ì˜¤ê±°ì˜ ê°•í™” ì² ê°‘", 400, 1, E_Type::Material));
+//    }
+//
+//    this->health = baseHealth + (this->level * 15);
+//    this->attack = baseAttack + (this->level * 4);
+//    this->maxHealth = this->health;
+//    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
+//}
+//
+//int Ogre::performAction()
+//{
+//    if (type == "íˆ¬ í—¤ë“œ" && rand() % 3 == 0) { // 33% í™•ë¥ ë¡œ 2ë²ˆ ê³µê²©
+//        return doubleAttack();
+//    }
+//    return smashAttack();
+//}
+//
+//int Ogre::smashAttack()
+//{
+//    std::cout << this->name << "ì´(ê°€) ìœ¡ì¤‘í•œ ëª½ë‘¥ì´ë¥¼ íœ˜ë‘ë¦…ë‹ˆë‹¤!" << std::endl;
+//    return this->attack;
+//}
+//
+//int Ogre::doubleAttack()
+//{
+//    int finalDamage = this->attack * 2;
+//    std::cout << this->name << "ì˜ ë¨¸ë¦¬ ë‘ ê°œê°€ ê°ìž ì†Œë¦¬ì¹˜ë©° ë™ì‹œì— ê³µê²©í•©ë‹ˆë‹¤! (2íšŒ ê³µê²©!)" << std::endl;
+//    return finalDamage;
+//}

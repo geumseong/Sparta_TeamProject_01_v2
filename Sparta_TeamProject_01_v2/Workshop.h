@@ -1,53 +1,53 @@
-#pragma once
-
-#if defined(_MSC_VER)
-#  pragma execution_character_set("utf-8")
-#endif
-
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <limits>
-#include <iostream>
-#include <memory>
-
-#include "Item.h"
-#include "Inventory.h"
-#include "ItemDB.h"   // ¡ç DB ¿¬µ¿
-
-class Workshop {
-public:
-    // DB¸¦ ÇÔ²² Àü´Ş¹Ş´Â´Ù.
-    void Open(Inventory& inv, const ItemDB& db);
-
-private:
-    // Ä«Å×°í¸®º° ¸Ş´º
-    void CraftPotion(Inventory& inv, const ItemDB& db);     // "alchemy"
-    void CraftEquipment(Inventory& inv, const ItemDB& db);  // "blacksmith"
-    void CraftAccessory(Inventory& inv, const ItemDB& db);  // "accessory" (DB¿¡ ¾øÀ¸¸é ÀÚµ¿ ½ºÅµ)
-    void ShowRecipes(const ItemDB& db) const;
-
-    // °øÅë I/O
-    int  AskIntInRange(const std::string& prompt, int minVal, int maxVal) const;
-    bool AskYesNo(const std::string& prompt) const;
-
-    // ¸®½ºÆ®(Áßº¹=°³¼ö)¿¡ ´ëÇØ ÀÌ¸§º° °³¼ö·Î ¾ĞÃà
-    static std::unordered_map<std::string, int>
-        CountByName(const std::vector<Item>& items);
-
-    // ÇöÀç ÀÎº¥Åä¸® º¸À¯·® Á¶È¸ (¾øÀ¸¸é 0)
-    static int GetOwnedCount(const Inventory& inv, const std::string& name);
-
-    // ÀÔ·Â(Àç·á) ÃæÁ· ¿©ºÎ Ã¼Å©
-    static bool HasAllInputs(const Inventory& inv,
-        const std::unordered_map<std::string, int>& req);
-
-    // Àç·á Â÷°¨ (ÃæºĞÇÏ´Ù°í °¡Á¤ÇÏ°í Â÷°¨; 0ÀÌ¸é remove)
-    static void ConsumeInputs(Inventory& inv,
-        const std::unordered_map<std::string, int>& req);
-
-    // »êÃâ Áö±Ş (Áßº¹ ÇÕ»êÇØ¼­ ÇÑ ¹ø¿¡ add)
-    static void GiveOutputs(Inventory& inv,
-        const std::vector<Item>& outputs,
-        int times);
-};
+ï»¿//#pragma once
+//
+//#if defined(_MSC_VER)
+//#  pragma execution_character_set("utf-8")
+//#endif
+//
+//#include <string>
+//#include <vector>
+//#include <unordered_map>
+//#include <limits>
+//#include <iostream>
+//#include <memory>
+//
+//#include "Item.h"
+//#include "Inventory.h"
+//#include "ItemDB.h"   // â† DB ì—°ë™
+//
+//class Workshop {
+//public:
+//    // DBë¥¼ í•¨ê»˜ ì „ë‹¬ë°›ëŠ”ë‹¤.
+//    void Open(Inventory& inv, const ItemDB& db);
+//
+//private:
+//    // ì¹´í…Œê³ ë¦¬ë³„ ë©”ë‰´
+//    void CraftPotion(Inventory& inv, const ItemDB& db);     // "alchemy"
+//    void CraftEquipment(Inventory& inv, const ItemDB& db);  // "blacksmith"
+//    void CraftAccessory(Inventory& inv, const ItemDB& db);  // "accessory" (DBì— ì—†ìœ¼ë©´ ìë™ ìŠ¤í‚µ)
+//    void ShowRecipes(const ItemDB& db) const;
+//
+//    // ê³µí†µ I/O
+//    int  AskIntInRange(const std::string& prompt, int minVal, int maxVal) const;
+//    bool AskYesNo(const std::string& prompt) const;
+//
+//    // ë¦¬ìŠ¤íŠ¸(ì¤‘ë³µ=ê°œìˆ˜)ì— ëŒ€í•´ ì´ë¦„ë³„ ê°œìˆ˜ë¡œ ì••ì¶•
+//    static std::unordered_map<std::string, int>
+//        CountByName(const std::vector<Item>& items);
+//
+//    // í˜„ì¬ ì¸ë²¤í† ë¦¬ ë³´ìœ ëŸ‰ ì¡°íšŒ (ì—†ìœ¼ë©´ 0)
+//    static int GetOwnedCount(const Inventory& inv, const std::string& name);
+//
+//    // ì…ë ¥(ì¬ë£Œ) ì¶©ì¡± ì—¬ë¶€ ì²´í¬
+//    static bool HasAllInputs(const Inventory& inv,
+//        const std::unordered_map<std::string, int>& req);
+//
+//    // ì¬ë£Œ ì°¨ê° (ì¶©ë¶„í•˜ë‹¤ê³  ê°€ì •í•˜ê³  ì°¨ê°; 0ì´ë©´ remove)
+//    static void ConsumeInputs(Inventory& inv,
+//        const std::unordered_map<std::string, int>& req);
+//
+//    // ì‚°ì¶œ ì§€ê¸‰ (ì¤‘ë³µ í•©ì‚°í•´ì„œ í•œ ë²ˆì— add)
+//    static void GiveOutputs(Inventory& inv,
+//        const std::vector<Item>& outputs,
+//        int times);
+//};

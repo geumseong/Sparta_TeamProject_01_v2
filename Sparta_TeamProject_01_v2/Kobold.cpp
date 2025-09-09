@@ -1,57 +1,57 @@
-#include "Kobold.h"
-#include "Item.h"
-#include <iostream>
-
-Kobold::Kobold(const std::string& type, int level)
-    : Monster(level), type(type), turnCount(0)
-{
-    int baseHealth = 0;
-    int baseAttack = 0;
-    std::string namePrefix = "";
-
-    if (type == "ÀÏ¹Ý") {
-        namePrefix = "ÄÚº¼Æ®";
-        baseHealth = 20;
-        baseAttack = 6;
-        this->baseExp = 7;
-        this->baseGold = 5;
-        this->attackSpeed = 15;
-        dropItem.push_back(Item("ÀÛÀº °¡Á× Á¶°¢", 5, 1, E_Type::Material));
-    }
-    else if (type == "ÇÔÁ¤²Û") {
-        namePrefix = "ÄÚº¼Æ® ÇÔÁ¤²Û";
-        baseHealth = 25;
-        baseAttack = 8;
-        this->baseExp = 12;
-        this->baseGold = 8;
-        this->attackSpeed = 18;
-        dropItem.push_back(Item("Á¶ÀâÇÑ ÇÔÁ¤ µµ±¸", 25, 1, E_Type::Material));
-    }
-
-    this->health = baseHealth + (this->level * 3);
-    this->attack = baseAttack + (this->level * 1);
-    this->maxHealth = this->health;
-    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
-}
-
-int Kobold::performAction()
-{
-    turnCount++;
-    if (type == "ÇÔÁ¤²Û" && rand() % 4 == 0) { // 25% È®·ü·Î ±â½À °ø°Ý
-        return trapAttack();
-    }
-    return normalAttack();
-}
-
-int Kobold::normalAttack()
-{
-    std::cout << this->name << "ÀÌ(°¡) ³¯Ä«·Î¿î ¹ßÅéÀ¸·Î ÇÒÅ¢´Ï´Ù!" << std::endl;
-    return this->attack;
-}
-
-int Kobold::trapAttack()
-{
-    int finalDamage = static_cast<int>(this->attack * 1.5);
-    std::cout << this->name << "ÀÌ(°¡) ¼û°ÜµÐ ÇÔÁ¤À» ÅÍ¶ß¸³´Ï´Ù! (°­·ÂÇÑ °ø°Ý!)" << std::endl;
-    return finalDamage;
-}
+ï»¿//#include "Kobold.h"
+//#include "Item.h"
+//#include <iostream>
+//
+//Kobold::Kobold(const std::string& type, int level)
+//    : Monster(level), type(type), turnCount(0)
+//{
+//    int baseHealth = 0;
+//    int baseAttack = 0;
+//    std::string namePrefix = "";
+//
+//    if (type == "ì¼ë°˜") {
+//        namePrefix = "ì½”ë³¼íŠ¸";
+//        baseHealth = 20;
+//        baseAttack = 6;
+//        this->baseExp = 7;
+//        this->baseGold = 5;
+//        this->attackSpeed = 15;
+//        dropItem.push_back(Item("ìž‘ì€ ê°€ì£½ ì¡°ê°", 5, 1, E_Type::Material));
+//    }
+//    else if (type == "í•¨ì •ê¾¼") {
+//        namePrefix = "ì½”ë³¼íŠ¸ í•¨ì •ê¾¼";
+//        baseHealth = 25;
+//        baseAttack = 8;
+//        this->baseExp = 12;
+//        this->baseGold = 8;
+//        this->attackSpeed = 18;
+//        dropItem.push_back(Item("ì¡°ìž¡í•œ í•¨ì • ë„êµ¬", 25, 1, E_Type::Material));
+//    }
+//
+//    this->health = baseHealth + (this->level * 3);
+//    this->attack = baseAttack + (this->level * 1);
+//    this->maxHealth = this->health;
+//    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
+//}
+//
+//int Kobold::performAction()
+//{
+//    turnCount++;
+//    if (type == "í•¨ì •ê¾¼" && rand() % 4 == 0) { // 25% í™•ë¥ ë¡œ ê¸°ìŠµ ê³µê²©
+//        return trapAttack();
+//    }
+//    return normalAttack();
+//}
+//
+//int Kobold::normalAttack()
+//{
+//    std::cout << this->name << "ì´(ê°€) ë‚ ì¹´ë¡œìš´ ë°œí†±ìœ¼ë¡œ í• í…ë‹ˆë‹¤!" << std::endl;
+//    return this->attack;
+//}
+//
+//int Kobold::trapAttack()
+//{
+//    int finalDamage = static_cast<int>(this->attack * 1.5);
+//    std::cout << this->name << "ì´(ê°€) ìˆ¨ê²¨ë‘” í•¨ì •ì„ í„°ëœ¨ë¦½ë‹ˆë‹¤! (ê°•ë ¥í•œ ê³µê²©!)" << std::endl;
+//    return finalDamage;
+//}

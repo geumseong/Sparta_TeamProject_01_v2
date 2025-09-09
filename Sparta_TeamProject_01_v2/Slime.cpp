@@ -1,79 +1,79 @@
-#include "Slime.h"
-#include "Item.h"
-#include <iostream>
-
-Slime::Slime(const std::string& type, int level)
-    : Monster(level), type(type), turnCount(0)
-{
-    int baseHealth = 0;
-    int baseAttack = 0;
-    std::string namePrefix = "";
-
-    // 'ÀÏ¹İ' Å¸ÀÔÀ» °¡Àå ¸ÕÀú ¼³Á¤
-    if (type == "ÀÏ¹İ")
-    {
-        namePrefix = "½½¶óÀÓ";
-        baseHealth = 25;
-        baseAttack = 4;
-        this->baseExp = 8;
-        this->baseGold = 4;
-        this->attackSpeed = 8;
-        // [¹æ¾î±¸ Àç·á] µå·Ó
-        dropItem.push_back(Item("²öÀûÇÑ Á©¸®", 10, 1, E_Type::Material));
-    }
-    else if (type == "´Ü´ÜÇÑ")
-    {
-        namePrefix = "´Ü´ÜÇÑ ½½¶óÀÓ";
-        baseHealth = 40;
-        baseAttack = 6;
-        this->baseExp = 15;
-        this->baseGold = 8;
-        this->attackSpeed = 5; // ´Ü´ÜÇØ¼­ ´À¸²
-        // [¹«±â Àç·á] µå·Ó
-        dropItem.push_back(Item("½½¶óÀÓÀÇ ÇÙ", 50, 1, E_Type::Material));
-    }
-    else if (type == "º¸¼®")
-    {
-        namePrefix = "º¸¼® ½½¶óÀÓ";
-        baseHealth = 60;
-        baseAttack = 10;
-        this->baseExp = 50;
-        this->baseGold = 50;
-        this->attackSpeed = 12; // Èñ±ÍÇØ¼­ ºü¸§
-        // [¾Ç¼¼»ç¸® Àç·á]¿Í [ÀçÈ­] µå·Ó
-        dropItem.push_back(Item("¹İÂ¦ÀÌ´Â Á¶°¢", 150, 1, E_Type::Material));
-        dropItem.push_back(Item("±İÈ­ ÁÖ¸Ó´Ï", 200, 1, E_Type::Material));
-    }
-
-    this->health = baseHealth + (this->level * 4);
-    this->attack = baseAttack + (this->level * 2);
-    this->maxHealth = this->health;
-    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
-}
-
-// ½½¶óÀÓÀÇ Çàµ¿ AI: 25% È®·ü·Î ¹æ¾î, 75% È®·ü·Î °ø°İ
-int Slime::performAction()
-{
-    turnCount++;
-    if (rand() % 4 == 0) // 4·Î ³ª´« ³ª¸ÓÁö°¡ 0ÀÏ È®·ü (25%)
-    {
-        return hardenDefense();
-    }
-    else
-    {
-        return normalAttack();
-    }
-}
-
-// °³º° Çàµ¿ ÇÔ¼ö
-int Slime::normalAttack()
-{
-    std::cout << this->name << "ÀÌ(°¡) ¸öÅë ¹ÚÄ¡±â¸¦ ½ÃµµÇÕ´Ï´Ù!" << std::endl;
-    return this->attack;
-}
-
-int Slime::hardenDefense()
-{
-    std::cout << this->name << "ÀÌ(°¡) ¸öÀ» ´Ü´ÜÇÏ°Ô ±»Çû½À´Ï´Ù. (¹æ¾î Çàµ¿)" << std::endl;
-    return 0;
-}
+ï»¿//#include "Slime.h"
+//#include "Item.h"
+//#include <iostream>
+//
+//Slime::Slime(const std::string& type, int level)
+//    : Monster(level), type(type), turnCount(0)
+//{
+//    int baseHealth = 0;
+//    int baseAttack = 0;
+//    std::string namePrefix = "";
+//
+//    // 'ì¼ë°˜' íƒ€ì…ì„ ê°€ì¥ ë¨¼ì € ì„¤ì •
+//    if (type == "ì¼ë°˜")
+//    {
+//        namePrefix = "ìŠ¬ë¼ì„";
+//        baseHealth = 25;
+//        baseAttack = 4;
+//        this->baseExp = 8;
+//        this->baseGold = 4;
+//        this->attackSpeed = 8;
+//        // [ë°©ì–´êµ¬ ì¬ë£Œ] ë“œë¡­
+//        dropItem.push_back(Item("ëˆì í•œ ì ¤ë¦¬", 10, 1, E_Type::Material));
+//    }
+//    else if (type == "ë‹¨ë‹¨í•œ")
+//    {
+//        namePrefix = "ë‹¨ë‹¨í•œ ìŠ¬ë¼ì„";
+//        baseHealth = 40;
+//        baseAttack = 6;
+//        this->baseExp = 15;
+//        this->baseGold = 8;
+//        this->attackSpeed = 5; // ë‹¨ë‹¨í•´ì„œ ëŠë¦¼
+//        // [ë¬´ê¸° ì¬ë£Œ] ë“œë¡­
+//        dropItem.push_back(Item("ìŠ¬ë¼ì„ì˜ í•µ", 50, 1, E_Type::Material));
+//    }
+//    else if (type == "ë³´ì„")
+//    {
+//        namePrefix = "ë³´ì„ ìŠ¬ë¼ì„";
+//        baseHealth = 60;
+//        baseAttack = 10;
+//        this->baseExp = 50;
+//        this->baseGold = 50;
+//        this->attackSpeed = 12; // í¬ê·€í•´ì„œ ë¹ ë¦„
+//        // [ì•…ì„¸ì‚¬ë¦¬ ì¬ë£Œ]ì™€ [ì¬í™”] ë“œë¡­
+//        dropItem.push_back(Item("ë°˜ì§ì´ëŠ” ì¡°ê°", 150, 1, E_Type::Material));
+//        dropItem.push_back(Item("ê¸ˆí™” ì£¼ë¨¸ë‹ˆ", 200, 1, E_Type::Material));
+//    }
+//
+//    this->health = baseHealth + (this->level * 4);
+//    this->attack = baseAttack + (this->level * 2);
+//    this->maxHealth = this->health;
+//    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
+//}
+//
+//// ìŠ¬ë¼ì„ì˜ í–‰ë™ AI: 25% í™•ë¥ ë¡œ ë°©ì–´, 75% í™•ë¥ ë¡œ ê³µê²©
+//int Slime::performAction()
+//{
+//    turnCount++;
+//    if (rand() % 4 == 0) // 4ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ê°€ 0ì¼ í™•ë¥  (25%)
+//    {
+//        return hardenDefense();
+//    }
+//    else
+//    {
+//        return normalAttack();
+//    }
+//}
+//
+//// ê°œë³„ í–‰ë™ í•¨ìˆ˜
+//int Slime::normalAttack()
+//{
+//    std::cout << this->name << "ì´(ê°€) ëª¸í†µ ë°•ì¹˜ê¸°ë¥¼ ì‹œë„í•©ë‹ˆë‹¤!" << std::endl;
+//    return this->attack;
+//}
+//
+//int Slime::hardenDefense()
+//{
+//    std::cout << this->name << "ì´(ê°€) ëª¸ì„ ë‹¨ë‹¨í•˜ê²Œ êµ³í˜”ìŠµë‹ˆë‹¤. (ë°©ì–´ í–‰ë™)" << std::endl;
+//    return 0;
+//}

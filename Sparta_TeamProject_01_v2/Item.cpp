@@ -1,63 +1,63 @@
-#include "Item.h"
-void Item::printInfo() const
-{
-	cout << "[ÀÌ¸§: " << name << ", °¡°Ý: " << price << "G, " << count << "°³ º¸À¯]" << endl;
-}
-
-void Item::useItem(Character& character)
-{
-	switch (type) //type
-	{
-	case E_Type::Consumable:
-		for (auto& e : effects) e->onConsume(character);
-		// ¿©±â¼­ Ãß°¡ ±â´É ±¸Çö
-		break;
-	case E_Type::Equipment:
-	case E_Type::Accessory:
-		for (auto& e : effects) e->onEquip(character);
-		// ¿©±â¼­ Ãß°¡ ±â´É ±¸Çö
-		break;
-	case E_Type::Material:
-		break;
-
-	}
-}
-
-void Item::unequipItem(Character& character)
-{
-	switch (type) //type
-	{
-	case E_Type::Consumable:
-		break;
-	case E_Type::Equipment:
-	case E_Type::Accessory:
-		for (auto& e : effects) e->onUnequip(character);
-		// ¿©±â¼­ Ãß°¡ ±â´É ±¸Çö
-		break;
-	case E_Type::Material:
-		break;
-
-	}
-}
-
-//setter
-void Item::setName(string name)
-{
-	this->name = name;
-}
-
-void Item::setPrice(int price)
-{
-	this->price = price;
-}
-
-void Item::setCount(int count)
-{
-	this->count = count;
-}
-
-void Item::setType(E_Type type)
-{
-	this->type = type;
-}
-
+ï»¿//#include "Item.h"
+//void Item::printInfo() const
+//{
+//	cout << "[ì´ë¦„: " << name << ", ê°€ê²©: " << price << "G, " << count << "ê°œ ë³´ìœ ]" << endl;
+//}
+//
+//void Item::useItem(Character& character)
+//{
+//	switch (type) //type
+//	{
+//	case E_Type::Consumable:
+//		for (auto& e : effects) e->onConsume(character);
+//		// ì—¬ê¸°ì„œ ì¶”ê°€ ê¸°ëŠ¥ êµ¬í˜„
+//		break;
+//	case E_Type::Equipment:
+//	case E_Type::Accessory:
+//		for (auto& e : effects) e->onEquip(character);
+//		// ì—¬ê¸°ì„œ ì¶”ê°€ ê¸°ëŠ¥ êµ¬í˜„
+//		break;
+//	case E_Type::Material:
+//		break;
+//
+//	}
+//}
+//
+//void Item::unequipItem(Character& character)
+//{
+//	switch (type) //type
+//	{
+//	case E_Type::Consumable:
+//		break;
+//	case E_Type::Equipment:
+//	case E_Type::Accessory:
+//		for (auto& e : effects) e->onUnequip(character);
+//		// ì—¬ê¸°ì„œ ì¶”ê°€ ê¸°ëŠ¥ êµ¬í˜„
+//		break;
+//	case E_Type::Material:
+//		break;
+//
+//	}
+//}
+//
+////setter
+//void Item::setName(string name)
+//{
+//	this->name = name;
+//}
+//
+//void Item::setPrice(int price)
+//{
+//	this->price = price;
+//}
+//
+//void Item::setCount(int count)
+//{
+//	this->count = count;
+//}
+//
+//void Item::setType(E_Type type)
+//{
+//	this->type = type;
+//}
+//
