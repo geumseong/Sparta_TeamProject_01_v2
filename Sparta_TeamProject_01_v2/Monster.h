@@ -6,11 +6,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include "Item.h"
 
 // 전방 선언
 class GameManager;
 class Character;
-class Item;
 
 
 
@@ -25,6 +25,8 @@ protected:
 	int level; // 몬스터 레벨
 	int health; // 몬스터 체력
 	int attack; // 몬스터 공격력
+	int baseExp; // 기본 보상 경험치
+	int baseGold; // 기본 보상 골드
 	std::vector<Item> dropItem; // 몬스터가 드롭하는 아이템 목록
 
 
@@ -46,6 +48,7 @@ public:
 	int getLevel() const { return level; }
 	int getHealth() const { return health; }
 	int getAttack() const { return attack; }
+	
 
 	// setter 함수?
 	// 몬스터의 속성값을 변경
@@ -56,7 +59,7 @@ public:
 	{ 
 		health -= damage;
 		
-		if (health < 0);
+		if (health < 0)
 		{
 			health = 0;
 		}
