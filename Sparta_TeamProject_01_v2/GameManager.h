@@ -33,19 +33,21 @@ public:
 
     Character* character_;
 
-    enum States { Start, Battle, Shopping, Resting, Crafting, Inventory, End };
+    enum States { Start, Battle, Shopping, Resting, Crafting, End };
     States currentState;
     int roundTracker;
+    int victoryRound = 10;
+    int bossRound = 5;
 
     vector<string> log;
     void outputLog(string navDialogue);
     void inputLog(string& input);
 
-    /*Monster**/ void generateMonster();
+    Monster* generateMonster();
     //Monster* generateMonster();
     void updateState(States stateName);
-    //BossMonster* generateBossMonster(int level);
-    void battle();
+    Monster* generateBossMonster();
+    void battle(Character* character, Monster* currentMonster);
     //void visitShop(Character* player);
     //void displayInventory(Character* player);
 };
