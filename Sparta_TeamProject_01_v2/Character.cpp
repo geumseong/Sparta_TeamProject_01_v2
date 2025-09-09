@@ -78,8 +78,18 @@ void Character::visitShop()
 
 void Character::characterDeath()
 {
-	if(health >= 0)
-		cout << "캐릭터가 사망하였습니다." << endl;
+	cout << "캐릭터가 사망하였습니다." << endl;
+}
+
+void Character::takeCharacterDamage(int damage)
+{
+	health -= damage;
+
+	if (health <= 0);
+	{
+		health = 0;
+		characterDeath();
+	}
 }
 
 string Character::getName() const
