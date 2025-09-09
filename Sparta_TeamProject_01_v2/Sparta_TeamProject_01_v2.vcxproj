@@ -128,14 +128,20 @@
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
+    <ClCompile Include="Imp.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Kobold.cpp" />
     <ClCompile Include="Magician.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Ogre.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Succubus.cpp" />
     <ClCompile Include="Thief.cpp" />
+    <ClCompile Include="Troll.cpp" />
     <ClCompile Include="Warrior.cpp" />
     <ClCompile Include="WorkShop.cpp" />
   </ItemGroup>
@@ -145,14 +151,20 @@
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
+    <ClInclude Include="Imp.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemEffect.h" />
+    <ClInclude Include="Kobold.h" />
     <ClInclude Include="Magician.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="Ogre.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="Slime.h" />
+    <ClInclude Include="Succubus.h" />
     <ClInclude Include="Thief.h" />
+    <ClInclude Include="Troll.h" />
     <ClInclude Include="Warrior.h" />
     <ClInclude Include="Workshop.h" />
   </ItemGroup>
