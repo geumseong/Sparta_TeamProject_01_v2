@@ -114,15 +114,18 @@ public:
                 auto ptr = Item(name, price, count, type);
                 if (effecttype == "HealEffect")
                 {
-                    int heal = item->value("heal", 0);
-                    ptr.addEffect<HealEffect>(heal);
+                    int hp = item->value("hp", 0);
+                    int mp = item->value("mp", 0);
+                    ptr.addEffect<HealEffect>(hp, mp);
                 }
                 else if (effecttype == "BuffEffect")
                 {
                     int ab = item->value("ab", 0);
                     int db = item->value("db", 0);
                     int sb = item->value("sb", 0);
-                    ptr.addEffect<BuffEffect>(ab, db, sb);
+                    int hb = item->value("hb", 0);
+                    int mb = item->value("mb", 0);
+                    ptr.addEffect<BuffEffect>(ab, db, sb, hb, mb);
                 }
                 else {}
 
@@ -161,15 +164,18 @@ public:
                     auto ptr = Item(name, price, count, type);
                     if (effecttype == "HealEffect")
                     {
-                        int heal = item->value("heal", 0);
-                        ptr.addEffect<HealEffect>(heal);
+                        int hp = item->value("hp", 0);
+                        int mp = item->value("mp", 0);
+                        ptr.addEffect<HealEffect>(hp, mp);
                     }
                     else if (effecttype == "BuffEffect")
                     {
                         int ab = item->value("ab", 0);
                         int db = item->value("db", 0);
                         int sb = item->value("sb", 0);
-                        ptr.addEffect<BuffEffect>(ab, db, sb);
+                        int hb = item->value("hb", 0);
+                        int mb = item->value("mb", 0);
+                        ptr.addEffect<BuffEffect>(ab, db, sb, hb, mb);
                     }
 
                     inputList.push_back(move(ptr));
@@ -193,17 +199,20 @@ public:
                     auto ptr = Item(name, price, count, type);
                     if (effecttype == "HealEffect")
                     {
-                        int heal = item->value("heal", 0);
-                        ptr.addEffect<HealEffect>(heal);
+                        int hp = item->value("hp", 0);
+                        int mp = item->value("mp", 0);
+                        ptr.addEffect<HealEffect>(hp, mp);
                     }
                     else if (effecttype == "BuffEffect")
                     {
                         int ab = item->value("ab", 0);
                         int db = item->value("db", 0);
                         int sb = item->value("sb", 0);
-                        ptr.addEffect<BuffEffect>(ab, db, sb);
+                        int hb = item->value("hb", 0);
+                        int mb = item->value("mb", 0);
+                        ptr.addEffect<BuffEffect>(ab, db, sb, hb, mb);
                     }
-
+                    else {}
                     outputList.push_back(move(ptr));
 
                 }
@@ -244,11 +253,18 @@ public:
                 auto ptr = Item(name, price, count, type);
                 if (effecttype == "HealEffect")
                 {
-                    ptr.addEffect<HealEffect>(item->value("heal", 0));
+                    int hp = item->value("hp", 0);
+                    int mp = item->value("mp", 0);
+                    ptr.addEffect<HealEffect>(hp, mp);
                 }
                 else if (effecttype == "BuffEffect")
                 {
-                    ptr.addEffect<BuffEffect>(item->value("ab", 0), item->value("db", 0), item->value("sb", 0));
+                    int ab = item->value("ab", 0);
+                    int db = item->value("db", 0);
+                    int sb = item->value("sb", 0);
+                    int hb = item->value("hb", 0);
+                    int mb = item->value("mb", 0);
+                    ptr.addEffect<BuffEffect>(ab, db, sb, hb, mb);
                 }
                 else {}
 
