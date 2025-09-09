@@ -9,6 +9,7 @@ Goblin::Goblin(const std::string& type, int level)
 	{
 		int baseHealth = 0; // 기본 체력
 		int baseAttack = 0; // 기본 공격력
+		int attackSpeed = 0; // 기본 공격속도
 		std::string namePrefix = ""; // 이름
 
 
@@ -17,6 +18,8 @@ Goblin::Goblin(const std::string& type, int level)
 			namePrefix = "고블린";
 			baseHealth = 30;
 			baseAttack = 5;
+			attackSpeed = 0;
+			
 			this->baseExp = 10;   // 기본 경험치 추가
 			this->baseGold = 5;    // 기본 골드 추가
 			// this->commonWeight = 80; // 일반 아이템 드랍 확률
@@ -31,6 +34,7 @@ Goblin::Goblin(const std::string& type, int level)
 			namePrefix = "겁쟁이 고블린";
 			baseHealth = 20;
 			baseAttack = 3;
+			attackSpeed = 0;
 			bonusExp = 10;
 			bonusGold = 10;
 			this->baseExp = 10;   // 기본 경험치 추가
@@ -47,6 +51,7 @@ Goblin::Goblin(const std::string& type, int level)
 			namePrefix = "건방진 고블린";
 			baseHealth = 35;
 			baseAttack = 10;
+			attackSpeed = 0;
 			bonusExp = 15;
 			bonusGold = 15;
 			this->baseExp = 10;   // 기본 경험치 추가
@@ -63,6 +68,7 @@ Goblin::Goblin(const std::string& type, int level)
 			namePrefix = "사나운 고블린";
 			baseHealth = 40;
 			baseAttack = 15;
+			attackSpeed = 0;
 			bonusExp = 20;
 			bonusGold = 20;
 			this->baseExp = 10;   // 기본 경험치 추가
@@ -79,6 +85,7 @@ Goblin::Goblin(const std::string& type, int level)
 			namePrefix = "재벌 고블린";
 			baseHealth = 100;
 			baseAttack = 50;
+			attackSpeed = 0;
 			bonusExp = 50;
 			bonusGold = 100;
 			this->baseExp = 10;   // 기본 경험치 추가
@@ -92,6 +99,7 @@ Goblin::Goblin(const std::string& type, int level)
 
 		this->health = baseHealth + (this->level * 5); // 레벨당 체력 5 증가
 		this->attack = baseAttack + (this->level * 2); // 레벨당 공격력 2 증가
+		this->attackSpeed = attackSpeed + (this->level * 2); // 레벨당 공격속도 2) 증가
 
 		this->name = "Lv." + std::to_string(level) + " " + namePrefix;
 
