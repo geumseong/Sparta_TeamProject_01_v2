@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include "GameManager.h"
 #include <random>
 #include <vector>
@@ -21,7 +21,7 @@ GameManager* GameManager::instance_ = nullptr;
 
 GameManager::GameManager()
 {
-    outputLog("--GameManager°¡ »ı¼ºµÇ¾ú½À´Ï´Ù--");
+    outputLog("--GameManagerê°€ ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤--");
     this->currentState = Start;
 }
 
@@ -41,7 +41,7 @@ void GameManager::updateState(States stateName)
     }
 
     cout << "===================================" << endl;
-    string navDialogue = "[State º¯°æ] ¡æ " + stateStr;
+    string navDialogue = "[State ë³€ê²½] â†’ " + stateStr;
     outputLog(navDialogue);
 
     this->currentState = stateName;
@@ -83,7 +83,7 @@ Monster* GameManager::generateMonster()
     }
     if (roundTracker % GameManager::bossRound == 0)
     {
-        outputLog("º¸½º ¸ó½ºÅÍ »ı¼º!!!");
+        outputLog("ë³´ìŠ¤ ëª¬ìŠ¤í„° ìƒì„±!!!");
         generateBossMonster(lvlModifier);
     }
     else
@@ -92,39 +92,39 @@ Monster* GameManager::generateMonster()
         {
             int rd;
         case 1:
-            outputLog("¿ÀÅ© ¸ó½ºÅÍ »ı¼º!");
+            outputLog("ì˜¤í¬ ëª¬ìŠ¤í„° ìƒì„±!");
             rd = generatorRandInt(3);
             switch (rd)
             {
-            case 1:     // ÀÏ¹İ ¿ÀÅ© »ı¼º
-                return new Orc("ÀÏ¹İ", GameManager::character_->getLevel() + lvlModifier);
+            case 1:     // ì¼ë°˜ ì˜¤í¬ ìƒì„±
+                return new Orc("ì¼ë°˜", GameManager::character_->getLevel() + lvlModifier);
                 break;
-            case 2:     // ¾ß¸¸ÀûÀÎ ¿ÀÅ© »ı¼º
-                return new Orc("¾ß¸¸ÀûÀÎ", GameManager::character_->getLevel() + lvlModifier);
+            case 2:     // ì•¼ë§Œì ì¸ ì˜¤í¬ ìƒì„±
+                return new Orc("ì•¼ë§Œì ì¸", GameManager::character_->getLevel() + lvlModifier);
                 break;
-            case 3:     // ±¤Àü»ç ¿ÀÅ© »ı¼º
-                return new Orc("±¤Àü»ç", GameManager::character_->getLevel() + lvlModifier);
+            case 3:     // ê´‘ì „ì‚¬ ì˜¤í¬ ìƒì„±
+                return new Orc("ê´‘ì „ì‚¬", GameManager::character_->getLevel() + lvlModifier);
                 break;
             }
         case 2:
-            outputLog("°íºí¸° ¸ó½ºÅÍ »ı¼º!");
+            outputLog("ê³ ë¸”ë¦° ëª¬ìŠ¤í„° ìƒì„±!");
             rd = generatorRandInt(4);
             switch (rd)
             {
-            case 1:     // ÀÏ¹İ °íºí¸° »ı¼º
-                return new Goblin("ÀÏ¹İ", GameManager::character_->getLevel() + lvlModifier);
+            case 1:     // ì¼ë°˜ ê³ ë¸”ë¦° ìƒì„±
+                return new Goblin("ì¼ë°˜", GameManager::character_->getLevel() + lvlModifier);
                 break;
-            case 2:     // °ÌÀïÀÌ °íºí¸° »ı¼º
-                return new Goblin("°ÌÀïÀÌ", GameManager::character_->getLevel() + lvlModifier);
+            case 2:     // ê²ìŸì´ ê³ ë¸”ë¦° ìƒì„±
+                return new Goblin("ê²ìŸì´", GameManager::character_->getLevel() + lvlModifier);
                 break;
-            case 3:     // °Ç¹æÁø °íºí¸° »ı¼º
-                return new Goblin("°Ç¹æÁø", GameManager::character_->getLevel() + lvlModifier);
+            case 3:     // ê±´ë°©ì§„ ê³ ë¸”ë¦° ìƒì„±
+                return new Goblin("ê±´ë°©ì§„", GameManager::character_->getLevel() + lvlModifier);
                 break;
-            case 4:     // »ç³ª¿î °íºí¸° »ı¼º
-                return new Goblin("»ç³ª¿î", GameManager::character_->getLevel() + lvlModifier);
+            case 4:     // ì‚¬ë‚˜ìš´ ê³ ë¸”ë¦° ìƒì„±
+                return new Goblin("ì‚¬ë‚˜ìš´", GameManager::character_->getLevel() + lvlModifier);
                 break;
-            case 5:     // Àç¹ú °íºí¸° »ı¼º
-                return new Goblin("Àç¹ú", GameManager::character_->getLevel() + lvlModifier);
+            case 5:     // ì¬ë²Œ ê³ ë¸”ë¦° ìƒì„±
+                return new Goblin("ì¬ë²Œ", GameManager::character_->getLevel() + lvlModifier);
                 break;
             }
         }
@@ -133,19 +133,19 @@ Monster* GameManager::generateMonster()
 
 Monster* GameManager::generateBossMonster(int lvlModif)
 {
-    outputLog("µå·¡°ï ¸ó½ºÅÍ »ı¼º!");
+    outputLog("ë“œë˜ê³¤ ëª¬ìŠ¤í„° ìƒì„±!");
     return new Dragon(GameManager::character_->getLevel() + lvlModif);
 }
 
 void GameManager::battle(Character* player, Monster* currentMonster)
 {
-    if (player->getAttackSpeed() < currentMonster->getAttackSpeed())    //ºü¸¥ °ø¼ÓÀÌ ¼±»§
+    if (player->getAttackSpeed() < currentMonster->getAttackSpeed())    //ë¹ ë¥¸ ê³µì†ì´ ì„ ë¹µ
     {
         int beforeHealth = player->getHealth();
-        instance_->outputLog(currentMonster->getName() + "ÀÇ ¼±Á¦°ø°İ!");
-        player->takeCharacterDamage(currentMonster->performAction());   // ¸ó½ºÅÍ°¡ °ø°İ
+        instance_->outputLog(currentMonster->getName() + "ì˜ ì„ ì œê³µê²©!");
+        player->takeCharacterDamage(currentMonster->performAction());   // ëª¬ìŠ¤í„°ê°€ ê³µê²©
         instance_->outputLog(
-            "ÇöÀç ÇÃ·¹ÀÌ¾îÀÇ HP: "
+            "í˜„ì¬ í”Œë ˆì´ì–´ì˜ HP: "
             + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
             + " ===> "
             + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
@@ -155,25 +155,25 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             instance_->updateState(GameManager::End);
         }
     }
-    while (!currentMonster->isDead() && player->getHealth() > 0)  // ¾î´À ÇÑÂÊÀÌ¶óµµ Á×Áö ¾Ê´Â ÇÑ ÁøÇà
+    while (!currentMonster->isDead() && player->getHealth() > 0)  // ì–´ëŠ í•œìª½ì´ë¼ë„ ì£½ì§€ ì•ŠëŠ” í•œ ì§„í–‰
     {
         instance_->outputLog(
-            "ÇÃ·¹ÀÌ¾îÀÇ ÅÏÀÔ´Ï´Ù. \n"
-            "1. °ø°İ\n"
-            "2. ¾ÆÀÌÅÛ »ç¿ë\n"
+            "í”Œë ˆì´ì–´ì˜ í„´ì…ë‹ˆë‹¤. \n"
+            "1. ê³µê²©\n"
+            "2. ì•„ì´í…œ ì‚¬ìš©\n"
             "==================================="
         );
         string input;
         instance_->inputLog(input);
-        if (input == "1" || input == "°ø°İ")
+        if (input == "1" || input == "ê³µê²©")
         {
-            player->attack(currentMonster);     // Ä³¸¯ÅÍ°¡ ¸ó½ºÅÍ¿¡°Ô °ø°İ
-            if (!currentMonster->isDead())      //¸ó½ºÅÍ°¡ Á×Áö ¾Ê¾Ò´Ù¸é ¸ó½ºÅÍ°¡ °ø°İ
+            player->attack(currentMonster);     // ìºë¦­í„°ê°€ ëª¬ìŠ¤í„°ì—ê²Œ ê³µê²©
+            if (!currentMonster->isDead())      //ëª¬ìŠ¤í„°ê°€ ì£½ì§€ ì•Šì•˜ë‹¤ë©´ ëª¬ìŠ¤í„°ê°€ ê³µê²©
             {
                 int beforeHealth = player->getHealth();
-                player->takeCharacterDamage(currentMonster->performAction()); // ¸ó½ºÅÍ°¡ °ø°İ
+                player->takeCharacterDamage(currentMonster->performAction()); // ëª¬ìŠ¤í„°ê°€ ê³µê²©
                 instance_->outputLog(
-                    "ÇöÀç ÇÃ·¹ÀÌ¾îÀÇ HP: "
+                    "í˜„ì¬ í”Œë ˆì´ì–´ì˜ HP: "
                     + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
                     + " ===> "
                     + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
@@ -184,9 +184,9 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                     break;
                 }
             }
-            else        // ¸ó½ºÅÍ°¡ Á×¾ú´Ù¸é
+            else        // ëª¬ìŠ¤í„°ê°€ ì£½ì—ˆë‹¤ë©´
             {
-                delete currentMonster;  // ¸Ş¸ğ¸® ÇØÁ¦
+                delete currentMonster;  // ë©”ëª¨ë¦¬ í•´ì œ
                 if (roundTracker == GameManager::victoryRound)
                 {
                     outputLog("** Victory!!!!");
@@ -195,19 +195,19 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 }
                 else
                 {
-                    // º¸»ó Áö±Ş
+                    // ë³´ìƒ ì§€ê¸‰
                     instance_->updateState(GameManager::Resting);
                     break;
                 }
             }
         }
-        else if (input == "2" || input == "¾ÆÀÌÅÛ »ç¿ë")
+        else if (input == "2" || input == "ì•„ì´í…œ ì‚¬ìš©")
         {
 
         }
         else
         {
-            instance_->outputLog("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
+            instance_->outputLog("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.");
         }
     }
 }
@@ -218,166 +218,3 @@ void GameManager::visitShop(Character* player) {
 void GameManager::displayInventory(Character* player) {
 }
 */
-
-//#include <iostream>
-//#include <vector>
-//#include "Monster.h"
-//#include "Character.h"
-//#include "GameManager.h"
-//using namespace std;
-
-int main()
-{
-    GameManager* Game = GameManager::getInstance();
-    Character* Character_;
-    Monster* currentMonster;
-    string input;
-    Game->outputLog("** Ä³¸¯ÅÍ ÀÌ¸§À» Á¤ÇÏ½Ê½Ã¿À.");
-    Game->inputLog(input);
-    Character_ = new Magician(input);
-    Game->character_ = Character_;
-    Game->outputLog("Ä³¸¯ÅÍ°¡ »ı¼ºµÇ¾ú½À´Ï´Ù.");
-    cout << "===================================" << endl;
-    Game->updateState(GameManager::Resting);
-    while (true)
-    {
-        switch (Game->currentState)
-        {
-        case GameManager::Start:    //Game ½ÃÀÛ State
-            break;
-
-        case GameManager::Resting:  //Game ÈŞ½Ä State
-            while (true)
-            {
-                Game->outputLog(
-                    "** ´ÙÀ½ Çà¼±Áö¸¦ ¼±ÅÃÇÏ¼¼¿ä. \n"
-                    "1. ´øÀü ÀÔÀå\n"    //GameManager::Battle·Î State º¯°æ / ´øÀüÀ¸·Î ÀÌµ¿.
-                    "2. »óÁ¡ ÀÔÀå\n"    //GameManager::ShoppingÀ¸·Î State º¯°æ / »óÁ¡À¸·Î ÀÌµ¿.
-                    "3. Á¦ÀÛ¼Ò ÀÔÀå\n"  //GameManager::CraftingÀ¸·Î State º¯°æ / Á¦ÀÛ¼Ò·Î ÀÌµ¿.
-                    "4. »óÅÂÃ¢\n"       //GameManager::Resting¿¡ ³²¾Æ ÀÖÁö¸¸, »óÅÂÃ¢ ÇÑ ¹ø Ãâ·Â.
-                    "5. ÀÎº¥Åä¸® ¿­±â\n"  //GameManager::Resting¿¡ ³²¾Æ ÀÖÁö¸¸, ÀÎº¥Åä¸® ÇÑ ¹ø Ãâ·Â.
-                    "0. ³¡³»±â"    //GameManager::End·Î State º¯°æ / °ÔÀÓÀ» ³¡³¿.
-                );
-                // Resting¿¡¼­ ¼±ÅÃÁöÀÇ °á°ú ÄÚµå
-                #pragma region RestChoiceResults
-                Game->inputLog(input);
-                if (input == "1" || input == "´øÀü ÀÔÀå")
-                {
-                    Game->updateState(GameManager::Battle);
-                    break;
-                }
-                else if (input == "2" || input == "»óÁ¡ ÀÔÀå")
-                {
-                    Game->updateState(GameManager::Shopping);
-                    break;
-                }
-                else if (input == "3" || input == "Á¦ÀÛ¼Ò ÀÔÀå")
-                {
-                    Game->updateState(GameManager::Crafting);
-                    break;
-                }
-                else if (input == "4" || input == "»óÅÂÃ¢")
-                {
-                    Game->outputLog("»óÅÂÃ¢ Ãâ·Â.");
-                    Character_->displayStatus();
-                    system("pause");
-                    break;
-                }
-                else if (input == "5" || input == "ÀÎº¥Åä¸® ¿­±â")
-                {
-                    Game->outputLog("**ÀÎº¥Åä¸® ¸ñ·Ï:");
-                    //inventory_->printItemlist();
-                    system("pause");
-                    break;
-                }
-                else if (input == "0" || input == "³¡³»±â")
-                {
-                    Game->updateState(GameManager::End);
-                    break;
-                }
-                else
-                {
-                    Game->outputLog("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
-                }
-                #pragma endregion  RestChoiceResults
-            }
-            break;
-
-        case GameManager::Shopping: //Game »óÁ¡/¼îÇÎ State
-            while (true)
-            {
-                Game->outputLog(
-                    "»óÁ¡¿¡ ÀÔÀåÇß½À´Ï´Ù. ´ÙÀ½ Çàµ¿À» ¼±ÅÃÇÏ¼¼¿ä. \n"
-                    "1. ¾ÆÀÌÅÛ ±¸¸Å\n"
-                    "2. ¾ÆÀÌÅÛ ÆÇ¸Å"
-                );
-                Game->inputLog(input);
-                
-                //¾ÆÀÌÅÛ ±¸¸Å
-                #pragma region BuyItem
-                if (input == "1" || input == "¾ÆÀÌÅÛ ±¸¸Å")
-                {
-                    while (true)
-                    {
-                        //shop_->displayItems();
-                        Game->inputLog(input);
-                        int index = stoi(input);
-                        //shop_->showItem(index);
-                        Game->outputLog("±×·¡¼­, »ç°Ú³ª?");
-                        Game->inputLog(input);
-                        if (input == "1" || "¿¹")
-                        {
-                            //shop_->buyItem(index, *inventory_);
-                            break;
-                        }
-                        else if (input == "2" || "¾Æ´Ï¿À")
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Game->outputLog("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
-                            break;
-                        }
-                    }
-                }
-                #pragma endregion BuyItem
-                // ¾ÆÀÌÅÛ ÆÇ¸Å
-                else if (input == "1" || input == "¾ÆÀÌÅÛ ÆÇ¸Å")
-                {
-                    //inventory_->printItemlist();
-                    Game->outputLog("¾î¶² ¾ÆÀÌÅÛÀ» ÆÄ½Ã°Ú³ª?");
-                }
-                else
-                {
-                    Game->outputLog("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
-                }
-            }
-            break;
-
-        case GameManager::Crafting:
-            Game->outputLog(
-                "Á¦ÀÛ¼Ò¿¡ ÀÔÀåÇß½À´Ï´Ù. ´ÙÀ½ Çàµ¿À» ¼±ÅÃÇÏ¼¼¿ä."
-            );
-            break;
-
-        case GameManager::Battle:   //Game ÀüÅõ/½Î¿ò State
-            Game->roundTracker++;
-            currentMonster = Game->generateMonster();
-            Game->outputLog(
-                "´øÀü¿¡ ÀÔÀåÇß½À´Ï´Ù. \n"
-                "Àû " + currentMonster->getName() + "¿Í Á¶¿ì!"
-            );
-            Game->battle(Character_, currentMonster);
-            break;
-
-        case GameManager::End:      //Game ³¡.
-            cout << "°ÔÀÓÀÌ ³¡³³´Ï´Ù..." << endl;
-            /*for (int i = 0; i < Game->log.size(); i++)
-            {
-                cout << Game->log[i] << endl;
-            }*/
-            return 0;
-        }
-    }
-}
