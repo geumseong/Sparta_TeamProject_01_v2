@@ -1,79 +1,222 @@
-//#include <iostream>
-//#include "Shop.h"
-//#include "Item.h"
-//#include "Character.h"
-//
-//Shop::Shop() // »óÁ¡¿¡ ¾ÆÀÌÅÛ Ãß°¡
-//{
-//	availableItems.push_back(new Item("±âº» °Ë", 50, 2, Equip ));
-//	availableItems.push_back(new Item("±âº» È°", 50 ,2, Equip));
-//	availableItems.push_back(new Item("±âº» ´Ü°Ë", 50, 2, Equip));
-//	availableItems.push_back(new Item("±âº» ÁöÆÎÀÌ", 50, 2, Equip));
-//	availableItems.push_back(new Item("¿µ¿õÀÇ °Ë", 100, 2, Equip));
-//	availableItems.push_back(new Item("¿µ¿õÀÇ È°", 100, 2, Equip));
-//	availableItems.push_back(new Item("¿µ¿õÀÇ ´Ü°Ë", 100, 2, Equip));
-//	availableItems.push_back(new Item("¿µ¿õÀÇ ÁöÆÎÀÌ", 100, 2, Equip));
-//
-//	availableItems.push_back(new Item("¼ÒÇü HP Æ÷¼Ç", 10,10, Potion));
-//	availableItems.push_back(new Item("¼ÒÇü MP Æ÷¼Ç", 10, 10, Potion));
-//	availableItems.push_back(new Item("ÁßÇü HP Æ÷¼Ç", 20, 10, Potion));
-//
-//	availableItems.push_back(new Item("ÁßÇü MP Æ÷¼Ç", 20, 10, Potion));
-//	availableItems.push_back(new Item("´ëÇü HP Æ÷¼Ç", 30, 10, Potion));
-//	availableItems.push_back(new Item("´ëÇü MP Æ÷¼Ç", 30, 10, Potion));
-//
-//	availableItems.push_back(new Item("°ø°İ·Â °­È­", 15,50, Stuff));
-//	availableItems.push_back(new Item("¹æ¾î·Â °­È­", 15,50, Stuff));
-//	availableItems.push_back(new Item("¸íÁß·ü °­È­", 15, 50,Stuff));
-//
-//}
-//
-//void Shop::displayItems() // »óÁ¡¿¡ ÀÖ´Â ¾ÆÀÌÅÛ Ãâ·Â
-//{
-//	std::cout << "===== »óÁ¡¿¡ ¿À½Å°ÍÀ» È¯¿µÇÕ´Ï´Ù! =====\n";
-//	for (size_t i = 0; i < availableItems.size(); ++i)
-//	{
-//		std::cout << i << ": ";
-//		availableItems[i]->printInfo();
-//
-//	}
-//}
-//
-//void Shop::buyItem(int index, Character* player) // ÇÃ·¹ÀÌ¾î°¡ ¾ÆÀÌÅÛ ±¸¸Å
-//{
-//	Item* item = availableItems[index];
-//{
-//	if (index < 0 || index >= availableItems.size())
-//	{
-//		std::cout << "Àß¸øµÈ ¾ÆÀÌÅÛ ¹øÈ£ÀÔ´Ï´Ù.\n";
-//		return;
-//	}
-//
-//	if (player->getGold() >= item->getprice()) // ±¸¸Å °¡´É ¿©ºÎ È®ÀÎ
-//	{
-//		player->addItem(item);
-//		player->spendGold(item->getprice());
-//		std::cout << "´ç½ÅÀº " << item->getName() << " À» ±¸¸Å Çß½À´Ï´Ù" << "!\n";
-//	}
-//	else
-//	{
-//		std::cout << "¼ÒÁöÇÑ °ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù.\n";
-//	}
-//}
-//
-//void Shop::sellItem(int index, Character * player) // ÇÃ·¹ÀÌ¾î°¡ ¾ÆÀÌÅÛ ÆÇ¸Å
-//{
-//	Item* item = player->removeItem(index); // ÀÎº¥Åä¸® ¾ÆÀÌÅÛ Á¦°Å
-//	if (item) // ¾ÆÀÌÅÛÀÌ Á¸ÀçÇÒ °æ¿ì
-//	{
-//		int sellPrice = static_cast<int>(item->getPrice() * 0.6); // 60% È¯±Ş
-//		player->earnGold(sellPrice); 
-//		availableItems.push_back(item); 
-//		std::cout << "´ç½ÅÀº " << item->getName() << "À» " << sellPrice << " °ñµå¿¡ ÆÇ¸ÅÇß½À´Ï´Ù.\n";
-//	}
-//	else // ¾ÆÀÌÅÛÀÌ Á¸ÀçÇÏÁö ¾ÊÀ» °æ¿ì
-//	{
-//		std::cout << "¾ÆÀÌÅÛÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù.\n";
-//	}
-//}
-//
+#include "Shop.h"
+#include <algorithm> // std::shuffleì„ ìœ„í•œ í—¤ë”
+#include <random>    // ë‚œìˆ˜ ìƒì„±ê¸° ë° ì…”í”Œì— í•„ìš”í•œ mt19937
+#include <chrono>    // ì‹œë“œ ìƒì„±ì„ ìœ„í•œ í˜„ì¬ ì‹œê°„
+#include <iostream>
+
+void Shop::openShop()
+{
+    for (auto item : availableItems) {
+        delete item;
+    }
+    availableItems.clear();
+
+    std::vector<Item*> itemPool = {
+        // ì „ì‚¬ ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ ê²€", 50, 1, E_Type::Equipment),
+        new Item("ë¶‰ì€ ê°•ì²  ê²€", 150, 1, E_Type::Equipment),
+        new Item("ê·¸ë¦¼ì ì¹´íƒ€ë‚˜", 200, 1, E_Type::Equipment),
+        new Item("ìš©ë§¹ì˜ ëŒ€ê²€", 300, 1, E_Type::Equipment),
+        new Item("ë¶‰ì€ ìš©ì˜ ì†¡ê³³ë‹ˆ", 350, 1, E_Type::Equipment),
+
+        // ê¶ìˆ˜ ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ í™œ", 50, 1, E_Type::Equipment),
+        new Item("ë°”ëŒì˜ í™œ", 150, 1, E_Type::Equipment),
+        new Item("ê³ ìš”í•œ ìˆ²ì˜ í™œ", 200, 1, E_Type::Equipment),
+        new Item("ë‹¬ë¹› ì¶”ì ì", 300, 1, E_Type::Equipment),
+		new Item("ë‹¬ ê·¸ë¦¼ì ì¥ê¶", 350, 1, E_Type::Equipment),
+
+        // ë§ˆë²•ì‚¬ ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ ì§€íŒ¡ì´", 50, 1, E_Type::Equipment),
+        new Item("ë³„ë¹› ì§€íŒ¡ì´", 150, 1, E_Type::Equipment),
+        new Item("ì‹¬ì—°ì˜ ì§€íŒ¡ì´", 200, 1, E_Type::Equipment),
+        new Item("ê¸ˆë‹¨ì˜ ë£¬ ì§€íŒ¡ì´", 300, 1, E_Type::Equipment),
+        new Item("ë§ˆë‚˜ì˜ ê³ ë™", 350, 1, E_Type::Equipment),
+
+        // ë„ì  ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ ë‹¨ê²€", 50, 1, E_Type::Equipment),
+        new Item("ê·¸ë¦¼ì ë‹¨ê²€", 150, 1, E_Type::Equipment),
+        new Item("ë§ë ¹ì˜ ì†¡ê³³", 200, 1, E_Type::Equipment),
+        new Item("ë¬´ìŒì˜ ì¹¼ë‚ ", 300, 1, E_Type::Equipment),
+        new Item("ì¹¨ë¬µì˜ ì¶”ì ì", 350, 1, E_Type::Equipment),
+
+        // ë°©ì–´êµ¬ (ì „ì‚¬)
+        new Item("ë‚¡ì€ ê°€ì£½ ê°‘ì˜·", 50, 1, E_Type::Equipment),
+        new Item("í›ˆë ¨ë³‘ì˜ ì² ê°‘", 100, 1, E_Type::Equipment),
+        new Item("ë‹¨ë ¨ëœ ì „ì‚¬ì˜ ê°‘ì˜·", 150, 1, E_Type::Equipment),
+        new Item("ë¬´ëª… íˆ¬ì‚¬ì˜ íŒê¸ˆ ê°‘ì˜·", 250, 1, E_Type::Equipment),
+        new Item("ìš©ì‚¬ì˜ ê°‘ì˜·", 350, 1, E_Type::Equipment),
+
+        // ë°©ì–´êµ¬ (ê¶ìˆ˜)
+        new Item("í—ˆë¦„í•œ ì´ˆì› ì‚¬ëƒ¥ê¾¼ íŠœë‹‰", 50, 1, E_Type::Equipment),
+        new Item("ì •ì°°ìì˜ ê°€ì£½ ì¡°ë¼", 100, 1, E_Type::Equipment),
+        new Item("ë°”ëŒ ì¶”ì ìì˜ ê²½ê°‘", 150, 1, E_Type::Equipment),
+        new Item("ìˆ²ê¸¸ ê²¬ìŠµìƒì˜ íŠœë‹‰", 250, 1, E_Type::Equipment),
+        new Item("ë¯¼ì²©í•œ í™œì¡ì´ì˜ ê°‘ì£¼", 350, 1, E_Type::Equipment),
+
+        // ë°©ì–´êµ¬ (ë§ˆë²•ì‚¬)
+        new Item("ë‚¡ì€ ë§ˆë²•ì‚¬ì˜ ë¡œë¸Œ", 50, 1, E_Type::Equipment),
+        new Item("ì´ˆë³´ ë§ˆë„ì‚¬ì˜ ë§í† ", 100, 1, E_Type::Equipment),
+        new Item("ë³„ë¹› ê²¬ìŠµìƒì˜ ë¡œë¸Œ", 150, 1, E_Type::Equipment),
+        new Item("ë§ˆë ¥ì˜ ë³„ë¹› ë¡œë¸Œ", 250, 1, E_Type::Equipment),
+        new Item("í˜„ìì˜ ë¡œë¸Œ", 350, 1, E_Type::Equipment),
+
+        // ë°©ì–´êµ¬ (ë„ì )
+        new Item("í—ˆë¦„í•œ ê·¸ë¦¼ì ì—°ìŠµë³µ", 50, 1, E_Type::Equipment),
+        new Item("ì´ˆë³´ ë„ì ì˜ ê°€ì£½ì¡°ë¼", 100, 1, E_Type::Equipment),
+        new Item("ì€ì‹ ìì˜ ê²½ëŸ‰ íŠœë‹‰", 150, 1, E_Type::Equipment),
+        new Item("ë°¤ì˜ ë°œê±¸ìŒ íŠœë‹‰", 250, 1, E_Type::Equipment),
+        new Item("ë¬´í˜•ì˜ ì ì…ë³µ", 350, 1, E_Type::Equipment),
+
+        // ì†Œë¹„ ì•„ì´í…œ
+        new Item("ì†Œí˜• HP í¬ì…˜", 10, 10, E_Type::Consumable),
+        new Item("ì¤‘í˜• HP í¬ì…˜", 30, 10, E_Type::Consumable),
+        new Item("ëŒ€í˜• HP í¬ì…˜", 60, 10, E_Type::Consumable),
+        new Item("ì†Œí˜• MP í¬ì…˜", 10, 10, E_Type::Consumable),
+        new Item("ì¤‘í˜• MP í¬ì…˜", 30, 10, E_Type::Consumable),
+        new Item("ëŒ€í˜• MP í¬ì…˜", 60, 10, E_Type::Consumable),
+
+        // ì•¡ì„¸ì„œë¦¬
+        new Item("ì²  ëª©ê±¸ì´", 60, 1, E_Type::Accessory),
+        new Item("ì€ ë°˜ì§€", 120, 1, E_Type::Accessory),
+		new Item("ë§ˆë²•ì‚¬ì˜ ë¶€ì ", 250, 1, E_Type::Accessory),
+		new Item("ë„ì ì˜ ê·€ê±¸ì´", 250, 1, E_Type::Accessory), 
+		new Item("ê¶ìˆ˜ì˜ íŒ”ì°Œ", 250, 1, E_Type::Accessory),  
+		new Item("ì „ì‚¬ì˜ íœ˜ì¥", 250, 1, E_Type::Accessory),
+        new Item("í™©ê¸ˆ ì™•ê´€", 300, 1, E_Type::Accessory),
+
+
+        // ì¬ë£Œ
+        new Item("ë‚˜ë¬´ ì¡°ê°", 5, 20, E_Type::Material),
+        new Item("ì²  ì¡°ê°", 15, 15, E_Type::Material),
+        new Item("ê°•ì²  ì¡°ê°", 25, 10, E_Type::Material),
+        new Item("ë¯¸ìŠ¤ë¦´ ì¡°ê°", 50, 5, E_Type::Material)
+    };
+
+    availableItems = itemPool;
+}
+
+    // staticìœ¼ë¡œ ì„ ì–¸í•´ì„œ seedë¥¼ í•œ ë²ˆë§Œ ìƒì„±
+    static std::mt19937 g(static_cast<unsigned>(
+        std::chrono::system_clock::now().time_since_epoch().count()));
+    std::shuffle(itemPool.begin(), itemPool.end(), g);
+
+    int numItems = 5;
+    for (int i = 0; i < numItems && i < itemPool.size(); ++i) {
+        availableItems.push_back(itemPool[i]);
+    }
+
+    for (int i = numItems; i < itemPool.size(); ++i) {
+        delete itemPool[i];
+    }
+}
+
+Shop::~Shop()
+{
+    for (auto item : availableItems) {
+        delete item;
+    }
+    availableItems.clear();
+}
+
+void Shop::buyItem(int index, Inventory& inven)
+{
+    if (index < 0 || index >= availableItems.size()) {
+        std::cout << "[NPC]: ê·¸ëŸ° ë¬¼ê±´ì€ ì—†ë„¤.\n";
+        return;
+    }
+
+    Item* item = availableItems[index];
+
+    if (inven.getGold() >= item->getPrice()) {
+        std::string boughtName = item->getName();
+        auto inputItem = std::make_unique<Item>(item->getName(), item->getPrice(), 1, item->getType());
+
+        inven.addItem(std::move(inputItem));
+        inven.setGold(inven.getGold() - item->getPrice());
+
+        if (item->getCount() > 1) {
+            item->setCount(item->getCount() - 1);
+        }
+        else {
+            delete availableItems[index];
+            availableItems.erase(availableItems.begin() + index);
+        }
+
+        std::cout << "[NPC]: " << boughtName << "(ì´)ë¼â€¦ ì¢‹ì€ ì„ íƒì´êµ°!\n";
+    }
+    else {
+        std::cout << "[NPC]: ê³¨ë“œê°€ ë¶€ì¡±í•˜ë„¤. ë‹¤ìŒì— ë‹¤ì‹œ ì˜¤ê²Œë‚˜.\n";
+    }
+}
+
+void Shop::sellItem(int index, Inventory& inven)
+{
+    Item* item = inven.findItem(index);
+
+    if (!item) {
+        std::cout << "[NPC]: ê·¸ëŸ° ì•„ì´í…œì€ ì—†ë„¤.\n";
+        return;
+    }
+
+    std::string itemName = item->getName();
+    int sellPrice = static_cast<int>(item->getPrice() * 0.6);
+    inven.setGold(inven.getGold() + sellPrice);
+
+    bool found = false;
+    for (auto* shopItem : availableItems) {
+        if (shopItem->getName() == itemName) {
+            shopItem->setCount(shopItem->getCount() + 1);
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        availableItems.push_back(new Item(itemName, item->getPrice(), 1, item->getType()));
+    }
+
+    if (item->getCount() > 1) {
+        item->setCount(item->getCount() - 1);
+    }
+    else {
+        inven.removeItem(index);
+        item = nullptr;
+    }
+
+    std::cout << "[NPC]: " << itemName << "ì„ " << sellPrice << "ê³¨ë“œì— ì‚¬ê² ë„¤.\n";
+}
+
+void Shop::showItem(int index)
+{
+    if (index >= 0 && index < availableItems.size()) {
+        availableItems[index]->printInfo();
+    }
+    else {
+        std::cout << "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œì…ë‹ˆë‹¤.\n";
+    }
+}
+
+void Shop::displayItems()
+{
+    std::cout << "[NPC]: ì´ê²ƒì´ ì˜¤ëŠ˜ì˜ ìƒí’ˆì´ë„¤! ì²œì²œíˆ ë³´ê²Œë‚˜.\n\n";
+    for (int i = 0; i < availableItems.size(); ++i) {
+        std::cout << i << ": ";
+        availableItems[i]->printInfo();
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+}
+
+std::string Shop::getItemName(int index) const
+{
+    if (index >= 0 && index < availableItems.size()) {
+        return availableItems[index]->getName();
+    }
+    return "(ì—†ëŠ” ì•„ì´í…œ)";
+}
+
+int Shop::getItemCount() const
+{
+    return static_cast<int>(availableItems.size());
+}

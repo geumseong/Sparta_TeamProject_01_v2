@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
-#include "Monster.h"
 #include <vector>
-//#include "Character.h"
+#include "Character.h"
 
 using namespace std;
+class Monster;
 
 class GameManager
 {
@@ -23,19 +23,29 @@ public:
         }
         return instance_;
     }
-    //Character* Character;
 
-    const enum States { Start, Battle, Shopping, Resting, End };
+    static void deleteInstance()
+    {
+        delete instance_;
+        instance_ = nullptr;
+    }
+    ~GameManager() {}
+
+    Character* character_;
+
+    enum States { Start, Battle, Shopping, Resting, Crafting, Inventory, End };
     States currentState;
+    int roundTracker;
 
     vector<string> log;
     void outputLog(string navDialogue);
     void inputLog(string& input);
 
-    //Monster* generateMonster(int level);
+    /*Monster**/ void generateMonster();
+    //Monster* generateMonster();
     void updateState(States stateName);
-    /*BossMonster* generateBossMonster(int level);
-    void battle(Character* player);
-    void visitShop(Character* player);
-    void displayInventory(Character* player);*/
+    //BossMonster* generateBossMonster(int level);
+    void battle();
+    //void visitShop(Character* player);
+    //void displayInventory(Character* player);
 };
