@@ -6,12 +6,14 @@
 #include "Magician.h"
 #include "Monster.h"
 #include "Inventory.h"
+#include "Shop.h"
 
 class Orc;
 
 // Instances
 GameManager* GameManager::instance_ = nullptr;
 Inventory* inventory_ = new Inventory(100, 10);
+Shop* shop_;
 
 GameManager::GameManager()
 {
@@ -213,13 +215,37 @@ int main()
                     "2. 아이템 판매"
                 );
                 Game->inputLog(input);
+                
+                //아이템 구매
                 if (input == "1" || input == "아이템 구매")
                 {
+                    while (true)
+                    {
+                        shop_->displayItems();
+                        Game->inputLog(input);
+                        int index = stoi(input);
+                        shop_->showItem(index);
+                        Game->outputLog("그래서, 사겠나?");
+                        Game->inputLog(input);
+                        if (input == "1" || "예")
+                        {
+                            shop_->buyItem(index, *inventory_);
+                        }
+                        else if (input == "2" || "아니오")
+                        {
 
+                        }
+                        else
+                        {
+                            Game->outputLog("잘못된 입력입니다.");
+                        }
+                    }
                 }
+                // 아이템 판매
                 else if (input == "1" || input == "아이템 판매")
                 {
-
+                    inventory_->printItemlist();
+                    Game->outputLog("어떤 아이템을 파시겠나?");
                 }
                 else
                 {

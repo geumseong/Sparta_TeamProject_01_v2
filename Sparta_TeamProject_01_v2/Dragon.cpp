@@ -10,6 +10,9 @@ Dragon::Dragon(int level)
     // 1. 보스에 걸맞은 기본 능력치 설정
     int baseHealth = 500;
     int baseAttack = 40;
+    
+    this->baseExp = 300; // 기본 경험치 추가
+    this->baseGold = 500; // 기본 골드 추가
 
     // 2. 레벨 스케일링 적용 (보스는 일반 몬스터보다 성장률이 높음)
     this->health = baseHealth + (this->level * 20);
@@ -19,8 +22,12 @@ Dragon::Dragon(int level)
     this->name = "Lv." + std::to_string(this->level) + " 드래곤";
 
     // 4. 보스 전용 특별 드롭 아이템 설정
-    dropItem.push_back(Item("드래곤의 비늘", "재료", 1000));
-    dropItem.push_back(Item("드래곤의 심장", "재료", 5000));
+    dropItem.push_back(Item("드래곤의 비늘", 1000, 1, E_Type::Material));
+    dropItem.push_back(Item("드래곤의 뿔", 3000, 1, E_Type::Material));
+    dropItem.push_back(Item("드래곤의 발톱", 2000, 1, E_Type::Material));
+    dropItem.push_back(Item("드래곤의 눈알", 5000, 1, E_Type::Material));
+    dropItem.push_back(Item("드래곤의 날개", 5000, 1, E_Type::Material));
+    dropItem.push_back(Item("드래곤의 심장", 10000, 1, E_Type::Material));
 }
 
 // --- 행동 AI 구현 ---
