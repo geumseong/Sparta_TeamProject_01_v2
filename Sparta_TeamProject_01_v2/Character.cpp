@@ -50,27 +50,6 @@ void Character::displayStatus()
 	cout << "------------------------------------" << endl;
 }
 
-void Character::levelUp()
-{
-	if (level < 10)
-	{
-		level++;
-		health = (maxHealth + (level * 20));
-		maxHealth = (maxHealth + (level * 20));
-		mp = (maxMp + (level * 20));
-		maxMp = (maxMp + level * 20);
-		attackPower = (attackPower + (level * 5));
-		experience = 0;
-		attackSpeed += 1;
-	}
-	else
-	{
-		cout << "더 이상 레벨업을 할 수 없습니다." << endl;
-	}
-
-}
-
-
 void Character::visitShop()
 {
 
