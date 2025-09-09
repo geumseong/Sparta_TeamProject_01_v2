@@ -24,6 +24,7 @@ protected:
 	std::string name; // 몬스터 이름
 	int level; // 몬스터 레벨
 	int health; // 몬스터 체력
+	int maxHealth; //몬스터 최대 체력
 	int attack; // 몬스터 공격력
 	int attackSpeed; // 몬스터 공격속도
 	int baseExp; // 기본 보상 경험치
@@ -97,4 +98,3 @@ public:
 	}
 
 };
-

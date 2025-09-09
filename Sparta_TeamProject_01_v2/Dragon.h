@@ -14,6 +14,7 @@ private:
     // 드래곤의 행동 패턴을 정의하는 private 함수
     int normalAttack();
     int fireBreathAttack();
+    bool isEnraged; // 2페이즈 분노 상태 여부
 
 public:
     // 생성자: 드래곤은 타입 없이 레벨만으로 생성
