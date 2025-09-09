@@ -1,32 +1,178 @@
+
 {
+  "comments": { 
+    "items_commemt"         : " 아이템 코드의 이름은 해당 테이블의 어디서 나오는지로 정한다",
+    "shopTables_commemt"    : " shopTables, shop_warrior 나온다 shop_warrior_000, shop_warrior_001...로 아이템 코드 지정 ",
+    "dropTables_commemt"    : " dropTables, goblin에서 나온다 goblin_000, goblin_001...로 아이템 코드 지정 ",
+    "recipeTables_commemt"  : " recipeTables, blacksmith에서 나온다 blacksmith_000, blacksmith_001...로 아이템 코드 지정",
+    "goldpouch"             : " 이건 여기저기서 나오기에 goldpouch_(몬스터이름)식으로 지정하여 나오는 골드 조정"
+},
+
+  
   "items": {
-    "sword_001": { "name": "검","price": 50 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1},
+    "dummy_Equipment": { "name": "", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "dummy_Consumable": { "name": "", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":0, "mp": 0},
+    "dummy_Material": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "dummy_Accessory": { "name": "", "price": 0 , "type": "Accessory", "effecttype":"", "comment":"악세사리는 추후 지정"},
+
+    "sword_001": { "name": "검","price": 50 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
     "potion_small": { "name": "회복 물약(소)", "price": 15, "type": "Consumable", "effecttype":"HealEffect", "heal":50},
     "iron": { "name": "철 광석",            "price": 5 , "tpye": "Material", "effecttype":""},
     "slime_001": { "name": "슬라임의 점액",  "price": 1 , "tpye": "Material", "effecttype":""},
-    "sword_002": { "name": "강철 검",       "price": 120 , "type": "Equipment", "effecttype":"BuffEffect", "ab":5, "db":5, "sb":5},
-    "Accessory_001": {"name": "녹슨 목걸이", "price": 100, "type": "Accessory", "effecttype":"BuffEffect", "ab":3, "db":3, "sb":3}
+    "sword_002": { "name": "강철 검",       "price": 120 , "type": "Equipment", "effecttype":"BuffEffect", "ab":5, "db":5, "sb":5, "hb":0, "mb":0},
+    "Accessory_001": {"name": "녹슨 목걸이", "price": 100, "type": "Accessory", "effecttype":"BuffEffect", "ab":3, "db":3, "sb":3, "hb":0, "mb":0},
+
+    "shop_potions_000": { "name": "소형 HP 포션", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":10, "mp": 0},
+    "shop_potions_001": { "name": "중형 HP 포션", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":30, "mp": 0},
+    "shop_potions_002": { "name": "대형 HP 포션", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":50, "mp": 0},
+    "shop_potions_003": { "name": "소형 MP 포션", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":0, "mp": 10},
+    "shop_potions_004": { "name": "중형 MP 포션", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":0, "mp": 30},
+    "shop_potions_005": { "name": "대형 MP 포션", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":0, "mp": 50},
+
+    "shop_material_000": { "name": "탄화된 나무 조각", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_001": { "name": "돌 조각", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_002": { "name": "녹슨 철편", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_003": { "name": "불완전한 강철괴", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_004": { "name": "정제된 강철괴", "price": 0 , "type": "Material", "effecttype":""},
+
+    "shop_warrior_000": { "name": "초보자의 검", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_001": { "name": "붉은 강철 검", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_002": { "name": "그림자 카타나", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_003": { "name": "용맹의 대검", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_004": { "name": "붉은 용의 송곳니", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_005": { "name": "낡은 가죽 갑옷", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_006": { "name": "훈련병의 철갑", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_007": { "name": "단련된 전사의 갑옷", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_008": { "name": "무명 투사의 판금 갑옷", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_warrior_009": { "name": "용사의 갑옷", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+
+    "shop_archer_000": { "name": "초보자의 활", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_001": { "name": "바람의 활", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_002": { "name": "고요한 숲의 활", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_003": { "name": "달빛 추적자", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_004": { "name": "달 그림자 장궁", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_005": { "name": "허름한 초원 사냥꾼 튜닉", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_006": { "name": "정찰자의 가죽 조끼", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_007": { "name": "바람 추적자의 경갑", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_008": { "name": "숲길 견습생의 튜닉", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_archer_009": { "name": "민첩한 활잡이의 갑주", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+
+    "shop_magician_000": { "name": "초보자의 지팡이", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_001": { "name": "별빛 지팡이", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_002": { "name": "심연의 지팡이", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_003": { "name": "금단의 룬 지팡이", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_004": { "name": "마나의 고동", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_005": { "name": "낡은 마법사의 로브", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_006": { "name": "초보 마도사의 망토", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_007": { "name": "별빛 견습생의 로브", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_008": { "name": "마력의 별빛 로브", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_magician_009": { "name": "현자의 로브", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+
+    "shop_thief_000": { "name": "초보자의 단검", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_001": { "name": "그림자 단검", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_002": { "name": "망령의 송곳", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_003": { "name": "무음의 칼날", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_004": { "name": "침묵의 추적자", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_005": { "name": "허름한 그림자 연습복", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_006": { "name": "초보 도적의 가죽조끼", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_007": { "name": "은신자의 경량 튜닉", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_008": { "name": "밤의 발걸음 튜닉", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "shop_thief_009": { "name": "무형의 잠입복", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+
+
+    "goldpouch_goblin": {"name": "고블린의 금화 주머니","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_000": {"name": "고블린의 부러진 뼈","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_001": {"name": "고블린의 가죽 조각","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_002": {"name": "고블린의 황금 덩어리","price": 0 , "type": "Material", "effecttype":""},
+
+    "goldpouch_orc": { "name": "오크의 금화 주머니","price": 0 , "type": "Material", "effecttype":""},
+    "orc_000": { "name": "오크의 부러진 뼈", "price": 0 , "type": "Material", "effecttype":""},
+    "orc_001": { "name": "오크의 투구 조각", "price": 0 , "type": "Material", "effecttype":""},
+    "orc_002": { "name": "오크의 날카로운 송곳니", "price": 0 , "type": "Material", "effecttype":""},
+    "orc_003": { "name": "오크의 갑옷", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0},
+    "orc_004": { "name": "오크의 전투 망치", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1, "hb":0, "mb":0}
   },
 
   "shopTables": {
-    "town_general": [
-      { "itemId": "sword_001" },
-      { "itemId": "potion_small" }
+    "shop_potions": [
+      { "itemId": "shop_potions_000" },
+      { "itemId": "shop_potions_001" },
+      { "itemId": "shop_potions_002" },
+      { "itemId": "shop_potions_003" },
+      { "itemId": "shop_potions_004" },
+      { "itemId": "shop_potions_005" }
     ],
-    "blacksmith_shop": [
-      { "itemId": "sword_001" },
-      { "itemId": "sword_002" }
+    "shop_material": [
+      { "itemId": "shop_material_000" },
+      { "itemId": "shop_material_001" },
+      { "itemId": "shop_material_002" },
+      { "itemId": "shop_material_003" },
+      { "itemId": "shop_material_004" }
+    ],
+    "shop_warrior": [
+      { "itemId": "shop_warrior_000" },
+      { "itemId": "shop_warrior_001" },
+      { "itemId": "shop_warrior_002" },
+      { "itemId": "shop_warrior_003" },
+      { "itemId": "shop_warrior_004" },
+      { "itemId": "shop_warrior_005" },
+      { "itemId": "shop_warrior_006" },
+      { "itemId": "shop_warrior_007" },
+      { "itemId": "shop_warrior_008" },
+      { "itemId": "shop_warrior_009" }
+    ],
+    "shop_archer": [
+      { "itemId": "shop_archer_000" },
+      { "itemId": "shop_archer_001" },
+      { "itemId": "shop_archer_002" },
+      { "itemId": "shop_archer_003" },
+      { "itemId": "shop_archer_004" },
+      { "itemId": "shop_archer_005" },
+      { "itemId": "shop_archer_006" },
+      { "itemId": "shop_archer_007" },
+      { "itemId": "shop_archer_008" },
+      { "itemId": "shop_archer_009" }
+    ],
+    "shop_magician": [
+      { "itemId": "shop_magician_000" },
+      { "itemId": "shop_magshop_thief_000ician_001" },
+      { "itemId": "shop_magician_002" },
+      { "itemId": "shop_magician_003" },
+      { "itemId": "shop_magician_004" },
+      { "itemId": "shop_magician_005" },
+      { "itemId": "shop_magician_006" },
+      { "itemId": "shop_magician_007" },
+      { "itemId": "shop_magician_008" },
+      { "itemId": "shop_magician_009" }
+    ],
+    "shop_thief": [
+      { "itemId": "" },
+      { "itemId": "shop_thief_001" },
+      { "itemId": "shop_thief_002" },
+      { "itemId": "shop_thief_003" },
+      { "itemId": "shop_thief_004" },
+      { "itemId": "shop_thief_005" },
+      { "itemId": "shop_thief_006" },
+      { "itemId": "shop_thief_007" },
+      { "itemId": "shop_thief_008" },
+      { "itemId": "shop_thief_009" }
     ]
   },
 
   "dropTables": {
-    "slime": [
-      { "itemId": "potion_small"},
-      { "itemId": "iron"},
-      { "itemId": "slime_001"}
-    ],
     "goblin": [
-      { "itemId": "iron"}
+      { "itemId": "goldpouch_goblin"},
+      { "itemId": "goblin_000"},
+      { "itemId": "goblin_001"},
+      { "itemId": "goblin_002"}
+    ],
+    "orc": [
+      { "itemId": "goldpouch_orc"},
+      { "itemId": "orc_000"},
+      { "itemId": "orc_001"},
+      { "itemId": "orc_002"},
+      { "itemId": "orc_003"},
+      { "itemId": "orc_004"}
     ]
   },
 
