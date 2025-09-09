@@ -7,13 +7,15 @@
 #include "Monster.h"
 #include "Inventory.h"
 #include "Shop.h"
+#include "orc.h"
+#include "goblin.h"
 
 class Orc;
 
 // Instances
 GameManager* GameManager::instance_ = nullptr;
-Inventory* inventory_ = new Inventory(100, 10);
-Shop* shop_;
+//Inventory* inventory_ = new Inventory(100, 10);
+//Shop* shop_;
 
 GameManager::GameManager()
 {
@@ -64,57 +66,115 @@ int generatorRandInt(int max)
     return rd;
 }
 
-/*Monster**/ void GameManager::generateMonster()
+Monster* GameManager::generateMonster()
 {
-    switch (generatorRandInt(3))
+    switch (generatorRandInt(2))
     {
+        int rd;
     case 1:
         outputLog("오크 몬스터 생성!");
-        //int rd = generatorRandInt(3);
-        //switch (rd)
-        //{
-        //case 1:     // 일반 오크 생성
-        //    return new Orc("일반", GameManager::character_->getLevel(), "일반");
-        //    break;
-        //case 2:     // 야만적인 오크 생성
-        //    return new Orc("야만적인", GameManager::character_->getLevel(), "야만적인");
-        //    break;
-        //case 3:     // 광전사 오크 생성
-        //    return new Orc("광전사", GameManager::character_->getLevel(), "광전사");
-        //    break;
-        //}
+        rd = generatorRandInt(3);
+        switch (rd)
+        {
+        case 1:     // 일반 오크 생성
+            return new Orc("일반", GameManager::character_->getLevel());
+            break;
+        case 2:     // 야만적인 오크 생성
+            return new Orc("야만적인", GameManager::character_->getLevel());
+            break;
+        case 3:     // 광전사 오크 생성
+            return new Orc("광전사", GameManager::character_->getLevel());
+            break;
+        }
     case 2:
         outputLog("고블린 몬스터 생성!");
-        //int rd = generatorRandInt(4);
-        //switch (rd)
-        //{
-        //case 1:     // 일반 고블린 생성
-        //    return new Goblin("일반", GameManager::character_->getLevel());
-        //    break;
-        //case 2:     // 겁쟁이 고블린 생성
-        //    return new Goblin("겁쟁이", GameManager::character_->getLevel());
-        //    break;
-        //case 3:     // 건방진 고블린 생성
-        //    return new Goblin("건방진", GameManager::character_->getLevel());
-        //    break;
-        //case 4:     // 사나운 고블린 생성
-        //    return new Goblin("사나운", GameManager::character_->getLevel());
-        //    break;
-        //case 5:     // 재벌 고블린 생성
-        //    return new Goblin("재벌", GameManager::character_->getLevel());
-        //    break;
-        //}
+        rd = generatorRandInt(4);
+        switch (rd)
+        {
+        case 1:     // 일반 고블린 생성
+            return new Goblin("일반", GameManager::character_->getLevel());
+            break;
+        case 2:     // 겁쟁이 고블린 생성
+            return new Goblin("겁쟁이", GameManager::character_->getLevel());
+            break;
+        case 3:     // 건방진 고블린 생성
+            return new Goblin("건방진", GameManager::character_->getLevel());
+            break;
+        case 4:     // 사나운 고블린 생성
+            return new Goblin("사나운", GameManager::character_->getLevel());
+            break;
+        case 5:     // 재벌 고블린 생성
+            return new Goblin("재벌", GameManager::character_->getLevel());
+            break;
+        }
     case 3:     // 드래곤 생성
         outputLog("드래곤 몬스터 생성!");
         break;
     }
+}
 
+void GameManager::battle(Character* player, Monster* currentMonster)
+{
+    if (player->getAttackSpeed() < currentMonster->getAttackSpeed())    //빠른 공속이 선빵
+    {
+        instance_->outputLog(currentMonster->getName() + "의 선제공격!");
+        cout << player->getHealth() << endl;
+        player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
+        instance_->outputLog(
+            "현재 플레이어의 HP: " + to_string(player->getHealth())
+            + " / " + to_string(player->getMaxHealth())
+        );
+        if (player->getHealth() <= 0)
+        {
+            instance_->updateState(GameManager::End);
+        }
+    }
+    while (!currentMonster->isDead() && player->getHealth() > 0)  // 어느 한쪽이라도 죽지 않는 한 진행
+    {
+        instance_->outputLog(
+            "플레이어의 턴입니다. \n"
+            "1. 공격\n"
+            "2. 아이템 사용"
+        );
+        string input;
+        instance_->inputLog(input);
+        if (input == "1" || input == "공격")
+        {
+            player->attack(currentMonster);     // 캐릭터가 몬스터에게 공격
+            if (!currentMonster->isDead())      //몬스터가 죽지 않았다면 몬스터가 공격
+            {
+                player->takeCharacterDamage(currentMonster->performAction()); // 몬스터가 공격
+                instance_->outputLog(
+                    "현재 플레이어의 HP: " + to_string(player->getHealth())
+                    + " / " + to_string(player->getMaxHealth())
+                );
+                /*if (Character_->getHealth() <= 0)
+                {
+                    Game->updateState(GameManager::End);
+                    break;
+                }*/
+            }
+            else        // 몬스터가 죽었다면
+            {
+                delete currentMonster;  // 메모리 해제
+                // 보상 지급
+                instance_->updateState(GameManager::Resting);
+                break;
+            }
+        }
+        else if (input == "2" || input == "아이템 사용")
+        {
+
+        }
+        else
+        {
+            instance_->outputLog("잘못된 입력입니다.");
+        }
+    }
 }
 
 /*
 BossMonster* GameManager::generateBossMonster(int level) {
-}
-void GameManager::battle(Character* player) {
 }
 void GameManager::visitShop(Character* player) {
 }
@@ -138,6 +198,7 @@ int main()
     Game->outputLog("** 캐릭터 이름을 정하십시오.");
     Game->inputLog(input);
     Character_ = new Magician(input);
+    cout << Character_->getHealth();
     Game->character_ = Character_;
     Game->outputLog("캐릭터가 생성되었습니다.");
     Game->updateState(GameManager::Resting);
@@ -188,7 +249,7 @@ int main()
                 else if (input == "5" || input == "인벤토리 열기")
                 {
                     Game->outputLog("**인벤토리 목록:");
-                    inventory_->printItemlist();
+                    //inventory_->printItemlist();
                     system("pause");
                     break;
                 }
@@ -217,19 +278,20 @@ int main()
                 Game->inputLog(input);
                 
                 //아이템 구매
+                #pragma region BuyItem
                 if (input == "1" || input == "아이템 구매")
                 {
                     while (true)
                     {
-                        shop_->displayItems();
+                        //shop_->displayItems();
                         Game->inputLog(input);
                         int index = stoi(input);
-                        shop_->showItem(index);
+                        //shop_->showItem(index);
                         Game->outputLog("그래서, 사겠나?");
                         Game->inputLog(input);
                         if (input == "1" || "예")
                         {
-                            shop_->buyItem(index, *inventory_);
+                            //shop_->buyItem(index, *inventory_);
                         }
                         else if (input == "2" || "아니오")
                         {
@@ -241,10 +303,11 @@ int main()
                         }
                     }
                 }
+                #pragma endregion BuyItem
                 // 아이템 판매
                 else if (input == "1" || input == "아이템 판매")
                 {
-                    inventory_->printItemlist();
+                    //inventory_->printItemlist();
                     Game->outputLog("어떤 아이템을 파시겠나?");
                 }
                 else
@@ -264,21 +327,16 @@ int main()
             break;
 
         case GameManager::Battle:   //Game 전투/싸움 State
-            //currentMonster = Game->generateMonster();
-            Game->generateMonster();
+            currentMonster = Game->generateMonster();
             Game->roundTracker++;
-            /*if (Character_->getAttackSpeed() < currentMonster->getAttackSpeed())
-            {
-
-            }*/
             Game->outputLog(
                 "던전에 입장했습니다. \n"
-                "적 ****와 조우!"
-                "1. 공격\n"
-                "2. 아이템 사용"
+                "적 " + currentMonster->getName() + "와 조우!"
             );
+            Game->battle(Character_, currentMonster);
             system("pause");
             break;
+
         case GameManager::End:      //Game 끝.
             cout << "게임이 끝납니다..." << endl;
             /*for (int i = 0; i < Game->log.size(); i++)

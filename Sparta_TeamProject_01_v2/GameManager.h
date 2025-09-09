@@ -41,11 +41,11 @@ public:
     void outputLog(string navDialogue);
     void inputLog(string& input);
 
-    /*Monster**/ void generateMonster();
+    Monster* generateMonster();
     //Monster* generateMonster();
     void updateState(States stateName);
     //BossMonster* generateBossMonster(int level);
-    void battle();
+    void battle(Character* character, Monster* currentMonster);
     //void visitShop(Character* player);
     //void displayInventory(Character* player);
 };
