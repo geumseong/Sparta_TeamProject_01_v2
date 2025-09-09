@@ -110,15 +110,57 @@
 
     "goldpouch_goblin": {"name": "고블린의 금화 주머니","price": 0 , "type": "Material", "effecttype":""},
     "goblin_000": {"name": "고블린의 부러진 뼈","price": 0 , "type": "Material", "effecttype":""},
-    "goblin_001": {"name": "고블린의 가죽 조각","price": 0 , "type": "Material", "effecttype":""},
-    "goblin_002": {"name": "고블린의 황금 덩어리","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_001": {"name": "고블린의 깨진 투구 조각","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_002": {"name": "고블린의 얇은 가죽","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_003": {"name": "고블린의 가죽 조각","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_004": {"name": "고블린의 긴 손톱","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_005": {"name": "고블린의 녹슨 단검","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_006": {"name": "고블린의 날카로운 이빨","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_007": {"name": "고블린의 녹슨 대검","price": 0 , "type": "Material", "effecttype":""},
+    "goblin_008": {"name": "고블린의 황금 조각","price": 0 , "type": "Material", "effecttype":""},
 
     "goldpouch_orc": { "name": "오크의 금화 주머니","price": 0 , "type": "Material", "effecttype":""},
     "orc_000": { "name": "오크의 부러진 뼈", "price": 0 , "type": "Material", "effecttype":""},
     "orc_001": { "name": "오크의 투구 조각", "price": 0 , "type": "Material", "effecttype":""},
-    "orc_002": { "name": "오크의 날카로운 송곳니", "price": 0 , "type": "Material", "effecttype":""},
-    "orc_003": { "name": "오크의 갑옷", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":0, "db":0, "sb":0, "hb":0, "mb":0},
-    "orc_004": { "name": "오크의 전투 망치", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":0, "db":0, "sb":0, "hb":0, "mb":0}
+    "orc_002": { "name": "오크의 거친 가죽", "price": 0 , "type": "Material", "effecttype":""},
+    "orc_003": { "name": "오크의 갑옷 조각", "price": 0 , "type": "Material", "effecttype":""},
+    "orc_004": { "name": "오크의 날카로운 송곳니", "price": 0 , "type": "Material", "effecttype":""},
+    "orc_005": { "name": "오크의 전투 망치", "price": 0 , "type": "Material", "effecttype":""},
+
+    "goldpouch_slime": { "name": "슬라임의 금화 주머니","price": 0 , "type": "Material", "effecttype":""},
+    "slime_000": { "name": "슬라임의 끈적한 젤리", "price": 0 , "type": "Material", "effecttype":""},
+    "slime_001": { "name": "슬라임의 핵", "price": 0 , "type": "Material", "effecttype":""},
+    "slime_002": { "name": "슬라임의 반짝이는 조각", "price": 0 , "type": "Material", "effecttype":""},
+
+    "kobold_000": { "name": "코볼트의 작은 가죽 조각", "price": 0 , "type": "Material", "effecttype":""},
+    "kobold_001": { "name": "코볼트의 조잡한 함정 도구", "price": 0 , "type": "Material", "effecttype":""},
+
+    "troll_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "troll_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "troll_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+
+    "ogre_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "ogre_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "ogre_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "ogre_003": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+
+    "imp_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "imp_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "imp_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+
+    "succubus_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "succubus_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "succubus_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "succubus_003": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+
+
+    "dragon_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_003": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_004": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_005": { "name": "", "price": 0 , "type": "Material", "effecttype":""}
+
   },
 
   "shopTables": {
