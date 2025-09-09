@@ -36,17 +36,17 @@ Character::Character(string name)
 void Character::displayStatus()
 {
 	cout << "------------------------------------" << endl;
-	cout << "* ÇöÀç ´É·ÂÄ¡" << endl;
-	cout << "ÀÌ¸§: " << name << endl;
-	cout << "Á÷¾÷: " << jobName << endl;
+	cout << "* í˜„ìž¬ ëŠ¥ë ¥ì¹˜" << endl;
+	cout << "ì´ë¦„: " << name << endl;
+	cout << "ì§ì—…: " << jobName << endl;
 	cout << "Lv. " << level << endl;
 	cout << "HP: " << health << endl;
 	cout << "MP: " << mp << endl;
-	cout << "°ø°Ý·Â: " << attackPower << endl;
-	cout << "¹æ¾î·Â: " << defense << endl;
-	cout << "°ø°Ý¼Óµµ: " << attackSpeed << endl;
-	cout << "°æÇèÄ¡: " << experience << endl;
-	cout << "°ñµå: " << gold << endl;
+	cout << "ê³µê²©ë ¥: " << attackPower << endl;
+	cout << "ë°©ì–´ë ¥: " << defense << endl;
+	cout << "ê³µê²©ì†ë„: " << attackSpeed << endl;
+	cout << "ê²½í—˜ì¹˜: " << experience << endl;
+	cout << "ê³¨ë“œ: " << gold << endl;
 	cout << "------------------------------------" << endl;
 }
 
@@ -65,7 +65,7 @@ void Character::levelUp()
 	}
 	else
 	{
-		cout << "´õ ÀÌ»ó ·¹º§¾÷À» ÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
+		cout << "ë” ì´ìƒ ë ˆë²¨ì—…ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
 	}
 
 }
@@ -78,14 +78,14 @@ void Character::visitShop()
 
 void Character::characterDeath()
 {
-	cout << "Ä³¸¯ÅÍ°¡ »ç¸ÁÇÏ¿´½À´Ï´Ù." << endl;
+	cout << "ìºë¦­í„°ê°€ ì‚¬ë§í•˜ì˜€ìŠµë‹ˆë‹¤." << endl;
 }
 
 void Character::takeCharacterDamage(int damage)
 {
 	health -= damage;
 
-	if (health <= 0);
+	if (health <= 0)
 	{
 		health = 0;
 		characterDeath();
