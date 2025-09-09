@@ -9,12 +9,14 @@ Orc::Orc(const std::string& type, int level)
 {
     int baseHealth = 0;
     int baseAttack = 0;
+    int attackSpeed = 0;
     std::string namePrefix = "";
 
     if (type == "일반") {
         namePrefix = "오크";
         baseHealth = 80;
         baseAttack = 15;
+        attackSpeed = 2;
         this->baseExp = 25;
         this->baseGold = 10;
         dropItem.push_back(Item("부러진 오크의 뼈", 20, 1, E_Type::Material));
@@ -24,6 +26,7 @@ Orc::Orc(const std::string& type, int level)
         namePrefix = "야만적인 오크";
         baseHealth = 100;
         baseAttack = 20;
+        attackSpeed = 2;
         this->baseExp = 40;
         this->baseGold = 20;
         dropItem.push_back(Item("오크의 거친 가죽", 30, 1, E_Type::Material));
@@ -33,6 +36,7 @@ Orc::Orc(const std::string& type, int level)
         namePrefix = "광전사 오크";
         baseHealth = 150;
         baseAttack = 30;
+        attackSpeed = 2;
         this->baseExp = 100;
         this->baseGold = 50;
         dropItem.push_back(Item("오크의 날카로운 송곳니", 50, 1, E_Type::Material));
@@ -41,6 +45,7 @@ Orc::Orc(const std::string& type, int level)
 
     this->health = baseHealth + (this->level * 10);
     this->attack = baseAttack + (this->level * 3);
+    this->attackSpeed = attackSpeed + (this->level * 2);
 
     this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
 }

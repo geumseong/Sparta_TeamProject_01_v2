@@ -25,6 +25,7 @@ protected:
 	int level; // 몬스터 레벨
 	int health; // 몬스터 체력
 	int attack; // 몬스터 공격력
+	int attackSpeed; // 몬스터 공격속도
 	int baseExp; // 기본 보상 경험치
 	int baseGold; // 기본 보상 골드
 	std::vector<Item> dropItem; // 몬스터가 드롭하는 아이템 목록
@@ -48,6 +49,7 @@ public:
 	int getLevel() const { return level; }
 	int getHealth() const { return health; }
 	int getAttack() const { return attack; }
+	int getAttackSpeed() const { return attackSpeed; }
 	
 
 	// setter 함수?
