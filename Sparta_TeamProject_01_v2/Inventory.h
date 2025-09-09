@@ -26,6 +26,7 @@ public:
 
 	//getter
 	int getmaxSize() { return maxSize; }
+	int getSize() { return itemList.size(); }
 	int getGold() { return gold; }
 
 	//setter

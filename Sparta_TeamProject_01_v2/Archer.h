@@ -8,6 +8,6 @@ public:
 	Archer(string nickName);
 
 	void attack() override;
-
+	void attack(Monster* monster) override;
 };
 

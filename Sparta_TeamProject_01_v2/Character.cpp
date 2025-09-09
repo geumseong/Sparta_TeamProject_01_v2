@@ -26,7 +26,7 @@ Character::Character(string name)
 	this -> maxHealth = 200;
 	this -> mp = 100;
 	this -> maxMp = 100;
-	this ->attackPower = 30;
+	this -> attackPower = 30;
 	this -> experience = 0;
 	this -> gold = 0;
 	this -> defense = 0;
@@ -42,7 +42,7 @@ void Character::displayStatus()
 	cout << "Lv. " << level << endl;
 	cout << "HP: " << health << endl;
 	cout << "MP: " << mp << endl;
-	cout << "공격력: " << attack << endl;
+	cout << "공격력: " << attackPower << endl;
 	cout << "방어력: " << defense << endl;
 	cout << "공격속도: " << attackSpeed << endl;
 	cout << "경험치: " << experience << endl;
@@ -80,11 +80,6 @@ void Character::characterDeath()
 {
 	if(health >= 0)
 		cout << "캐릭터가 사망하였습니다." << endl;
-}
-
-void Character::characterAttack()
-{
-
 }
 
 string Character::getName() const
