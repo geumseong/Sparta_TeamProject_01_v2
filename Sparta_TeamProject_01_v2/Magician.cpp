@@ -58,8 +58,8 @@ void Magician::attack(Monster* monster)
 
     cout << monster->getName() << "에게 " << damage << "의 데미지를 입혔습니다" << endl;
 
-    int monsterHP = monster->getHealth() - damage;
-    if (monster->setHP(monsterHP)) {
+    if (!monster->isDead()) {
+        monster->takeDamage(damage);
         cout << "몬스터의 체력이 " << monster->getHealth() << " 가 남았습니다." << endl;
     }
     else {
