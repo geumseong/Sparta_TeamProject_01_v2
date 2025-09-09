@@ -79,11 +79,11 @@ public:
         }
 
         // 값 파싱
-        string  name    = it->value("name", string{});
-        int     price   = it->value("price", 0);
-        int     count   = 1;
+        string  name = it->value("name", string{});
+        int     price = it->value("price", 0);
+        int     count = 1;
         string  typeStr = it->value("type", string{ "Unknown" });
-        E_Type  type    = stringToType(typeStr);
+        E_Type  type = stringToType(typeStr);
 
         auto ptr = make_unique<Item>(name, price, count, type);
         // ID 저장하고 싶으면 여기서 추가
@@ -109,8 +109,24 @@ public:
                 int     count = 1;
                 string  typeStr = item->value("type", string{ "Unknown" });
                 E_Type  type = stringToType(typeStr);
+                string  effecttype = item->value("effecttype", string{});
 
-                list.emplace_back(name, price, count, type);
+                auto ptr = Item(name, price, count, type);
+                if (effecttype == "HealEffect")
+                {
+                    int heal = item->value("heal", 0);
+                    ptr.addEffect<HealEffect>(heal);
+                }
+                else if (effecttype == "BuffEffect")
+                {
+                    int ab = item->value("ab", 0);
+                    int db = item->value("db", 0);
+                    int sb = item->value("sb", 0);
+                    ptr.addEffect<BuffEffect>(ab, db, sb);
+                }
+                else {}
+
+                list.push_back(move(ptr));
             }
         }
         return list;
@@ -129,18 +145,36 @@ public:
 
         for (auto& recipe : *it)
         {
-            for (auto& in : recipe["inputs"]) 
+            for (auto& in : recipe["inputs"])
             {
                 string itemId = in.value("itemId", "");
                 auto item = db_["items"].find(itemId);
-                if (item != db_["items"].end()) 
+                if (item != db_["items"].end())
                 {
-                    string  name    = item->value("name", string{});
-                    int     price   = item->value("price", 0);
-                    int     count   = 1;
+                    string  name = item->value("name", string{});
+                    int     price = item->value("price", 0);
+                    int     count = 1;
                     string  typeStr = item->value("type", string{ "Unknown" });
-                    E_Type  type    = stringToType(typeStr);
-                    inputList.emplace_back(name, price, count, type);
+                    E_Type  type = stringToType(typeStr);
+                    string  effecttype = item->value("effecttype", string{});
+
+                    auto ptr = Item(name, price, count, type);
+                    if (effecttype == "HealEffect")
+                    {
+                        int heal = item->value("heal", 0);
+                        ptr.addEffect<HealEffect>(heal);
+                    }
+                    else if (effecttype == "BuffEffect")
+                    {
+                        int ab = item->value("ab", 0);
+                        int db = item->value("db", 0);
+                        int sb = item->value("sb", 0);
+                        ptr.addEffect<BuffEffect>(ab, db, sb);
+                    }
+
+                    inputList.push_back(move(ptr));
+
+
                 }
             }
             for (auto& in : recipe["outputs"])
@@ -154,16 +188,33 @@ public:
                     int     count = 1;
                     string  typeStr = item->value("type", string{ "Unknown" });
                     E_Type  type = stringToType(typeStr);
-                    outputList.emplace_back(name, price, count, type);
+                    string  effecttype = item->value("effecttype", string{});
+
+                    auto ptr = Item(name, price, count, type);
+                    if (effecttype == "HealEffect")
+                    {
+                        int heal = item->value("heal", 0);
+                        ptr.addEffect<HealEffect>(heal);
+                    }
+                    else if (effecttype == "BuffEffect")
+                    {
+                        int ab = item->value("ab", 0);
+                        int db = item->value("db", 0);
+                        int sb = item->value("sb", 0);
+                        ptr.addEffect<BuffEffect>(ab, db, sb);
+                    }
+
+                    outputList.push_back(move(ptr));
+
                 }
-            }    
+            }
         }
         recipeList.push_back(move(outputList));
         recipeList.push_back(move(inputList));
         return recipeList;
     }
 
-    
+
 
     /**
      * @brief 드랍 테이블 출력
@@ -177,18 +228,31 @@ public:
         auto it = db_["dropTables"].find(monsterName);
         if (it == db_["dropTables"].end()) return droplist;
 
-        for (auto& drop : *it) 
+        for (auto& drop : *it)
         {
             string itemId = drop.value("itemId", "");
             auto item = db_["items"].find(itemId);
-            if (item != db_["items"].end()) 
+            if (item != db_["items"].end())
             {
                 string  name = item->value("name", string{});
                 int     price = item->value("price", 0);
                 int     count = 1;
                 string  typeStr = item->value("type", string{ "Unknown" });
                 E_Type  type = stringToType(typeStr);
-                droplist.emplace_back(name, price, count, type);
+                string  effecttype = item->value("effecttype", string{});
+
+                auto ptr = Item(name, price, count, type);
+                if (effecttype == "HealEffect")
+                {
+                    ptr.addEffect<HealEffect>(item->value("heal", 0));
+                }
+                else if (effecttype == "BuffEffect")
+                {
+                    ptr.addEffect<BuffEffect>(item->value("ab", 0), item->value("db", 0), item->value("sb", 0));
+                }
+                else {}
+
+                droplist.push_back(move(ptr));
             }
         }
         return droplist;

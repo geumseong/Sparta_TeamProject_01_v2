@@ -1,11 +1,11 @@
 {
   "items": {
-    "sword_001": { "name": "검","price": 50 , "type": "Equipment"},
-    "potion_small": { "name": "회복 물약(소)", "price": 15, "type": "Consumable"},
-    "iron": { "name": "철 광석",            "price": 5 , "tpye": "Material"},
-    "slime_001": { "name": "슬라임의 점액",  "price": 1 , "tpye": "Material"},
-    "sword_002": { "name": "강철 검",       "price": 120 , "type": "Equipment"},
-    "Accessory_001": {"name": "녹슨 목걸이", "price": 100, "type": "Accessory"}
+    "sword_001": { "name": "검","price": 50 , "type": "Equipment", "effecttype":"BuffEffect", "ab":1, "db":1, "sb":1},
+    "potion_small": { "name": "회복 물약(소)", "price": 15, "type": "Consumable", "effecttype":"HealEffect", "heal":50},
+    "iron": { "name": "철 광석",            "price": 5 , "tpye": "Material", "effecttype":""},
+    "slime_001": { "name": "슬라임의 점액",  "price": 1 , "tpye": "Material", "effecttype":""},
+    "sword_002": { "name": "강철 검",       "price": 120 , "type": "Equipment", "effecttype":"BuffEffect", "ab":5, "db":5, "sb":5},
+    "Accessory_001": {"name": "녹슨 목걸이", "price": 100, "type": "Accessory", "effecttype":"BuffEffect", "ab":3, "db":3, "sb":3}
   },
 
   "shopTables": {
