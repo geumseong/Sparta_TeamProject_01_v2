@@ -83,7 +83,7 @@ public:
 	{
 		if (dropItem.empty())
 		{
-			return Item("없음", 0, 0); // 드롭 아이템이 없으면 "없음" 반환
+			return Item("없음", 0, 0, E_Type::Material); // 드롭 아이템이 없으면 "없음" 반환
 		}
 
 		// 랜덤으로 아이템 선택
