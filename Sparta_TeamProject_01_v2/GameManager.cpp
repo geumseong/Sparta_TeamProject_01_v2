@@ -71,10 +71,20 @@ int generatorRandInt(int max)
 
 Monster* GameManager::generateMonster()
 {
+    int lvlModifier = 0;
+    int rand = generatorRandInt(2);
+    if (rand == 1)
+    {
+        lvlModifier = 0;
+    }
+    else if(rand == 2)
+    {
+        lvlModifier = 1;
+    }
     if (roundTracker % GameManager::bossRound == 0)
     {
         outputLog("보스 몬스터 생성!!!");
-        generateBossMonster();
+        generateBossMonster(lvlModifier);
     }
     else
     {
@@ -87,13 +97,13 @@ Monster* GameManager::generateMonster()
             switch (rd)
             {
             case 1:     // 일반 오크 생성
-                return new Orc("일반", GameManager::character_->getLevel());
+                return new Orc("일반", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 2:     // 야만적인 오크 생성
-                return new Orc("야만적인", GameManager::character_->getLevel());
+                return new Orc("야만적인", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 3:     // 광전사 오크 생성
-                return new Orc("광전사", GameManager::character_->getLevel());
+                return new Orc("광전사", GameManager::character_->getLevel() + lvlModifier);
                 break;
             }
         case 2:
@@ -102,29 +112,29 @@ Monster* GameManager::generateMonster()
             switch (rd)
             {
             case 1:     // 일반 고블린 생성
-                return new Goblin("일반", GameManager::character_->getLevel());
+                return new Goblin("일반", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 2:     // 겁쟁이 고블린 생성
-                return new Goblin("겁쟁이", GameManager::character_->getLevel());
+                return new Goblin("겁쟁이", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 3:     // 건방진 고블린 생성
-                return new Goblin("건방진", GameManager::character_->getLevel());
+                return new Goblin("건방진", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 4:     // 사나운 고블린 생성
-                return new Goblin("사나운", GameManager::character_->getLevel());
+                return new Goblin("사나운", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 5:     // 재벌 고블린 생성
-                return new Goblin("재벌", GameManager::character_->getLevel());
+                return new Goblin("재벌", GameManager::character_->getLevel() + lvlModifier);
                 break;
             }
         }
     }
 }
 
-Monster* GameManager::generateBossMonster()
+Monster* GameManager::generateBossMonster(int lvlModif)
 {
     outputLog("드래곤 몬스터 생성!");
-    return new Dragon(GameManager::character_->getLevel());
+    return new Dragon(GameManager::character_->getLevel() + lvlModif);
 }
 
 void GameManager::battle(Character* player, Monster* currentMonster)
