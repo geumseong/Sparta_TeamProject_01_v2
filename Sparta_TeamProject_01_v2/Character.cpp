@@ -36,40 +36,19 @@ Character::Character(string name)
 void Character::displayStatus()
 {
 	cout << "------------------------------------" << endl;
-	cout << "* í˜„ìž¬ ëŠ¥ë ¥ì¹˜" << endl;
-	cout << "ì´ë¦„: " << name << endl;
-	cout << "ì§ì—…: " << jobName << endl;
+	cout << "* ÇöÀç ´É·ÂÄ¡" << endl;
+	cout << "ÀÌ¸§: " << name << endl;
+	cout << "Á÷¾÷: " << jobName << endl;
 	cout << "Lv. " << level << endl;
 	cout << "HP: " << health << endl;
 	cout << "MP: " << mp << endl;
-	cout << "ê³µê²©ë ¥: " << attackPower << endl;
-	cout << "ë°©ì–´ë ¥: " << defense << endl;
-	cout << "ê³µê²©ì†ë„: " << attackSpeed << endl;
-	cout << "ê²½í—˜ì¹˜: " << experience << endl;
-	cout << "ê³¨ë“œ: " << gold << endl;
+	cout << "°ø°Ý·Â: " << attackPower << endl;
+	cout << "¹æ¾î·Â: " << defense << endl;
+	cout << "°ø°Ý¼Óµµ: " << attackSpeed << endl;
+	cout << "°æÇèÄ¡: " << experience << endl;
+	cout << "°ñµå: " << gold << endl;
 	cout << "------------------------------------" << endl;
 }
-
-void Character::levelUp()
-{
-	if (level < 10)
-	{
-		level++;
-		health = (maxHealth + (level * 20));
-		maxHealth = (maxHealth + (level * 20));
-		mp = (maxMp + (level * 20));
-		maxMp = (maxMp + level * 20);
-		attackPower = (attackPower + (level * 5));
-		experience = 0;
-		attackSpeed += 1;
-	}
-	else
-	{
-		cout << "ë” ì´ìƒ ë ˆë²¨ì—…ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
-	}
-
-}
-
 
 void Character::visitShop()
 {
@@ -78,7 +57,7 @@ void Character::visitShop()
 
 void Character::characterDeath()
 {
-	cout << "ìºë¦­í„°ê°€ ì‚¬ë§í•˜ì˜€ìŠµë‹ˆë‹¤." << endl;
+	cout << "Ä³¸¯ÅÍ°¡ »ç¸ÁÇÏ¿´½À´Ï´Ù." << endl;
 }
 
 void Character::takeCharacterDamage(int damage)

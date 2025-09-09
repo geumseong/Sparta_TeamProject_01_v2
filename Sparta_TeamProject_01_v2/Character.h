@@ -15,8 +15,8 @@ public:
 
     virtual void attack() = 0;
     virtual void attack(Monster* monster) = 0;
+    virtual void levelUp() = 0;
     void displayStatus();
-    void levelUp();
     void visitShop();
     void characterDeath();
     void takeCharacterDamage(int damage);

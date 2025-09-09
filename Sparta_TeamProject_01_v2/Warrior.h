@@ -9,5 +9,6 @@ public:
 
 	void attack() override;
 	void attack(Monster* monster) override;
+	void levelUp() override;
 };
 
