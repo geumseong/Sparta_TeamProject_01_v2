@@ -46,7 +46,7 @@ public:
     Monster* generateMonster();
     //Monster* generateMonster();
     void updateState(States stateName);
-    Monster* generateBossMonster();
+    Monster* generateBossMonster(int lvlModif);
     void battle(Character* character, Monster* currentMonster);
     //void visitShop(Character* player);
     //void displayInventory(Character* player);
