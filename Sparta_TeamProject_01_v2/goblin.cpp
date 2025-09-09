@@ -1,5 +1,6 @@
 #include "Goblin.h"
 #include "Item.h"
+#include <iostream>
 
 Goblin::Goblin(const std::string& type, int level)
     : Monster(level), type(type), bonusExp(0), bonusGold(0), turnCount(0), isFled(false)
@@ -10,16 +11,19 @@ Goblin::Goblin(const std::string& type, int level)
 		int baseAttack = 0; // 기본 공격력
 		std::string namePrefix = ""; // 이름
 
+
 		if (type == "일반")
 		{
 			namePrefix = "고블린";
 			baseHealth = 30;
 			baseAttack = 5;
+			this->baseExp = 10;   // 기본 경험치 추가
+			this->baseGold = 5;    // 기본 골드 추가
 			// this->commonWeight = 80; // 일반 아이템 드랍 확률
 			// this->rareWeight = 15;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 5; // 전설 아이템 드랍 확률
-			dropItem.push_back(Item("고블린의 부러진 뼈", 20, 1));
-			dropItem.push_back(Item("깨진 투구 조각", 30, 1));
+			dropItem.push_back(Item("고블린의 부러진 뼈", 20, 1, E_Type::Material));
+			dropItem.push_back(Item("깨진 투구 조각", 30, 1, E_Type::Material));
 		}
 
 		else if (type == "겁쟁이")
@@ -29,11 +33,13 @@ Goblin::Goblin(const std::string& type, int level)
 			baseAttack = 3;
 			bonusExp = 10;
 			bonusGold = 10;
+			this->baseExp = 10;   // 기본 경험치 추가
+			this->baseGold = 5;    // 기본 골드 추가
 			// this->commonWeight = 70; // 일반 아이템 드랍 확률
 			// this->rareWeight = 25;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 5; // 전설 아이템 드랍 확률
-			dropItem.push_back(Item("고블린의 얇은 가죽", 20, 1));
-			dropItem.push_back(Item("가죽 조각", 25, 1));
+			dropItem.push_back(Item("고블린의 얇은 가죽", 20, 1, E_Type::Material));
+			dropItem.push_back(Item("가죽 조각", 25, 1, E_Type::Material));
 		}
 
 		else if (type == "건방진")
@@ -43,11 +49,13 @@ Goblin::Goblin(const std::string& type, int level)
 			baseAttack = 10;
 			bonusExp = 15;
 			bonusGold = 15;
+			this->baseExp = 10;   // 기본 경험치 추가
+			this->baseGold = 5;    // 기본 골드 추가
 			// this->commonWeight = 60; // 일반 아이템 드랍 확률
 			// this->rareWeight = 30;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 10; // 전설 아이템 드랍 확률
-			dropItem.push_back(Item("고블린의 긴 손톱", 30, 1));
-			dropItem.push_back(Item("녹슨 단검", 40, 1));
+			dropItem.push_back(Item("고블린의 긴 손톱", 30, 1, E_Type::Material));
+			dropItem.push_back(Item("녹슨 단검", 40, 1, E_Type::Material));
 		}
 
 		else if (type == "사나운")
@@ -57,11 +65,13 @@ Goblin::Goblin(const std::string& type, int level)
 			baseAttack = 15;
 			bonusExp = 20;
 			bonusGold = 20;
+			this->baseExp = 10;   // 기본 경험치 추가
+			this->baseGold = 5;    // 기본 골드 추가
 			// this->commonWeight = 50; // 일반 아이템 드랍 확률
 			// this->rareWeight = 35;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 15; // 전설 아이템 드랍 확률
-			dropItem.push_back(Item("고블린의 날카로운 이빨", 50, 1));
-			dropItem.push_back(Item("녹슨 대검", 60, 1));
+			dropItem.push_back(Item("고블린의 날카로운 이빨", 50, 1, E_Type::Material));
+			dropItem.push_back(Item("녹슨 대검", 60, 1, E_Type::Material));
 		}
 
 		else if (type == "재벌")
@@ -71,11 +81,13 @@ Goblin::Goblin(const std::string& type, int level)
 			baseAttack = 50;
 			bonusExp = 50;
 			bonusGold = 100;
+			this->baseExp = 10;   // 기본 경험치 추가
+			this->baseGold = 5;    // 기본 골드 추가
 			// this->commonWeight = 30; // 일반 아이템 드랍 확률
 			// this->rareWeight = 50;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 20; // 전설 아이템 드랍 확률
-			dropItem.push_back(Item("고블린의 황금 조각", 100, 1));
-			dropItem.push_back(Item("금화 주머니", 200, 1));
+			dropItem.push_back(Item("고블린의 황금 조각", 100, 1, E_Type::Material));
+			dropItem.push_back(Item("금화 주머니", 200, 1, E_Type::Material));
 		}
 
 		this->health = baseHealth + (this->level * 5); // 레벨당 체력 5 증가
