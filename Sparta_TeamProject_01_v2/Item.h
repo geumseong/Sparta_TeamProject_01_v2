@@ -13,6 +13,7 @@ enum E_Type
 	Equipment,
 	Accessory,
 	Material,
+	Unknown1
 };
 
 class Item

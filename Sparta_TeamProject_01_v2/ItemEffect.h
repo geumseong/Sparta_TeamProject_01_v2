@@ -14,11 +14,16 @@ struct I_Effect
 class HealEffect : public I_Effect
 {
 public:
-    int heal = 0;
-    HealEffect(int heal) : heal(heal) {}
+    int HP = 0;
+    int MP = 0;
+    HealEffect(int hp, int mp) : HP(hp), MP(mp) {}
     void onConsume(Character& character)
     {
-        character.setHealth( min(character.getHealth() + heal, character.getMaxhealth()) );
+        character.setHealth(min(character.getHealth() + HP, character.getMaxHealth()));
+        character.setMp(min(character.getMp() + MP, character.getMaxMp()));
+        //character.setHealth( std::min(character.getHealth() + int(character.getMaxHealth() * (HP / 100.0f)), character.getMaxHealth()));
+        //character.setMp( std::min(character.getMp() + int(character.getMaxMp() * (MP / 100.0f)), character.getMaxMp()));
+        //백분율로 회복되게 변경
     }
 };
 
@@ -28,18 +33,24 @@ public:
     int atkbuff = 0;
     int defbuff = 0;
     int spdbuff = 0;
-    BuffEffect(int ab, int db, int sb) : atkbuff(ab), defbuff(db), spdbuff(sb) {}
+    int hpbuff = 0;
+    int mpbuff = 0;
+    BuffEffect(int ab, int db, int sb, int hb, int mb) : atkbuff(ab), defbuff(db), spdbuff(sb), hpbuff(hb), mpbuff(mb) {}
     virtual void onEquip(Character& character) override
     {
 
         character.setAttack(character.getAttack() + atkbuff);
-        //character.setDeffence(character.getDeffence() + defbuff);
-        //character.setSpeed(character.getSpeed() + spdbuff);
+        character.setDefense(character.getDefense() + defbuff);
+        character.setAttackSpeed(character.getAttackSpeed() + spdbuff);
+        character.setMaxhealth(character.getMaxHealth() + hpbuff);
+        character.setMaxMp(character.getMaxMp() + mpbuff);
     }
     virtual void onUnequip(Character& character) override
     {
         character.setAttack(character.getAttack() - atkbuff);
-        //character.setDeffence(character.getDeffence() - defbuff);
-        //character.setSpeed(character.getSpeed() - spdbuff);
+        character.setDefense(character.getDefense() - defbuff);
+        character.setAttackSpeed(character.getAttackSpeed() - spdbuff);
+        character.setMaxhealth(character.getMaxHealth() - hpbuff);
+        character.setMaxMp(character.getMaxMp() - mpbuff);
     }
 };

@@ -6,11 +6,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include "Item.h"
 
 // 전방 선언
 class GameManager;
 class Character;
-class Item;
 
 
 
@@ -24,7 +24,11 @@ protected:
 	std::string name; // 몬스터 이름
 	int level; // 몬스터 레벨
 	int health; // 몬스터 체력
+	int maxHealth; //몬스터 최대 체력
 	int attack; // 몬스터 공격력
+	int attackSpeed; // 몬스터 공격속도
+	int baseExp; // 기본 보상 경험치
+	int baseGold; // 기본 보상 골드
 	std::vector<Item> dropItem; // 몬스터가 드롭하는 아이템 목록
 
 
@@ -46,6 +50,8 @@ public:
 	int getLevel() const { return level; }
 	int getHealth() const { return health; }
 	int getAttack() const { return attack; }
+	int getAttackSpeed() const { return attackSpeed; }
+	
 
 	// setter 함수?
 	// 몬스터의 속성값을 변경
@@ -56,7 +62,7 @@ public:
 	{ 
 		health -= damage;
 		
-		if (health < 0);
+		if (health < 0)
 		{
 			health = 0;
 		}
@@ -83,7 +89,7 @@ public:
 	{
 		if (dropItem.empty())
 		{
-			return Item("없음", 0, 0); // 드롭 아이템이 없으면 "없음" 반환
+			return Item("없음", 0, 0, E_Type::Material); // 드롭 아이템이 없으면 "없음" 반환
 		}
 
 		// 랜덤으로 아이템 선택
@@ -92,4 +98,3 @@ public:
 	}
 
 };
-
