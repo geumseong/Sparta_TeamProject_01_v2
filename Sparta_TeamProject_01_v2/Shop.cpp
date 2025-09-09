@@ -1,7 +1,7 @@
 #include "Shop.h"
-#include <algorithm> // std::shuffleÀ» À§ÇÑ Çì´õ
-#include <random>    // ³­¼ö »ı¼º±â ¹× ¼ÅÇÃ¿¡ ÇÊ¿äÇÑ mt19937
-#include <chrono>    // ½Ãµå »ı¼ºÀ» À§ÇÑ ÇöÀç ½Ã°£
+#include <algorithm> // std::shuffleì„ ìœ„í•œ í—¤ë”
+#include <random>    // ë‚œìˆ˜ ìƒì„±ê¸° ë° ì…”í”Œì— í•„ìš”í•œ mt19937
+#include <chrono>    // ì‹œë“œ ìƒì„±ì„ ìœ„í•œ í˜„ì¬ ì‹œê°„
 #include <iostream>
 
 void Shop::openShop()
@@ -12,91 +12,91 @@ void Shop::openShop()
     availableItems.clear();
 
     std::vector<Item*> itemPool = {
-        // Àü»ç ¹«±â
-        new Item("ÃÊº¸ÀÚÀÇ °Ë", 50, 1, E_Type::Equipment),
-        new Item("ºÓÀº °­Ã¶ °Ë", 150, 1, E_Type::Equipment),
-        new Item("±×¸²ÀÚ Ä«Å¸³ª", 200, 1, E_Type::Equipment),
-        new Item("¿ë¸ÍÀÇ ´ë°Ë", 300, 1, E_Type::Equipment),
-        new Item("ºÓÀº ¿ëÀÇ ¼Û°÷´Ï", 350, 1, E_Type::Equipment),
+        // ì „ì‚¬ ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ ê²€", 50, 1, E_Type::Equipment),
+        new Item("ë¶‰ì€ ê°•ì²  ê²€", 150, 1, E_Type::Equipment),
+        new Item("ê·¸ë¦¼ì ì¹´íƒ€ë‚˜", 200, 1, E_Type::Equipment),
+        new Item("ìš©ë§¹ì˜ ëŒ€ê²€", 300, 1, E_Type::Equipment),
+        new Item("ë¶‰ì€ ìš©ì˜ ì†¡ê³³ë‹ˆ", 350, 1, E_Type::Equipment),
 
-        // ±Ã¼ö ¹«±â
-        new Item("ÃÊº¸ÀÚÀÇ È°", 50, 1, E_Type::Equipment),
-        new Item("¹Ù¶÷ÀÇ È°", 150, 1, E_Type::Equipment),
-        new Item("°í¿äÇÑ ½£ÀÇ È°", 200, 1, E_Type::Equipment),
-        new Item("´Şºû ÃßÀûÀÚ", 300, 1, E_Type::Equipment),
-		new Item("´Ş ±×¸²ÀÚ Àå±Ã", 350, 1, E_Type::Equipment),
+        // ê¶ìˆ˜ ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ í™œ", 50, 1, E_Type::Equipment),
+        new Item("ë°”ëŒì˜ í™œ", 150, 1, E_Type::Equipment),
+        new Item("ê³ ìš”í•œ ìˆ²ì˜ í™œ", 200, 1, E_Type::Equipment),
+        new Item("ë‹¬ë¹› ì¶”ì ì", 300, 1, E_Type::Equipment),
+		new Item("ë‹¬ ê·¸ë¦¼ì ì¥ê¶", 350, 1, E_Type::Equipment),
 
-        // ¸¶¹ı»ç ¹«±â
-        new Item("ÃÊº¸ÀÚÀÇ ÁöÆÎÀÌ", 50, 1, E_Type::Equipment),
-        new Item("º°ºû ÁöÆÎÀÌ", 150, 1, E_Type::Equipment),
-        new Item("½É¿¬ÀÇ ÁöÆÎÀÌ", 200, 1, E_Type::Equipment),
-        new Item("±İ´ÜÀÇ ·é ÁöÆÎÀÌ", 300, 1, E_Type::Equipment),
-        new Item("¸¶³ªÀÇ °íµ¿", 350, 1, E_Type::Equipment),
+        // ë§ˆë²•ì‚¬ ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ ì§€íŒ¡ì´", 50, 1, E_Type::Equipment),
+        new Item("ë³„ë¹› ì§€íŒ¡ì´", 150, 1, E_Type::Equipment),
+        new Item("ì‹¬ì—°ì˜ ì§€íŒ¡ì´", 200, 1, E_Type::Equipment),
+        new Item("ê¸ˆë‹¨ì˜ ë£¬ ì§€íŒ¡ì´", 300, 1, E_Type::Equipment),
+        new Item("ë§ˆë‚˜ì˜ ê³ ë™", 350, 1, E_Type::Equipment),
 
-        // µµÀû ¹«±â
-        new Item("ÃÊº¸ÀÚÀÇ ´Ü°Ë", 50, 1, E_Type::Equipment),
-        new Item("±×¸²ÀÚ ´Ü°Ë", 150, 1, E_Type::Equipment),
-        new Item("¸Á·ÉÀÇ ¼Û°÷", 200, 1, E_Type::Equipment),
-        new Item("¹«À½ÀÇ Ä®³¯", 300, 1, E_Type::Equipment),
-        new Item("Ä§¹¬ÀÇ ÃßÀûÀÚ", 350, 1, E_Type::Equipment),
+        // ë„ì  ë¬´ê¸°
+        new Item("ì´ˆë³´ìì˜ ë‹¨ê²€", 50, 1, E_Type::Equipment),
+        new Item("ê·¸ë¦¼ì ë‹¨ê²€", 150, 1, E_Type::Equipment),
+        new Item("ë§ë ¹ì˜ ì†¡ê³³", 200, 1, E_Type::Equipment),
+        new Item("ë¬´ìŒì˜ ì¹¼ë‚ ", 300, 1, E_Type::Equipment),
+        new Item("ì¹¨ë¬µì˜ ì¶”ì ì", 350, 1, E_Type::Equipment),
 
-        // ¹æ¾î±¸ (Àü»ç)
-        new Item("³°Àº °¡Á× °©¿Ê", 50, 1, E_Type::Equipment),
-        new Item("ÈÆ·Ãº´ÀÇ Ã¶°©", 100, 1, E_Type::Equipment),
-        new Item("´Ü·ÃµÈ Àü»çÀÇ °©¿Ê", 150, 1, E_Type::Equipment),
-        new Item("¹«¸í Åõ»çÀÇ ÆÇ±İ °©¿Ê", 250, 1, E_Type::Equipment),
-        new Item("¿ë»çÀÇ °©¿Ê", 350, 1, E_Type::Equipment),
+        // ë°©ì–´êµ¬ (ì „ì‚¬)
+        new Item("ë‚¡ì€ ê°€ì£½ ê°‘ì˜·", 50, 1, E_Type::Equipment),
+        new Item("í›ˆë ¨ë³‘ì˜ ì² ê°‘", 100, 1, E_Type::Equipment),
+        new Item("ë‹¨ë ¨ëœ ì „ì‚¬ì˜ ê°‘ì˜·", 150, 1, E_Type::Equipment),
+        new Item("ë¬´ëª… íˆ¬ì‚¬ì˜ íŒê¸ˆ ê°‘ì˜·", 250, 1, E_Type::Equipment),
+        new Item("ìš©ì‚¬ì˜ ê°‘ì˜·", 350, 1, E_Type::Equipment),
 
-        // ¹æ¾î±¸ (±Ã¼ö)
-        new Item("Çã¸§ÇÑ ÃÊ¿ø »ç³É²Û Æ©´Ğ", 50, 1, E_Type::Equipment),
-        new Item("Á¤ÂûÀÚÀÇ °¡Á× Á¶³¢", 100, 1, E_Type::Equipment),
-        new Item("¹Ù¶÷ ÃßÀûÀÚÀÇ °æ°©", 150, 1, E_Type::Equipment),
-        new Item("½£±æ °ß½À»ıÀÇ Æ©´Ğ", 250, 1, E_Type::Equipment),
-        new Item("¹ÎÃ¸ÇÑ È°ÀâÀÌÀÇ °©ÁÖ", 350, 1, E_Type::Equipment),
+        // ë°©ì–´êµ¬ (ê¶ìˆ˜)
+        new Item("í—ˆë¦„í•œ ì´ˆì› ì‚¬ëƒ¥ê¾¼ íŠœë‹‰", 50, 1, E_Type::Equipment),
+        new Item("ì •ì°°ìì˜ ê°€ì£½ ì¡°ë¼", 100, 1, E_Type::Equipment),
+        new Item("ë°”ëŒ ì¶”ì ìì˜ ê²½ê°‘", 150, 1, E_Type::Equipment),
+        new Item("ìˆ²ê¸¸ ê²¬ìŠµìƒì˜ íŠœë‹‰", 250, 1, E_Type::Equipment),
+        new Item("ë¯¼ì²©í•œ í™œì¡ì´ì˜ ê°‘ì£¼", 350, 1, E_Type::Equipment),
 
-        // ¹æ¾î±¸ (¸¶¹ı»ç)
-        new Item("³°Àº ¸¶¹ı»çÀÇ ·Îºê", 50, 1, E_Type::Equipment),
-        new Item("ÃÊº¸ ¸¶µµ»çÀÇ ¸ÁÅä", 100, 1, E_Type::Equipment),
-        new Item("º°ºû °ß½À»ıÀÇ ·Îºê", 150, 1, E_Type::Equipment),
-        new Item("¸¶·ÂÀÇ º°ºû ·Îºê", 250, 1, E_Type::Equipment),
-        new Item("ÇöÀÚÀÇ ·Îºê", 350, 1, E_Type::Equipment),
+        // ë°©ì–´êµ¬ (ë§ˆë²•ì‚¬)
+        new Item("ë‚¡ì€ ë§ˆë²•ì‚¬ì˜ ë¡œë¸Œ", 50, 1, E_Type::Equipment),
+        new Item("ì´ˆë³´ ë§ˆë„ì‚¬ì˜ ë§í† ", 100, 1, E_Type::Equipment),
+        new Item("ë³„ë¹› ê²¬ìŠµìƒì˜ ë¡œë¸Œ", 150, 1, E_Type::Equipment),
+        new Item("ë§ˆë ¥ì˜ ë³„ë¹› ë¡œë¸Œ", 250, 1, E_Type::Equipment),
+        new Item("í˜„ìì˜ ë¡œë¸Œ", 350, 1, E_Type::Equipment),
 
-        // ¹æ¾î±¸ (µµÀû)
-        new Item("Çã¸§ÇÑ ±×¸²ÀÚ ¿¬½Àº¹", 50, 1, E_Type::Equipment),
-        new Item("ÃÊº¸ µµÀûÀÇ °¡Á×Á¶³¢", 100, 1, E_Type::Equipment),
-        new Item("Àº½ÅÀÚÀÇ °æ·® Æ©´Ğ", 150, 1, E_Type::Equipment),
-        new Item("¹ãÀÇ ¹ß°ÉÀ½ Æ©´Ğ", 250, 1, E_Type::Equipment),
-        new Item("¹«ÇüÀÇ ÀáÀÔº¹", 350, 1, E_Type::Equipment),
+        // ë°©ì–´êµ¬ (ë„ì )
+        new Item("í—ˆë¦„í•œ ê·¸ë¦¼ì ì—°ìŠµë³µ", 50, 1, E_Type::Equipment),
+        new Item("ì´ˆë³´ ë„ì ì˜ ê°€ì£½ì¡°ë¼", 100, 1, E_Type::Equipment),
+        new Item("ì€ì‹ ìì˜ ê²½ëŸ‰ íŠœë‹‰", 150, 1, E_Type::Equipment),
+        new Item("ë°¤ì˜ ë°œê±¸ìŒ íŠœë‹‰", 250, 1, E_Type::Equipment),
+        new Item("ë¬´í˜•ì˜ ì ì…ë³µ", 350, 1, E_Type::Equipment),
 
-        // ¼Òºñ ¾ÆÀÌÅÛ
-        new Item("¼ÒÇü HP Æ÷¼Ç", 10, 10, E_Type::Consumable),
-        new Item("ÁßÇü HP Æ÷¼Ç", 30, 10, E_Type::Consumable),
-        new Item("´ëÇü HP Æ÷¼Ç", 60, 10, E_Type::Consumable),
-        new Item("¼ÒÇü MP Æ÷¼Ç", 10, 10, E_Type::Consumable),
-        new Item("ÁßÇü MP Æ÷¼Ç", 30, 10, E_Type::Consumable),
-        new Item("´ëÇü MP Æ÷¼Ç", 60, 10, E_Type::Consumable),
+        // ì†Œë¹„ ì•„ì´í…œ
+        new Item("ì†Œí˜• HP í¬ì…˜", 10, 10, E_Type::Consumable),
+        new Item("ì¤‘í˜• HP í¬ì…˜", 30, 10, E_Type::Consumable),
+        new Item("ëŒ€í˜• HP í¬ì…˜", 60, 10, E_Type::Consumable),
+        new Item("ì†Œí˜• MP í¬ì…˜", 10, 10, E_Type::Consumable),
+        new Item("ì¤‘í˜• MP í¬ì…˜", 30, 10, E_Type::Consumable),
+        new Item("ëŒ€í˜• MP í¬ì…˜", 60, 10, E_Type::Consumable),
 
-        // ¾×¼¼¼­¸®
-        new Item("Ã¶ ¸ñ°ÉÀÌ", 60, 1, E_Type::Accessory),
-        new Item("Àº ¹İÁö", 120, 1, E_Type::Accessory),
-		new Item("¸¶¹ı»çÀÇ ºÎÀû", 250, 1, E_Type::Accessory),
-		new Item("µµÀûÀÇ ±Í°ÉÀÌ", 250, 1, E_Type::Accessory), 
-		new Item("±Ã¼öÀÇ ÆÈÂî", 250, 1, E_Type::Accessory),  
-		new Item("Àü»çÀÇ ÈÖÀå", 250, 1, E_Type::Accessory),
-        new Item("È²±İ ¿Õ°ü", 300, 1, E_Type::Accessory),
+        // ì•¡ì„¸ì„œë¦¬
+        new Item("ì²  ëª©ê±¸ì´", 60, 1, E_Type::Accessory),
+        new Item("ì€ ë°˜ì§€", 120, 1, E_Type::Accessory),
+		new Item("ë§ˆë²•ì‚¬ì˜ ë¶€ì ", 250, 1, E_Type::Accessory),
+		new Item("ë„ì ì˜ ê·€ê±¸ì´", 250, 1, E_Type::Accessory), 
+		new Item("ê¶ìˆ˜ì˜ íŒ”ì°Œ", 250, 1, E_Type::Accessory),  
+		new Item("ì „ì‚¬ì˜ íœ˜ì¥", 250, 1, E_Type::Accessory),
+        new Item("í™©ê¸ˆ ì™•ê´€", 300, 1, E_Type::Accessory),
 
 
-        // Àç·á
-        new Item("³ª¹« Á¶°¢", 5, 20, E_Type::Material),
-        new Item("Ã¶ Á¶°¢", 15, 15, E_Type::Material),
-        new Item("°­Ã¶ Á¶°¢", 25, 10, E_Type::Material),
-        new Item("¹Ì½º¸± Á¶°¢", 50, 5, E_Type::Material)
+        // ì¬ë£Œ
+        new Item("ë‚˜ë¬´ ì¡°ê°", 5, 20, E_Type::Material),
+        new Item("ì²  ì¡°ê°", 15, 15, E_Type::Material),
+        new Item("ê°•ì²  ì¡°ê°", 25, 10, E_Type::Material),
+        new Item("ë¯¸ìŠ¤ë¦´ ì¡°ê°", 50, 5, E_Type::Material)
     };
 
     availableItems = itemPool;
 }
 
-    // staticÀ¸·Î ¼±¾ğÇØ¼­ seed¸¦ ÇÑ ¹ø¸¸ »ı¼º
+    // staticìœ¼ë¡œ ì„ ì–¸í•´ì„œ seedë¥¼ í•œ ë²ˆë§Œ ìƒì„±
     static std::mt19937 g(static_cast<unsigned>(
         std::chrono::system_clock::now().time_since_epoch().count()));
     std::shuffle(itemPool.begin(), itemPool.end(), g);
@@ -122,7 +122,7 @@ Shop::~Shop()
 void Shop::buyItem(int index, Inventory& inven)
 {
     if (index < 0 || index >= availableItems.size()) {
-        std::cout << "[NPC]: ±×·± ¹°°ÇÀº ¾ø³×.\n";
+        std::cout << "[NPC]: ê·¸ëŸ° ë¬¼ê±´ì€ ì—†ë„¤.\n";
         return;
     }
 
@@ -143,10 +143,10 @@ void Shop::buyItem(int index, Inventory& inven)
             availableItems.erase(availableItems.begin() + index);
         }
 
-        std::cout << "[NPC]: " << boughtName << "(ÀÌ)¶ó¡¦ ÁÁÀº ¼±ÅÃÀÌ±º!\n";
+        std::cout << "[NPC]: " << boughtName << "(ì´)ë¼â€¦ ì¢‹ì€ ì„ íƒì´êµ°!\n";
     }
     else {
-        std::cout << "[NPC]: °ñµå°¡ ºÎÁ·ÇÏ³×. ´ÙÀ½¿¡ ´Ù½Ã ¿À°Ô³ª.\n";
+        std::cout << "[NPC]: ê³¨ë“œê°€ ë¶€ì¡±í•˜ë„¤. ë‹¤ìŒì— ë‹¤ì‹œ ì˜¤ê²Œë‚˜.\n";
     }
 }
 
@@ -155,7 +155,7 @@ void Shop::sellItem(int index, Inventory& inven)
     Item* item = inven.findItem(index);
 
     if (!item) {
-        std::cout << "[NPC]: ±×·± ¾ÆÀÌÅÛÀº ¾ø³×.\n";
+        std::cout << "[NPC]: ê·¸ëŸ° ì•„ì´í…œì€ ì—†ë„¤.\n";
         return;
     }
 
@@ -184,7 +184,7 @@ void Shop::sellItem(int index, Inventory& inven)
         item = nullptr;
     }
 
-    std::cout << "[NPC]: " << itemName << "À» " << sellPrice << "°ñµå¿¡ »ç°Ú³×.\n";
+    std::cout << "[NPC]: " << itemName << "ì„ " << sellPrice << "ê³¨ë“œì— ì‚¬ê² ë„¤.\n";
 }
 
 void Shop::showItem(int index)
@@ -193,13 +193,13 @@ void Shop::showItem(int index)
         availableItems[index]->printInfo();
     }
     else {
-        std::cout << "Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛÀÔ´Ï´Ù.\n";
+        std::cout << "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œì…ë‹ˆë‹¤.\n";
     }
 }
 
 void Shop::displayItems()
 {
-    std::cout << "[NPC]: ÀÌ°ÍÀÌ ¿À´ÃÀÇ »óÇ°ÀÌ³×! ÃµÃµÈ÷ º¸°Ô³ª.\n\n";
+    std::cout << "[NPC]: ì´ê²ƒì´ ì˜¤ëŠ˜ì˜ ìƒí’ˆì´ë„¤! ì²œì²œíˆ ë³´ê²Œë‚˜.\n\n";
     for (int i = 0; i < availableItems.size(); ++i) {
         std::cout << i << ": ";
         availableItems[i]->printInfo();
@@ -213,7 +213,7 @@ std::string Shop::getItemName(int index) const
     if (index >= 0 && index < availableItems.size()) {
         return availableItems[index]->getName();
     }
-    return "(¾ø´Â ¾ÆÀÌÅÛ)";
+    return "(ì—†ëŠ” ì•„ì´í…œ)";
 }
 
 int Shop::getItemCount() const

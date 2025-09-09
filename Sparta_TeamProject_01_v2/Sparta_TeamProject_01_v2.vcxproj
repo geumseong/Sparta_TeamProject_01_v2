@@ -154,6 +154,7 @@
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="Warrior.h" />
+    <ClInclude Include="Workshop.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
