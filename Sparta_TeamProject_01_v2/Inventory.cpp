@@ -42,7 +42,7 @@ void Inventory::printItemlist()
 {
 	for (int i = 0; i < this->itemList.size(); i++)
 	{
-		cout << i << ": ";
+		cout << i + 1 << ": ";
 		this->itemList[i]->printInfo();
 	}
 }

@@ -1,9 +1,11 @@
 ﻿#include <iostream>
 #include <unordered_map>
+#include <random>
+#include <algorithm>
 #include "Shop.h"
 #include "ItemDB.h"
-#include "Inventory.h"
 #include "Item.h"
+#include "Inventory.h"
 
 Shop::Shop() {
     availableItems.clear();
@@ -40,8 +42,25 @@ void Shop::openShop(ItemDB& db, const std::string& category)
 
     availableItems.clear();
     int numItems = 5;
-    for (int i = 0; i < numItems && i < static_cast<int>(itemPool.size()); ++i) {
-        availableItems.push_back(std::move(itemPool[i]));
+
+    if (category == u8"포션" || category == u8"재료") {
+        // 포션/재료는 순서 유지
+        for (int i = 0; i < numItems && i < static_cast<int>(itemPool.size()); ++i) {
+            availableItems.push_back(move(itemPool[i])); // 복사
+        }
+    }
+    else {
+        // 직업 상점은 랜덤 선택
+        std::random_device rd;
+        std::mt19937 g(rd());
+
+        std::vector<size_t> indices(itemPool.size());
+        std::iota(indices.begin(), indices.end(), 0);
+        std::shuffle(indices.begin(), indices.end(), g);
+
+        for (size_t i = 0; i < static_cast<size_t>(numItems) && i < indices.size(); ++i) {
+            availableItems.push_back(move(move(itemPool[indices[i]]))); // 복사
+        }
     }
 
     std::cout << u8"[NPC]: " << category << u8" 상점을 열었네!\n";
@@ -64,54 +83,56 @@ void Shop::buyItem(int index, Inventory& inven)
     inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType()));
     inven.setGold(inven.getGold() - item.getPrice());
 
-    if (item.getCount() > 1) item.setCount(item.getCount() - 1);
-    else availableItems.erase(availableItems.begin() + index);
-
     std::cout << u8"[NPC]: " << item.getName() << u8"(이)라… 좋은 선택이군!\n";
+
+    if (item.getCount() > 1)  
+        item.setCount(item.getCount() - 1); 
+    else
+        availableItems.erase(availableItems.begin() + index);
+
+   
 }
 
 void Shop::sellItem(int index, Inventory& inven)
 {
     Item* item = inven.findItem(index);
-    if (!item)
-    {
+    if (!item) {
         std::cout << u8"[NPC]: 그런 아이템은 없네.\n";
         return;
     }
 
     std::string itemName = item->getName();
     int itemPrice = item->getPrice();
-
     int sellPrice = static_cast<int>(itemPrice * 0.6);
+
     inven.setGold(inven.getGold() + sellPrice);
 
     bool found = false;
-    for (auto& shopItem : availableItems)
-    {
-        if (shopItem.getName() == itemName)
-        {
+    for (auto& shopItem : availableItems) {
+        if (shopItem.getName() == itemName) {
             shopItem.setCount(shopItem.getCount() + 1);
             found = true;
             break;
         }
     }
-    if (!found)
-    {
-        availableItems.push_back(Item(itemName, itemPrice, 1, item->getType()));
+
+    if (!found) {
+        availableItems.push_back(move(Item(itemName, itemPrice, 1, item->getType())));
     }
-
-    if (item->getCount() > 1) item->setCount(item->getCount() - 1);
-    else inven.removeItem(index);
-
     std::cout << u8"[NPC]: " << itemName << u8"을 " << sellPrice << u8"G 에 사겠네.\n";
-}
+    if (item->getCount() > 1)
+        item->setCount(item->getCount() - 1);
+    else
+        inven.removeItem(index);
 
+   
+}
 
 void Shop::displayItems()
 {
     std::cout << u8"[NPC]: 이것이 오늘의 상품이네! 천천히 보게나.\n\n";
     for (int i = 0; i < static_cast<int>(availableItems.size()); ++i) {
-        std::cout << (i + 1) << ": ";
+        std::cout << (i+1) << ": ";
         availableItems[i].printInfo();
         std::cout << "\n";
     }
