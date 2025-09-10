@@ -1,8 +1,9 @@
 ﻿#include <iostream>
+#include <random>
+#include <algorithm>
 #include <unordered_map>
 #include "Shop.h"
 #include "ItemDB.h"
-#include "Inventory.h"
 #include "Item.h"
 
 Shop::Shop() {
@@ -12,6 +13,7 @@ Shop::Shop() {
 Shop::~Shop() {
     availableItems.clear();
 }
+
 
 void Shop::openShop(ItemDB& db, const std::string& category)
 {
@@ -40,36 +42,31 @@ void Shop::openShop(ItemDB& db, const std::string& category)
 
     availableItems.clear();
     int numItems = 5;
-    for (int i = 0; i < numItems && i < static_cast<int>(itemPool.size()); ++i) {
-        availableItems.push_back(std::move(itemPool[i]));
+
+    if (category == u8"포션" || category == u8"재료") {
+        // 포션/재료 순서 유지
+        for (int i = 0; i < numItems && i < static_cast<int>(itemPool.size()); ++i) {
+            availableItems.push_back(move(itemPool[i]));
+        }
+    }
+    else {
+        // 직업 상점 랜덤 선택
+        std::random_device rd;
+        std::mt19937 g(rd());
+
+        std::vector<size_t> indices(itemPool.size());
+        std::iota(indices.begin(), indices.end(), 0);
+        std::shuffle(indices.begin(), indices.end(), g);
+
+        
+        for (size_t i = 0; i < static_cast<size_t>(numItems) && i < indices.size(); ++i) {
+            availableItems.push_back(move(itemPool[indices[i]]));
+        }
     }
 
     std::cout << u8"[NPC]: " << category << u8" 상점을 열었네!\n";
     displayItems();
 }
-
-void Shop::buyItem(int index, Inventory& inven)
-{
-    if (index < 0 || index >= static_cast<int>(availableItems.size())) {
-        std::cout << u8"[NPC]: 그런 물건은 없네.\n";
-        return;
-    }
-
-    Item& item = availableItems[index];
-    if (inven.getGold() < item.getPrice()) {
-        std::cout << u8"[NPC]: 골드가 부족하네. 다음에 다시 오게나.\n";
-        return;
-    }
-
-    inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType()));
-    inven.setGold(inven.getGold() - item.getPrice());
-
-    if (item.getCount() > 1) item.setCount(item.getCount() - 1);
-    else availableItems.erase(availableItems.begin() + index);
-
-    std::cout << u8"[NPC]: " << item.getName() << u8"(이)라… 좋은 선택이군!\n";
-}
-
 void Shop::sellItem(int index, Inventory& inven)
 {
     Item* item = inven.findItem(index);
