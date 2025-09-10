@@ -53,42 +53,37 @@ int main()
     Game->inven->addItem(move(Item(u8"고블린의 부러진 뼈", 100, 1, E_Type::Material)));
     Game->inven->addItem(move(Item(u8"트롤의 재생하는 심장", 100, 1, E_Type::Material)));
     //goblin 000 troll 002
-    workshop.printrecipe(db, "weapon");
+    //workshop.printrecipe(db, "weapon");
     workshop.CraftItem(db, *Game->inven, "weapon", 0 );
     workshop.CraftItem(db, *Game->inven, "weapon", 1);
 
 
-    int x = 1, y = 1, w = 60, h = 12;
-    boxPosition box_ETC = { 40, 1, 60, 28 };
-    boxPosition box_status = { 1, 1, 39, 8 };
-    boxPosition box_log = { 1, 9, 39, 12 };
-    boxPosition box_choose = { 1, 21, 39, 8 };
-
-    string input;
 
 
-    RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]() { // 오른쪽
-        // c.displayStatus(); // 기존 코드 그대로 호출
+    //최초 레이아웃 생성
+    RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+    {
         Game->inven->printItemlist();
-        });
+    });
 
-    RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() { // 왼쪽 1
-        // c.displayStatus(); // 기존 코드 그대로 호출
+    RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]()  // 스탯 창 생성
+    { 
 
-        });
+    });
 
-    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() {// 왼쪽 2
-        // c.displayStatus(); // 기존 코드 그대로 호출
+    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()  // 로그 창 생성
+    {
         Game->outputLog(u8"** 캐릭터 이름을 정하십시오.");
-        
-        });
-    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() {// 왼쪽 3
+    });
 
-        });
+    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 창 생성
+    {
 
+    });
+    //최초 레이아웃 생성
     
     //setCursorPosition( x, y);
-
+    string input;
     setCursorPosition(2, 27);
     Game->inputLog(input);
 
@@ -97,25 +92,10 @@ int main()
     Game->character_ = Character_;
 
 
-
-
-    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() {// 왼쪽 2
-        // c.displayStatus(); // 기존 코드 그대로 호출
+    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() // 로그 출력
+    {
         Game->outputLog(u8"캐릭터가 생성되었습니다.");
-
-        });
-
-
-
-
-
-
-
-
-
-
-    //cout << "===================================" << endl;
-
+    });
 
 
     Game->updateState(GameManager::Battle);
@@ -323,14 +303,14 @@ int main()
             Game->roundTracker++;
             currentMonster = Game->generateMonster();
 
-            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() {// 왼쪽 2
-                // c.displayStatus(); // 기존 코드 그대로 호출
+            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() // 로그 출력
+            {
                 Game->outputLog(
                     u8"던전에 입장했습니다. \n"
                     u8"적 " + currentMonster->getName() + u8"와 조우!"
                 );
 
-                });
+            });
 
 
 

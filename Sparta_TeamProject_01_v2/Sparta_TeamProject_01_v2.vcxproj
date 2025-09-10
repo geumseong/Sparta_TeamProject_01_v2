@@ -127,6 +127,7 @@
     <ClCompile Include="AsciiArt.h" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Dragon.cpp" />
+    <ClCompile Include="drawtest.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Imp.cpp" />
