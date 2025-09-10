@@ -176,6 +176,7 @@ sfml-audio-d.lib</AdditionalDependencies>
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Succubus.cpp" />
     <ClCompile Include="Thief.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Troll.cpp" />
     <ClCompile Include="Warrior.cpp" />
     <ClCompile Include="WorkShop.cpp" />
@@ -200,6 +201,7 @@ sfml-audio-d.lib</AdditionalDependencies>
     <ClInclude Include="Succubus.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="Troll.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="Warrior.h" />
     <ClInclude Include="Workshop.h" />
   </ItemGroup>

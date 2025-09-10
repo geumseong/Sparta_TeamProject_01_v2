@@ -6,11 +6,26 @@
 #include "GameManager.h"
 
 #include "Magician.h"
+#include "UIManager.h"
 using namespace std;
+
+
 
 int main()
 {
+    // ... (EnableVirtualTerminalProcessing() 등 초기 설정) ...
 
+    UIManager uiManager; // UIManager 객체 생성
+
+    // 타이틀 화면 호출
+    uiManager.showTitleScreen();
+
+    // 타이틀이 끝나면 화면을 지우고 메인 게임 로직 시작
+    system("cls");
+    std::cout << "게임의 다음 단계가 시작됩니다..." << std::endl;
+
+    // ... (GameManager 생성 및 게임 시작) ...
+    
     GameManager* Game = GameManager::getInstance();
     Character* Character_;
     Monster* currentMonster;
