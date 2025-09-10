@@ -12,11 +12,6 @@
 
 #include "drawtest.h"
 
-boxPosition box_ETC = { 40, 1, 60, 28 };
-boxPosition box_status = { 1, 1, 39, 8 };
-boxPosition box_log = { 1, 9, 39, 12 };
-boxPosition box_choose = { 1, 21, 39, 8 };
-
 class Orc;
 
 // Instances
@@ -24,7 +19,7 @@ GameManager* GameManager::instance_ = nullptr;
 
 GameManager::GameManager()
 {
-    outputLog(u8"--GameManager가 생성되었습니다--");
+    //outputLog(u8"--GameManager가 생성되었습니다--");
     this->currentState = Start;
 }
 
@@ -136,7 +131,7 @@ Monster* GameManager::generateMonster()
 
 Monster* GameManager::generateBossMonster(int lvlModif)
 {
-    outputLog(u8"드래곤 몬스터 생성!");
+    //outputLog(u8"드래곤 몬스터 생성!");
     //return new Dragon(GameManager::character_->getLevel() + lvlModif);
     return new Goblin(u8"재벌", 1);
 }
@@ -147,27 +142,24 @@ void GameManager::battle(Character* player, Monster* currentMonster)
     {
         int beforeHealth = player->getHealth();
 
-        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() 
-            {// 왼쪽 2
-            // c.displayStatus(); // 기존 코드 그대로 호출
-                instance_->outputLog(currentMonster->getName() + u8"의 선제공격!");
-
-
-                player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
-                instance_->outputLog(
-                    u8"현재 플레이어의 HP: "
-                    + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
-                    + " ===> "
-                    + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
-                );
-
-            });
+        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() // 로그 출력
+        {// 왼쪽 2
+            instance_->outputLog(currentMonster->getName() + u8"의 선제공격!");
+            player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
+            instance_->outputLog(
+                u8"현재 플레이어의 HP: "
+                + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
+                + " ===> "
+                + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
+            );
+        });
         
 
-        RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() { // 왼쪽 1
-            // c.displayStatus(); // 기존 코드 그대로 호출
-                player->displayStatus();
-            });
+        RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() // 스탯 출력
+        { // 왼쪽 1
+        // c.displayStatus(); // 기존 코드 그대로 호출
+            player->displayStatus();
+        });
 
 
         if (player->getHealth() <= 0)
@@ -184,7 +176,9 @@ void GameManager::battle(Character* player, Monster* currentMonster)
 
         });
         
-        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() {// 왼쪽 3
+        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]()  // 선택지 출력
+        {// 왼쪽 3
+
             instance_->outputLog(
                 u8"\n"
                 u8"1. 공격\n"
@@ -194,7 +188,7 @@ void GameManager::battle(Character* player, Monster* currentMonster)
         });
 
 
-        setCursorPosition(2, 27);
+        setCursorPosition(2, 27);// 커서위치 초기화
         string input;
         instance_->inputLog(input);
         if (input == "1" || input == "공격")
@@ -203,26 +197,23 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             if (!currentMonster->isDead())      //몬스터가 죽지 않았다면 몬스터가 공격
             {
                 int beforeHealth = player->getHealth();
-                player->takeCharacterDamage(currentMonster->performAction()); // 몬스터가 공격
 
-                RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
-                    {// 왼쪽 2
-                        player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
-                        instance_->outputLog(
-                            u8"현재 플레이어의 HP: "
-                            + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
-                            + " ===> "
-                            + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
-                        );
-
-                    });
+                RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                {// 왼쪽 2
+                    player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
+                    instance_->outputLog(
+                        u8"현재 플레이어의 HP: "
+                        + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
+                        + " ===> "
+                        + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
+                    );
+                });
 
 
-                RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() 
-                    { // 왼쪽 1
-
-                        player->displayStatus();
-                    });
+                RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() // 스탯 출력
+                { // 왼쪽 1
+                    player->displayStatus();
+                });
 
                 if (player->getHealth() <= 0)
                 {
@@ -235,10 +226,10 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 if (roundTracker == GameManager::victoryRound)
                 {
 
-                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
-                        {// 왼쪽 2
-                            outputLog(u8"** Victory!!!!");
-                        });
+                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() // 스탯 출력
+                    {// 왼쪽 2
+                        outputLog(u8"** Victory!!!!");
+                    });
 
                     instance_->updateState(GameManager::End);
                     //break;
@@ -292,7 +283,12 @@ void GameManager::battle(Character* player, Monster* currentMonster)
         }
         else
         {
-            instance_->outputLog(u8"잘못된 입력입니다.");
+            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+            {
+                instance_->outputLog(u8"잘못된 입력입니다.");
+            });
+
+
         }
     }
 }

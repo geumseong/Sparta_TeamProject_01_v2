@@ -1,6 +1,7 @@
 ﻿#include "Character.h"
 #include <iostream>
 
+
 Character::Character()
 {
 	jobName = "Beginner";

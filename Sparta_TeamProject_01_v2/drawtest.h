@@ -113,3 +113,9 @@ struct boxPosition
     int width;
     int height;
 };
+
+
+extern boxPosition box_ETC;
+extern boxPosition box_status;
+extern boxPosition box_log;
+extern boxPosition box_choose;
