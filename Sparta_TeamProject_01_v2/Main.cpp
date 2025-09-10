@@ -9,6 +9,7 @@
 #include "Inventory.h"
 #include "itemDB.h"
 #include <Windows.h>
+#include "UIManager.h"
 
 
 #include "Workshop.h"
@@ -18,6 +19,19 @@ int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
+    
+    // ... (EnableVirtualTerminalProcessing() 등 초기 설정) ...
+
+    UIManager uiManager; // UIManager 객체 생성
+
+    // 타이틀 화면 호출
+    uiManager.showTitleScreen();
+
+    // 타이틀이 끝나면 화면을 지우고 메인 게임 로직 시작
+    system("cls");
+    std::cout << "게임의 다음 단계가 시작됩니다..." << std::endl;
+
+    // ... (GameManager 생성 및 게임 시작) ...
 
     GameManager* Game = GameManager::getInstance();
     Character* Character_;
@@ -264,6 +278,38 @@ int main()
             Game->outputLog(
                 u8"제작소에 입장했습니다. 다음 행동을 선택하세요."
             );
+            workshop.Open(db, *Game->inven);
+            while(true)
+            {
+                Game->inputLog(input);
+                if (input == "1" || input == "포션 제작")
+                {
+                    while (true)
+                    {
+                        workshop.printrecipe(db, "alchemy");
+                    }
+                }
+                else if (input == "2" || input == "장비 제작")
+                {
+
+                }
+                else if (input == "3" || input == "무기 제작")
+                {
+
+                }
+                else if (input == "4" || input == "액세서리 제작")
+                {
+
+                }
+                else if (input == "5" || input == "나가기")
+                {
+
+                }
+                else
+                {
+                    Game->outputLog(u8"잘못된 입력입니다.");
+                }
+            }
             break;
 
         case GameManager::Battle:   //Game 전투/싸움 State
