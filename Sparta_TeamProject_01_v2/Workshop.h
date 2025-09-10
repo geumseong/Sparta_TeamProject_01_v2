@@ -15,7 +15,7 @@ class WorkShop {
 public:
     void Open(const ItemDB& db, Inventory& inv);
     bool CraftItem(const ItemDB& db, Inventory& inv, string tableName, int index);
-    void printrecipe(const ItemDB& db, string tableName);
+    int printrecipe(const ItemDB& db, string tableName);
 private:
 
     void CraftEquipment(Inventory& inv, const ItemDB& db);
