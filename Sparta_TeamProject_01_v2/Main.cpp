@@ -5,13 +5,38 @@
 #include "Character.h"
 #include "GameManager.h"
 #include "Magician.h"
+
+#include "Inventory.h"
+#include "itemDB.h"
 using namespace std;
 
 int main()
 {
+
     GameManager* Game = GameManager::getInstance();
     Character* Character_;
     Monster* currentMonster;
+
+
+    Inventory inven(100, 100);
+    ItemDB db;
+
+    std::string err;
+    if (!db.loadFromFile("../itemDB/itemDB.json", &err)) {
+        std::cerr << err << "\n";
+        return 1;
+    }//db 로딩
+
+    vector<Item> test = db.getShopTable("shop_potions"); //shop_potions로딩
+
+    for (auto& item : test)
+    {
+        inven.addItem(move(item));
+    }
+    inven.printItemlist();
+
+
+
     string input;
     Game->outputLog("** 캐릭터 이름을 정하십시오.");
     Game->inputLog(input);
