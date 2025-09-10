@@ -1,18 +1,18 @@
-#pragma once
-#include "Monster.h"
-#include <string>
-
-class Item;
-
-class Troll : public Monster
-{
-private:
-    std::string type;
-    int regenerationAmount; // ÅÏ´ç Ã¼·Â Àç»ı·®
-
-    int slamAttack();
-
-public:
-    Troll(const std::string& type, int level);
-    int performAction() override;
-};
+ï»¿//#pragma once
+//#include "Monster.h"
+//#include <string>
+//
+//class Item;
+//
+//class Troll : public Monster
+//{
+//private:
+//    std::string type;
+//    int regenerationAmount; // í„´ë‹¹ ì²´ë ¥ ì¬ìƒëŸ‰
+//
+//    int slamAttack();
+//
+//public:
+//    Troll(const std::string& type, int level);
+//    int performAction() override;
+//};

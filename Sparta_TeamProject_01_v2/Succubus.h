@@ -1,19 +1,19 @@
-#pragma once
-#include "Monster.h"
-#include <string>
-
-class Item;
-
-class Succubus : public Monster
-{
-private:
-    std::string type;
-    bool isEnraged; // 2ÆäÀÌÁî »óÅÂ º¯¼ö
-
-    int charmAttack();
-    int lifeDrainAttack();
-
-public:
-    Succubus(const std::string& type, int level);
-    int performAction() override;
-};
+ï»¿//#pragma once
+//#include "Monster.h"
+//#include <string>
+//
+//class Item;
+//
+//class Succubus : public Monster
+//{
+//private:
+//    std::string type;
+//    bool isEnraged; // 2í˜ì´ì¦ˆ ìƒíƒœ ë³€ìˆ˜
+//
+//    int charmAttack();
+//    int lifeDrainAttack();
+//
+//public:
+//    Succubus(const std::string& type, int level);
+//    int performAction() override;
+//};

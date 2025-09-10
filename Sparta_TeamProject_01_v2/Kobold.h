@@ -1,19 +1,19 @@
-#pragma once
-#include "Monster.h"
-#include <string>
-
-class Item;
-
-class Kobold : public Monster
-{
-private:
-    std::string type;
-    int turnCount;
-
-    int normalAttack();
-    int trapAttack(); // ÇÔÁ¤²ÛÀÇ ±â½À °ø°İ
-
-public:
-    Kobold(const std::string& type, int level);
-    int performAction() override;
-};
+ï»¿//#pragma once
+//#include "Monster.h"
+//#include <string>
+//
+//class Item;
+//
+//class Kobold : public Monster
+//{
+//private:
+//    std::string type;
+//    int turnCount;
+//
+//    int normalAttack();
+//    int trapAttack(); // í•¨ì •ê¾¼ì˜ ê¸°ìŠµ ê³µê²©
+//
+//public:
+//    Kobold(const std::string& type, int level);
+//    int performAction() override;
+//};

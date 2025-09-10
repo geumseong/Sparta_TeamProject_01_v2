@@ -10,10 +10,7 @@
 #include "itemDB.h"
 #include <Windows.h>
 #include "UIManager.h"
-
-
 #include "Workshop.h"
-#include "UIManager.h"
 using namespace std;
 
 

@@ -1,24 +1,24 @@
-#pragma once
-#include "Monster.h"
-#include <string>
-
-// Àü¹æ ¼±¾ğ
-class Item;
-
-class Slime : public Monster
-{
-private:
-    std::string type;
-    int turnCount;
-
-    // ½½¶óÀÓÀÇ Çàµ¿ ÆĞÅÏ
-    int normalAttack();
-    int hardenDefense(); // ¸öÀ» ±»Çô ¹æ¾îÇÏ´Â Çàµ¿
-
-public:
-    // »ı¼ºÀÚ
-    Slime(const std::string& type, int level);
-
-    // ¿À¹ö¶óÀÌµå
-    int performAction() override;
-};
+ï»¿//#pragma once
+//#include "Monster.h"
+//#include <string>
+//
+//// ì „ë°© ì„ ì–¸
+//class Item;
+//
+//class Slime : public Monster
+//{
+//private:
+//    std::string type;
+//    int turnCount;
+//
+//    // ìŠ¬ë¼ì„ì˜ í–‰ë™ íŒ¨í„´
+//    int normalAttack();
+//    int hardenDefense(); // ëª¸ì„ êµ³í˜€ ë°©ì–´í•˜ëŠ” í–‰ë™
+//
+//public:
+//    // ìƒì„±ì
+//    Slime(const std::string& type, int level);
+//
+//    // ì˜¤ë²„ë¼ì´ë“œ
+//    int performAction() override;
+//};
