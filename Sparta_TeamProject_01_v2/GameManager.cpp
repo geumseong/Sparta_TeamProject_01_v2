@@ -191,13 +191,13 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 }
                 else
                 {
-                    //// 보상 지급
-                    //for (int i = 0; i < currentMonster->getDropItems()->size(); i++)
-                    //{
-                    //    //vector<Item> a = *(currentMonster->getDropItems());
-                    //    //instance_->inven->addItem(move(Item(a[i].getName(), a[i].getPrice(), 1, E_Type::Material)));
-                    //    //Instance_->inven->addItem(move(Item(u8"슬라임의 끈적한 젤리", 100, 1, E_Type::Material)));
-                    //}
+                    // 보상 지급
+                    for (int i = 0; i < currentMonster->getDropItemsSize(); i++)
+                    {
+                        vector<Item> a = currentMonster->getDropItems();
+                        instance_->inven->addItem(move(Item(a[i].getName(), a[i].getPrice(), 1, E_Type::Material)));
+                        instance_->inven->addItem(move(Item(u8"슬라임의 끈적한 젤리", 100, 1, E_Type::Material)));
+                    }
                     instance_->updateState(GameManager::Shopping);
                     //break;
                 }
