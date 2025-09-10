@@ -33,7 +33,7 @@ public:
     ~GameManager() {}
 
     Character* character_;
-    Inventory* inven;
+    Inventory* inven = nullptr;
     //Inventory* getInventory() { return inven; }
 
     enum States { Start, Battle, Shopping, Resting, Crafting, End };
@@ -42,7 +42,7 @@ public:
     int victoryRound = 10;
     int bossRound = 5;
     int eventRound = 3;
-
+    //
     vector<string> log;
     void outputLog(string navDialogue);
     void inputLog(string& input);

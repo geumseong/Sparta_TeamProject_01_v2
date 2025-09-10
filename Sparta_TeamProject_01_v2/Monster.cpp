@@ -1,8 +1,8 @@
-// Monster.cpp
+ï»¿// Monster.cpp
 #include "Monster.h"
 
-// ¸ó½ºÅÍ Å¬·¡½ºÀÇ »ı¼ºÀÚ ±¸Çö
+// ëª¬ìŠ¤í„° í´ë˜ìŠ¤ì˜ ìƒì„±ì êµ¬í˜„
 Monster::Monster(int level) : level(level), name(""), health(0), attack(0), attackSpeed(0), baseExp(0), baseGold(0)
 {
-    // »ı¼ºÀÚ ³»ºÎ¿¡¼­´Â Æ¯º°È÷ ÇÒ ÀÛ¾÷ÀÌ ¾øÀ½
-}
+    // ìƒì„±ì ë‚´ë¶€ì—ì„œëŠ” íŠ¹ë³„íˆ í•  ì‘ì—…ì´ ì—†ìŒ
+}//

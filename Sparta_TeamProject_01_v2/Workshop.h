@@ -8,7 +8,7 @@
 
 class Inventory;   
 class ItemDB;      
-
+//
 #include "Item.h"
 
 class WorkShop {

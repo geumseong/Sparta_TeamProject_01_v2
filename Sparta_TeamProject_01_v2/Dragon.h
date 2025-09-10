@@ -1,25 +1,25 @@
-// Dragon.h
-#pragma once
-#include "Monster.h"
-#include <string>
-
-class Item; // Àü¹æ ¼±¾ğ
-
-class Dragon : public Monster
-{
-private:
-    int turnCount; // ÅÏ ¼ö¸¦ ¼¼±â À§ÇÑ º¯¼ö
-    int fireBreathCooldown; // È­¿° ºê·¹½º ÄğÅ¸ÀÓÀ» °ü¸®ÇÏ´Â º¯¼ö
-
-    // µå·¡°ïÀÇ Çàµ¿ ÆĞÅÏÀ» Á¤ÀÇÇÏ´Â private ÇÔ¼ö
-    int normalAttack();
-    int fireBreathAttack();
-    bool isEnraged; // 2ÆäÀÌÁî ºĞ³ë »óÅÂ ¿©ºÎ
-
-public:
-    // »ı¼ºÀÚ: µå·¡°ïÀº Å¸ÀÔ ¾øÀÌ ·¹º§¸¸À¸·Î »ı¼º
-    Dragon(int level);
-
-    // ¿À¹ö¶óÀÌµå: µå·¡°ïÀÇ Çàµ¿ AI¸¦ °áÁ¤
-    int performAction() override;
-};
+ï»¿//// Dragon.h
+//#pragma once
+//#include "Monster.h"
+//#include <string>
+//
+//class Item; // ì „ë°© ì„ ì–¸
+//
+//class Dragon : public Monster
+//{
+//private:
+//    int turnCount; // í„´ ìˆ˜ë¥¼ ì„¸ê¸° ìœ„í•œ ë³€ìˆ˜
+//    int fireBreathCooldown; // í™”ì—¼ ë¸Œë ˆìŠ¤ ì¿¨íƒ€ì„ì„ ê´€ë¦¬í•˜ëŠ” ë³€ìˆ˜
+//
+//    // ë“œë˜ê³¤ì˜ í–‰ë™ íŒ¨í„´ì„ ì •ì˜í•˜ëŠ” private í•¨ìˆ˜
+//    int normalAttack();
+//    int fireBreathAttack();
+//    bool isEnraged; // 2í˜ì´ì¦ˆ ë¶„ë…¸ ìƒíƒœ ì—¬ë¶€
+//
+//public:
+//    // ìƒì„±ì: ë“œë˜ê³¤ì€ íƒ€ì… ì—†ì´ ë ˆë²¨ë§Œìœ¼ë¡œ ìƒì„±
+//    Dragon(int level);
+//
+//    // ì˜¤ë²„ë¼ì´ë“œ: ë“œë˜ê³¤ì˜ í–‰ë™ AIë¥¼ ê²°ì •
+//    int performAction() override;
+//};

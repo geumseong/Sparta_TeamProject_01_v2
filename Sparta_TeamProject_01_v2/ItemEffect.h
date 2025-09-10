@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <algorithm>
-
+//
 class Character;
 
 struct I_Effect

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Character.h"
 
 class Magician : public Character
@@ -12,3 +12,4 @@ public:
 	void levelUp() override;
 };
 
+//

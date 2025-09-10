@@ -17,7 +17,7 @@ GameManager* GameManager::instance_ = nullptr;
 
 GameManager::GameManager()
 {
-    outputLog("--GameManager가 생성되었습니다--");
+    outputLog(u8"--GameManager가 생성되었습니다--");
     this->currentState = Start;
 }
 
@@ -37,7 +37,7 @@ void GameManager::updateState(States stateName)
     }
 
     cout << "===================================" << endl;
-    string navDialogue = "[State 변경] → " + stateStr;
+    string navDialogue = u8"[State 변경] → " + stateStr;
     outputLog(navDialogue);
 
     this->currentState = stateName;
@@ -79,7 +79,7 @@ Monster* GameManager::generateMonster()
     }
     if (roundTracker % GameManager::bossRound == 0)
     {
-        outputLog("보스 몬스터 생성!!!");
+        outputLog(u8"보스 몬스터 생성!!!");
         generateBossMonster(lvlModifier);
     }
     else
@@ -88,39 +88,39 @@ Monster* GameManager::generateMonster()
         {
             int rd;
         case 1:
-            outputLog("오크 몬스터 생성!");
+            outputLog(u8"오크 몬스터 생성!");
             rd = generatorRandInt(3);
             switch (rd)
             {
             case 1:     // 일반 오크 생성
-                return new Orc("일반", GameManager::character_->getLevel() + lvlModifier);
+                return new Orc(u8"일반", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 2:     // 야만적인 오크 생성
-                return new Orc("야만적인", GameManager::character_->getLevel() + lvlModifier);
+                return new Orc(u8"야만적인", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 3:     // 광전사 오크 생성
-                return new Orc("광전사", GameManager::character_->getLevel() + lvlModifier);
+                return new Orc(u8"광전사", GameManager::character_->getLevel() + lvlModifier);
                 break;
             }
         case 2:
-            outputLog("고블린 몬스터 생성!");
+            outputLog(u8"고블린 몬스터 생성!");
             rd = generatorRandInt(4);
             switch (rd)
             {
             case 1:     // 일반 고블린 생성
-                return new Goblin("일반", GameManager::character_->getLevel() + lvlModifier);
+                return new Goblin(u8"일반", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 2:     // 겁쟁이 고블린 생성
-                return new Goblin("겁쟁이", GameManager::character_->getLevel() + lvlModifier);
+                return new Goblin(u8"겁쟁이", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 3:     // 건방진 고블린 생성
-                return new Goblin("건방진", GameManager::character_->getLevel() + lvlModifier);
+                return new Goblin(u8"건방진", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 4:     // 사나운 고블린 생성
-                return new Goblin("사나운", GameManager::character_->getLevel() + lvlModifier);
+                return new Goblin(u8"사나운", GameManager::character_->getLevel() + lvlModifier);
                 break;
             case 5:     // 재벌 고블린 생성
-                return new Goblin("재벌", GameManager::character_->getLevel() + lvlModifier);
+                return new Goblin(u8"재벌", GameManager::character_->getLevel() + lvlModifier);
                 break;
             }
         }
@@ -129,8 +129,9 @@ Monster* GameManager::generateMonster()
 
 Monster* GameManager::generateBossMonster(int lvlModif)
 {
-    outputLog("드래곤 몬스터 생성!");
-    return new Dragon(GameManager::character_->getLevel() + lvlModif);
+    outputLog(u8"드래곤 몬스터 생성!");
+    //return new Dragon(GameManager::character_->getLevel() + lvlModif);
+    return new Goblin(u8"재벌", 1);
 }
 
 void GameManager::battle(Character* player, Monster* currentMonster)
@@ -138,10 +139,10 @@ void GameManager::battle(Character* player, Monster* currentMonster)
     if (player->getAttackSpeed() < currentMonster->getAttackSpeed())    //빠른 공속이 선빵
     {
         int beforeHealth = player->getHealth();
-        instance_->outputLog(currentMonster->getName() + "의 선제공격!");
+        instance_->outputLog(currentMonster->getName() + u8"의 선제공격!");
         player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
         instance_->outputLog(
-            "현재 플레이어의 HP: "
+            u8"현재 플레이어의 HP: "
             + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
             + " ===> "
             + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
@@ -154,9 +155,9 @@ void GameManager::battle(Character* player, Monster* currentMonster)
     while (!currentMonster->isDead() && player->getHealth() > 0)  // 어느 한쪽이라도 죽지 않는 한 진행
     {
         instance_->outputLog(
-            "플레이어의 턴입니다. \n"
-            "1. 공격\n"
-            "2. 아이템 사용\n"
+            u8"플레이어의 턴입니다. \n"
+            u8"1. 공격\n"
+            u8"2. 아이템 사용\n"
             "==================================="
         );
         string input;
@@ -169,7 +170,7 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 int beforeHealth = player->getHealth();
                 player->takeCharacterDamage(currentMonster->performAction()); // 몬스터가 공격
                 instance_->outputLog(
-                    "현재 플레이어의 HP: "
+                    u8"현재 플레이어의 HP: "
                     + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
                     + " ===> "
                     + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
@@ -184,17 +185,19 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             {
                 if (roundTracker == GameManager::victoryRound)
                 {
-                    outputLog("** Victory!!!!");
+                    outputLog(u8"** Victory!!!!");
                     instance_->updateState(GameManager::End);
                     //break;
                 }
                 else
                 {
-                    // 보상 지급
-                    for (int i = 0; i < currentMonster->getDropItems().size(); i++)
-                    {
-                        //instance_->inven->addItem(currentMonster->getDropItems()[i]);
-                    }
+                    //// 보상 지급
+                    //for (int i = 0; i < currentMonster->getDropItems()->size(); i++)
+                    //{
+                    //    //vector<Item> a = *(currentMonster->getDropItems());
+                    //    //instance_->inven->addItem(move(Item(a[i].getName(), a[i].getPrice(), 1, E_Type::Material)));
+                    //    //Instance_->inven->addItem(move(Item(u8"슬라임의 끈적한 젤리", 100, 1, E_Type::Material)));
+                    //}
                     instance_->updateState(GameManager::Shopping);
                     //break;
                 }
@@ -213,11 +216,12 @@ void GameManager::battle(Character* player, Monster* currentMonster)
         }
         else
         {
-            instance_->outputLog("잘못된 입력입니다.");
+            instance_->outputLog(u8"잘못된 입력입니다.");
         }
     }
 }
-
+//
+//
 /*
 void GameManager::visitShop(Character* player) {
 }

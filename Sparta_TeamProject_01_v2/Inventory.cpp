@@ -4,7 +4,7 @@ void Inventory::setGold(int gold)
 {
 	this->gold = gold;
 }
-
+//
 void Inventory::addItem(unique_ptr<Item> item) // 아이템이 존재하지 않으면 맨 뒤에 추가
 {
 	int index = findIndex(item->getName());
