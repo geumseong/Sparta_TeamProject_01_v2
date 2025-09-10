@@ -10,13 +10,23 @@
 #include "itemDB.h"
 #include <Windows.h>
 #include "UIManager.h"
+#include "AsciiArt.h"
 #include "Workshop.h"
 using namespace std;
 
-
+void EnableVirtualTerminalProcessing() {
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hOut == INVALID_HANDLE_VALUE) { return; }
+    DWORD dwMode = 0;
+    if (!GetConsoleMode(hOut, &dwMode)) { return; }
+    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    if (!SetConsoleMode(hOut, dwMode)) { return; }
+}
 
 int main()
 {
+    // ▼▼▼ 게임 시작 시 이 함수가 반드시 호출되어야 합니다! ▼▼▼
+    EnableVirtualTerminalProcessing();
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
     
