@@ -1,4 +1,5 @@
 ﻿//#include "Ogre.h"
+// #include "AsciiArt.h"
 //#include "Item.h"
 //#include <iostream>
 //
@@ -10,6 +11,7 @@
 //    std::string namePrefix = "";
 //
 //    if (type == "일반") {
+// AsciiArt::printFromFile("ogre_art.txt");
 //        namePrefix = "오거";
 //        baseHealth = 200;
 //        baseAttack = 30;
@@ -19,6 +21,7 @@
 //        dropItem.push_back(Item("오거의 대퇴골", 100, 1, E_Type::Material));
 //    }
 //    else if (type == "투 헤드") {
+// AsciiArt::printFromFile("ogre_art.txt");
 //        namePrefix = "투 헤드 오거";
 //        baseHealth = 250;
 //        baseAttack = 25;
@@ -28,6 +31,7 @@
 //        dropItem.push_back(Item("오거의 쌍둥이 목걸이", 250, 1, E_Type::Accessory));
 //    }
 //    else if (type == "풀아머") {
+// AsciiArt::printFromFile("ogre_art.txt");
 //        namePrefix = "풀아머 오거";
 //        baseHealth = 300;
 //        baseAttack = 20;

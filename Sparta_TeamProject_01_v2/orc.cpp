@@ -1,5 +1,6 @@
 ﻿#include "Orc.h"
 #include "Item.h" 
+#include "AsciiArt.h"
 #include <iostream> 
 #include <random>   
 
@@ -12,7 +13,10 @@ Orc::Orc(const std::string& type, int level)
     int attackSpeed = 0;
     std::string namePrefix = "";
 
-    if (type == "일반") {
+    if (type == "일반")
+    {
+        AsciiArt::setConsoleSize(160, 160);
+        AsciiArt::printFromFile("orc_art.txt");
         namePrefix = "오크";
         baseHealth = 80;
         baseAttack = 15;
@@ -22,7 +26,11 @@ Orc::Orc(const std::string& type, int level)
         //dropItem.push_back(Item("부러진 오크의 뼈", 20, 1, E_Type::Material));
         //dropItem.push_back(Item("오크의 투구 조각", 30, 1, E_Type::Material));
     }
-    else if (type == "야만적인") {
+
+    else if (type == "야만적인")
+    {
+        AsciiArt::setConsoleSize(160, 160);
+        AsciiArt::printFromFile("orc_art.txt");
         namePrefix = "야만적인 오크";
         baseHealth = 100;
         baseAttack = 20;
@@ -32,7 +40,10 @@ Orc::Orc(const std::string& type, int level)
         //dropItem.push_back(Item("오크의 거친 가죽", 30, 1, E_Type::Material));
         //dropItem.push_back(Item("오크의 갑옷 조각", 40, 1, E_Type::Material));
     }
-    else if (type == "광전사") {
+    else if (type == "광전사") 
+    {
+        AsciiArt::setConsoleSize(160, 160);
+        AsciiArt::printFromFile("orc_art.txt");
         namePrefix = "광전사 오크";
         baseHealth = 150;
         baseAttack = 30;

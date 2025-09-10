@@ -39,7 +39,7 @@ Dragon::Dragon(int level)
     std::cout << "\n\n... 하늘이 어두워지며 거대한 그림자가 땅을 뒤덮습니다 ...\n\n";
     system("pause"); // 잠시 멈춤
 
-
+    AsciiArt::setConsoleSize(160, 160);
     AsciiArt::printFromFile("dragon_appear_raw_hq.txt");
     AsciiArt::printFromFile("dragon_appear_raw.txt");
 
@@ -62,6 +62,7 @@ int Dragon::performAction()
         std::cout << this->name << " - 2페이즈 돌입!" << std::endl;
         system("pause");
 
+        AsciiArt::setConsoleSize(160, 160);
         AsciiArt::printFromFile("dragon_phase2_raw_hq.txt");
         AsciiArt::printFromFile("dragon_phase2_raw.txt");
 
