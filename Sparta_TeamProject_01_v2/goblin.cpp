@@ -1,5 +1,4 @@
 ﻿#include "Goblin.h"
-#include "AsciiArt.h"
 #include "Item.h"
 #include <iostream>
 
@@ -16,7 +15,6 @@ Goblin::Goblin(const std::string& type, int level)
 
 		if (type == u8"일반")
 		{
-			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = u8"고블린";
 			baseHealth = 30;
 			baseAttack = 5;
@@ -33,8 +31,6 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"겁쟁이")
 		{
-			AsciiArt::setConsoleSize(160, 160);
-			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = u8"겁쟁이 고블린";
 			baseHealth = 20;
 			baseAttack = 3;
@@ -52,8 +48,6 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"건방진")
 		{
-			AsciiArt::setConsoleSize(160, 160);
-			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = u8"건방진 고블린";
 			baseHealth = 35;
 			baseAttack = 10;
@@ -71,8 +65,6 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"사나운")
 		{
-			AsciiArt::setConsoleSize(160, 160);
-			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = u8"사나운 고블린";
 			baseHealth = 40;
 			baseAttack = 15;
@@ -90,8 +82,6 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"재벌")
 		{
-			AsciiArt::setConsoleSize(160, 160);
-			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = u8"재벌 고블린";
 			baseHealth = 100;
 			baseAttack = 50;

@@ -1,5 +1,4 @@
 ﻿//#include "Imp.h"
-// #include "AsciiArt.h"
 //#include "Item.h"
 //#include <iostream>
 //
@@ -11,7 +10,6 @@
 //    std::string namePrefix = "";
 //
 //    if (type == "일반") {
-//		AsciiArt::printFromFile("imp_art.txt");
 //        namePrefix = "임프";
 //        baseHealth = 30;
 //        baseAttack = 12;
@@ -21,7 +19,6 @@
 //        dropItem.push_back(Item("임프의 작은 뿔", 30, 1, E_Type::Material));
 //    }
 //    else if (type == "파이어") {
-//		AsciiArt::printFromFile("imp_art.txt");
 //        namePrefix = "파이어 임프";
 //        baseHealth = 40;
 //        baseAttack = 10; // 마법 공격이라 기본 공격력은 낮음
@@ -31,7 +28,6 @@
 //        dropItem.push_back(Item("불의 정수", 80, 1, E_Type::Material));
 //    }
 //    else if (type == "범생이") {
-//		AsciiArt::printFromFile("imp_art.txt");
 //        namePrefix = "범생이 임프";
 //        baseHealth = 35;
 //        baseAttack = 8;

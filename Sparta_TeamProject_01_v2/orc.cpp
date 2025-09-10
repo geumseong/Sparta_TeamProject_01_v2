@@ -1,6 +1,5 @@
 ﻿#include "Orc.h"
 #include "Item.h" 
-#include "AsciiArt.h"
 #include <iostream> 
 #include <random>   
 //
@@ -14,8 +13,6 @@ Orc::Orc(const std::string& type, int level)
     std::string namePrefix = "";
 
     if (type == u8"일반") {
-        AsciiArt::setConsoleSize(160, 160);
-        AsciiArt::printFromFile("orc_art.txt");
         namePrefix = u8"오크";
         baseHealth = 80;
         baseAttack = 15;
@@ -26,8 +23,6 @@ Orc::Orc(const std::string& type, int level)
         dropItem.push_back(Item(u8"오크의 투구 조각", 30, 1, E_Type::Material));
     }
     else if (type == u8"야만적인") {
-        AsciiArt::setConsoleSize(160, 160);
-        AsciiArt::printFromFile("orc_art.txt");
         namePrefix = u8"야만적인 오크";
         baseHealth = 100;
         baseAttack = 20;
@@ -38,8 +33,6 @@ Orc::Orc(const std::string& type, int level)
         dropItem.push_back(Item(u8"오크의 갑옷 조각", 40, 1, E_Type::Material));
     }
     else if (type == u8"광전사") {
-        AsciiArt::setConsoleSize(160, 160);
-        AsciiArt::printFromFile("orc_art.txt");
         namePrefix = u8"광전사 오크";
         baseHealth = 150;
         baseAttack = 30;

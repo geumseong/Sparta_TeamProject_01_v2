@@ -1,5 +1,4 @@
 ﻿//#include "Slime.h"
-// #include "AsciiArt.h"
 //#include "Item.h"
 //#include <iostream>
 //
@@ -13,7 +12,6 @@
 //    // '일반' 타입을 가장 먼저 설정
 //    if (type == "일반")
 //    {
-// AsciiArt::printFromFile("slime_art.txt");
 //        namePrefix = "슬라임";
 //        baseHealth = 25;
 //        baseAttack = 4;
@@ -25,7 +23,6 @@
 //    }
 //    else if (type == "단단한")
 //    {
-// AsciiArt::printFromFile("slime_art.txt");
 //        namePrefix = "단단한 슬라임";
 //        baseHealth = 40;
 //        baseAttack = 6;
@@ -37,7 +34,6 @@
 //    }
 //    else if (type == "보석")
 //    {
-// AsciiArt::printFromFile("slime_art.txt");
 //        namePrefix = "보석 슬라임";
 //        baseHealth = 60;
 //        baseAttack = 10;
