@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <vector>
 #include "Character.h"
@@ -38,6 +38,7 @@ public:
     int roundTracker;
     int victoryRound = 10;
     int bossRound = 5;
+    int eventRound = 3;
 
     vector<string> log;
     void outputLog(string navDialogue);
