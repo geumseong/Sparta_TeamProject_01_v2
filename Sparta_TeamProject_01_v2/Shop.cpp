@@ -1,151 +1,123 @@
-﻿#include  "shop.h"
-#include <algorithm>
+﻿#include <iostream>
 #include <random>
 #include <chrono>
-#include <iostream>
-
+#include <algorithm>
+#include "Shop.h"
+#include "ItemDB.h"
+#include "Inventory.h"
 #include "Item.h"
-#include "itemDB.h"
-//
-Shop::~Shop()
+
+Shop::Shop() { availableItems.clear(); }
+Shop::~Shop() { availableItems.clear(); }
+
+void Shop::openShop(ItemDB& db, const std::string& category) // category: "전사", "궁수", "마법사", "도적", "포션", "재료"
 {
-    for (auto item : availableItems) 
+    std::string shopKey;
+
+	if (category == "전사")       shopKey = "shop_warrior"; // shop_warrior
+	else if (category == "궁수")  shopKey = "shop_archer"; // shop_archer
+	else if (category == "마법사") shopKey = "shop_mage"; // shop_mage
+	else if (category == "도적")   shopKey = "shop_thief"; // shop_thief
+	else if (category == "포션")   shopKey = "shop_potions"; // shop_potions 
+	else if (category == "재료")   shopKey = "shop_material"; // shop_material
+    else 
     {
-        delete item;
+        std::cout << "[NPC]: 알 수 없는 상점 타입이네.\n"; 
+        return;
     }
+
+    std::vector<Item> itemPool = db.getShopTable(shopKey);
+
+    if (itemPool.empty())
+    {
+        std::cout << "[NPC]: 아직 준비된 물건이 없네.\n";
+        return;
+    }
+
+    // 셔플 제거 → 고정 순서 유지
+
     availableItems.clear();
-}
-
-void Shop::openShop(ItemDB db)
-{
-    /*
-    shop_warrior
-    shop_archer
-    shop_magician
-    shop_thief
-    shop_potions
-    shop_material
-    */
-    std::vector<Item> itemPool = db.getShopTable("shop_warrior");
-    static std::mt19937 g(static_cast<unsigned>(
-    std::chrono::system_clock::now().time_since_epoch().count()));
-    std::shuffle(itemPool.begin(), itemPool.end(), g);
-
     int numItems = 5;
-    //for (int i = 0; i < numItems && i < itemPool.size(); ++i) {
-    //    Item original = itemPool[i];
-    //    availableItems.push_back(new Item(
-    //        original->getName(),
-    //        original->getPrice(),
-    //        original->getCount(),
-    //        original->getType()
-    //    ));
-    //}
-
-    for (auto item : itemPool)
-    {  
-        delete item;
+    for (int i = 0; i < numItems && i < static_cast<int>(itemPool.size()); ++i)
+    {
+        availableItems.push_back(itemPool[i]);
     }
+
+    std::cout << "[NPC]: " << category << " 상점을 열었네!\n";
+    displayItems();
 }
 
 void Shop::buyItem(int index, Inventory& inven)
 {
-    if (index < 0 || index >= static_cast<int>(availableItems.size())) {
+    if (index < 0 || index >= static_cast<int>(availableItems.size()))
+    {
         std::cout << "[NPC]: 그런 물건은 없네.\n";
         return;
     }
 
-    Item* item = availableItems[index];
-
-    if (inven.getGold() >= item->getPrice()) {
-        std::string boughtName = item->getName();
-        auto inputItem = std::<Item>(
-            item->getName(), item->getPrice(), 1, item->getType());
-
-        inven.addItem(std::move(inputItem));
-        inven.setGold(inven.getGold() - item->getPrice());
-
-        if (item->getCount() > 1) {
-            item->setCount(item->getCount() - 1);
-        }
-        else {
-            delete item;
-            availableItems.erase(availableItems.begin() + index);
-        }
-
-        std::cout << "[NPC]: " << boughtName << "(이)라… 좋은 선택이군!\n";
-    }
-    else {
+    Item& item = availableItems[index];
+    if (inven.getGold() < item.getPrice()) 
+    {
         std::cout << "[NPC]: 골드가 부족하네. 다음에 다시 오게나.\n";
+        return;
     }
+
+    inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType()));
+    inven.setGold(inven.getGold() - item.getPrice());
+
+    if (item.getCount() > 1) item.setCount(item.getCount() - 1);
+    else availableItems.erase(availableItems.begin() + index);
+
+    std::cout << "[NPC]: " << item.getName() << "(이)라… 좋은 선택이군!\n";
 }
 
-void Shop::sellItem(int index, Inventory& inven)
+void Shop::sellItem(int index, Inventory& inven) // index는 inven의 인덱스
 {
     Item* item = inven.findItem(index);
-
-    if (!item) {
+    if (!item) 
+    {
         std::cout << "[NPC]: 그런 아이템은 없네.\n";
         return;
     }
 
-    std::string itemName = item->getName();
-    int sellPrice = static_cast<int>(item->getPrice() * 0.6);
+	int sellPrice = static_cast<int>(item->getPrice() * 0.6); // 60% 가격으로 판매
     inven.setGold(inven.getGold() + sellPrice);
 
     bool found = false;
-    for (auto* shopItem : availableItems) {
-        if (shopItem->getName() == itemName) {
-            shopItem->setCount(shopItem->getCount() + 1);
+	for (auto& shopItem : availableItems) // 상점에 이미 아이템이 있으면 개수만 증가
+    {
+        if (shopItem.getName() == item->getName())
+        {
+            shopItem.setCount(shopItem.getCount() + 1);
             found = true;
             break;
         }
     }
-
-    if (!found) {
-        availableItems.push_back(new Item(itemName, item->getPrice(), 1, item->getType()));
+	if (!found) { // 상점에 아이템이 없으면 새로 추가
+        availableItems.push_back(Item(item->getName(), item->getPrice(), 1, item->getType()));
     }
 
-    if (item->getCount() > 1) {
-        item->setCount(item->getCount() - 1);
-    }
-    else {
-        inven.removeItem(index);
-    }
+    if (item->getCount() > 1) item->setCount(item->getCount() - 1);
+    else inven.removeItem(index);
 
-    std::cout << "[NPC]: " << itemName << "을 " << sellPrice << "골드에 사겠네.\n";
+    std::cout << "[NPC]: " << item->getName() << "을 " << sellPrice << "골드에 사겠네.\n";
 }
 
-void Shop::showItem(int index)
-{
-    if (index >= 0 && index < static_cast<int>(availableItems.size())) {
-        availableItems[index]->printInfo();
-    }
-    else {
-        std::cout << "존재하지 않는 아이템입니다.\n";
-    }
-}
-
-void Shop::displayItems()
+void Shop::displayItems() // 전체 아이템 출력
 {
     std::cout << "[NPC]: 이것이 오늘의 상품이네! 천천히 보게나.\n\n";
     for (int i = 0; i < static_cast<int>(availableItems.size()); ++i) {
-        std::cout << i << ": ";
-        availableItems[i]->printInfo();
+        std::cout << (i + 1) << ": "; // 사용자에게는 1부터 보이게
+        availableItems[i].printInfo();
         std::cout << "\n";
     }
-    std::cout << "\n";
+        std::cout << "\n";
 }
 
-std::string Shop::getItemName(int index) const
+void Shop::showItem(int index) // 특정 아이템 정보 출력
 {
-    if (index >= 0 && index < static_cast<int>(availableItems.size())) {
-        return availableItems[index]->getName();
-    }
-    return "(없는 아이템)";
-}
-
-int Shop::getItemCount() const
-{
-    return static_cast<int>(availableItems.size());
+	if (index >= 0 && index < static_cast<int>(availableItems.size())) // index 유효성 검사
+        availableItems[index].printInfo();
+    else
+        std::cout << "존재하지 않는 아이템입니다.\n";
 }
