@@ -29,6 +29,13 @@ void WorkShop::Open(const ItemDB& db, Inventory& inv )
 
 bool WorkShop::CraftItem(const ItemDB& db, Inventory& inv, string tableName, int index)
 {
+    /*
+    recipeTables 세부 테이블
+    weapon
+    armor
+    accessory
+    alchemy
+    */
     auto recipelist = db.getRecipeTable(tableName);
     if (checkrecipe(recipelist.inputs, inv, index))//재료템이 인벤에 있다면
     {
@@ -64,6 +71,7 @@ bool WorkShop::AskYesNo(const std::string& prompt) const
 
 void WorkShop::printrecipe(const ItemDB& db, string tableName)
 {
+
     auto vec = db.getRecipeTable(tableName);
     for (size_t i = 0; i < vec.outputs.size(); i++)
     {
