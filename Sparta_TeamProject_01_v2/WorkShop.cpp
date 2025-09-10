@@ -2,10 +2,11 @@
 #include <cctype>
 #include "itemDB.h"
 #include <iostream>
+#include "Inventory.h"
 using namespace std;
 
 
-void Workshop::Open(Inventory& inv, const ItemDB& db)
+void WorkShop::Open(Inventory& inv, const ItemDB& db)
 {
     while (true) {
         std::cout << "\n=== 제작 공방 ===\n"
@@ -23,6 +24,32 @@ void Workshop::Open(Inventory& inv, const ItemDB& db)
         else if (sel == 4) ShowRecipes(db);
         else { std::cout << "제작 공방을 종료합니다.\n"; return; }
     }
+}
+
+void WorkShop::CraftPotion(Inventory& inv, const ItemDB& db)
+{
+}
+
+void WorkShop::CraftEquipment(Inventory& inv, const ItemDB& db)
+{
+}
+
+void WorkShop::CraftAccessory(Inventory& inv, const ItemDB& db)
+{
+}
+
+void WorkShop::ShowRecipes(const ItemDB& db) const
+{
+}
+
+int WorkShop::AskIntInRange(const std::string& prompt, int minVal, int maxVal) const
+{
+    return 0;
+}
+
+bool WorkShop::AskYesNo(const std::string& prompt) const
+{
+    return false;
 }
 
 
