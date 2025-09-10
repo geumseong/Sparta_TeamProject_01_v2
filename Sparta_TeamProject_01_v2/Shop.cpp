@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include <algorithm>
+#include <unordered_map>
 #include "Shop.h"
 #include "ItemDB.h"
 #include "Inventory.h"
@@ -13,29 +13,29 @@ Shop::~Shop() {
     availableItems.clear();
 }
 
-void Shop::openShop(ItemDB& db, const std::string& category) // 상점 열기
+void Shop::openShop(ItemDB& db, const std::string& category)
 {
-    std::cout << "[디버그] 전달받은 category: [" << category << "]\n"; 
+    std::unordered_map<std::string, std::string> shopMap = {
+        {u8"전사", "shop_warrior"},
+        {u8"궁수", "shop_archer"},
+        {u8"마법사", "shop_magician"},
+        {u8"도적", "shop_thief"},
+        {u8"포션", "shop_potions"},
+        {u8"재료", "shop_material"}
+    };
 
-	std::string shopKey; // 상점 키 변수
-
-    if (category == "전사")       shopKey = "shop_warrior";
-    else if (category == "궁수")  shopKey = "shop_archer";
-    else if (category == u8"마법사") shopKey = "shop_magician";
-    else if (category == "도적")   shopKey = "shop_thief";
-    else if (category == "포션")   shopKey = "shop_potions";
-    else if (category == "재료")   shopKey = "shop_material";
-    else {
+    auto it = shopMap.find(category);
+    if (it == shopMap.end()) {
         std::cout << u8"[NPC]: 알 수 없는 상점 타입이네.\n";
         return;
     }
 
+    std::string shopKey = it->second;
     std::vector<Item> itemPool = db.getShopTable(shopKey);
 
-    // 디버깅: itemPool 상태 확인
-    std::cout << "[디버그] itemPool 크기: " << itemPool.size() << "\n";
-    for (auto& item : itemPool) {
-        std::cout << "[디버그] item 이름: " << item.getName() << "\n";
+    if (itemPool.empty()) {
+        std::cout << u8"[NPC]: 아직 준비된 물건이 없네.\n";
+        return;
     }
 
     availableItems.clear();
@@ -44,39 +44,33 @@ void Shop::openShop(ItemDB& db, const std::string& category) // 상점 열기
         availableItems.push_back(std::move(itemPool[i]));
     }
 
-    // 디버깅: availableItems 상태 확인
-    std::cout << "[디버그] availableItems 크기: " << availableItems.size() << "\n";
-    for (auto& item : availableItems) {
-        std::cout << "[디버그] 진열된 아이템: " << item.getName() << "\n";
-    }
-
     std::cout << u8"[NPC]: " << category << u8" 상점을 열었네!\n";
-	displayItems(); // 진열된 아이템 표시
+    displayItems();
 }
 
-void Shop::buyItem(int index, Inventory& inven) // 아이템 구매
+void Shop::buyItem(int index, Inventory& inven)
 {
-	if (index < 0 || index >= static_cast<int>(availableItems.size())) { // 인덱스 유효성 검사
+    if (index < 0 || index >= static_cast<int>(availableItems.size())) {
         std::cout << u8"[NPC]: 그런 물건은 없네.\n";
         return;
     }
 
-	Item& item = availableItems[index]; // 구매할 아이템 참조
-	if (inven.getGold() < item.getPrice()) {  //골드 부족 검사
+    Item& item = availableItems[index];
+    if (inven.getGold() < item.getPrice()) {
         std::cout << u8"[NPC]: 골드가 부족하네. 다음에 다시 오게나.\n";
         return;
     }
 
-	inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType())); // 인벤토리에 아이템 추가
-	inven.setGold(inven.getGold() - item.getPrice()); // 골드 차감
+    inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType()));
+    inven.setGold(inven.getGold() - item.getPrice());
 
-	if (item.getCount() > 1) item.setCount(item.getCount() - 1); // 아이템 개수 감소
-	else availableItems.erase(availableItems.begin() + index); // 개수가 0이면 진열 목록에서 제거
+    if (item.getCount() > 1) item.setCount(item.getCount() - 1);
+    else availableItems.erase(availableItems.begin() + index);
 
     std::cout << u8"[NPC]: " << item.getName() << u8"(이)라… 좋은 선택이군!\n";
 }
 
-void Shop::sellItem(int index, Inventory& inven) // 아이템 판매
+void Shop::sellItem(int index, Inventory& inven)
 {
     Item* item = inven.findItem(index);
     if (!item) {
