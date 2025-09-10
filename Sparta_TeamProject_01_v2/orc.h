@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include "Monster.h"
 #include <string>
 
-// Àü¹æ ¼±¾ğ
+// ì „ë°© ì„ ì–¸
 class Item;
 
 class Orc : public Monster
@@ -12,24 +12,24 @@ private:
     int bonusExp;
     int bonusGold;
     int turnCount;
-    bool isCharging; // µ¹Áø »óÅÂ ¿©ºÎ
+    bool isCharging; // ëŒì§„ ìƒíƒœ ì—¬ë¶€
 
-    // °¢ À¯Çüº° °íÀ¯ Çàµ¿À» Á¤ÀÇÇÏ´Â ÇÔ¼öµé
+    // ê° ìœ í˜•ë³„ ê³ ìœ  í–‰ë™ì„ ì •ì˜í•˜ëŠ” í•¨ìˆ˜ë“¤
     int performNormalAction();
     int performSavageAction();
     int performBerserkerAction();
-
+    //
 public:
-    // ¿ÀÅ© »ı¼ºÀÚ: Å¸ÀÔ¿¡ µû¶ó ¼Ó¼ºÀÌ ´Ş¶óÁø´Ù
+    // ì˜¤í¬ ìƒì„±ì: íƒ€ì…ì— ë”°ë¼ ì†ì„±ì´ ë‹¬ë¼ì§„ë‹¤
     Orc(const std::string& type, int level);
 
-    // ¿À¹ö¶óÀÌµå
+    // ì˜¤ë²„ë¼ì´ë“œ
     int performAction() override;
 
-    // µ¹Áø »óÅÂ È®ÀÎ ÇÔ¼ö
+    // ëŒì§„ ìƒíƒœ í™•ì¸ í•¨ìˆ˜
     bool isOrcCharging() const { return isCharging; }
 
-    // º¸»ó °ü·Ã ÇÔ¼ö
+    // ë³´ìƒ ê´€ë ¨ í•¨ìˆ˜
     int getBonusExp() const { return bonusExp; }
     int getBonusGold() const { return bonusGold; }
 };

@@ -53,5 +53,5 @@ public:
 	void setPrice(int price);
 	void setCount(int count);
 	void setType(E_Type type);
-
+	//
 };

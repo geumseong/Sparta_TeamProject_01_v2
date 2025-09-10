@@ -1,7 +1,7 @@
-// Goblin.h
-// ¸ó½ºÅÍÀÇ Á¾·ù Áß ÇÏ³ªÀÎ °íºí¸°À» Á¤ÀÇÇÏ´Â Çì´õ ÆÄÀÏ
-// Goblin Å¬·¡½º´Â Monster Å¬·¡½º¸¦ »ó¼Ó¹Þ¾Æ °íºí¸° ¸ó½ºÅÍ¸¦ ±¸Çö
-// Goblin Å¬·¡½º´Â Æ¯¼öÇÑ °³Ã¼ÀÇ °íºí¸°ÀÇ Æ¯¼öÇÑ Çàµ¿°ú ¼Ó¼ºÀ» Ãß°¡·Î Á¤ÀÇ
+ï»¿// Goblin.h
+// ëª¬ìŠ¤í„°ì˜ ì¢…ë¥˜ ì¤‘ í•˜ë‚˜ì¸ ê³ ë¸”ë¦°ì„ ì •ì˜í•˜ëŠ” í—¤ë” íŒŒì¼
+// Goblin í´ëž˜ìŠ¤ëŠ” Monster í´ëž˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ ê³ ë¸”ë¦° ëª¬ìŠ¤í„°ë¥¼ êµ¬í˜„
+// Goblin í´ëž˜ìŠ¤ëŠ” íŠ¹ìˆ˜í•œ ê°œì²´ì˜ ê³ ë¸”ë¦°ì˜ íŠ¹ìˆ˜í•œ í–‰ë™ê³¼ ì†ì„±ì„ ì¶”ê°€ë¡œ ì •ì˜
 
 
 #pragma once
@@ -9,23 +9,23 @@
 #include <string>
 
 
-// Àü¹æ ¼±¾ð
+// ì „ë°© ì„ ì–¸
 class Item;
 
-// Goblin Å¬·¡½º´Â Monster Å¬·¡½º¸¦ »ó¼Ó¹Þ¾Æ °íºí¸° ¸ó½ºÅÍ¸¦ ±¸Çö
+// Goblin í´ëž˜ìŠ¤ëŠ” Monster í´ëž˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ ê³ ë¸”ë¦° ëª¬ìŠ¤í„°ë¥¼ êµ¬í˜„
 
 
 class Goblin : public Monster
 {
 private:
-	std::string type; // °íºí¸°ÀÇ Á¾·ù (¿¹: ÀÏ¹Ý °íºí¸°, °íºí¸° Àü»ç µî)
-	int bonusExp; // Æ¯¼ö °³Ã¼ Ã³Ä¡ ½Ã Ãß°¡ °æÇèÄ¡
-	int bonusGold; // Æ¯¼ö °³Ã¼ Ã³Ä¡ ½Ã Ãß°¡ °ñµå
-	int turnCount; // ÅÏ Ä«¿îÆ® (Æ¯¼ö Çàµ¿À» À§ÇÑ)
-	bool isFled; // µµÁÖ ¿©ºÎ
+	std::string type; // ê³ ë¸”ë¦°ì˜ ì¢…ë¥˜ (ì˜ˆ: ì¼ë°˜ ê³ ë¸”ë¦°, ê³ ë¸”ë¦° ì „ì‚¬ ë“±)
+	int bonusExp; // íŠ¹ìˆ˜ ê°œì²´ ì²˜ì¹˜ ì‹œ ì¶”ê°€ ê²½í—˜ì¹˜
+	int bonusGold; // íŠ¹ìˆ˜ ê°œì²´ ì²˜ì¹˜ ì‹œ ì¶”ê°€ ê³¨ë“œ
+	int turnCount; // í„´ ì¹´ìš´íŠ¸ (íŠ¹ìˆ˜ í–‰ë™ì„ ìœ„í•œ)
+	bool isFled; // ë„ì£¼ ì—¬ë¶€
 
 
-	// °¢ À¯Çüº° °íÀ¯ Çàµ¿À» Á¤ÀÇÇÏ´Â ÇÔ¼ö
+	// ê° ìœ í˜•ë³„ ê³ ìœ  í–‰ë™ì„ ì •ì˜í•˜ëŠ” í•¨ìˆ˜
 	int performNormalAction();
 	int performCowardlyAction();
 	int performCheekyAction();
@@ -34,15 +34,15 @@ private:
 
 
 public:
-	// °íºí¸° »ý¼ºÀÚ
-	// °íºí¸°ÀÇ ÀÌ¸§, Ã¼·Â, °ø°Ý·ÂÀ» ÃÊ±â°ªÀ¸·Î ¼³Á¤
+	// ê³ ë¸”ë¦° ìƒì„±ìž
+	// ê³ ë¸”ë¦°ì˜ ì´ë¦„, ì²´ë ¥, ê³µê²©ë ¥ì„ ì´ˆê¸°ê°’ìœ¼ë¡œ ì„¤ì •
 	Goblin(const std::string& type, int level);
 
 
+	//
 
-
-	// Goblin Å¬·¡½º¿¡¼­ performAction() ÇÔ¼ö¸íÀ» performAction()À¸·Î ¼öÁ¤ÇÏ¿©
-	// Monster Å¬·¡½ºÀÇ virtual void performAction()À» ¿Ã¹Ù¸£°Ô ¿À¹ö¶óÀÌµåÇÕ´Ï´Ù.
+	// Goblin í´ëž˜ìŠ¤ì—ì„œ performAction() í•¨ìˆ˜ëª…ì„ performAction()ìœ¼ë¡œ ìˆ˜ì •í•˜ì—¬
+	// Monster í´ëž˜ìŠ¤ì˜ virtual void performAction()ì„ ì˜¬ë°”ë¥´ê²Œ ì˜¤ë²„ë¼ì´ë“œí•©ë‹ˆë‹¤.
 	int performAction() override;
 
 	bool hasFled() const { return isFled; }
@@ -50,10 +50,10 @@ public:
 	int getBonusGold() const { return bonusGold; }
 
 
-	//this->health = baseHealth + (this->level * 5); // ·¹º§´ç Ã¼·Â 5 Áõ°¡
-	//this->attack = baseAttack + (this->level * 2); // ·¹º§´ç °ø°Ý·Â 2 Áõ°¡
-	//this->maxHealth = this->health; // ÃÖ´ë Ã¼·Â ¼³Á¤
+	//this->health = baseHealth + (this->level * 5); // ë ˆë²¨ë‹¹ ì²´ë ¥ 5 ì¦ê°€
+	//this->attack = baseAttack + (this->level * 2); // ë ˆë²¨ë‹¹ ê³µê²©ë ¥ 2 ì¦ê°€
+	//this->maxHealth = this->health; // ìµœëŒ€ ì²´ë ¥ ì„¤ì •
 
-	//this->name = "Lv." + std::to_string(level) + " " + this->name; // ÀÌ¸§¿¡ ·¹º§ Ãß°¡
+	//this->name = "Lv." + std::to_string(level) + " " + this->name; // ì´ë¦„ì— ë ˆë²¨ ì¶”ê°€
 
 };

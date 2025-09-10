@@ -1,7 +1,7 @@
 ﻿#include "Item.h"
 void Item::printInfo() const
 {
-	cout << "[이름: " << name << ", 가격: " << price << "G, " << count << "개 보유]" << endl;
+	cout << u8"[이름: " << name << u8", 가격: " << price << u8"G, " << count << u8"개 보유]" << endl;
 }
 
 void Item::useItem(Character& character)
@@ -19,7 +19,7 @@ void Item::useItem(Character& character)
 		break;
 	case E_Type::Material:
 		break;
-
+		//
 	}
 }
 

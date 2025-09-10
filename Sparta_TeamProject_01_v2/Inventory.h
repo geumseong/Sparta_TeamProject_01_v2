@@ -35,7 +35,7 @@ public:
 
 	//카테고리별 분류
 };
-
+//
 //Inventory 사용예시
 //
 //Inventory inven(100, 10);

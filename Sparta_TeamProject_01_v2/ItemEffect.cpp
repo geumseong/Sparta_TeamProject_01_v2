@@ -28,3 +28,4 @@ void BuffEffect::onUnequip(Character& character)
     character.setMaxhealth(character.getMaxHealth() - hpbuff);
     character.setMaxMp(character.getMaxMp() - mpbuff);
 }
+//

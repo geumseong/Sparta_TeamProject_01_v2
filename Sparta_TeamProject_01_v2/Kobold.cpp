@@ -1,5 +1,4 @@
 ﻿//#include "Kobold.h"
-// #include "AsciiArt.h"
 //#include "Item.h"
 //#include <iostream>
 //
@@ -11,7 +10,6 @@
 //    std::string namePrefix = "";
 //
 //    if (type == "일반") {
-// AsciiArt::printFromFile("kobold_art.txt");
 //        namePrefix = "코볼트";
 //        baseHealth = 20;
 //        baseAttack = 6;
@@ -21,7 +19,6 @@
 //        dropItem.push_back(Item("작은 가죽 조각", 5, 1, E_Type::Material));
 //    }
 //    else if (type == "함정꾼") {
-// AsciiArt::printFromFile("kobold_art.txt");
 //        namePrefix = "코볼트 함정꾼";
 //        baseHealth = 25;
 //        baseAttack = 8;

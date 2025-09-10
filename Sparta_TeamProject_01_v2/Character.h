@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <vector>
@@ -20,8 +20,8 @@ public:
     void visitShop();
     void characterDeath();
     void takeCharacterDamage(int damage);
-
-    // getter ÇÔ¼ö
+    //
+    // getter í•¨ìˆ˜
     string getName() const;
     int getLevel() const;
     int getHealth() const;
@@ -32,9 +32,10 @@ public:
     int getDefense() const;
     int getAttackSpeed() const;
     int getExperience() const;
+    string getJobName() { return jobName; }
 
 
-    // setter ÇÔ¼ö
+    // setter í•¨ìˆ˜
     void setName(string _name);
     bool setHealth(int _health);
     bool setMaxhealth(int _maxHealth);
@@ -47,16 +48,16 @@ public:
 
 
 protected:
-    string name;        // Ä³¸¯ÅÍ ÀÌ¸§
-    string jobName;     // Ä³¸¯ÅÍ Á÷¾÷ ÀÌ¸§
-    int level;          // Ä³¸¯ÅÍ ·¹º§ ¼öÄ¡
-    int health;         // Ä³¸¯ÅÍ Ã¼·Â ¼öÄ¡
-    int maxHealth;      // Ä³¸¯ÅÍ ÃÖ´ë Ã¼·Â ¼öÄ¡
-    int mp;             // Ä³¸¯ÅÍ ¸¶³ª ¼öÄ¡
-    int maxMp;          // Ä³¸¯ÅÍ ÃÖ´ë ¸¶³ª ¼öÄ¡
-    int attackPower;         // Ä³¸¯ÅÍ °ø°İ ¼öÄ¡
-    int defense;        // ¹æ¾î·Â °íÁ¤ ¼öÄ¡
-    int attackSpeed;    // °ø°İ¼Óµµ (¼Óµµ¿¡ µû¶ó¼­ °ø°İÅÏÀÌ °áÁ¤µÈ´Ù)
-    int experience;     // Ä³¸¯ÅÍ °æÇèÄ¡
-    int gold;           // Ä³¸¯ÅÍ °ñµå ¼öÄ¡
+    string name;        // ìºë¦­í„° ì´ë¦„
+    string jobName;     // ìºë¦­í„° ì§ì—… ì´ë¦„
+    int level;          // ìºë¦­í„° ë ˆë²¨ ìˆ˜ì¹˜
+    int health;         // ìºë¦­í„° ì²´ë ¥ ìˆ˜ì¹˜
+    int maxHealth;      // ìºë¦­í„° ìµœëŒ€ ì²´ë ¥ ìˆ˜ì¹˜
+    int mp;             // ìºë¦­í„° ë§ˆë‚˜ ìˆ˜ì¹˜
+    int maxMp;          // ìºë¦­í„° ìµœëŒ€ ë§ˆë‚˜ ìˆ˜ì¹˜
+    int attackPower;         // ìºë¦­í„° ê³µê²© ìˆ˜ì¹˜
+    int defense;        // ë°©ì–´ë ¥ ê³ ì • ìˆ˜ì¹˜
+    int attackSpeed;    // ê³µê²©ì†ë„ (ì†ë„ì— ë”°ë¼ì„œ ê³µê²©í„´ì´ ê²°ì •ëœë‹¤)
+    int experience;     // ìºë¦­í„° ê²½í—˜ì¹˜
+    int gold;           // ìºë¦­í„° ê³¨ë“œ ìˆ˜ì¹˜
 };

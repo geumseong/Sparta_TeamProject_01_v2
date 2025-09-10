@@ -1,4 +1,4 @@
-#include "Character.h"
+ï»¿#include "Character.h"
 #include <iostream>
 
 Character::Character()
@@ -35,19 +35,18 @@ Character::Character(string name)
 
 void Character::displayStatus()
 {
-	cout << "------------------------------------" << endl;
-	cout << "* ÇöÀç ´É·ÂÄ¡" << endl;
-	cout << "ÀÌ¸§: " << name << endl;
-	cout << "Á÷¾÷: " << jobName << endl;
-	cout << "Lv. " << level << endl;
-	cout << "HP: " << health << endl;
-	cout << "MP: " << mp << endl;
-	cout << "°ø°Ý·Â: " << attackPower << endl;
-	cout << "¹æ¾î·Â: " << defense << endl;
-	cout << "°ø°Ý¼Óµµ: " << attackSpeed << endl;
-	cout << "°æÇèÄ¡: " << experience << endl;
-	cout << "°ñµå: " << gold << endl;
-	cout << "------------------------------------" << endl;
+	cout << u8"------------------------------------" << endl;
+	cout << u8"* í˜„ìž¬ ëŠ¥ë ¥ì¹˜" << endl;
+	cout << u8"ì´ë¦„: " << name << endl;
+	cout << u8"ì§ì—…: " << jobName << endl;
+	cout << u8"Lv. " << level << endl;
+	cout << u8"HP: " << health << endl;
+	cout << u8"MP: " << mp << endl;
+	cout << u8"ê³µê²©ë ¥: " << attackPower << endl;
+	cout << u8"ë°©ì–´ë ¥: " << defense << endl;
+	cout << u8"ê³µê²©ì†ë„: " << attackSpeed << endl;
+	cout << u8"ê²½í—˜ì¹˜: " << experience << endl;
+	cout << u8"------------------------------------" << endl;
 }
 
 void Character::visitShop()
@@ -57,7 +56,7 @@ void Character::visitShop()
 
 void Character::characterDeath()
 {
-	cout << "Ä³¸¯ÅÍ°¡ »ç¸ÁÇÏ¿´½À´Ï´Ù." << endl;
+	cout << u8"ìºë¦­í„°ê°€ ì‚¬ë§í•˜ì˜€ìŠµë‹ˆë‹¤." << endl;
 }
 
 void Character::takeCharacterDamage(int damage)
@@ -95,7 +94,7 @@ int Character::getMp() const
 {
 	return mp;
 }
-
+//
 int Character::getMaxMp() const
 {
 	return maxMp;

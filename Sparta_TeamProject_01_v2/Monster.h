@@ -29,7 +29,8 @@ protected:
 	int attackSpeed; // 몬스터 공격속도
 	int baseExp; // 기본 보상 경험치
 	int baseGold; // 기본 보상 골드
-	//std::vector<Item> dropItem; // 몬스터가 드롭하는 아이템 목록
+	vector<Item> dropItem; // 몬스터가 드롭하는 아이템 목록
+
 
 
 public:
@@ -39,10 +40,8 @@ public:
 	Monster(int level); // 레벨만 받아서 초기화
 	
 	virtual ~Monster() {} // 가상 소멸자
-
-
 	// 멤버 함수
-
+	//
 
 	// getter 함수
 	// 몬스터의 속성값을 리턴
@@ -51,6 +50,10 @@ public:
 	int getHealth() const { return health; }
 	int getAttack() const { return attack; }
 	int getAttackSpeed() const { return attackSpeed; }
+	vector<Item> getDropItems() { return move(dropItem); }
+	int getDropItemsSize() { return dropItem.size(); }
+	int getBaseExp() { return baseExp; }
+	int getBaseGold() { return baseGold; }
 	
 
 	// setter 함수?
@@ -81,20 +84,20 @@ public:
 	virtual int performAction()
 	{
 		// 기본 행동: 몬스터가 공격하는 행동
-		std::cout << name << " 가 공격합니다 :  " << attack << " 데미지를 입혔습니다!" << std::endl;
+		std::cout << name << u8" 가 공격합니다 :  " << attack << u8" 데미지를 입혔습니다!" << std::endl;
 		return attack; // 공격력을 리턴
 	}
 	
-	//Item getDropItem() const // 아이템 드롭
-	//{
-	//	if (dropItem.empty())
-	//	{
-	//		return Item("없음", 0, 0, E_Type::Material); // 드롭 아이템이 없으면 "없음" 반환
-	//	}
+	Item getDropItem()
+	{
+		if (dropItem.size() < 0)
+		{
+			return Item("없음", 0, 0, E_Type::Material);
+		}
+		// 랜덤으로 아이템 선택
+		int randomIndex = rand() % dropItem.size();
+		return move(dropItem[randomIndex]);
 
-	//	// 랜덤으로 아이템 선택
-	//	int randomIndex = rand() % dropItem.size();
-	//	return dropItem[randomIndex];
-	//}
+	}
 
 };
