@@ -23,6 +23,38 @@ void EnableVirtualTerminalProcessing() {
     if (!SetConsoleMode(hOut, dwMode)) { return; }
 }
 
+void Craft(GameManager* Game, WorkShop workshop, ItemDB db, string craftType)
+{
+    string input;
+    while (true)
+    {
+        Game->outputLog(u8"어떤 것을 제작하실 건가요?");
+        int size = workshop.printrecipe(db, craftType);
+        Game->outputLog(u8"0. 뒤로가기");
+        Game->outputLog(u8"9. 인벤토리 확인");
+        Game->inputLog(input);
+        int choice = stoi(input);
+        if (choice > 0 && choice <= size)
+        {
+            workshop.CraftItem(db, *Game->inven, craftType, choice-1);
+            cout << "crafted " << craftType << endl;
+        }
+        else if (input == "0" || input == "뒤로가기")
+        {
+            break;
+        }
+        else if (input == "9" || input == "인벤토리 확인")
+        {
+            Game->inven->printItemlist();
+            system("pause");
+        }
+        else
+        {
+            Game->outputLog(u8"잘못된 입력입니다.");
+        }
+    }
+}
+
 int main()
 {
     // ▼▼▼ 게임 시작 시 이 함수가 반드시 호출되어야 합니다! ▼▼▼
@@ -285,57 +317,40 @@ int main()
             break;
 
         case GameManager::Crafting:
-            Game->outputLog(
-                u8"제작소에 입장했습니다. 다음 행동을 선택하세요."
-            );
-            workshop.Open(db, *Game->inven);
+            
             while(true)
             {
+                Game->outputLog(
+                    u8"제작소에 입장했습니다. 다음 행동을 선택하세요."
+                );
+                workshop.Open(db, *Game->inven);
                 Game->inputLog(input);
                 if (input == "1" || input == "포션 제작")
                 {
-                    while (true)
-                    {
-                        Game->outputLog(u8"어떤 것을 제작하실 건가요?");
-                        int size = workshop.printrecipe(db, "alchemy");
-                        Game->outputLog(u8"0. 뒤로가기");
-                        Game->inputLog(input);
-                        int choice = stoi(input);
-                        if (choice > 0 && choice <= size)
-                        {
-                            workshop.CraftItem(db, *Game->inven, "alchemy", choice);
-                        }
-                        else if (input == "0" || input == "뒤로가기")
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Game->outputLog(u8"잘못된 입력입니다.");
-                        }
-                    }
+                    Craft(Game, workshop, db, "alchemy");
                 }
-                else if (input == "2" || input == "장비 제작")
+                else if (input == "2" || input == "무기 제작")
                 {
-
+                    Craft(Game, workshop, db, "weapon");
                 }
-                else if (input == "3" || input == "무기 제작")
+                else if (input == "3" || input == "장비 제작")
                 {
-
+                    Craft(Game, workshop, db, "armor");
                 }
                 else if (input == "4" || input == "액세서리 제작")
                 {
-
+                    Craft(Game, workshop, db, "accessory");
                 }
                 else if (input == "5" || input == "나가기")
                 {
-
+                    break;
                 }
                 else
                 {
                     Game->outputLog(u8"잘못된 입력입니다.");
                 }
             }
+            Game->updateState(GameManager::Battle);
             break;
 
         case GameManager::Battle:   //Game 전투/싸움 State
@@ -358,3 +373,4 @@ int main()
         }
     }
 }
+
