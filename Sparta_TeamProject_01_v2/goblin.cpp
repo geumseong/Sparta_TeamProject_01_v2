@@ -1,4 +1,5 @@
 ﻿#include "Goblin.h"
+#include "AsciiArt.h"
 #include "Item.h"
 #include <iostream>
 
@@ -15,6 +16,7 @@ Goblin::Goblin(const std::string& type, int level)
 
 		if (type == "일반")
 		{
+			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = "고블린";
 			baseHealth = 30;
 			baseAttack = 5;
@@ -31,6 +33,8 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == "겁쟁이")
 		{
+			AsciiArt::setConsoleSize(160, 160);
+			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = "겁쟁이 고블린";
 			baseHealth = 20;
 			baseAttack = 3;
@@ -48,6 +52,8 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == "건방진")
 		{
+			AsciiArt::setConsoleSize(160, 160);
+			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = "건방진 고블린";
 			baseHealth = 35;
 			baseAttack = 10;
@@ -65,6 +71,8 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == "사나운")
 		{
+			AsciiArt::setConsoleSize(160, 160);
+			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = "사나운 고블린";
 			baseHealth = 40;
 			baseAttack = 15;
@@ -82,6 +90,8 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == "재벌")
 		{
+			AsciiArt::setConsoleSize(160, 160);
+			AsciiArt::printFromFile("goblin_art.txt");
 			namePrefix = "재벌 고블린";
 			baseHealth = 100;
 			baseAttack = 50;

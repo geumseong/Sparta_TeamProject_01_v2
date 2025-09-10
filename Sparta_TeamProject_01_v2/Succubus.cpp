@@ -1,4 +1,5 @@
 ﻿//#include "Succubus.h"
+// #include "AsciiArt.h"
 //#include "Item.h"
 //#include <iostream>
 //#include <algorithm> // std::min 함수 사용
@@ -6,6 +7,8 @@
 //Succubus::Succubus(const std::string& type, int level)
 //    : Monster(level), type(type), isEnraged(false)
 //{
+// AsciiArt::printFromFile("succubus_art_hq.txt");
+// AsciiArt::printFromFile("succubus_art.txt");
 //    int baseHealth = 250;
 //    int baseAttack = 25;
 //    std::string namePrefix = "서큐버스";
@@ -28,6 +31,8 @@
 //{
 //    // 2페이즈 진입 조건 확인
 //    if (!isEnraged && this->health <= this->maxHealth / 2) {
+// AsciiArt::printFromFile("succubus_phase2_hq.txt");
+// AsciiArt::printFromFile("succubus_phase2.txt");
 //        isEnraged = true;
 //        std::cout << this->name << "의 눈빛이 변하며 주변에 사악한 기운이 감돕니다! (2페이즈 돌입!)" << std::endl;
 //        this->attack = static_cast<int>(this->attack * 1.3); // 공격력 30% 증가
