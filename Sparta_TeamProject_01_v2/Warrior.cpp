@@ -3,7 +3,7 @@
 
 Warrior::Warrior()
 {
-	jobName = "Warrior";
+	jobName = u8"전사";
 	health += 50;
 	maxHealth += 50;
 	attackPower += 10;
@@ -11,7 +11,7 @@ Warrior::Warrior()
 
 Warrior::Warrior(string nickName)
 {
-    this->jobName = "Warrior";
+    this->jobName = u8"전사";
     setName(nickName);
     this->level = 1;
     this->health = 200;

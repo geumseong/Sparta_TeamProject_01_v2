@@ -11,7 +11,7 @@ Archer::Archer()
 
 Archer::Archer(string nickName)
 {
-    this->jobName = "Archer";
+    this->jobName = u8"궁수";
     setName(nickName);
     this->level = 1;
     this->health = 200;

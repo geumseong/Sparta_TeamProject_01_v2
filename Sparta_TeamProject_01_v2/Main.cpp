@@ -13,6 +13,10 @@
 #include "UIManager.h"
 #include "AsciiArt.h"
 #include "Workshop.h"
+#include "Archer.h"
+#include "Thief.h"
+#include "Warrior.h"
+
 using namespace std;
 
 void EnableVirtualTerminalProcessing() {
@@ -145,9 +149,69 @@ int main()
 
     setCursorPosition(2, 27);
     Game->inputLog(input);
+    string name = input;
 
+    while(true)
+    {
+        RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()
+            { // 오른쪽
+// c.displayStatus(); // 기존 코드 그대로 호출
+                Game->inven->printItemlist();
+            });
 
-    Character_ = new Magician(input);
+        RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]()
+            { // 왼쪽 1
+// c.displayStatus(); // 기존 코드 그대로 호출
+
+            });
+
+        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
+            {// 왼쪽 2
+// c.displayStatus(); // 기존 코드 그대로 호출
+                Game->outputLog(
+                    u8"플레이 하실 직업을 선택하세요.\n"
+                    u8"1. 전사\n"
+                    u8"2. 궁수\n"
+                    u8"3. 마법사\n"
+                    u8"4. 도적"
+                );
+            });
+        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]()
+            {// 왼쪽 3
+
+            });
+        Game->inputLog(input);
+        if (input == "1" || input == "전사")
+        {
+            Character_ = new Warrior(input);
+            break;
+        }
+        if (input == "2" || input == "궁수")
+        {
+            Character_ = new Archer(input);
+            break;
+        }
+        if (input == "3" || input == "마법사")
+        {
+            Character_ = new Magician(input);
+            break;
+        }
+        if (input == "4" || input == "도적")
+        {
+            Character_ = new Thief(input);
+            break;
+        }
+        else
+        {
+            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
+                {// 왼쪽 2
+    // c.displayStatus(); // 기존 코드 그대로 호출
+                    Game->outputLog(u8"잘못된 입력입니다.");
+
+                });
+        }
+    }
+
     Game->character_ = Character_;
 
 

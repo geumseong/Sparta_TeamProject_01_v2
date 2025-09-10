@@ -174,6 +174,7 @@ void GameManager::battle(Character* player, Monster* currentMonster)
         {
             instance_->updateState(GameManager::End);
         }
+        system("pause");
     }
     while (!currentMonster->isDead() && player->getHealth() > 0)  // 어느 한쪽이라도 죽지 않는 한 진행
     {

@@ -12,7 +12,7 @@ Thief::Thief()
 
 Thief::Thief(string nickName)
 {
-    this->jobName = "Thief";
+    this->jobName = u8"도적";
     setName(nickName);
     this->level = 1;
     this->health = 200;
