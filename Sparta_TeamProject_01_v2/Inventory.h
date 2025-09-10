@@ -1,68 +1,68 @@
-#pragma once
-#include <vector>
-#include "Item.h"
-
-//Ãß»ó Å¬·¡½º ±¸Çö class I_Inventory
-
-
-
-class Inventory
-{
-private:
-	vector<unique_ptr<Item>> itemList;
-	int maxSize;
-	int gold;
-
-
-public:
-	Inventory(int gold, int maxsize) : gold(gold), maxSize(maxsize) {}
-
-	void printItemlist();
-	void addItem(unique_ptr<Item> item);
-
-	void removeItem(int index);
-	int findIndex(string name);
-	Item* findItem(int index);
-
-	//getter
-	int getmaxSize() { return maxSize; }
-	int getSize() { return itemList.size(); }
-	int getGold() { return gold; }
-
-	//setter
-	void setGold(int gold);
-
-	//Ä«Å×°í¸®º° ºĞ·ù
-};
-
-//Inventory »ç¿ë¿¹½Ã
+ï»¿//#pragma once
+//#include <vector>
+//#include "Item.h"
 //
-//Inventory inven(100, 10);
-// 
-//void shop(Inventory& inven); //inventory¸¦ ½á¾ßÇÏ¸é ·¹ÆÛ·±½º¸¦ ÀÌ¿ëÇÏ¸é µÊ
-// 
+////ì¶”ìƒ í´ë˜ìŠ¤ êµ¬í˜„ class I_Inventory
 //
-//inven.addItem(make_unique<Item>("examplePotion", 100, 1, E_Type::Consumable));
-//int num = inven.findIndex("examplePotion");
-//inven.findItem(num)->addEffect<HealEffect>(50); // ¸Å°³º¯¼ö´Â Èú·®À» ³ªÅ¸³¿
-//inven.findItem(num)->useItem();
 //
-//inven.addItem(make_unique<Item>("exampleAccessory", 500, 1, E_Type::Accessory));
-//num = inven.findIndex("exampleAccessory");
-//inven.findItem(num)->addEffect<BuffEffect>(50, 50, 50);//¼ø¼­´ë·Î °ø, ¹æ, ¼Ó ¿É¼Ç
-//inven.findItem(num)->useItem();
 //
-//inven.addItem(make_unique<Item>("exampleEquipment", 300, 1, E_Type::Equipment));
-//num = inven.findIndex("exampleEquipment");
-//inven.findItem(num)->addEffect<BuffEffect>(50, 30, 30);
-//inven.findItem(num)->useItem();
+//class Inventory
+//{
+//private:
+//	vector<unique_ptr<Item>> itemList;
+//	int maxSize;
+//	int gold;
 //
-//inven.addItem(make_unique<Item>("exampleMaterial", 50, 10, E_Type::Material));
-//num = inven.findIndex("exampleMaterial");
-//inven.findItem(num)->addEffect<HealEffect>(50);
-//inven.findItem(num)->useItem(); //Àç·á´Â »ç¿ëÇØµµ ¾Æ¹«·± È¿°ú°¡ ¾øÀ½
 //
-//inven.setGold(50000);
-//inven.printItemlist();
+//public:
+//	Inventory(int gold, int maxsize) : gold(gold), maxSize(maxsize) {}
 //
-//return 0;
+//	void printItemlist();
+//	void addItem(unique_ptr<Item> item);
+//
+//	void removeItem(int index);
+//	int findIndex(string name);
+//	Item* findItem(int index);
+//
+//	//getter
+//	int getmaxSize() { return maxSize; }
+//	int getSize() { return itemList.size(); }
+//	int getGold() { return gold; }
+//
+//	//setter
+//	void setGold(int gold);
+//
+//	//ì¹´í…Œê³ ë¦¬ë³„ ë¶„ë¥˜
+//};
+//
+////Inventory ì‚¬ìš©ì˜ˆì‹œ
+////
+////Inventory inven(100, 10);
+//// 
+////void shop(Inventory& inven); //inventoryë¥¼ ì¨ì•¼í•˜ë©´ ë ˆí¼ëŸ°ìŠ¤ë¥¼ ì´ìš©í•˜ë©´ ë¨
+//// 
+////
+////inven.addItem(make_unique<Item>("examplePotion", 100, 1, E_Type::Consumable));
+////int num = inven.findIndex("examplePotion");
+////inven.findItem(num)->addEffect<HealEffect>(50); // ë§¤ê°œë³€ìˆ˜ëŠ” íëŸ‰ì„ ë‚˜íƒ€ëƒ„
+////inven.findItem(num)->useItem();
+////
+////inven.addItem(make_unique<Item>("exampleAccessory", 500, 1, E_Type::Accessory));
+////num = inven.findIndex("exampleAccessory");
+////inven.findItem(num)->addEffect<BuffEffect>(50, 50, 50);//ìˆœì„œëŒ€ë¡œ ê³µ, ë°©, ì† ì˜µì…˜
+////inven.findItem(num)->useItem();
+////
+////inven.addItem(make_unique<Item>("exampleEquipment", 300, 1, E_Type::Equipment));
+////num = inven.findIndex("exampleEquipment");
+////inven.findItem(num)->addEffect<BuffEffect>(50, 30, 30);
+////inven.findItem(num)->useItem();
+////
+////inven.addItem(make_unique<Item>("exampleMaterial", 50, 10, E_Type::Material));
+////num = inven.findIndex("exampleMaterial");
+////inven.findItem(num)->addEffect<HealEffect>(50);
+////inven.findItem(num)->useItem(); //ì¬ë£ŒëŠ” ì‚¬ìš©í•´ë„ ì•„ë¬´ëŸ° íš¨ê³¼ê°€ ì—†ìŒ
+////
+////inven.setGold(50000);
+////inven.printItemlist();
+////
+////return 0;

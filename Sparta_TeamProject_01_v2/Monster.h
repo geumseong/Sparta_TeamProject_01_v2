@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// »óÈ£ ÀÛ¿ë : GameManager, Character, Item
+// ìƒí˜¸ ì‘ìš© : GameManager, Character, Item
 #include <string>
 #include <iostream>
 #include <cstdlib>
@@ -8,44 +8,44 @@
 #include <vector>
 #include "Item.h"
 
-// Àü¹æ ¼±¾ğ
+// ì „ë°© ì„ ì–¸
 class GameManager;
 class Character;
 
 
 
-class Monster // ¸ğµç ¸ó½ºÅÍÀÇ °øÅëÀûÀÎ ¼Ó¼º°ú ±â´ÉÀ» Á¤ÀÇÇÏ´Â ºÎ¸ğ Å¬·¡½º
+class Monster // ëª¨ë“  ëª¬ìŠ¤í„°ì˜ ê³µí†µì ì¸ ì†ì„±ê³¼ ê¸°ëŠ¥ì„ ì •ì˜í•˜ëŠ” ë¶€ëª¨ í´ë˜ìŠ¤
 { 
 
 protected:
-	// ¸â¹ö º¯¼ö (¼Ó¼º)
-	// ¸ó½ºÅÍÀÇ »óÅÂ(µ¥ÀÌÅÍ)
-	// protected·Î ¼³Á¤ÇÏ¿© ÀÚ½Ä Å¬·¡½º¿¡¼­ Á¢±Ù °¡´ÉÇÏµµ·Ï ÇÔ
-	std::string name; // ¸ó½ºÅÍ ÀÌ¸§
-	int level; // ¸ó½ºÅÍ ·¹º§
-	int health; // ¸ó½ºÅÍ Ã¼·Â
-	int maxHealth; //¸ó½ºÅÍ ÃÖ´ë Ã¼·Â
-	int attack; // ¸ó½ºÅÍ °ø°İ·Â
-	int attackSpeed; // ¸ó½ºÅÍ °ø°İ¼Óµµ
-	int baseExp; // ±âº» º¸»ó °æÇèÄ¡
-	int baseGold; // ±âº» º¸»ó °ñµå
-	std::vector<Item> dropItem; // ¸ó½ºÅÍ°¡ µå·ÓÇÏ´Â ¾ÆÀÌÅÛ ¸ñ·Ï
+	// ë©¤ë²„ ë³€ìˆ˜ (ì†ì„±)
+	// ëª¬ìŠ¤í„°ì˜ ìƒíƒœ(ë°ì´í„°)
+	// protectedë¡œ ì„¤ì •í•˜ì—¬ ìì‹ í´ë˜ìŠ¤ì—ì„œ ì ‘ê·¼ ê°€ëŠ¥í•˜ë„ë¡ í•¨
+	std::string name; // ëª¬ìŠ¤í„° ì´ë¦„
+	int level; // ëª¬ìŠ¤í„° ë ˆë²¨
+	int health; // ëª¬ìŠ¤í„° ì²´ë ¥
+	int maxHealth; //ëª¬ìŠ¤í„° ìµœëŒ€ ì²´ë ¥
+	int attack; // ëª¬ìŠ¤í„° ê³µê²©ë ¥
+	int attackSpeed; // ëª¬ìŠ¤í„° ê³µê²©ì†ë„
+	int baseExp; // ê¸°ë³¸ ë³´ìƒ ê²½í—˜ì¹˜
+	int baseGold; // ê¸°ë³¸ ë³´ìƒ ê³¨ë“œ
+	//std::vector<Item> dropItem; // ëª¬ìŠ¤í„°ê°€ ë“œë¡­í•˜ëŠ” ì•„ì´í…œ ëª©ë¡
 
 
 public:
-	// ¸ó½ºÅÍ »ı¼ºÀÚ
-	// ¸ó½ºÅÍ °´Ã¼¸¦ »ı¼ºÇÒ ¶§ °¡Àå ¸ÕÀú È£ÃâµÊ
-	// ÀÌ¸§, Ã¼·Â, °ø°İ·ÂÀ» ÃÊ±â°ªÀ¸·Î ¼³Á¤
-	Monster(int level); // ·¹º§¸¸ ¹Ş¾Æ¼­ ÃÊ±âÈ­
+	// ëª¬ìŠ¤í„° ìƒì„±ì
+	// ëª¬ìŠ¤í„° ê°ì²´ë¥¼ ìƒì„±í•  ë•Œ ê°€ì¥ ë¨¼ì € í˜¸ì¶œë¨
+	// ì´ë¦„, ì²´ë ¥, ê³µê²©ë ¥ì„ ì´ˆê¸°ê°’ìœ¼ë¡œ ì„¤ì •
+	Monster(int level); // ë ˆë²¨ë§Œ ë°›ì•„ì„œ ì´ˆê¸°í™”
 	
-	virtual ~Monster() {} // °¡»ó ¼Ò¸êÀÚ
+	virtual ~Monster() {} // ê°€ìƒ ì†Œë©¸ì
 
 
-	// ¸â¹ö ÇÔ¼ö
+	// ë©¤ë²„ í•¨ìˆ˜
 
 
-	// getter ÇÔ¼ö
-	// ¸ó½ºÅÍÀÇ ¼Ó¼º°ªÀ» ¸®ÅÏ
+	// getter í•¨ìˆ˜
+	// ëª¬ìŠ¤í„°ì˜ ì†ì„±ê°’ì„ ë¦¬í„´
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHealth() const { return health; }
@@ -53,11 +53,11 @@ public:
 	int getAttackSpeed() const { return attackSpeed; }
 	
 
-	// setter ÇÔ¼ö?
-	// ¸ó½ºÅÍÀÇ ¼Ó¼º°ªÀ» º¯°æ
-	// ¸ó½ºÅÍ¿¡°Ô ÇÇÇØ¸¦ ÀÔÈ÷´Â ÇÔ¼ö 
-	// ¸ó½ºÅÍ¿¡°Ô Á÷Á¢ÀûÀ¸·Î ¼Ó¼º°ªÀ» º¯°æÇÏ´Â °ÍÀº À§ÇèÇÒ ¼ö ÀÖÀ¸¹Ç·Î
-	// setter ÇÔ¼ö´Â Á¦°øÇÏÁö ¾ÊÀ½?
+	// setter í•¨ìˆ˜?
+	// ëª¬ìŠ¤í„°ì˜ ì†ì„±ê°’ì„ ë³€ê²½
+	// ëª¬ìŠ¤í„°ì—ê²Œ í”¼í•´ë¥¼ ì…íˆëŠ” í•¨ìˆ˜ 
+	// ëª¬ìŠ¤í„°ì—ê²Œ ì§ì ‘ì ìœ¼ë¡œ ì†ì„±ê°’ì„ ë³€ê²½í•˜ëŠ” ê²ƒì€ ìœ„í—˜í•  ìˆ˜ ìˆìœ¼ë¯€ë¡œ
+	// setter í•¨ìˆ˜ëŠ” ì œê³µí•˜ì§€ ì•ŠìŒ?
 	void takeDamage(int damage) 
 	{ 
 		health -= damage;
@@ -66,35 +66,35 @@ public:
 		{
 			health = 0;
 		}
-	} // ÇÇÇØ
+	} // í”¼í•´
 	
 
-	// ¸ó½ºÅÍÀÇ Çàµ¿À» Á¤ÀÇ ÇÏ´Â ÇÔ¼ö
+	// ëª¬ìŠ¤í„°ì˜ í–‰ë™ì„ ì •ì˜ í•˜ëŠ” í•¨ìˆ˜
 	
-	// ¸ó½ºÅÍÀÇ »ç¸Á ¿©ºÎ¸¦ È®ÀÎÇÏ´Â ÇÔ¼ö
-	bool isDead() const { return health <= 0; } // »ç¸Á
+	// ëª¬ìŠ¤í„°ì˜ ì‚¬ë§ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
+	bool isDead() const { return health <= 0; } // ì‚¬ë§
 	
-	// ¸ó½ºÅÍ°¡ Á×¾úÀ» ¶§ ¾ÆÀÌÅÛÀ» µå·ÓÇÏ´Â ÇÔ¼ö
-	//void dropItem() { /* ¾ÆÀÌÅÛ µå¶ø ·ÎÁ÷ */ return nullptr; } // ¾ÆÀÌÅÛ µå¶ø
+	// ëª¬ìŠ¤í„°ê°€ ì£½ì—ˆì„ ë•Œ ì•„ì´í…œì„ ë“œë¡­í•˜ëŠ” í•¨ìˆ˜
+	//void dropItem() { /* ì•„ì´í…œ ë“œë ë¡œì§ */ return nullptr; } // ì•„ì´í…œ ë“œë
 
-	// ¸ó½ºÅÍÀÇ ÀÏ¹İ Çàµ¿ (±âº» ±¸Çö)
+	// ëª¬ìŠ¤í„°ì˜ ì¼ë°˜ í–‰ë™ (ê¸°ë³¸ êµ¬í˜„)
 	virtual int performAction()
 	{
-		// ±âº» Çàµ¿: ¸ó½ºÅÍ°¡ °ø°İÇÏ´Â Çàµ¿
-		std::cout << name << " °¡ °ø°İÇÕ´Ï´Ù :  " << attack << " µ¥¹ÌÁö¸¦ ÀÔÇû½À´Ï´Ù!" << std::endl;
-		return attack; // °ø°İ·ÂÀ» ¸®ÅÏ
+		// ê¸°ë³¸ í–‰ë™: ëª¬ìŠ¤í„°ê°€ ê³µê²©í•˜ëŠ” í–‰ë™
+		std::cout << name << " ê°€ ê³µê²©í•©ë‹ˆë‹¤ :  " << attack << " ë°ë¯¸ì§€ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤!" << std::endl;
+		return attack; // ê³µê²©ë ¥ì„ ë¦¬í„´
 	}
 	
-	Item getDropItem() const // ¾ÆÀÌÅÛ µå·Ó
-	{
-		if (dropItem.empty())
-		{
-			return Item("¾øÀ½", 0, 0, E_Type::Material); // µå·Ó ¾ÆÀÌÅÛÀÌ ¾øÀ¸¸é "¾øÀ½" ¹İÈ¯
-		}
+	//Item getDropItem() const // ì•„ì´í…œ ë“œë¡­
+	//{
+	//	if (dropItem.empty())
+	//	{
+	//		return Item("ì—†ìŒ", 0, 0, E_Type::Material); // ë“œë¡­ ì•„ì´í…œì´ ì—†ìœ¼ë©´ "ì—†ìŒ" ë°˜í™˜
+	//	}
 
-		// ·£´ıÀ¸·Î ¾ÆÀÌÅÛ ¼±ÅÃ
-		int randomIndex = rand() % dropItem.size();
-		return dropItem[randomIndex];
-	}
+	//	// ëœë¤ìœ¼ë¡œ ì•„ì´í…œ ì„ íƒ
+	//	int randomIndex = rand() % dropItem.size();
+	//	return dropItem[randomIndex];
+	//}
 
 };

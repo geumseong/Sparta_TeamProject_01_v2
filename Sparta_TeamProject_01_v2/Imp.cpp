@@ -1,67 +1,67 @@
-#include "Imp.h"
-#include "Item.h"
-#include <iostream>
-
-Imp::Imp(const std::string& type, int level)
-    : Monster(level), type(type)
-{
-    int baseHealth = 0;
-    int baseAttack = 0;
-    std::string namePrefix = "";
-
-    if (type == "ÀÏ¹İ") {
-        namePrefix = "ÀÓÇÁ";
-        baseHealth = 30;
-        baseAttack = 12;
-        this->baseExp = 20;
-        this->baseGold = 10;
-        this->attackSpeed = 22;
-        dropItem.push_back(Item("ÀÓÇÁÀÇ ÀÛÀº »Ô", 30, 1, E_Type::Material));
-    }
-    else if (type == "ÆÄÀÌ¾î") {
-        namePrefix = "ÆÄÀÌ¾î ÀÓÇÁ";
-        baseHealth = 40;
-        baseAttack = 10; // ¸¶¹ı °ø°İÀÌ¶ó ±âº» °ø°İ·ÂÀº ³·À½
-        this->baseExp = 30;
-        this->baseGold = 15;
-        this->attackSpeed = 20;
-        dropItem.push_back(Item("ºÒÀÇ Á¤¼ö", 80, 1, E_Type::Material));
-    }
-    else if (type == "¹ü»ıÀÌ") {
-        namePrefix = "¹ü»ıÀÌ ÀÓÇÁ";
-        baseHealth = 35;
-        baseAttack = 8;
-        this->baseExp = 40;
-        this->baseGold = 30;
-        this->attackSpeed = 25;
-        dropItem.push_back(Item("ÀÓÇÁÀÇ ³°Àº ¾È°æ", 180, 1, E_Type::Accessory));
-        dropItem.push_back(Item("ÁöÇıÀÇ ÆäÀÌÁö", 220, 1, E_Type::Material));
-    }
-
-    this->health = baseHealth + (this->level * 4);
-    this->attack = baseAttack + (this->level * 2);
-    this->maxHealth = this->health;
-    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
-}
-
-int Imp::performAction()
-{
-    if (type == "ÆÄÀÌ¾î") {
-        return fireBoltAttack();
-    }
-    // "¹ü»ıÀÌ" Å¸ÀÔµµ ±âº» °ø°İÀº ÇÒÄû±â·Î ¼³Á¤
-    return scratchAttack();
-}
-
-int Imp::scratchAttack()
-{
-    std::cout << this->name << "ÀÌ(°¡) Àå³­½º·´°Ô ÇÒÄû¸ç ±«·ÓÈü´Ï´Ù!" << std::endl;
-    return this->attack;
-}
-
-int Imp::fireBoltAttack()
-{
-    int finalDamage = static_cast<int>(this->attack * 1.8);
-    std::cout << this->name << "ÀÌ(°¡) ÀÛÀº È­¿°±¸¸¦ ´øÁı´Ï´Ù! (¸¶¹ı °ø°İ!)" << std::endl;
-    return finalDamage;
-}
+ï»¿//#include "Imp.h"
+//#include "Item.h"
+//#include <iostream>
+//
+//Imp::Imp(const std::string& type, int level)
+//    : Monster(level), type(type)
+//{
+//    int baseHealth = 0;
+//    int baseAttack = 0;
+//    std::string namePrefix = "";
+//
+//    if (type == "ì¼ë°˜") {
+//        namePrefix = "ì„í”„";
+//        baseHealth = 30;
+//        baseAttack = 12;
+//        this->baseExp = 20;
+//        this->baseGold = 10;
+//        this->attackSpeed = 22;
+//        dropItem.push_back(Item("ì„í”„ì˜ ì‘ì€ ë¿”", 30, 1, E_Type::Material));
+//    }
+//    else if (type == "íŒŒì´ì–´") {
+//        namePrefix = "íŒŒì´ì–´ ì„í”„";
+//        baseHealth = 40;
+//        baseAttack = 10; // ë§ˆë²• ê³µê²©ì´ë¼ ê¸°ë³¸ ê³µê²©ë ¥ì€ ë‚®ìŒ
+//        this->baseExp = 30;
+//        this->baseGold = 15;
+//        this->attackSpeed = 20;
+//        dropItem.push_back(Item("ë¶ˆì˜ ì •ìˆ˜", 80, 1, E_Type::Material));
+//    }
+//    else if (type == "ë²”ìƒì´") {
+//        namePrefix = "ë²”ìƒì´ ì„í”„";
+//        baseHealth = 35;
+//        baseAttack = 8;
+//        this->baseExp = 40;
+//        this->baseGold = 30;
+//        this->attackSpeed = 25;
+//        dropItem.push_back(Item("ì„í”„ì˜ ë‚¡ì€ ì•ˆê²½", 180, 1, E_Type::Accessory));
+//        dropItem.push_back(Item("ì§€í˜œì˜ í˜ì´ì§€", 220, 1, E_Type::Material));
+//    }
+//
+//    this->health = baseHealth + (this->level * 4);
+//    this->attack = baseAttack + (this->level * 2);
+//    this->maxHealth = this->health;
+//    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
+//}
+//
+//int Imp::performAction()
+//{
+//    if (type == "íŒŒì´ì–´") {
+//        return fireBoltAttack();
+//    }
+//    // "ë²”ìƒì´" íƒ€ì…ë„ ê¸°ë³¸ ê³µê²©ì€ í• í€´ê¸°ë¡œ ì„¤ì •
+//    return scratchAttack();
+//}
+//
+//int Imp::scratchAttack()
+//{
+//    std::cout << this->name << "ì´(ê°€) ì¥ë‚œìŠ¤ëŸ½ê²Œ í• í€´ë©° ê´´ë¡­í™ë‹ˆë‹¤!" << std::endl;
+//    return this->attack;
+//}
+//
+//int Imp::fireBoltAttack()
+//{
+//    int finalDamage = static_cast<int>(this->attack * 1.8);
+//    std::cout << this->name << "ì´(ê°€) ì‘ì€ í™”ì—¼êµ¬ë¥¼ ë˜ì§‘ë‹ˆë‹¤! (ë§ˆë²• ê³µê²©!)" << std::endl;
+//    return finalDamage;
+//}

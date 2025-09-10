@@ -1,7 +1,7 @@
-#include "Troll.h"
+ï»¿#include "Troll.h"
 #include "Item.h"
 #include <iostream>
-#include <algorithm> // std::min ÇÔ¼ö »ç¿ë
+#include <algorithm> // std::min í•¨ìˆ˜ ì‚¬ìš©
 
 Troll::Troll(const std::string& type, int level)
     : Monster(level), type(type)
@@ -10,27 +10,27 @@ Troll::Troll(const std::string& type, int level)
     int baseAttack = 0;
     std::string namePrefix = "";
 
-    // 'ÀÏ¹İ' Å¸ÀÔÀ» °¡Àå ¸ÕÀú ¼³Á¤
-    if (type == "ÀÏ¹İ") {
-        namePrefix = "Æ®·Ñ";
+    // 'ì¼ë°˜' íƒ€ì…ì„ ê°€ì¥ ë¨¼ì € ì„¤ì •
+    if (type == "ì¼ë°˜") {
+        namePrefix = "íŠ¸ë¡¤";
         baseHealth = 120;
         baseAttack = 18;
         this->baseExp = 50;
         this->baseGold = 30;
         this->attackSpeed = 4;
-        this->regenerationAmount = 5; // ÅÏ´ç 5 È¸º¹
-        dropItem.push_back(Item("Æ®·ÑÀÇ Áú±ä °¡Á×", 50, 1, E_Type::Material));
+        this->regenerationAmount = 5; // í„´ë‹¹ 5 íšŒë³µ
+        //dropItem.push_back(Item("íŠ¸ë¡¤ì˜ ì§ˆê¸´ ê°€ì£½", 50, 1, E_Type::Material));
     }
-    else if (type == "Àç»ıÇÏ´Â") {
-        namePrefix = "Àç»ıÇÏ´Â Æ®·Ñ";
+    else if (type == "ì¬ìƒí•˜ëŠ”") {
+        namePrefix = "ì¬ìƒí•˜ëŠ” íŠ¸ë¡¤";
         baseHealth = 100;
         baseAttack = 22;
         this->baseExp = 80;
         this->baseGold = 45;
         this->attackSpeed = 6;
-        this->regenerationAmount = 15; // ÅÏ´ç 15 È¸º¹
-        dropItem.push_back(Item("Æ®·ÑÀÇ ÇÇ°¡ ´ã±ä ¾àº´", 120, 1, E_Type::Material));
-        dropItem.push_back(Item("Æ®·ÑÀÇ Àç»ıÇÏ´Â ½ÉÀå", 300, 1, E_Type::Material));
+        this->regenerationAmount = 15; // í„´ë‹¹ 15 íšŒë³µ
+        //dropItem.push_back(Item("íŠ¸ë¡¤ì˜ í”¼ê°€ ë‹´ê¸´ ì•½ë³‘", 120, 1, E_Type::Material));
+        //dropItem.push_back(Item("íŠ¸ë¡¤ì˜ ì¬ìƒí•˜ëŠ” ì‹¬ì¥", 300, 1, E_Type::Material));
     }
 
     this->health = baseHealth + (this->level * 12);
@@ -41,17 +41,17 @@ Troll::Troll(const std::string& type, int level)
 
 int Troll::performAction()
 {
-    // Çàµ¿ ½ÃÀÛ Àü Ã¼·Â Àç»ı
+    // í–‰ë™ ì‹œì‘ ì „ ì²´ë ¥ ì¬ìƒ
     this->health += this->regenerationAmount;
-    this->health = std::min(this->maxHealth, this->health); // ÃÖ´ë Ã¼·ÂÀ» ³ÑÁö ¾Êµµ·Ï º¸Á¤
+    this->health = std::min(this->maxHealth, this->health); // ìµœëŒ€ ì²´ë ¥ì„ ë„˜ì§€ ì•Šë„ë¡ ë³´ì •
 
-    std::cout << this->name << "ÀÇ »óÃ³°¡ ²Ù¹°°Å¸®¸ç È¸º¹µË´Ï´Ù! (HP " << this->regenerationAmount << " È¸º¹)" << std::endl;
+    std::cout << this->name << "ì˜ ìƒì²˜ê°€ ê¾¸ë¬¼ê±°ë¦¬ë©° íšŒë³µë©ë‹ˆë‹¤! (HP " << this->regenerationAmount << " íšŒë³µ)" << std::endl;
 
     return slamAttack();
 }
 
 int Troll::slamAttack()
 {
-    std::cout << this->name << "ÀÌ(°¡) °Å´ëÇÑ ÁÖ¸ÔÀ» ³»¸®Ä¨´Ï´Ù!" << std::endl;
+    std::cout << this->name << "ì´(ê°€) ê±°ëŒ€í•œ ì£¼ë¨¹ì„ ë‚´ë¦¬ì¹©ë‹ˆë‹¤!" << std::endl;
     return this->attack;
 }

@@ -1,66 +1,66 @@
-#include "Succubus.h"
-#include "Item.h"
-#include <iostream>
-#include <algorithm> // std::min ÇÔ¼ö »ç¿ë
-
-Succubus::Succubus(const std::string& type, int level)
-    : Monster(level), type(type), isEnraged(false)
-{
-    int baseHealth = 250;
-    int baseAttack = 25;
-    std::string namePrefix = "¼­Å¥¹ö½º";
-
-    this->baseExp = 250;
-    this->baseGold = 300;
-    this->attackSpeed = 16;
-
-    dropItem.push_back(Item("¸ÅÈ¤ÀûÀÎ Çâ¼ö", 150, 1, E_Type::Accessory));
-    dropItem.push_back(Item("°ËÀº ¹ÚÁã ³¯°³", 80, 1, E_Type::Material));
-    dropItem.push_back(Item("Å¸¶ôÇÑ ¿µÈ¥¼®", 500, 1, E_Type::Material));
-
-    this->health = baseHealth + (this->level * 18);
-    this->attack = baseAttack + (this->level * 4);
-    this->maxHealth = this->health;
-    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
-}
-
-int Succubus::performAction()
-{
-    // 2ÆäÀÌÁî ÁøÀÔ Á¶°Ç È®ÀÎ
-    if (!isEnraged && this->health <= this->maxHealth / 2) {
-        isEnraged = true;
-        std::cout << this->name << "ÀÇ ´«ºûÀÌ º¯ÇÏ¸ç ÁÖº¯¿¡ »ç¾ÇÇÑ ±â¿îÀÌ °¨µ½´Ï´Ù! (2ÆäÀÌÁî µ¹ÀÔ!)" << std::endl;
-        this->attack = static_cast<int>(this->attack * 1.3); // °ø°İ·Â 30% Áõ°¡
-    }
-
-    // 2ÆäÀÌÁîÀÏ °æ¿ì 2È¸ °ø°İ
-    if (isEnraged) {
-        std::cout << this->name << "ÀÌ(°¡) ¿¬¼ÓÀ¸·Î °ø°İÇÕ´Ï´Ù!" << std::endl;
-        int totalDamage = lifeDrainAttack() + charmAttack();
-        return totalDamage;
-    }
-    // 1ÆäÀÌÁîÀÏ °æ¿ì ±âÁ¸ ÆĞÅÏ
-    else {
-        if (rand() % 2 == 0) {
-            return lifeDrainAttack();
-        }
-        return charmAttack();
-    }
-}
-
-int Succubus::charmAttack()
-{
-    std::cout << this->name << "ÀÌ(°¡) ¸ÅÈ¤ÀûÀÎ Ã¤ÂïÀ» ÈÖµÎ¸¨´Ï´Ù!" << std::endl;
-    return this->attack;
-}
-
-int Succubus::lifeDrainAttack()
-{
-    int damage = static_cast<int>(this->attack * 0.8);
-    int healAmount = static_cast<int>(damage * 0.5);
-
-    this->health = std::min(this->maxHealth, this->health + healAmount);
-
-    std::cout << this->name << "ÀÌ(°¡) »ı¸í·ÂÀ» Èí¼öÇÕ´Ï´Ù! (HP " << healAmount << " È¸º¹)" << std::endl;
-    return damage;
-}
+ï»¿//#include "Succubus.h"
+//#include "Item.h"
+//#include <iostream>
+//#include <algorithm> // std::min í•¨ìˆ˜ ì‚¬ìš©
+//
+//Succubus::Succubus(const std::string& type, int level)
+//    : Monster(level), type(type), isEnraged(false)
+//{
+//    int baseHealth = 250;
+//    int baseAttack = 25;
+//    std::string namePrefix = "ì„œíë²„ìŠ¤";
+//
+//    this->baseExp = 250;
+//    this->baseGold = 300;
+//    this->attackSpeed = 16;
+//
+//    dropItem.push_back(Item("ë§¤í˜¹ì ì¸ í–¥ìˆ˜", 150, 1, E_Type::Accessory));
+//    dropItem.push_back(Item("ê²€ì€ ë°•ì¥ ë‚ ê°œ", 80, 1, E_Type::Material));
+//    dropItem.push_back(Item("íƒ€ë½í•œ ì˜í˜¼ì„", 500, 1, E_Type::Material));
+//
+//    this->health = baseHealth + (this->level * 18);
+//    this->attack = baseAttack + (this->level * 4);
+//    this->maxHealth = this->health;
+//    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
+//}
+//
+//int Succubus::performAction()
+//{
+//    // 2í˜ì´ì¦ˆ ì§„ì… ì¡°ê±´ í™•ì¸
+//    if (!isEnraged && this->health <= this->maxHealth / 2) {
+//        isEnraged = true;
+//        std::cout << this->name << "ì˜ ëˆˆë¹›ì´ ë³€í•˜ë©° ì£¼ë³€ì— ì‚¬ì•…í•œ ê¸°ìš´ì´ ê°ë•ë‹ˆë‹¤! (2í˜ì´ì¦ˆ ëŒì…!)" << std::endl;
+//        this->attack = static_cast<int>(this->attack * 1.3); // ê³µê²©ë ¥ 30% ì¦ê°€
+//    }
+//
+//    // 2í˜ì´ì¦ˆì¼ ê²½ìš° 2íšŒ ê³µê²©
+//    if (isEnraged) {
+//        std::cout << this->name << "ì´(ê°€) ì—°ì†ìœ¼ë¡œ ê³µê²©í•©ë‹ˆë‹¤!" << std::endl;
+//        int totalDamage = lifeDrainAttack() + charmAttack();
+//        return totalDamage;
+//    }
+//    // 1í˜ì´ì¦ˆì¼ ê²½ìš° ê¸°ì¡´ íŒ¨í„´
+//    else {
+//        if (rand() % 2 == 0) {
+//            return lifeDrainAttack();
+//        }
+//        return charmAttack();
+//    }
+//}
+//
+//int Succubus::charmAttack()
+//{
+//    std::cout << this->name << "ì´(ê°€) ë§¤í˜¹ì ì¸ ì±„ì°ì„ íœ˜ë‘ë¦…ë‹ˆë‹¤!" << std::endl;
+//    return this->attack;
+//}
+//
+//int Succubus::lifeDrainAttack()
+//{
+//    int damage = static_cast<int>(this->attack * 0.8);
+//    int healAmount = static_cast<int>(damage * 0.5);
+//
+//    this->health = std::min(this->maxHealth, this->health + healAmount);
+//
+//    std::cout << this->name << "ì´(ê°€) ìƒëª…ë ¥ì„ í¡ìˆ˜í•©ë‹ˆë‹¤! (HP " << healAmount << " íšŒë³µ)" << std::endl;
+//    return damage;
+//}

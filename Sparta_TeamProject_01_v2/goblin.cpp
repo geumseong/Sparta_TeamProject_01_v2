@@ -1,4 +1,4 @@
-#include "Goblin.h"
+ï»¿#include "Goblin.h"
 #include "Item.h"
 #include <iostream>
 
@@ -7,99 +7,99 @@ Goblin::Goblin(const std::string& type, int level)
 {
 
 	{
-		int baseHealth = 0; // ±âº» Ã¼·Â
-		int baseAttack = 0; // ±âº» °ø°İ·Â
-		int attackSpeed = 0; // ±âº» °ø°İ¼Óµµ
-		std::string namePrefix = ""; // ÀÌ¸§
+		int baseHealth = 0; // ê¸°ë³¸ ì²´ë ¥
+		int baseAttack = 0; // ê¸°ë³¸ ê³µê²©ë ¥
+		int attackSpeed = 0; // ê¸°ë³¸ ê³µê²©ì†ë„
+		std::string namePrefix = ""; // ì´ë¦„
 
 
-		if (type == "ÀÏ¹İ")
+		if (type == "ì¼ë°˜")
 		{
-			namePrefix = "°íºí¸°";
+			namePrefix = "ê³ ë¸”ë¦°";
 			baseHealth = 30;
 			baseAttack = 5;
 			attackSpeed = 0;
 			
-			this->baseExp = 10;   // ±âº» °æÇèÄ¡ Ãß°¡
-			this->baseGold = 5;    // ±âº» °ñµå Ãß°¡
-			// this->commonWeight = 80; // ÀÏ¹İ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->rareWeight = 15;   // Èñ±Í ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->legendaryWeight = 5; // Àü¼³ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			dropItem.push_back(Item("°íºí¸°ÀÇ ºÎ·¯Áø »À", 20, 1, E_Type::Material));
-			dropItem.push_back(Item("±úÁø Åõ±¸ Á¶°¢", 30, 1, E_Type::Material));
+			this->baseExp = 10;   // ê¸°ë³¸ ê²½í—˜ì¹˜ ì¶”ê°€
+			this->baseGold = 5;    // ê¸°ë³¸ ê³¨ë“œ ì¶”ê°€
+			// this->commonWeight = 80; // ì¼ë°˜ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->rareWeight = 15;   // í¬ê·€ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->legendaryWeight = 5; // ì „ì„¤ ì•„ì´í…œ ë“œë í™•ë¥ 
+			//dropItem.push_back(Item("ê³ ë¸”ë¦°ì˜ ë¶€ëŸ¬ì§„ ë¼ˆ", 20, 1, E_Type::Material));
+			//dropItem.push_back(Item("ê¹¨ì§„ íˆ¬êµ¬ ì¡°ê°", 30, 1, E_Type::Material));
 		}
 
-		else if (type == "°ÌÀïÀÌ")
+		else if (type == "ê²ìŸì´")
 		{
-			namePrefix = "°ÌÀïÀÌ °íºí¸°";
+			namePrefix = "ê²ìŸì´ ê³ ë¸”ë¦°";
 			baseHealth = 20;
 			baseAttack = 3;
 			attackSpeed = 0;
 			bonusExp = 10;
 			bonusGold = 10;
-			this->baseExp = 10;   // ±âº» °æÇèÄ¡ Ãß°¡
-			this->baseGold = 5;    // ±âº» °ñµå Ãß°¡
-			// this->commonWeight = 70; // ÀÏ¹İ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->rareWeight = 25;   // Èñ±Í ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->legendaryWeight = 5; // Àü¼³ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			dropItem.push_back(Item("°íºí¸°ÀÇ ¾ãÀº °¡Á×", 20, 1, E_Type::Material));
-			dropItem.push_back(Item("°¡Á× Á¶°¢", 25, 1, E_Type::Material));
+			this->baseExp = 10;   // ê¸°ë³¸ ê²½í—˜ì¹˜ ì¶”ê°€
+			this->baseGold = 5;    // ê¸°ë³¸ ê³¨ë“œ ì¶”ê°€
+			// this->commonWeight = 70; // ì¼ë°˜ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->rareWeight = 25;   // í¬ê·€ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->legendaryWeight = 5; // ì „ì„¤ ì•„ì´í…œ ë“œë í™•ë¥ 
+			//dropItem.push_back(Item("ê³ ë¸”ë¦°ì˜ ì–‡ì€ ê°€ì£½", 20, 1, E_Type::Material));
+			//dropItem.push_back(Item("ê°€ì£½ ì¡°ê°", 25, 1, E_Type::Material));
 		}
 
-		else if (type == "°Ç¹æÁø")
+		else if (type == "ê±´ë°©ì§„")
 		{
-			namePrefix = "°Ç¹æÁø °íºí¸°";
+			namePrefix = "ê±´ë°©ì§„ ê³ ë¸”ë¦°";
 			baseHealth = 35;
 			baseAttack = 10;
 			attackSpeed = 0;
 			bonusExp = 15;
 			bonusGold = 15;
-			this->baseExp = 10;   // ±âº» °æÇèÄ¡ Ãß°¡
-			this->baseGold = 5;    // ±âº» °ñµå Ãß°¡
-			// this->commonWeight = 60; // ÀÏ¹İ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->rareWeight = 30;   // Èñ±Í ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->legendaryWeight = 10; // Àü¼³ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			dropItem.push_back(Item("°íºí¸°ÀÇ ±ä ¼ÕÅé", 30, 1, E_Type::Material));
-			dropItem.push_back(Item("³ì½¼ ´Ü°Ë", 40, 1, E_Type::Material));
+			this->baseExp = 10;   // ê¸°ë³¸ ê²½í—˜ì¹˜ ì¶”ê°€
+			this->baseGold = 5;    // ê¸°ë³¸ ê³¨ë“œ ì¶”ê°€
+			// this->commonWeight = 60; // ì¼ë°˜ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->rareWeight = 30;   // í¬ê·€ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->legendaryWeight = 10; // ì „ì„¤ ì•„ì´í…œ ë“œë í™•ë¥ 
+			//dropItem.push_back(Item("ê³ ë¸”ë¦°ì˜ ê¸´ ì†í†±", 30, 1, E_Type::Material));
+			//dropItem.push_back(Item("ë…¹ìŠ¨ ë‹¨ê²€", 40, 1, E_Type::Material));
 		}
 
-		else if (type == "»ç³ª¿î")
+		else if (type == "ì‚¬ë‚˜ìš´")
 		{
-			namePrefix = "»ç³ª¿î °íºí¸°";
+			namePrefix = "ì‚¬ë‚˜ìš´ ê³ ë¸”ë¦°";
 			baseHealth = 40;
 			baseAttack = 15;
 			attackSpeed = 0;
 			bonusExp = 20;
 			bonusGold = 20;
-			this->baseExp = 10;   // ±âº» °æÇèÄ¡ Ãß°¡
-			this->baseGold = 5;    // ±âº» °ñµå Ãß°¡
-			// this->commonWeight = 50; // ÀÏ¹İ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->rareWeight = 35;   // Èñ±Í ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->legendaryWeight = 15; // Àü¼³ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			dropItem.push_back(Item("°íºí¸°ÀÇ ³¯Ä«·Î¿î ÀÌ»¡", 50, 1, E_Type::Material));
-			dropItem.push_back(Item("³ì½¼ ´ë°Ë", 60, 1, E_Type::Material));
+			this->baseExp = 10;   // ê¸°ë³¸ ê²½í—˜ì¹˜ ì¶”ê°€
+			this->baseGold = 5;    // ê¸°ë³¸ ê³¨ë“œ ì¶”ê°€
+			// this->commonWeight = 50; // ì¼ë°˜ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->rareWeight = 35;   // í¬ê·€ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->legendaryWeight = 15; // ì „ì„¤ ì•„ì´í…œ ë“œë í™•ë¥ 
+			//dropItem.push_back(Item("ê³ ë¸”ë¦°ì˜ ë‚ ì¹´ë¡œìš´ ì´ë¹¨", 50, 1, E_Type::Material));
+			//dropItem.push_back(Item("ë…¹ìŠ¨ ëŒ€ê²€", 60, 1, E_Type::Material));
 		}
 
-		else if (type == "Àç¹ú")
+		else if (type == "ì¬ë²Œ")
 		{
-			namePrefix = "Àç¹ú °íºí¸°";
+			namePrefix = "ì¬ë²Œ ê³ ë¸”ë¦°";
 			baseHealth = 100;
 			baseAttack = 50;
 			attackSpeed = 0;
 			bonusExp = 50;
 			bonusGold = 100;
-			this->baseExp = 10;   // ±âº» °æÇèÄ¡ Ãß°¡
-			this->baseGold = 5;    // ±âº» °ñµå Ãß°¡
-			// this->commonWeight = 30; // ÀÏ¹İ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->rareWeight = 50;   // Èñ±Í ¾ÆÀÌÅÛ µå¶ø È®·ü
-			// this->legendaryWeight = 20; // Àü¼³ ¾ÆÀÌÅÛ µå¶ø È®·ü
-			dropItem.push_back(Item("°íºí¸°ÀÇ È²±İ Á¶°¢", 100, 1, E_Type::Material));
-			dropItem.push_back(Item("±İÈ­ ÁÖ¸Ó´Ï", 200, 1, E_Type::Material));
+			this->baseExp = 10;   // ê¸°ë³¸ ê²½í—˜ì¹˜ ì¶”ê°€
+			this->baseGold = 5;    // ê¸°ë³¸ ê³¨ë“œ ì¶”ê°€
+			// this->commonWeight = 30; // ì¼ë°˜ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->rareWeight = 50;   // í¬ê·€ ì•„ì´í…œ ë“œë í™•ë¥ 
+			// this->legendaryWeight = 20; // ì „ì„¤ ì•„ì´í…œ ë“œë í™•ë¥ 
+			//dropItem.push_back(Item("ê³ ë¸”ë¦°ì˜ í™©ê¸ˆ ì¡°ê°", 100, 1, E_Type::Material));
+			//dropItem.push_back(Item("ê¸ˆí™” ì£¼ë¨¸ë‹ˆ", 200, 1, E_Type::Material));
 		}
 
-		this->health = baseHealth + (this->level * 5); // ·¹º§´ç Ã¼·Â 5 Áõ°¡
-		this->attack = baseAttack + (this->level * 2); // ·¹º§´ç °ø°İ·Â 2 Áõ°¡
-		this->attackSpeed = attackSpeed + (this->level * 2); // ·¹º§´ç °ø°İ¼Óµµ 2) Áõ°¡
+		this->health = baseHealth + (this->level * 5); // ë ˆë²¨ë‹¹ ì²´ë ¥ 5 ì¦ê°€
+		this->attack = baseAttack + (this->level * 2); // ë ˆë²¨ë‹¹ ê³µê²©ë ¥ 2 ì¦ê°€
+		this->attackSpeed = attackSpeed + (this->level * 2); // ë ˆë²¨ë‹¹ ê³µê²©ì†ë„ 2) ì¦ê°€
 
 		this->name = "Lv." + std::to_string(level) + " " + namePrefix;
 
@@ -107,77 +107,77 @@ Goblin::Goblin(const std::string& type, int level)
 }
 
 
-// ¸ó½ºÅÍÀÇ ÀüÃ¼ Çàµ¿À» °áÁ¤ÇÏ´Â ¸ŞÀÎ ÇÔ¼ö
+// ëª¬ìŠ¤í„°ì˜ ì „ì²´ í–‰ë™ì„ ê²°ì •í•˜ëŠ” ë©”ì¸ í•¨ìˆ˜
 int Goblin::performAction() 
 {
     turnCount++;
 
-    if (type == "°ÌÀïÀÌ") { return performCowardlyAction(); }
-    else if (type == "Àç¹ú") { return performRichAction(); }
-    else if (type == "°Ç¹æÁø") { return performCheekyAction(); }
-    else if (type == "»ç³ª¿î") { return performFierceAction(); }
+    if (type == "ê²ìŸì´") { return performCowardlyAction(); }
+    else if (type == "ì¬ë²Œ") { return performRichAction(); }
+    else if (type == "ê±´ë°©ì§„") { return performCheekyAction(); }
+    else if (type == "ì‚¬ë‚˜ìš´") { return performFierceAction(); }
     else { return performNormalAction(); }
 }
 
-// ÀÏ¹İ °íºí¸°ÀÇ Çàµ¿
+// ì¼ë°˜ ê³ ë¸”ë¦°ì˜ í–‰ë™
 int Goblin::performNormalAction() 
 {
-    std::cout << this->name << "°¡ ¸ùµÕÀÌ¸¦ ÈÖµÎ¸¨´Ï´Ù!" << attack << std::endl;
-	return this->attack; // °ø°İ·Â ¹İÈ¯
+    std::cout << this->name << "ê°€ ëª½ë‘¥ì´ë¥¼ íœ˜ë‘ë¦…ë‹ˆë‹¤!" << attack << std::endl;
+	return this->attack; // ê³µê²©ë ¥ ë°˜í™˜
 
 }
 
-// °ÌÀïÀÌ °íºí¸°ÀÇ Çàµ¿
+// ê²ìŸì´ ê³ ë¸”ë¦°ì˜ í–‰ë™
 int Goblin::performCowardlyAction() 
 {
     if (turnCount >= 2) {
         if (rand() % 100 < 20) {
-            std::cout << name << "°¡ °Ì¿¡ Áú·Á µµ¸ÁÄ¡·Á ÇÕ´Ï´Ù! (µµÁÖ ¼º°ø!)" << std::endl;
+            std::cout << name << "ê°€ ê²ì— ì§ˆë ¤ ë„ë§ì¹˜ë ¤ í•©ë‹ˆë‹¤! (ë„ì£¼ ì„±ê³µ!)" << std::endl;
             this->health = 0;
             this->isFled = true;
-			return 0; // µµÁÖ ¼º°ø, µ¥¹ÌÁö ¾øÀ½
+			return 0; // ë„ì£¼ ì„±ê³µ, ë°ë¯¸ì§€ ì—†ìŒ
         }
         else {
-            std::cout << name << "°¡ µµ¸ÁÄ¡·Á´Ù ½ÇÆĞÇÏ°í ´ç½ÅÀ» °ø°İÇÕ´Ï´Ù! °ø°İ·Â: " << attack << std::endl;
-			return attack; // °ø°İ·Â ¹İÈ¯
+            std::cout << name << "ê°€ ë„ë§ì¹˜ë ¤ë‹¤ ì‹¤íŒ¨í•˜ê³  ë‹¹ì‹ ì„ ê³µê²©í•©ë‹ˆë‹¤! ê³µê²©ë ¥: " << attack << std::endl;
+			return attack; // ê³µê²©ë ¥ ë°˜í™˜
 		}
     }
     else {
-        std::cout << name << "°¡ °Ì¿¡ Áú·Á ¸öÀ» ¿õÅ©¸³´Ï´Ù." << std::endl;
-		return 0; // ¿õÅ©¸², µ¥¹ÌÁö ¾øÀ½
+        std::cout << name << "ê°€ ê²ì— ì§ˆë ¤ ëª¸ì„ ì›…í¬ë¦½ë‹ˆë‹¤." << std::endl;
+		return 0; // ì›…í¬ë¦¼, ë°ë¯¸ì§€ ì—†ìŒ
     
 	}
 }
 
-// °Ç¹æÁø °íºí¸°ÀÇ Çàµ¿
+// ê±´ë°©ì§„ ê³ ë¸”ë¦°ì˜ í–‰ë™
 int Goblin::performCheekyAction() {
-    std::cout << name << "°¡ ´ç½ÅÀ» ÇâÇØ ¼Õ°¡¶ôÁúÇÏ¸ç µµ¹ßÇÕ´Ï´Ù! (¸Ş½ÃÁö¸¸ Ãâ·Â)" << std::endl;
-	return 0; // µµ¹ß, µ¥¹ÌÁö ¾øÀ½
+    std::cout << name << "ê°€ ë‹¹ì‹ ì„ í–¥í•´ ì†ê°€ë½ì§ˆí•˜ë©° ë„ë°œí•©ë‹ˆë‹¤! (ë©”ì‹œì§€ë§Œ ì¶œë ¥)" << std::endl;
+	return 0; // ë„ë°œ, ë°ë¯¸ì§€ ì—†ìŒ
 }
 
-// »ç³ª¿î °íºí¸°ÀÇ Çàµ¿
+// ì‚¬ë‚˜ìš´ ê³ ë¸”ë¦°ì˜ í–‰ë™
 int Goblin::performFierceAction()
 {
 	int finalDamage = static_cast<int>(this->attack * 1.5);
-    std::cout << name << "°¡ Æ÷È¿ÇÏ¸ç ¹«ÀÚºñÇÑ °ø°İÀ» ÆÛº×½À´Ï´Ù! °ø°İ·Â: " << finalDamage << "!" << std::endl;
-	return finalDamage; // °­È­µÈ °ø°İ·Â ¹İÈ¯
+    std::cout << name << "ê°€ í¬íš¨í•˜ë©° ë¬´ìë¹„í•œ ê³µê²©ì„ í¼ë¶“ìŠµë‹ˆë‹¤! ê³µê²©ë ¥: " << finalDamage << "!" << std::endl;
+	return finalDamage; // ê°•í™”ëœ ê³µê²©ë ¥ ë°˜í™˜
 
 }
 
-// Àç¹ú °íºí¸°ÀÇ Çàµ¿
+// ì¬ë²Œ ê³ ë¸”ë¦°ì˜ í–‰ë™
 int Goblin::performRichAction()
 {
     if (turnCount == 3) 
     {
-        std::cout << this->name << "°¡ ´ç½ÅÀ» ºñ¿ôÀ¸¸ç µµ¸ÁÃÆ½À´Ï´Ù! (µµÁÖ ¼º°ø!)" << std::endl;
+        std::cout << this->name << "ê°€ ë‹¹ì‹ ì„ ë¹„ì›ƒìœ¼ë©° ë„ë§ì³¤ìŠµë‹ˆë‹¤! (ë„ì£¼ ì„±ê³µ!)" << std::endl;
         this->health = 0;
         this->isFled = true;
-		return 0; // µµÁÖ ¼º°ø, µ¥¹ÌÁö ¾øÀ½
+		return 0; // ë„ì£¼ ì„±ê³µ, ë°ë¯¸ì§€ ì—†ìŒ
     }
 
     else 
     {
-        std::cout << this->name << "°¡ °Å¸¸ÇÏ°Ô Àç·ÂÀ» °ú½ÃÇÕ´Ï´Ù!" << std::endl;
-		return 0; // Àç·Â °ú½Ã, µ¥¹ÌÁö ¾øÀ½
+        std::cout << this->name << "ê°€ ê±°ë§Œí•˜ê²Œ ì¬ë ¥ì„ ê³¼ì‹œí•©ë‹ˆë‹¤!" << std::endl;
+		return 0; // ì¬ë ¥ ê³¼ì‹œ, ë°ë¯¸ì§€ ì—†ìŒ
 	}
 }
