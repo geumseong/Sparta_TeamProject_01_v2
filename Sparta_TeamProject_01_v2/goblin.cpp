@@ -38,7 +38,7 @@ Goblin::Goblin(const std::string& type, int level)
 			bonusExp = 10;
 			bonusGold = 10;
 			this->baseExp = 10;   // 기본 경험치 추가
-			this->baseGold = 5;    // 기본 골드 추가
+			this->baseGold = 10;    // 기본 골드 추가
 			// this->commonWeight = 70; // 일반 아이템 드랍 확률
 			// this->rareWeight = 25;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 5; // 전설 아이템 드랍 확률
@@ -54,8 +54,8 @@ Goblin::Goblin(const std::string& type, int level)
 			attackSpeed = 0;
 			bonusExp = 15;
 			bonusGold = 15;
-			this->baseExp = 10;   // 기본 경험치 추가
-			this->baseGold = 5;    // 기본 골드 추가
+			this->baseExp = 15;   // 기본 경험치 추가
+			this->baseGold = 15;    // 기본 골드 추가
 			// this->commonWeight = 60; // 일반 아이템 드랍 확률
 			// this->rareWeight = 30;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 10; // 전설 아이템 드랍 확률
@@ -71,8 +71,8 @@ Goblin::Goblin(const std::string& type, int level)
 			attackSpeed = 0;
 			bonusExp = 20;
 			bonusGold = 20;
-			this->baseExp = 10;   // 기본 경험치 추가
-			this->baseGold = 5;    // 기본 골드 추가
+			this->baseExp = 20;   // 기본 경험치 추가
+			this->baseGold = 20;    // 기본 골드 추가
 			// this->commonWeight = 50; // 일반 아이템 드랍 확률
 			// this->rareWeight = 35;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 15; // 전설 아이템 드랍 확률
@@ -88,8 +88,8 @@ Goblin::Goblin(const std::string& type, int level)
 			attackSpeed = 0;
 			bonusExp = 50;
 			bonusGold = 100;
-			this->baseExp = 10;   // 기본 경험치 추가
-			this->baseGold = 5;    // 기본 골드 추가
+			this->baseExp = 50;   // 기본 경험치 추가
+			this->baseGold = 100;    // 기본 골드 추가
 			// this->commonWeight = 30; // 일반 아이템 드랍 확률
 			// this->rareWeight = 50;   // 희귀 아이템 드랍 확률
 			// this->legendaryWeight = 20; // 전설 아이템 드랍 확률
