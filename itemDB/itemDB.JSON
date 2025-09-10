@@ -24,11 +24,13 @@
     "shop_potions_005": { "name": "대형 MP 포션", "price": 0 , "type": "Consumable", "effecttype":"HealEffect", "hp":0, "mp": 100},
 
 
-    "shop_material_000": { "name": "탄화된 나무 조각", "price": 0 , "type": "Material", "effecttype":""},
-    "shop_material_001": { "name": "돌 조각", "price": 0 , "type": "Material", "effecttype":""},
-    "shop_material_002": { "name": "녹슨 철편", "price": 0 , "type": "Material", "effecttype":""},
-    "shop_material_003": { "name": "불완전한 강철괴", "price": 0 , "type": "Material", "effecttype":""},
-    "shop_material_004": { "name": "정제된 강철괴", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_000": { "name": "낡은 천 조각", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_001": { "name": "찢어진 가죽", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_002": { "name": "낡은 실", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_003": { "name": "녹슨 철", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_004": { "name": "청동 체인", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_005": { "name": "강철 반지", "price": 0 , "type": "Material", "effecttype":""},
+    "shop_material_006": { "name": "마모된 세라믹 팔찌", "price": 0 , "type": "Material", "effecttype":""},
 
 
     "shop_warrior_000": { "name": "초보자의 검", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":3, "db":0, "sb":0, "hb":0, "mb":0},
@@ -159,9 +161,20 @@
     "dragon_002": { "name": "드래곤의 발톱", "price": 0 , "type": "Material", "effecttype":""},
     "dragon_003": { "name": "드래곤의 눈알", "price": 0 , "type": "Material", "effecttype":""},
     "dragon_004": { "name": "드래곤의 날개", "price": 0 , "type": "Material", "effecttype":""},
-    "dragon_005": { "name": "드래곤의 심장", "price": 0 , "type": "Material", "effecttype":""}
+    "dragon_005": { "name": "드래곤의 심장", "price": 0 , "type": "Material", "effecttype":""},
 
-  },
+    "recipe_weapon_000": { "name": "클레이모어", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":23, "db":15, "sb":0, "hb":0, "mb":0},
+    "recipe_weapon_001": { "name": "미라쥬 컴파운드 보우", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":30, "db":0, "sb":3, "hb":0, "mb":0},
+    "recipe_weapon_002": { "name": "혼이 깃든 단검", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":30, "db":0, "sb":0, "hb":50, "mb":50},
+    "recipe_weapon_003": { "name": "진혼의 로드", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":30, "db":0, "sb":0, "hb":0, "mb":100},
+
+    "recipe_armor_000": { "name": "럼버스 숄더", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":0, "db":40, "sb":0, "hb":200, "mb":75},
+    "recipe_armor_001": { "name": "실피 레이어", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":0, "db":25, "sb":5, "hb":100, "mb":100},
+    "recipe_armor_002": { "name": "엘븐 카인", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":10, "db":25, "sb":0, "hb":150, "mb":150},
+    "recipe_armor_003": { "name": "마나 라멜라 로브", "price": 0 , "type": "Equipment", "effecttype":"BuffEffect", "ab":0, "db":25, "sb":0, "hb":125, "mb":175}
+
+
+  }, 
 
   "shopTables": {
     "shop_potions": [
@@ -170,7 +183,8 @@
       { "itemId": "shop_potions_002" },
       { "itemId": "shop_potions_003" },
       { "itemId": "shop_potions_004" },
-      { "itemId": "shop_potions_005" }
+      { "itemId": "shop_potions_005" },
+      { "itemId": "shop_potions_006" }
     ],
     "shop_material": [
       { "itemId": "shop_material_000" },
@@ -316,18 +330,124 @@
   },
 
   "recipeTables": {
-    "blacksmith": [
+    "weapon": [
       {
-        "id": "steel_sword",
+        "id": "클레이모어",
         "outputs": [ { "itemId": "sword_002", "count": 1 } ],
-        "inputs":  [ { "itemId": "iron", "count": 3 }, { "itemId": "sword_001", "count": 1 } ]
+        "inputs":  [ 
+          { "itemId": "ogre_000", "count": 1 }, 
+          { "itemId": "orc_005", "count": 1 }, 
+          { "itemId": "goblin_008", "count": 1 } 
+        ]
+      },
+      {
+        "id": "미라쥬 컴파운드 보우",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "troll_000", "count": 1 }, 
+          { "itemId": "goblin_004", "count": 1 } 
+        ]
+      },
+      {
+        "id": "혼이 깃든 단검",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "goblin_004", "count": 1 }, 
+          { "itemId": "imp_000", "count": 1 },
+          { "itemId": "orc_004", "count": 1 } 
+        ]
+      },
+      {
+        "id": "진혼의 로드",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "imp_003", "count": 1 }, 
+          { "itemId": "succubus_002", "count": 1 },
+          { "itemId": "goblin_008", "count": 1 } 
+        ]
       }
+    ],
+      "armor": [
+      {
+        "id": "럼버스 숄더",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "shop_material_002", "count": 1 }, 
+          { "itemId": "orc_003", "count": 1 },
+          { "itemId": "goblin_003", "count": 1 } 
+        ]
+      },
+      {
+        "id": "실피 레이어",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "kobold_000", "count": 1 }, 
+          { "itemId": "troll_000", "count": 1 },
+          { "itemId": "shop_material_000", "count": 1 }
+        ]
+      },
+      {
+        "id": "엘븐 카인",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "orc_002", "count": 1 }, 
+          { "itemId": "shop_material_001", "count": 1 },
+          { "itemId": "goblin_002", "count": 1 } 
+        ]
+      },
+      {
+        "id": "마나 라멜라 로브",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "slime_001", "count": 1 }, 
+          { "itemId": "goblin_000", "count": 1 },
+          { "itemId": "shop_material_002", "count": 1 }
+        ]
+      }
+    ],
+    "Accessory": [
+      {
+        "id": "반투의 십장표",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "shop_material_004", "count": 1 }, 
+          { "itemId": "goblin_008", "count": 1 } 
+        ]
+      },
+      {
+        "id": "블루 문",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "shop_material_005", "count": 1 }, 
+          { "itemId": "slime_001", "count": 1 } 
+        ]
+      },
+      {
+        "id": "위엄의 팔찌",
+        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
+        "inputs":  [ 
+          { "itemId": "shop_material_006", "count": 1 }, 
+          { "itemId": "orc_004", "count": 1 } 
+        ]
+      }
+
     ],
     "alchemy":  [
         {
-        "id": "potion_small",
-        "outputs": [ { "itemId": "sword_002", "count": 1 } ],
-        "inputs":  [ { "itemId": "iron", "count": 3 }, { "itemId": "sword_001", "count": 1 } ]
+          "id": "대형 HP 포션",
+          "outputs": [ { "itemId": "shop_potions_002", "count": 1 } ],
+          "inputs":  [ 
+            { "itemId": "slime_000", "count": 1 }, 
+            { "itemId": "troll_002", "count": 1 } 
+          ]
+        },
+        {
+          "id": "대형 MP 포션",
+          "outputs": [ { "itemId": "shop_potions_005", "count": 1 } ],
+          "inputs":  [ 
+            { "itemId": "slime_002", "count": 1 }, 
+            { "itemId": "goblin_000", "count": 1 } 
+          ]
         }
     ]
   }
