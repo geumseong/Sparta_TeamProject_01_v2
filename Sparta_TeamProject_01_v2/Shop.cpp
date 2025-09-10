@@ -71,37 +71,42 @@ void Shop::buyItem(int index, Inventory& inven)
     std::cout << u8"[NPC]: " << item.getName() << u8"(이)라… 좋은 선택이군!\n";
 }
 
-void Shop::sellItem(int index, Inventory& inven) // index는 inven의 인덱스
+void Shop::sellItem(int index, Inventory& inven)
 {
     Item* item = inven.findItem(index);
-    if (!item) 
+    if (!item)
     {
         std::cout << u8"[NPC]: 그런 아이템은 없네.\n";
         return;
     }
 
-	int sellPrice = static_cast<int>(item->getPrice() * 0.6); // 60% 가격으로 판매
+    std::string itemName = item->getName();
+    int itemPrice = item->getPrice();
+
+    int sellPrice = static_cast<int>(itemPrice * 0.6);
     inven.setGold(inven.getGold() + sellPrice);
 
     bool found = false;
-	for (auto& shopItem : availableItems) // 상점에 이미 아이템이 있으면 개수만 증가
+    for (auto& shopItem : availableItems)
     {
-        if (shopItem.getName() == item->getName())
+        if (shopItem.getName() == itemName)
         {
             shopItem.setCount(shopItem.getCount() + 1);
             found = true;
             break;
         }
     }
-	if (!found) { // 상점에 아이템이 없으면 새로 추가
-        availableItems.push_back(Item(item->getName(), item->getPrice(), 1, item->getType()));
+    if (!found)
+    {
+        availableItems.push_back(Item(itemName, itemPrice, 1, item->getType()));
     }
 
     if (item->getCount() > 1) item->setCount(item->getCount() - 1);
     else inven.removeItem(index);
 
-    std::cout << u8"[NPC]: " << item->getName() << u8"을 " << sellPrice << u8"G 에 사겠네.\n";
+    std::cout << u8"[NPC]: " << itemName << u8"을 " << sellPrice << u8"G 에 사겠네.\n";
 }
+
 
 void Shop::displayItems() // 전체 아이템 출력
 {

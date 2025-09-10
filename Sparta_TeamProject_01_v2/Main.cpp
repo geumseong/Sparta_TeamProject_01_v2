@@ -264,6 +264,7 @@ int main()
             Game->outputLog(
                 u8"제작소에 입장했습니다. 다음 행동을 선택하세요."
             );
+            workshop.Open(db, *Game->inven);
             break;
 
         case GameManager::Battle:   //Game 전투/싸움 State
