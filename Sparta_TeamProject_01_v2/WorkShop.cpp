@@ -12,9 +12,10 @@ void WorkShop::Open(const ItemDB& db, Inventory& inv )
     //while (true) {
         std::cout << u8"\n=== 제작 공방 ===\n"
             << u8"1. 포션 제작\n"
-            << u8"2. 장비 제작\n"
-            << u8"3. 액세서리 제작\n"
-            << u8"4. 레시피\n"
+            << u8"2. 무기 제작\n"
+            << u8"3. 장비 제작\n"
+            << u8"4. 액세서리 제작\n"
+            /*<< u8"5. 레시피\n"*/
             << u8"5. 나가기\n"
             << u8"선택: ";
 
@@ -41,8 +42,10 @@ bool WorkShop::CraftItem(const ItemDB& db, Inventory& inv, string tableName, int
     {
         removeInputinInven(recipelist.inputs, inv, index);//인벤에서 아이템 제거
         addOutputItem(recipelist.outputs, inv, index); //인벤에 아이템 추가
+        cout << u8"제작에 성공하였습니다." << endl;
         return true;
     }
+    cout << u8"제작에 실패하였습니다." << endl;
     return false;
 }
 
@@ -69,9 +72,8 @@ bool WorkShop::AskYesNo(const std::string& prompt) const
 }
 
 
-void WorkShop::printrecipe(const ItemDB& db, string tableName)
+int WorkShop::printrecipe(const ItemDB& db, string tableName)
 {
-
     auto vec = db.getRecipeTable(tableName);
     for (size_t i = 0; i < vec.outputs.size(); i++)
     {
@@ -84,6 +86,7 @@ void WorkShop::printrecipe(const ItemDB& db, string tableName)
 
         std::cout << endl;
     }
+    return vec.outputs.size();
 }
 
 

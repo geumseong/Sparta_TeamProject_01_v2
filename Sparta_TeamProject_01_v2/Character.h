@@ -5,6 +5,8 @@
 #include "Monster.h"
 using namespace std;
 
+
+
 class Monster;
 class Character
 {

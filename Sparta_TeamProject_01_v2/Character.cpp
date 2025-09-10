@@ -1,6 +1,7 @@
 ﻿#include "Character.h"
 #include <iostream>
 
+
 Character::Character()
 {
 	jobName = "Beginner";
@@ -35,18 +36,15 @@ Character::Character(string name)
 
 void Character::displayStatus()
 {
-	cout << u8"------------------------------------" << endl;
-	cout << u8"* 현재 능력치" << endl;
-	cout << u8"이름: " << name << endl;
+	cout << u8"이름: " << name << "    ";
 	cout << u8"직업: " << jobName << endl;
 	cout << u8"Lv. " << level << endl;
-	cout << u8"HP: " << health << endl;
-	cout << u8"MP: " << mp << endl;
+	cout << u8"HP: " << health << "      ";
+	cout << u8"MP: " << mp  << endl;
 	cout << u8"공격력: " << attackPower << endl;
 	cout << u8"방어력: " << defense << endl;
-	cout << u8"공격속도: " << attackSpeed << endl;
-	cout << u8"경험치: " << experience << endl;
-	cout << u8"------------------------------------" << endl;
+	cout << u8"공격속도: " << attackSpeed;
+	cout << u8"        경험치: " << experience << endl;
 }
 
 void Character::visitShop()

@@ -9,9 +9,14 @@
 #include "Inventory.h"
 #include "itemDB.h"
 #include <Windows.h>
+#include "drawtest.h"
 #include "UIManager.h"
 #include "AsciiArt.h"
 #include "Workshop.h"
+#include "Archer.h"
+#include "Thief.h"
+#include "Warrior.h"
+
 using namespace std;
 
 void EnableVirtualTerminalProcessing() {
@@ -23,10 +28,43 @@ void EnableVirtualTerminalProcessing() {
     if (!SetConsoleMode(hOut, dwMode)) { return; }
 }
 
+void Craft(GameManager* Game, WorkShop workshop, ItemDB db, string craftType)
+{
+    string input;
+    while (true)
+    {
+        Game->outputLog(u8"어떤 것을 제작하실 건가요?");
+        int size = workshop.printrecipe(db, craftType);
+        Game->outputLog(u8"0. 뒤로가기");
+        Game->outputLog(u8"9. 인벤토리 확인");
+        Game->inputLog(input);
+        int choice = stoi(input);
+        if (choice > 0 && choice <= size)
+        {
+            workshop.CraftItem(db, *Game->inven, craftType, choice-1);
+            cout << "crafted " << craftType << endl;
+        }
+        else if (input == "0" || input == "뒤로가기")
+        {
+            break;
+        }
+        else if (input == "9" || input == "인벤토리 확인")
+        {
+            Game->inven->printItemlist();
+            system("pause");
+        }
+        else
+        {
+            Game->outputLog(u8"잘못된 입력입니다.");
+        }
+    }
+}
+
 int main()
 {
     // ▼▼▼ 게임 시작 시 이 함수가 반드시 호출되어야 합니다! ▼▼▼
     EnableVirtualTerminalProcessing();
+    system("mode con: cols=300 lines=200");
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
     
@@ -69,26 +107,115 @@ int main()
     Game->inven->addItem(move(Item(u8"슬라임의 끈적한 젤리", 100, 1, E_Type::Material)));
     Game->inven->addItem(move(Item(u8"슬라임의 반짝이는 조각", 100, 1, E_Type::Material)));
     //slime 000, 002
-    cout << "ADD material" << endl;
+    
     Game->inven->addItem(move(Item(u8"고블린의 부러진 뼈", 100, 1, E_Type::Material)));
     Game->inven->addItem(move(Item(u8"트롤의 재생하는 심장", 100, 1, E_Type::Material)));
-    cout << "ADD material" << endl;
     //goblin 000 troll 002
-    Game->inven->printItemlist();
-    workshop.printrecipe(db, "weapon");
+    //workshop.printrecipe(db, "weapon");
     workshop.CraftItem(db, *Game->inven, "weapon", 0 );
     workshop.CraftItem(db, *Game->inven, "weapon", 1);
-    cout << "craft and print" << endl;
-    Game->inven->printItemlist();
 
 
+
+
+    //최초 레이아웃 생성
+    RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+    {
+        Game->inven->printItemlist();
+    });
+
+    RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]()  // 스탯 창 생성
+    { 
+
+    });
+
+    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()  // 로그 창 생성
+    {
+        Game->outputLog(u8"** 캐릭터 이름을 정하십시오.");
+    });
+
+    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 창 생성
+    {
+
+    });
+    //최초 레이아웃 생성
+    
+    //setCursorPosition( x, y);
     string input;
-    Game->outputLog(u8"** 캐릭터 이름을 정하십시오.");
+    setCursorPosition(2, 27);
     Game->inputLog(input);
-    Character_ = new Magician(input);
+    string name = input;
+
+    while(true)
+    {
+        RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()
+            { // 오른쪽
+// c.displayStatus(); // 기존 코드 그대로 호출
+                Game->inven->printItemlist();
+            });
+
+        RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]()
+            { // 왼쪽 1
+// c.displayStatus(); // 기존 코드 그대로 호출
+
+            });
+
+        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
+            {// 왼쪽 2
+// c.displayStatus(); // 기존 코드 그대로 호출
+                Game->outputLog(
+                    u8"플레이 하실 직업을 선택하세요.\n"
+                    u8"1. 전사\n"
+                    u8"2. 궁수\n"
+                    u8"3. 마법사\n"
+                    u8"4. 도적"
+                );
+            });
+        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]()
+            {// 왼쪽 3
+
+            });
+        Game->inputLog(input);
+        if (input == "1" || input == "전사")
+        {
+            Character_ = new Warrior(input);
+            break;
+        }
+        if (input == "2" || input == "궁수")
+        {
+            Character_ = new Archer(input);
+            break;
+        }
+        if (input == "3" || input == "마법사")
+        {
+            Character_ = new Magician(input);
+            break;
+        }
+        if (input == "4" || input == "도적")
+        {
+            Character_ = new Thief(input);
+            break;
+        }
+        else
+        {
+            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
+                {// 왼쪽 2
+    // c.displayStatus(); // 기존 코드 그대로 호출
+                    Game->outputLog(u8"잘못된 입력입니다.");
+
+                });
+        }
+    }
+
     Game->character_ = Character_;
-    Game->outputLog(u8"캐릭터가 생성되었습니다.");
-    cout << "===================================" << endl;
+
+
+    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() // 로그 출력
+    {
+        Game->outputLog(u8"캐릭터가 생성되었습니다.");
+    });
+
+
     Game->updateState(GameManager::Battle);
     while (true)
     {
@@ -285,50 +412,57 @@ int main()
             break;
 
         case GameManager::Crafting:
-            Game->outputLog(
-                u8"제작소에 입장했습니다. 다음 행동을 선택하세요."
-            );
-            workshop.Open(db, *Game->inven);
+            
             while(true)
             {
+                Game->outputLog(
+                    u8"제작소에 입장했습니다. 다음 행동을 선택하세요."
+                );
+                workshop.Open(db, *Game->inven);
                 Game->inputLog(input);
                 if (input == "1" || input == "포션 제작")
                 {
-                    while (true)
-                    {
-                        workshop.printrecipe(db, "alchemy");
-                    }
+                    Craft(Game, workshop, db, "alchemy");
                 }
-                else if (input == "2" || input == "장비 제작")
+                else if (input == "2" || input == "무기 제작")
                 {
-
+                    Craft(Game, workshop, db, "weapon");
                 }
-                else if (input == "3" || input == "무기 제작")
+                else if (input == "3" || input == "장비 제작")
                 {
-
+                    Craft(Game, workshop, db, "armor");
                 }
                 else if (input == "4" || input == "액세서리 제작")
                 {
-
+                    Craft(Game, workshop, db, "accessory");
                 }
                 else if (input == "5" || input == "나가기")
                 {
-
+                    break;
                 }
                 else
                 {
                     Game->outputLog(u8"잘못된 입력입니다.");
                 }
             }
+            Game->updateState(GameManager::Battle);
             break;
 
         case GameManager::Battle:   //Game 전투/싸움 State
             Game->roundTracker++;
             currentMonster = Game->generateMonster();
-            Game->outputLog(
-                u8"던전에 입장했습니다. \n"
-                u8"적 " + currentMonster->getName() + u8"와 조우!"
-            );
+
+            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() // 로그 출력
+            {
+                Game->outputLog(
+                    u8"던전에 입장했습니다. \n"
+                    u8"적 " + currentMonster->getName() + u8"와 조우!"
+                );
+
+            });
+
+
+
             Game->battle(Character_, currentMonster);
             break;
 
@@ -342,3 +476,4 @@ int main()
         }
     }
 }
+

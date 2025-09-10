@@ -70,32 +70,39 @@ void Shop::openShop(ItemDB& db, const std::string& category)
 void Shop::sellItem(int index, Inventory& inven)
 {
     Item* item = inven.findItem(index);
-    if (!item) {
+    if (!item)
+    {
         std::cout << u8"[NPC]: 그런 아이템은 없네.\n";
         return;
     }
 
-    int sellPrice = static_cast<int>(item->getPrice() * 0.6);
+    std::string itemName = item->getName();
+    int itemPrice = item->getPrice();
+
+    int sellPrice = static_cast<int>(itemPrice * 0.6);
     inven.setGold(inven.getGold() + sellPrice);
 
     bool found = false;
-    for (auto& shopItem : availableItems) {
-        if (shopItem.getName() == item->getName()) {
+    for (auto& shopItem : availableItems)
+    {
+        if (shopItem.getName() == itemName)
+        {
             shopItem.setCount(shopItem.getCount() + 1);
             found = true;
             break;
         }
     }
-
-    if (!found) {
-        availableItems.push_back(Item(item->getName(), item->getPrice(), 1, item->getType()));
+    if (!found)
+    {
+        availableItems.push_back(Item(itemName, itemPrice, 1, item->getType()));
     }
 
     if (item->getCount() > 1) item->setCount(item->getCount() - 1);
     else inven.removeItem(index);
 
-    std::cout << u8"[NPC]: " << item->getName() << u8"을 " << sellPrice << u8"G 에 사겠네.\n";
+    std::cout << u8"[NPC]: " << itemName << u8"을 " << sellPrice << u8"G 에 사겠네.\n";
 }
+
 
 void Shop::displayItems()
 {
