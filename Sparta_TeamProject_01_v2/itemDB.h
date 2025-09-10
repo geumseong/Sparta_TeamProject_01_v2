@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -7,7 +7,7 @@
 
 /**
  * @class GameDB
- * @brief JSON ±â¹İ °ÔÀÓ µ¥ÀÌÅÍº£ÀÌ½º ·Î´õ ¹× ´Ü¼ø Ãâ·Â Å¬·¡½º
+ * @brief JSON ê¸°ë°˜ ê²Œì„ ë°ì´í„°ë² ì´ìŠ¤ ë¡œë” ë° ë‹¨ìˆœ ì¶œë ¥ í´ë˜ìŠ¤
  */
 inline E_Type stringToType(const std::string& str) {
     if (str == "Consumable") return E_Type::Consumable;
@@ -33,29 +33,29 @@ public:
     ItemDB() = default;
 
     /**
-     * @brief JSON ÆÄÀÏ ·Îµå
-     * @param path JSON ÆÄÀÏ °æ·Î
-     * @param err ¿¡·¯ ¸Ş½ÃÁö Ãâ·Â¿ë (¿É¼Ç)
-     * @return ¼º°ø ¿©ºÎ
+     * @brief JSON íŒŒì¼ ë¡œë“œ
+     * @param path JSON íŒŒì¼ ê²½ë¡œ
+     * @param err ì—ëŸ¬ ë©”ì‹œì§€ ì¶œë ¥ìš© (ì˜µì…˜)
+     * @return ì„±ê³µ ì—¬ë¶€
      */
     bool loadFromFile(const std::string& path, std::string* err = nullptr) {
         std::ifstream f(path);
         if (!f.is_open()) {
-            if (err) *err = "ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù: " + path;
+            if (err) *err = "íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤: " + path;
             return false;
         }
         try {
             f >> db_;
         }
         catch (const std::exception& e) {
-            if (err) *err = std::string("JSON ÆÄ½Ì ½ÇÆĞ: ") + e.what();
+            if (err) *err = std::string("JSON íŒŒì‹± ì‹¤íŒ¨: ") + e.what();
             return false;
         }
         return true;
     }
 
     /**
-     * @brief ÀüÃ¼ ¾ÆÀÌÅÛ Ãâ·Â
+     * @brief ì „ì²´ ì•„ì´í…œ ì¶œë ¥
      */
     void printAllItems() const {
         if (!db_.contains("items")) return;
@@ -69,16 +69,16 @@ public:
     }
 
 
-    unique_ptr<Item> findItemById(const string& itemId) const //id¸¦ ÅëÇØ¼­ °Ë»ö
+    unique_ptr<Item> findItemById(const string& itemId) const //idë¥¼ í†µí•´ì„œ ê²€ìƒ‰
     {
         if (!db_.contains("items")) return nullptr;
 
         auto it = db_["items"].find(itemId);
         if (it == db_["items"].end()) {
-            return nullptr; // ÇØ´ç ID ¾øÀ½
+            return nullptr; // í•´ë‹¹ ID ì—†ìŒ
         }
 
-        // °ª ÆÄ½Ì
+        // ê°’ íŒŒì‹±
         string  name = it->value("name", string{});
         int     price = it->value("price", 0);
         int     count = 1;
@@ -86,13 +86,13 @@ public:
         E_Type  type = stringToType(typeStr);
 
         auto ptr = make_unique<Item>(name, price, count, type);
-        // ID ÀúÀåÇÏ°í ½ÍÀ¸¸é ¿©±â¼­ Ãß°¡
+        // ID ì €ì¥í•˜ê³  ì‹¶ìœ¼ë©´ ì—¬ê¸°ì„œ ì¶”ê°€
         // ptr->id = itemId;
         return ptr;
     }
 
 
-    vector<Item> getShopTable(const std::string& shoptableName) const { // »óÁ¡ Å×ÀÌÇÃ ¸®ÅÏ
+    vector<Item> getShopTable(const std::string& shoptableName) const { // ìƒì  í…Œì´í”Œ ë¦¬í„´
         vector<Item> list;
         if (!db_.contains("shopTables") || !db_.contains("items")) return list;
 
@@ -136,8 +136,8 @@ public:
     }
 
 
-    vector<vector<Item>> getRecipeTable(const std::string& recipetableName) const //·¹½ÃÇÇ ¸®ÅÏ
-    {                                                                             //recipetableName ¹°¾à, Àåºñ ·¹½ÃÇÇ ±¸ºĞ
+    vector<vector<Item>> getRecipeTable(const std::string& recipetableName) const //ë ˆì‹œí”¼ ë¦¬í„´
+    {                                                                             //recipetableName ë¬¼ì•½, ì¥ë¹„ ë ˆì‹œí”¼ êµ¬ë¶„
         vector<vector<Item>> recipeList;
         vector<Item> inputList;
         vector<Item> outputList;
@@ -226,8 +226,8 @@ public:
 
 
     /**
-     * @brief µå¶ø Å×ÀÌºí Ãâ·Â
-     * @param monsterName ¸ó½ºÅÍ ÀÌ¸§
+     * @brief ë“œë í…Œì´ë¸” ì¶œë ¥
+     * @param monsterName ëª¬ìŠ¤í„° ì´ë¦„
      */
 
     vector<Item> getDropTable(const std::string& monsterName) const {
@@ -277,5 +277,5 @@ public:
 
 
 private:
-    nlohmann::json db_; ///< JSON ÀüÃ¼ µ¥ÀÌÅÍ
+    nlohmann::json db_; ///< JSON ì „ì²´ ë°ì´í„°
 };
