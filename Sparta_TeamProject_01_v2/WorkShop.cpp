@@ -9,22 +9,22 @@ using namespace std;
 void WorkShop::Open(const ItemDB& db, Inventory& inv )
 {
     int index = 1;
-    while (true) {
+    //while (true) {
         std::cout << u8"\n=== 제작 공방 ===\n"
             << u8"1. 포션 제작\n"
             << u8"2. 장비 제작\n"
-            << u8"3. 악세사리 제작\n"
+            << u8"3. 액세서리 제작\n"
             << u8"4. 레시피\n"
             << u8"5. 나가기\n"
             << u8"선택: ";
 
-        int sel = AskIntInRange("", 1, 5);
+        /*int sel = AskIntInRange("", 1, 5);
         if (sel == 1) CraftItem(db, inv, "weapon" , index );
         else if (sel == 2) CraftEquipment(inv, db);
         else if (sel == 3) CraftAccessory(inv, db);
         else if (sel == 4) ShowRecipes(db);
-        else { std::cout << u8"제작 공방을 종료합니다.\n"; return; }
-    }
+        else { std::cout << u8"제작 공방을 종료합니다.\n"; return; }*/
+    //}
 }
 
 bool WorkShop::CraftItem(const ItemDB& db, Inventory& inv, string tableName, int index)
