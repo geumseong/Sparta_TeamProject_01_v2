@@ -4,7 +4,7 @@
 #include "Item.h"
 #include "Inventory.h"
 #include "ItemDB.h"
-//
+
 class Shop {
 public:
     Shop();
@@ -16,13 +16,8 @@ public:
     void showItem(int index);                               // 특정 아이템 정보 출력
     void displayItems();                                    // 전체 아이템 출력
 
-    std::string getItemName(int index) const;               // 아이템 이름 반환
-    int getItemCount() const
-    {
-        return availableItems.size();
-    }                               // 아이템 개수 반환
-    Item* getItem(int index) const;
-    // 아이템 객체 반환
+    int getItemCount() const;                               // 아이템 개수 반환
+    Item* getItem(int index) const;                         // 아이템 객체 반환
 
 private:
     std::vector<Item> availableItems;                       // 진열 아이템 목록
