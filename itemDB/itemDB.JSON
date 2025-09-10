@@ -135,31 +135,31 @@
     "kobold_000": { "name": "코볼트의 작은 가죽 조각", "price": 0 , "type": "Material", "effecttype":""},
     "kobold_001": { "name": "코볼트의 조잡한 함정 도구", "price": 0 , "type": "Material", "effecttype":""},
 
-    "troll_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "troll_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "troll_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "troll_000": { "name": "트롤의 질긴 가죽", "price": 0 , "type": "Material", "effecttype":""},
+    "troll_001": { "name": "트롤의 피가 담긴 약병", "price": 0 , "type": "Material", "effecttype":""},
+    "troll_002": { "name": "트롤의 재생하는 심장", "price": 0 , "type": "Material", "effecttype":""},
 
-    "ogre_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "ogre_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "ogre_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "ogre_003": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "ogre_000": { "name": "오거의 대퇴골", "price": 0 , "type": "Material", "effecttype":""},
+    "ogre_001": { "name": "오거의 쌍둥이 목걸이", "price": 0 , "type": "Material", "effecttype":""},
+    "ogre_002": { "name": "오염된 강철 주괴", "price": 0 , "type": "Material", "effecttype":""},
+    "ogre_003": { "name": "오거의 강화 철갑", "price": 0 , "type": "Material", "effecttype":""},
 
-    "imp_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "imp_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "imp_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "imp_000": { "name": "임프의 작은 뿔", "price": 0 , "type": "Material", "effecttype":""},
+    "imp_001": { "name": "임프의 정수", "price": 0 , "type": "Material", "effecttype":""},
+    "imp_002": { "name": "임프의 낡은 안경", "price": 0 , "type": "Material", "effecttype":""},
+    "imp_003": { "name": "임프의 지혜의 페이지", "price": 0 , "type": "Material", "effecttype":""},
 
-    "succubus_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "succubus_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "succubus_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "succubus_003": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
+    "succubus_000": { "name": "서큐버스의 매혹적인 향수", "price": 0 , "type": "Material", "effecttype":""},
+    "succubus_001": { "name": "서큐버스의 검은 날개", "price": 0 , "type": "Material", "effecttype":""},
+    "succubus_002": { "name": "서큐버스의 타락한 영혼석", "price": 0 , "type": "Material", "effecttype":""},
 
 
-    "dragon_000": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "dragon_001": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "dragon_002": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "dragon_003": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "dragon_004": { "name": "", "price": 0 , "type": "Material", "effecttype":""},
-    "dragon_005": { "name": "", "price": 0 , "type": "Material", "effecttype":""}
+    "dragon_000": { "name": "드래곤의 비늘", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_001": { "name": "드래곤의 뿔", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_002": { "name": "드래곤의 발톱", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_003": { "name": "드래곤의 눈알", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_004": { "name": "드래곤의 날개", "price": 0 , "type": "Material", "effecttype":""},
+    "dragon_005": { "name": "드래곤의 심장", "price": 0 , "type": "Material", "effecttype":""}
 
   },
 
@@ -272,6 +272,46 @@
       { "itemId": "orc_002"},
       { "itemId": "orc_003"},
       { "itemId": "orc_004"}
+    ],
+    "slime":[
+      {"itemId":"goldpouch_slime"},
+      {"itemId":"slime_000"},
+      {"itemId":"slime_001"},
+      {"itemId":"slime_002"}
+    ],
+    "kobold":[
+      {"itemId":"kobold_000"},
+      {"itemId":"kobold_001"}
+    ],
+    "troll":[
+      {"itemId":"troll_000"},
+      {"itemId":"troll_001"},
+      {"itemId":"troll_002"}
+    ],
+    "ogre":[
+      {"itemId":"ogre_000"},
+      {"itemId":"ogre_001"},
+      {"itemId":"ogre_002"},
+      {"itemId":"ogre_003"}
+    ],
+    "imp":[
+      {"itemId":"imp_000"},
+      {"itemId":"imp_001"},
+      {"itemId":"imp_002"},
+      {"itemId":"imp_003"}
+    ],
+    "succubus":[
+      {"itemId":"succubus_000"},
+      {"itemId":"succubus_001"},
+      {"itemId":"succubus_002"}
+    ],
+    "dragon":[
+      {"itemId":"dragon_000"},
+      {"itemId":"dragon_001"},
+      {"itemId":"dragon_002"},
+      {"itemId":"dragon_003"},
+      {"itemId":"dragon_004"},
+      {"itemId":"dragon_005"}
     ]
   },
 
