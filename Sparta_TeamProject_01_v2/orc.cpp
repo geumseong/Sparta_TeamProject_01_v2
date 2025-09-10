@@ -1,9 +1,9 @@
-#include "Orc.h"
+ï»¿#include "Orc.h"
 #include "Item.h" 
 #include <iostream> 
 #include <random>   
 
-// --- »ı¼ºÀÚ ±¸Çö ---
+// --- ìƒì„±ì êµ¬í˜„ ---
 Orc::Orc(const std::string& type, int level)
     : Monster(level), type(type), bonusExp(0), bonusGold(0), turnCount(0), isCharging(false)
 {
@@ -12,35 +12,35 @@ Orc::Orc(const std::string& type, int level)
     int attackSpeed = 0;
     std::string namePrefix = "";
 
-    if (type == "ÀÏ¹İ") {
-        namePrefix = "¿ÀÅ©";
+    if (type == "ì¼ë°˜") {
+        namePrefix = "ì˜¤í¬";
         baseHealth = 80;
         baseAttack = 15;
         attackSpeed = 2;
         this->baseExp = 25;
         this->baseGold = 10;
-        dropItem.push_back(Item("ºÎ·¯Áø ¿ÀÅ©ÀÇ »À", 20, 1, E_Type::Material));
-        dropItem.push_back(Item("¿ÀÅ©ÀÇ Åõ±¸ Á¶°¢", 30, 1, E_Type::Material));
+        //dropItem.push_back(Item("ë¶€ëŸ¬ì§„ ì˜¤í¬ì˜ ë¼ˆ", 20, 1, E_Type::Material));
+        //dropItem.push_back(Item("ì˜¤í¬ì˜ íˆ¬êµ¬ ì¡°ê°", 30, 1, E_Type::Material));
     }
-    else if (type == "¾ß¸¸ÀûÀÎ") {
-        namePrefix = "¾ß¸¸ÀûÀÎ ¿ÀÅ©";
+    else if (type == "ì•¼ë§Œì ì¸") {
+        namePrefix = "ì•¼ë§Œì ì¸ ì˜¤í¬";
         baseHealth = 100;
         baseAttack = 20;
         attackSpeed = 2;
         this->baseExp = 40;
         this->baseGold = 20;
-        dropItem.push_back(Item("¿ÀÅ©ÀÇ °ÅÄ£ °¡Á×", 30, 1, E_Type::Material));
-        dropItem.push_back(Item("¿ÀÅ©ÀÇ °©¿Ê Á¶°¢", 40, 1, E_Type::Material));
+        //dropItem.push_back(Item("ì˜¤í¬ì˜ ê±°ì¹œ ê°€ì£½", 30, 1, E_Type::Material));
+        //dropItem.push_back(Item("ì˜¤í¬ì˜ ê°‘ì˜· ì¡°ê°", 40, 1, E_Type::Material));
     }
-    else if (type == "±¤Àü»ç") {
-        namePrefix = "±¤Àü»ç ¿ÀÅ©";
+    else if (type == "ê´‘ì „ì‚¬") {
+        namePrefix = "ê´‘ì „ì‚¬ ì˜¤í¬";
         baseHealth = 150;
         baseAttack = 30;
         attackSpeed = 2;
         this->baseExp = 100;
         this->baseGold = 50;
-        dropItem.push_back(Item("¿ÀÅ©ÀÇ ³¯Ä«·Î¿î ¼Û°÷´Ï", 50, 1, E_Type::Material));
-        dropItem.push_back(Item("¿ÀÅ©ÀÇ ÀüÅõ ¸ÁÄ¡", 70, 1, E_Type::Material));
+        //dropItem.push_back(Item("ì˜¤í¬ì˜ ë‚ ì¹´ë¡œìš´ ì†¡ê³³ë‹ˆ", 50, 1, E_Type::Material));
+        //dropItem.push_back(Item("ì˜¤í¬ì˜ ì „íˆ¬ ë§ì¹˜", 70, 1, E_Type::Material));
     }
 
     this->health = baseHealth + (this->level * 10);
@@ -51,15 +51,15 @@ Orc::Orc(const std::string& type, int level)
 }
 
 
-// --- Çàµ¿ AI ±¸Çö ---
+// --- í–‰ë™ AI êµ¬í˜„ ---
 int Orc::performAction()
 {
     turnCount++;
 
-    if (type == "¾ß¸¸ÀûÀÎ") {
+    if (type == "ì•¼ë§Œì ì¸") {
         return performSavageAction();
     }
-    else if (type == "±¤Àü»ç") {
+    else if (type == "ê´‘ì „ì‚¬") {
         return performBerserkerAction();
     }
     else {
@@ -68,10 +68,10 @@ int Orc::performAction()
 }
 
 
-// --- °³º° Çàµ¿ ÇÔ¼ö ±¸Çö ---
+// --- ê°œë³„ í–‰ë™ í•¨ìˆ˜ êµ¬í˜„ ---
 int Orc::performNormalAction()
 {
-    std::cout << this->name << "°¡ ¹¬Á÷ÇÑ °ø°İÀ» ½ÃµµÇÕ´Ï´Ù!" << std::endl;
+    std::cout << this->name << "ê°€ ë¬µì§í•œ ê³µê²©ì„ ì‹œë„í•©ë‹ˆë‹¤!" << std::endl;
     return this->attack;
 }
 
@@ -80,7 +80,7 @@ int Orc::performSavageAction()
     if (rand() % 100 < 30)
     {
         int finalDamage = static_cast<int>(this->attack * 1.5);
-        std::cout << this->name << "°¡ ±¤±â¿¡ ÈÛ½Î¿© ¹«ÀÚºñÇÑ ÀÏ°İÀ» ³¯¸³´Ï´Ù! (°­·ÂÇÑ °ø°İ!)" << std::endl;
+        std::cout << this->name << "ê°€ ê´‘ê¸°ì— íœ©ì‹¸ì—¬ ë¬´ìë¹„í•œ ì¼ê²©ì„ ë‚ ë¦½ë‹ˆë‹¤! (ê°•ë ¥í•œ ê³µê²©!)" << std::endl;
         return finalDamage;
     }
     else
@@ -93,14 +93,14 @@ int Orc::performBerserkerAction()
 {
     if (!isCharging)
     {
-        std::cout << this->name << "°¡ µ¹ÁøÀ» ÁØºñÇÕ´Ï´Ù! ´ÙÀ½ °ø°İÀÌ ¸Å¿ì °­·ÂÇØÁı´Ï´Ù!" << std::endl;
+        std::cout << this->name << "ê°€ ëŒì§„ì„ ì¤€ë¹„í•©ë‹ˆë‹¤! ë‹¤ìŒ ê³µê²©ì´ ë§¤ìš° ê°•ë ¥í•´ì§‘ë‹ˆë‹¤!" << std::endl;
         isCharging = true;
         return 0;
     }
     else
     {
         int finalDamage = this->attack * 2;
-        std::cout << this->name << "°¡ µ¹ÁøÇÏ¸ç ´ç½ÅÀ» ¸Í°ø°İÇÕ´Ï´Ù! (¸Å¿ì °­·ÂÇÑ °ø°İ!)" << std::endl;
+        std::cout << this->name << "ê°€ ëŒì§„í•˜ë©° ë‹¹ì‹ ì„ ë§¹ê³µê²©í•©ë‹ˆë‹¤! (ë§¤ìš° ê°•ë ¥í•œ ê³µê²©!)" << std::endl;
         isCharging = false;
         return finalDamage;
     }

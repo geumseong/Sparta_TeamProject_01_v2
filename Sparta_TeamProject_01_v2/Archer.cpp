@@ -1,4 +1,4 @@
-#include "Archer.h"
+ï»¿#include "Archer.h"
 #include "iostream"
 
 Archer::Archer()
@@ -32,68 +32,70 @@ void Archer::attack()
 void Archer::attack(Monster* monster)
 {
     if (!monster) {
-        cout << "°ø°Ý ´ë»óÀÌ ¾ø½À´Ï´Ù.\n";
+        cout << "ê³µê²© ëŒ€ìƒì´ ì—†ìŠµë‹ˆë‹¤.\n";
         return;
     }
 
-    cout << "[" << name << "] ÀÇ Çàµ¿À» ¼±ÅÃÇÏ¼¼¿ä.\n";
-    cout << "1. ÀÏ¹Ý °ø°Ý\n";
-    cout << "2. ´õºí¼¦ (¸¶³ª 10 ¼Ò¸ð)\n";
-    cout << "3. Äü¼¦ (¸¶³ª 20 ¼Ò¸ð)\n";
-    int choice;
-    int finalDamage;
-    cin >> choice;
+    cout << "[" << name << "] ì˜ í–‰ë™ì„ ì„ íƒí•˜ì„¸ìš”.\n";
+    cout << "1. ì¼ë°˜ ê³µê²©\n";
+    cout << "2. ë”ë¸”ìƒ· (ë§ˆë‚˜ 10 ì†Œëª¨)\n";
+    cout << "3. í€µìƒ· (ë§ˆë‚˜ 20 ì†Œëª¨)\n";
+    string choice;
+    int finalDamage = 0;
+    getline(cin, choice);
 
-    if (choice == 1) {
+    if (choice == "1")
+    {
         finalDamage = attackPower;
-        cout << name << "ÀÌ(°¡) ÀÏ¹Ý °ø°ÝÀ» ÇÕ´Ï´Ù! (" << finalDamage << " ÇÇÇØ)" << endl;
+        cout << name << "ì´(ê°€) ì¼ë°˜ ê³µê²©ì„ í•©ë‹ˆë‹¤! (" << finalDamage << " í”¼í•´)" << endl;
     }
-    else if (choice == 2) {
+    else if (choice == "2")
+    {
         int skillCost = 10;
         if (mp >= skillCost) {
             mp -= skillCost;
             finalDamage = attackPower * 2;
-            cout << name << "ÀÌ(°¡) ´õºí¼¦À» »ç¿ëÇÕ´Ï´Ù! (" << finalDamage
-                << " ÇÇÇØ, MP -" << skillCost << ")" << endl;
+            cout << name << "ì´(ê°€) ë”ë¸”ìƒ·ì„ ì‚¬ìš©í•©ë‹ˆë‹¤! (" << finalDamage
+                << " í”¼í•´, MP -" << skillCost << ")" << endl;
         }
         else {
             finalDamage = attackPower;
-            cout << "MP°¡ ºÎÁ·ÇÏ¿© ½ºÅ³À» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù! ´ë½Å ÀÏ¹Ý °ø°ÝÀ» ÇÕ´Ï´Ù." << endl;
-            cout << name << "ÀÌ(°¡) ÀÏ¹Ý °ø°ÝÀ» ÇÕ´Ï´Ù! (" << finalDamage << " ÇÇÇØ)" << endl;
+            cout << "MPê°€ ë¶€ì¡±í•˜ì—¬ ìŠ¤í‚¬ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤! ëŒ€ì‹  ì¼ë°˜ ê³µê²©ì„ í•©ë‹ˆë‹¤." << endl;
+            cout << name << "ì´(ê°€) ì¼ë°˜ ê³µê²©ì„ í•©ë‹ˆë‹¤! (" << finalDamage << " í”¼í•´)" << endl;
         }
     }
-    else if (choice == 3) {
+    else if (choice == "3")
+    {
         int skillCost = 20;
         if (mp >= skillCost) {
             mp -= skillCost;
             finalDamage = (attackPower * 2) + attackSpeed;
-            cout << name << "ÀÌ(°¡) Äü¼¦À» »ç¿ëÇÕ´Ï´Ù! (" << finalDamage
-                << " ÇÇÇØ, MP -" << skillCost << ")" << endl;
+            cout << name << "ì´(ê°€) í€µìƒ·ì„ ì‚¬ìš©í•©ë‹ˆë‹¤! (" << finalDamage
+                << " í”¼í•´, MP -" << skillCost << ")" << endl;
         }
         else {
             finalDamage = attackPower;
-            cout << "MP°¡ ºÎÁ·ÇÏ¿© ½ºÅ³À» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù! ´ë½Å ÀÏ¹Ý °ø°ÝÀ» ÇÕ´Ï´Ù." << endl;
-            cout << name << "ÀÌ(°¡) ÀÏ¹Ý °ø°ÝÀ» ÇÕ´Ï´Ù! (" << finalDamage << " ÇÇÇØ)" << endl;
+            cout << "MPê°€ ë¶€ì¡±í•˜ì—¬ ìŠ¤í‚¬ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤! ëŒ€ì‹  ì¼ë°˜ ê³µê²©ì„ í•©ë‹ˆë‹¤." << endl;
+            cout << name << "ì´(ê°€) ì¼ë°˜ ê³µê²©ì„ í•©ë‹ˆë‹¤! (" << finalDamage << " í”¼í•´)" << endl;
         }
     }
     else {
         finalDamage = attackPower;
-        cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ÀÏ¹Ý °ø°ÝÀ» ½ÇÇàÇÕ´Ï´Ù." << endl;
-        cout << name << "ÀÌ(°¡) ÀÏ¹Ý °ø°ÝÀ» ÇÕ´Ï´Ù! (" << finalDamage << " ÇÇÇØ)" << endl;
+        cout << "ìž˜ëª»ëœ ìž…ë ¥ìž…ë‹ˆë‹¤. ì¼ë°˜ ê³µê²©ì„ ì‹¤í–‰í•©ë‹ˆë‹¤." << endl;
+        cout << name << "ì´(ê°€) ì¼ë°˜ ê³µê²©ì„ í•©ë‹ˆë‹¤! (" << finalDamage << " í”¼í•´)" << endl;
     }
 
-    int damage = finalDamage;
+    //int damage = finalDamage;
 
-    cout << monster->getName() << "¿¡°Ô " << damage << "ÀÇ µ¥¹ÌÁö¸¦ ÀÔÇû½À´Ï´Ù" << endl;
+    cout << monster->getName() << "ì—ê²Œ " << finalDamage << "ì˜ ë°ë¯¸ì§€ë¥¼ ìž…í˜”ìŠµë‹ˆë‹¤" << endl;
 
-    int monsterHP = monster->getHealth() - damage;
+    monster->takeDamage(finalDamage);
     if (!monster->isDead()) {
-        monster->takeDamage(damage);
-        cout << "¸ó½ºÅÍÀÇ Ã¼·ÂÀÌ " << monster->getHealth() << " °¡ ³²¾Ò½À´Ï´Ù." << endl;
+        cout << "ëª¬ìŠ¤í„°ì˜ ì²´ë ¥ì´ " << monster->getHealth() << " ê°€ ë‚¨ì•˜ìŠµë‹ˆë‹¤." << endl;
     }
     else {
-        cout << "¸ó½ºÅÍÀÇ Ã¼·ÂÀÌ 0ÀÌ µÇ¾ú½À´Ï´Ù." << endl;
-        cout << "ÇÃ·¹ÀÌ¾î°¡ ½Â¸® ÇÏ¿´½À´Ï´Ù." << endl;
+        cout << "ëª¬ìŠ¤í„°ì˜ ì²´ë ¥ì´ 0ì´ ë˜ì—ˆìŠµë‹ˆë‹¤." << endl;
+        cout << "í”Œë ˆì´ì–´ê°€ ìŠ¹ë¦¬ í•˜ì˜€ìŠµë‹ˆë‹¤." << endl;
     }
 }
 
@@ -113,7 +115,7 @@ void Archer::levelUp()
     }
     else
     {
-        cout << "´õ ÀÌ»ó ·¹º§¾÷À» ÇÒ ¼ö ¾ø½À´Ï´Ù." << endl;
+        cout << "ë” ì´ìƒ ë ˆë²¨ì—…ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤." << endl;
     }
 
 }

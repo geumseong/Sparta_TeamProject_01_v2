@@ -1,7 +1,7 @@
-#include "Item.h"
+ï»¿#include "Item.h"
 void Item::printInfo() const
 {
-	cout << "[ÀÌ¸§: " << name << ", °¡°Ý: " << price << "G, " << count << "°³ º¸À¯]" << endl;
+	cout << "[ì´ë¦„: " << name << ", ê°€ê²©: " << price << "G, " << count << "ê°œ ë³´ìœ ]" << endl;
 }
 
 void Item::useItem(Character& character)
@@ -10,12 +10,12 @@ void Item::useItem(Character& character)
 	{
 	case E_Type::Consumable:
 		for (auto& e : effects) e->onConsume(character);
-		// ¿©±â¼­ Ãß°¡ ±â´É ±¸Çö
+		// ì—¬ê¸°ì„œ ì¶”ê°€ ê¸°ëŠ¥ êµ¬í˜„
 		break;
 	case E_Type::Equipment:
 	case E_Type::Accessory:
 		for (auto& e : effects) e->onEquip(character);
-		// ¿©±â¼­ Ãß°¡ ±â´É ±¸Çö
+		// ì—¬ê¸°ì„œ ì¶”ê°€ ê¸°ëŠ¥ êµ¬í˜„
 		break;
 	case E_Type::Material:
 		break;
@@ -32,7 +32,7 @@ void Item::unequipItem(Character& character)
 	case E_Type::Equipment:
 	case E_Type::Accessory:
 		for (auto& e : effects) e->onUnequip(character);
-		// ¿©±â¼­ Ãß°¡ ±â´É ±¸Çö
+		// ì—¬ê¸°ì„œ ì¶”ê°€ ê¸°ëŠ¥ êµ¬í˜„
 		break;
 	case E_Type::Material:
 		break;

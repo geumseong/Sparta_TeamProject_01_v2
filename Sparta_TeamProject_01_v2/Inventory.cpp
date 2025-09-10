@@ -1,21 +1,35 @@
-#include "Inventory.h"
+ï»¿#include "Inventory.h"
 
 void Inventory::setGold(int gold)
 {
 	this->gold = gold;
 }
 
-void Inventory::addItem(unique_ptr<Item> item) // ¾ÆÀÌÅÛÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é ¸Ç µÚ¿¡ Ãß°¡
+void Inventory::addItem(unique_ptr<Item> item) // ì•„ì´í…œì´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ ë§¨ ë’¤ì— ì¶”ê°€
 {
 	int index = findIndex(item->getName());
 	if (index == -1) 
 	{
 		this->itemList.push_back(move(item));
 	}
-	else // ¾ÆÀÌÅÛÀÌ Á¸ÀçÇÑ´Ù¸é ÀÎº¥¿¡ ÀÖ´Â ¾ÆÀÌÅÛÀÇ °³¼ö¸¦ Ãß°¡ÇÒ ¾ÆÀÌÅÛ °³¼ö¸¸Å­ Áõ°¡
+	else // ì•„ì´í…œì´ ì¡´ì¬í•œë‹¤ë©´ ì¸ë²¤ì— ìˆëŠ” ì•„ì´í…œì˜ ê°œìˆ˜ë¥¼ ì¶”ê°€í•  ì•„ì´í…œ ê°œìˆ˜ë§Œí¼ ì¦ê°€
 	{
 		auto invenitem = findItem(index);
 		invenitem->setCount(invenitem->getCount() + item->getCount());
+	}
+}
+
+void Inventory::addItem(Item item) // ì•„ì´í…œì´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ ë§¨ ë’¤ì— ì¶”ê°€
+{
+	int index = findIndex(item.getName());
+	if (index == -1)
+	{
+		this->itemList.push_back(make_unique<Item>(move(item)));
+	}
+	else // ì•„ì´í…œì´ ì¡´ì¬í•œë‹¤ë©´ ì¸ë²¤ì— ìˆëŠ” ì•„ì´í…œì˜ ê°œìˆ˜ë¥¼ ì¶”ê°€í•  ì•„ì´í…œ ê°œìˆ˜ë§Œí¼ ì¦ê°€
+	{
+		auto invenitem = findItem(index);
+		invenitem->setCount(invenitem->getCount() + item.getCount());
 	}
 }
 
