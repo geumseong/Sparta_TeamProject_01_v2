@@ -10,6 +10,13 @@
 #include "goblin.h"
 #include "Dragon.h"
 
+#include "drawtest.h"
+
+boxPosition box_ETC = { 40, 1, 60, 28 };
+boxPosition box_status = { 1, 1, 39, 8 };
+boxPosition box_log = { 1, 9, 39, 12 };
+boxPosition box_choose = { 1, 21, 39, 8 };
+
 class Orc;
 
 // Instances
@@ -36,9 +43,9 @@ void GameManager::updateState(States stateName)
     case Crafting:  stateStr = "Crafting"; break;
     }
 
-    cout << "===================================" << endl;
-    string navDialogue = u8"[State 변경] → " + stateStr;
-    outputLog(navDialogue);
+    //cout << "===================================" << endl;
+    //string navDialogue = u8"[State 변경] → " + stateStr;
+    //outputLog(navDialogue);
 
     this->currentState = stateName;
 }
@@ -79,7 +86,7 @@ Monster* GameManager::generateMonster()
     }
     if (roundTracker % GameManager::bossRound == 0)
     {
-        outputLog(u8"보스 몬스터 생성!!!");
+        //outputLog(u8"보스 몬스터 생성!!!");
         generateBossMonster(lvlModifier);
     }
     else
@@ -88,7 +95,7 @@ Monster* GameManager::generateMonster()
         {
             int rd;
         case 1:
-            outputLog(u8"오크 몬스터 생성!");
+            //outputLog(u8"오크 몬스터 생성!");
             rd = generatorRandInt(3);
             switch (rd)
             {
@@ -103,7 +110,7 @@ Monster* GameManager::generateMonster()
                 break;
             }
         case 2:
-            outputLog(u8"고블린 몬스터 생성!");
+            //outputLog(u8"고블린 몬스터 생성!");
             rd = generatorRandInt(4);
             switch (rd)
             {
@@ -139,14 +146,30 @@ void GameManager::battle(Character* player, Monster* currentMonster)
     if (player->getAttackSpeed() < currentMonster->getAttackSpeed())    //빠른 공속이 선빵
     {
         int beforeHealth = player->getHealth();
-        instance_->outputLog(currentMonster->getName() + u8"의 선제공격!");
-        player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
-        instance_->outputLog(
-            u8"현재 플레이어의 HP: "
-            + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
-            + " ===> "
-            + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
-        );
+
+        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() 
+            {// 왼쪽 2
+            // c.displayStatus(); // 기존 코드 그대로 호출
+                instance_->outputLog(currentMonster->getName() + u8"의 선제공격!");
+
+
+                player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
+                instance_->outputLog(
+                    u8"현재 플레이어의 HP: "
+                    + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
+                    + " ===> "
+                    + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
+                );
+
+            });
+        
+
+        RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() { // 왼쪽 1
+            // c.displayStatus(); // 기존 코드 그대로 호출
+                player->displayStatus();
+            });
+
+
         if (player->getHealth() <= 0)
         {
             instance_->updateState(GameManager::End);
@@ -154,12 +177,23 @@ void GameManager::battle(Character* player, Monster* currentMonster)
     }
     while (!currentMonster->isDead() && player->getHealth() > 0)  // 어느 한쪽이라도 죽지 않는 한 진행
     {
-        instance_->outputLog(
-            u8"플레이어의 턴입니다. \n"
-            u8"1. 공격\n"
-            u8"2. 아이템 사용\n"
-            "==================================="
-        );
+        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() {// 왼쪽 2
+            // c.displayStatus(); // 기존 코드 그대로 호출
+            instance_->outputLog(u8"플레이어의 턴입니다. \n");
+
+        });
+        
+        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() {// 왼쪽 3
+            instance_->outputLog(
+                u8"\n"
+                u8"1. 공격\n"
+                u8"2. 아이템 사용\n"
+            );
+            
+        });
+
+
+        setCursorPosition(2, 27);
         string input;
         instance_->inputLog(input);
         if (input == "1" || input == "공격")
@@ -169,12 +203,26 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             {
                 int beforeHealth = player->getHealth();
                 player->takeCharacterDamage(currentMonster->performAction()); // 몬스터가 공격
-                instance_->outputLog(
-                    u8"현재 플레이어의 HP: "
-                    + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
-                    + " ===> "
-                    + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
-                );
+
+                RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
+                    {// 왼쪽 2
+                        player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
+                        instance_->outputLog(
+                            u8"현재 플레이어의 HP: "
+                            + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
+                            + " ===> "
+                            + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
+                        );
+
+                    });
+
+
+                RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() 
+                    { // 왼쪽 1
+
+                        player->displayStatus();
+                    });
+
                 if (player->getHealth() <= 0)
                 {
                     instance_->updateState(GameManager::End);
@@ -185,7 +233,12 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             {
                 if (roundTracker == GameManager::victoryRound)
                 {
-                    outputLog(u8"** Victory!!!!");
+
+                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()
+                        {// 왼쪽 2
+                            outputLog(u8"** Victory!!!!");
+                        });
+
                     instance_->updateState(GameManager::End);
                     //break;
                 }

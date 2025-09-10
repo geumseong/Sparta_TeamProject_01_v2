@@ -152,6 +152,7 @@
     <ClInclude Include="Archer.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Dragon.h" />
+    <ClInclude Include="drawtest.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="Imp.h" />
