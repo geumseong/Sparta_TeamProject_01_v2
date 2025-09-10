@@ -286,7 +286,23 @@ int main()
                 {
                     while (true)
                     {
-                        workshop.printrecipe(db, "alchemy");
+                        Game->outputLog(u8"어떤 것을 제작하실 건가요?");
+                        int size = workshop.printrecipe(db, "alchemy");
+                        Game->outputLog(u8"0. 뒤로가기");
+                        Game->inputLog(input);
+                        int choice = stoi(input);
+                        if (choice > 0 && choice <= size)
+                        {
+                            workshop.CraftItem(db, *Game->inven, "alchemy", choice);
+                        }
+                        else if (input == "0" || input == "뒤로가기")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Game->outputLog(u8"잘못된 입력입니다.");
+                        }
                     }
                 }
                 else if (input == "2" || input == "장비 제작")

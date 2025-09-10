@@ -69,9 +69,8 @@ bool WorkShop::AskYesNo(const std::string& prompt) const
 }
 
 
-void WorkShop::printrecipe(const ItemDB& db, string tableName)
+int WorkShop::printrecipe(const ItemDB& db, string tableName)
 {
-
     auto vec = db.getRecipeTable(tableName);
     for (size_t i = 0; i < vec.outputs.size(); i++)
     {
