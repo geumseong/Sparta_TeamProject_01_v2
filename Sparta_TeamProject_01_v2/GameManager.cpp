@@ -6,7 +6,6 @@
 #include "Magician.h"
 #include "Monster.h"
 #include "Inventory.h"
-#include "Shop.h"
 #include "orc.h"
 #include "goblin.h"
 #include "Dragon.h"
@@ -15,9 +14,6 @@ class Orc;
 
 // Instances
 GameManager* GameManager::instance_ = nullptr;
-//Inventory* inventory_ = new Inventory(100, 10);
-//Shop* shop_;
-//int roundTracker = 0;
 
 GameManager::GameManager()
 {
@@ -186,7 +182,6 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             }
             else        // 몬스터가 죽었다면
             {
-                delete currentMonster;  // 메모리 해제
                 if (roundTracker == GameManager::victoryRound)
                 {
                     outputLog("** Victory!!!!");
@@ -196,6 +191,10 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 else
                 {
                     // 보상 지급
+                    for (int i = 0; i < currentMonster->getDropItems().size(); i++)
+                    {
+                        //instance_->inven->addItem(currentMonster->getDropItems()[i]);
+                    }
                     instance_->updateState(GameManager::Shopping);
                     //break;
                 }
@@ -204,6 +203,7 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                     instance_->updateState(GameManager::Crafting);
                     //break;
                 }
+                delete currentMonster;  // 몬스터 메모리 해제
                 break;
             }
         }
