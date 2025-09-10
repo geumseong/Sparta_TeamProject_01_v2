@@ -8,6 +8,9 @@
 
 #include "Inventory.h"
 #include "itemDB.h"
+
+
+#include "Workshop.h"
 using namespace std;
 
 int main()
@@ -17,7 +20,7 @@ int main()
     Character* Character_;
     Monster* currentMonster;
 
-
+    WorkShop workshop;
     Inventory inven(100, 100);
     ItemDB db;
 
@@ -27,14 +30,27 @@ int main()
         return 1;
     }//db 로딩
 
-    vector<Item> test = db.getShopTable("shop_potions"); //shop_potions로딩
+    //vector<Item> test = db.getShopTable("shop_potions"); //shop_potions로딩
 
-    for (auto& item : test)
-    {
-        inven.addItem(move(item));
-    }
+    //for (auto& item : test)
+    //{
+    //    inven.addItem(move(item));
+    //}
+    //inven.printItemlist();
+    inven.addItem(move(Item("슬라임의 끈적한 젤리", 100, 1, E_Type::Material)));
+    inven.addItem(move(Item("슬라임의 반짝이는 조각", 100, 1, E_Type::Material)));
+    //slime 000, 002
+    cout << "ADD material" << endl;
+    inven.addItem(move(Item("고블린의 부러진 뼈", 100, 1, E_Type::Material)));
+    inven.addItem(move(Item("트롤의 재생하는 심장", 100, 1, E_Type::Material)));
+    cout << "ADD material" << endl;
+    //goblin 000 troll 002
     inven.printItemlist();
-
+    workshop.printrecipe(db, "weapon");
+    workshop.CraftItem(db, inven, "weapon", 0 );
+    workshop.CraftItem(db, inven, "weapon", 1);
+    cout << "craft and print" << endl;
+    inven.printItemlist();
 
 
     string input;
