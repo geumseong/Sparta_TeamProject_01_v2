@@ -192,34 +192,12 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 else
                 {
                     // 보상 지급
-                        //아이템 지급
-                    outputLog(u8"아래의 아이템들을 획득했습니다.");
-                    vector<Item> a = currentMonster->getDropItems();
-                    for (int i = 0; i < a.size(); i++)
+                    for (int i = 0; i < currentMonster->getDropItemsSize(); i++)
                     {
-                        a[i].printInfo();
+                        vector<Item> a = currentMonster->getDropItems();
                         instance_->inven->addItem(move(Item(a[i].getName(), a[i].getPrice(), 1, E_Type::Material)));
+                        instance_->inven->addItem(move(Item(u8"슬라임의 끈적한 젤리", 100, 1, E_Type::Material)));
                     }
-                        
-                        //경험치 + 골드 지급
-                    outputLog(u8"경험치를 " + to_string(currentMonster->getBaseExp()) + u8"exp 만큼 획득했다!");
-                    outputLog(u8"골드를 " + to_string(currentMonster->getBaseGold()) + u8"G 만큼 획득했다!)");
-                    int beforeExp = character_->getExperience();
-                    int beforeGold = inven->getGold();
-                    int beforeLevel = character_->getLevel();
-                    character_->setExperience(character_->getExperience() + currentMonster->getBaseExp());
-                    inven->setGold(inven->getGold() + currentMonster->getBaseGold());
-                    if (character_->getExperience() >= 100)
-                    {
-                        character_->levelUp();
-                    }
-                    outputLog(u8"현재 경험치: Lvl. "
-                        + to_string(beforeLevel) + " (" + to_string(beforeExp) + "/100) " + "==> Lvl. "
-                        + to_string(character_->getLevel()) + " (" + to_string(character_->getExperience()) + "/100) "
-                        + "\n"
-                        + u8"현재 골드: " + to_string(beforeGold) + "G ==> " + to_string(inven->getGold()) + "G"    
-                    );
-                    
                     instance_->updateState(GameManager::Shopping);
                     //break;
                 }

@@ -52,8 +52,6 @@ public:
 	int getAttackSpeed() const { return attackSpeed; }
 	vector<Item> getDropItems() { return move(dropItem); }
 	int getDropItemsSize() { return dropItem.size(); }
-	int getBaseExp() { return baseExp; }
-	int getBaseGold() { return baseGold; }
 	
 
 	// setter 함수?

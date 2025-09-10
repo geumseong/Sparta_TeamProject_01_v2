@@ -19,8 +19,8 @@ Orc::Orc(const std::string& type, int level)
         attackSpeed = 2;
         this->baseExp = 25;
         this->baseGold = 10;
-        dropItem.push_back(Item(u8"부러진 오크의 뼈", 20, 1, E_Type::Material));
-        dropItem.push_back(Item(u8"오크의 투구 조각", 30, 1, E_Type::Material));
+        //dropItem->push_back(Item(u8"부러진 오크의 뼈", 20, 1, E_Type::Material));
+        //dropItem->push_back(Item(u8"오크의 투구 조각", 30, 1, E_Type::Material));
     }
     else if (type == u8"야만적인") {
         namePrefix = u8"야만적인 오크";
@@ -29,8 +29,8 @@ Orc::Orc(const std::string& type, int level)
         attackSpeed = 2;
         this->baseExp = 40;
         this->baseGold = 20;
-        dropItem.push_back(Item(u8"오크의 거친 가죽", 30, 1, E_Type::Material));
-        dropItem.push_back(Item(u8"오크의 갑옷 조각", 40, 1, E_Type::Material));
+        //dropItem->push_back(Item(u8"오크의 거친 가죽", 30, 1, E_Type::Material));
+        //dropItem->push_back(Item(u8"오크의 갑옷 조각", 40, 1, E_Type::Material));
     }
     else if (type == u8"광전사") {
         namePrefix = u8"광전사 오크";
@@ -39,8 +39,8 @@ Orc::Orc(const std::string& type, int level)
         attackSpeed = 2;
         this->baseExp = 100;
         this->baseGold = 50;
-        dropItem.push_back(Item(u8"오크의 날카로운 송곳니", 50, 1, E_Type::Material));
-        dropItem.push_back(Item(u8"오크의 전투 망치", 70, 1, E_Type::Material));
+        //dropItem->push_back(Item(u8"오크의 날카로운 송곳니", 50, 1, E_Type::Material));
+        //dropItem->push_back(Item(u8"오크의 전투 망치", 70, 1, E_Type::Material));
     }
 
     this->health = baseHealth + (this->level * 10);

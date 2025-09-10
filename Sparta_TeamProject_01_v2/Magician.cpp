@@ -11,7 +11,7 @@ Magician::Magician()
 //
 Magician::Magician(string nickName)
 {
-    this->jobName = u8"마법사";
+    this->jobName = "마법사";
     setName(nickName);
     this->level = 1;
     this->health = 200;
