@@ -191,14 +191,20 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 {
                     outputLog("** Victory!!!!");
                     instance_->updateState(GameManager::End);
-                    break;
+                    //break;
                 }
                 else
                 {
                     // 보상 지급
-                    instance_->updateState(GameManager::Resting);
-                    break;
+                    instance_->updateState(GameManager::Shopping);
+                    //break;
                 }
+                if (roundTracker % eventRound == 0)
+                {
+                    instance_->updateState(GameManager::Crafting);
+                    //break;
+                }
+                break;
             }
         }
         else if (input == "2" || input == "아이템 사용")
