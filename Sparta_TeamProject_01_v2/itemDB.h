@@ -134,94 +134,103 @@ public:
         }
         return list;
     }
+    struct RecipeTable {
+        std::vector<Item> outputs;                 // [ 레시피별 결과 아이템들... ]
+        std::vector<std::vector<Item>> inputs;     // [ [레시피1 재료들...], [레시피2 재료들...] ... ]
+    };
 
+    RecipeTable getRecipeTable(const std::string& recipetableName) const
+    {
+        RecipeTable result;
 
-    vector<vector<Item>> getRecipeTable(const std::string& recipetableName) const //레시피 리턴
-    {                                                                             //recipetableName 물약, 장비 레시피 구분
-        vector<vector<Item>> recipeList;
-        vector<Item> inputList;
-        vector<Item> outputList;
-        if (!db_.contains("recipeTables") || !db_.contains("items")) return recipeList;
+        if (!db_.contains("recipeTables") || !db_.contains("items")) return result;
 
         auto it = db_["recipeTables"].find(recipetableName);
-        if (it == db_["recipeTables"].end()) return recipeList;
+        if (it == db_["recipeTables"].end()) return result;
 
         for (auto& recipe : *it)
         {
+            // 1) outputs: 보통 예시대로 1개지만 배열이므로 모두 처리
+            for (auto& out : recipe["outputs"])
+            {
+                std::string itemId = out.value("itemId", "");
+                int outCount = out.value("count", 1);
+
+                auto itemIt = db_["items"].find(itemId);
+                if (itemIt != db_["items"].end())
+                {
+                    std::string name = itemIt->value("name", std::string{});
+                    int        price = itemIt->value("price", 0);
+                    int        count = outCount; // 레시피에서 준 count 반영
+                    std::string typeStr = itemIt->value("type", std::string{ "Unknown" });
+                    E_Type     type = stringToType(typeStr);
+                    std::string effecttype = itemIt->value("effecttype", std::string{});
+
+                    Item outItem(name, price, count, type);
+                    if (effecttype == "HealEffect")
+                    {
+                        int hp = itemIt->value("hp", 0);
+                        int mp = itemIt->value("mp", 0);
+                        outItem.addEffect<HealEffect>(hp, mp);
+                    }
+                    else if (effecttype == "BuffEffect")
+                    {
+                        int ab = itemIt->value("ab", 0);
+                        int db = itemIt->value("db", 0);
+                        int sb = itemIt->value("sb", 0);
+                        int hb = itemIt->value("hb", 0);
+                        int mb = itemIt->value("mb", 0);
+                        outItem.addEffect<BuffEffect>(ab, db, sb, hb, mb);
+                    }
+                    result.outputs.emplace_back(std::move(outItem));
+                }
+            }
+
+            // 2) inputs: 이 레시피의 재료들을 한 벡터로 묶어 inputs에 push
+            std::vector<Item> thisRecipeInputs;
+
             for (auto& in : recipe["inputs"])
             {
-                string itemId = in.value("itemId", "");
-                auto item = db_["items"].find(itemId);
-                if (item != db_["items"].end())
-                {
-                    string  name = item->value("name", string{});
-                    int     price = item->value("price", 0);
-                    int     count = 1;
-                    string  typeStr = item->value("type", string{ "Unknown" });
-                    E_Type  type = stringToType(typeStr);
-                    string  effecttype = item->value("effecttype", string{});
+                std::string itemId = in.value("itemId", "");
+                int inCount = in.value("count", 1);
 
-                    auto ptr = Item(name, price, count, type);
+                auto itemIt = db_["items"].find(itemId);
+                if (itemIt != db_["items"].end())
+                {
+                    std::string name = itemIt->value("name", std::string{});
+                    int        price = itemIt->value("price", 0);
+                    int        count = inCount; // 레시피에서 준 count 반영
+                    std::string typeStr = itemIt->value("type", std::string{ "Unknown" });
+                    E_Type     type = stringToType(typeStr);
+                    std::string effecttype = itemIt->value("effecttype", std::string{});
+
+                    Item inItem(name, price, count, type);
                     if (effecttype == "HealEffect")
                     {
-                        int hp = item->value("hp", 0);
-                        int mp = item->value("mp", 0);
-                        ptr.addEffect<HealEffect>(hp, mp);
+                        int hp = itemIt->value("hp", 0);
+                        int mp = itemIt->value("mp", 0);
+                        inItem.addEffect<HealEffect>(hp, mp);
                     }
                     else if (effecttype == "BuffEffect")
                     {
-                        int ab = item->value("ab", 0);
-                        int db = item->value("db", 0);
-                        int sb = item->value("sb", 0);
-                        int hb = item->value("hb", 0);
-                        int mb = item->value("mb", 0);
-                        ptr.addEffect<BuffEffect>(ab, db, sb, hb, mb);
+                        int ab = itemIt->value("ab", 0);
+                        int db = itemIt->value("db", 0);
+                        int sb = itemIt->value("sb", 0);
+                        int hb = itemIt->value("hb", 0);
+                        int mb = itemIt->value("mb", 0);
+                        inItem.addEffect<BuffEffect>(ab, db, sb, hb, mb);
                     }
 
-                    inputList.push_back(move(ptr));
-
-
+                    thisRecipeInputs.emplace_back(std::move(inItem));
                 }
             }
-            for (auto& in : recipe["outputs"])
-            {
-                string itemId = in.value("itemId", "");
-                auto item = db_["items"].find(itemId);
-                if (item != db_["items"].end())
-                {
-                    string  name = item->value("name", string{});
-                    int     price = item->value("price", 0);
-                    int     count = 1;
-                    string  typeStr = item->value("type", string{ "Unknown" });
-                    E_Type  type = stringToType(typeStr);
-                    string  effecttype = item->value("effecttype", string{});
 
-                    auto ptr = Item(name, price, count, type);
-                    if (effecttype == "HealEffect")
-                    {
-                        int hp = item->value("hp", 0);
-                        int mp = item->value("mp", 0);
-                        ptr.addEffect<HealEffect>(hp, mp);
-                    }
-                    else if (effecttype == "BuffEffect")
-                    {
-                        int ab = item->value("ab", 0);
-                        int db = item->value("db", 0);
-                        int sb = item->value("sb", 0);
-                        int hb = item->value("hb", 0);
-                        int mb = item->value("mb", 0);
-                        ptr.addEffect<BuffEffect>(ab, db, sb, hb, mb);
-                    }
-                    else {}
-                    outputList.push_back(move(ptr));
-
-                }
-            }
+            result.inputs.emplace_back(std::move(thisRecipeInputs));
         }
-        recipeList.push_back(move(outputList));
-        recipeList.push_back(move(inputList));
-        return recipeList;
+
+        return result;
     }
+
 
 
 

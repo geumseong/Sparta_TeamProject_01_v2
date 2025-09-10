@@ -1,4 +1,4 @@
-#include "Workshop.h"
+﻿#include "Workshop.h"
 #include <cctype>
 #include "itemDB.h"
 #include <iostream>
@@ -6,8 +6,9 @@
 using namespace std;
 
 
-void WorkShop::Open(Inventory& inv, const ItemDB& db)
+void WorkShop::Open(const ItemDB& db, Inventory& inv )
 {
+    int index = 1;
     while (true) {
         std::cout << "\n=== 제작 공방 ===\n"
             << "1. 포션 제작\n"
@@ -18,7 +19,7 @@ void WorkShop::Open(Inventory& inv, const ItemDB& db)
             << "선택: ";
 
         int sel = AskIntInRange("", 1, 5);
-        if (sel == 1) CraftPotion(inv, db);
+        if (sel == 1) CraftItem(db, inv, "weapon" , index );
         else if (sel == 2) CraftEquipment(inv, db);
         else if (sel == 3) CraftAccessory(inv, db);
         else if (sel == 4) ShowRecipes(db);
@@ -26,8 +27,23 @@ void WorkShop::Open(Inventory& inv, const ItemDB& db)
     }
 }
 
-void WorkShop::CraftPotion(Inventory& inv, const ItemDB& db)
+bool WorkShop::CraftItem(const ItemDB& db, Inventory& inv, string tableName, int index)
 {
+    /*
+    recipeTables 세부 테이블
+    weapon
+    armor
+    accessory
+    alchemy
+    */
+    auto recipelist = db.getRecipeTable(tableName);
+    if (checkrecipe(recipelist.inputs, inv, index))//재료템이 인벤에 있다면
+    {
+        removeInputinInven(recipelist.inputs, inv, index);//인벤에서 아이템 제거
+        addOutputItem(recipelist.outputs, inv, index); //인벤에 아이템 추가
+        return true;
+    }
+    return false;
 }
 
 void WorkShop::CraftEquipment(Inventory& inv, const ItemDB& db)
@@ -53,44 +69,27 @@ bool WorkShop::AskYesNo(const std::string& prompt) const
 }
 
 
-bool checkrecipe(std::vector<std::vector<Item>>& vec)
+void WorkShop::printrecipe(const ItemDB& db, string tableName)
 {
-    for (size_t i = 0; i < vec[1].size(); i++)
+
+    auto vec = db.getRecipeTable(tableName);
+    for (size_t i = 0; i < vec.outputs.size(); i++)
     {
-        if (i == 0)
+        std::cout << vec.outputs[i].getName() << " : ";
+
+        for (size_t j = 0; j < vec.inputs[i].size(); j++)
         {
-            auto& output = vec[0][0];
-            std::cout << output.getName();
-            if (output.getCount() > 1)
-                std::cout << " x" << output.getCount();
-            std::cout << ": ";
+            std::cout << vec.inputs[i][j].getName() << " , ";
         }
 
-        auto& input = vec[1][i];
-        std::cout << input.getName();
-        if (input.getCount() > 1)
-            std::cout << " x" << input.getCount();
-
-        if (i + 1 < vec[1].size())
-            std::cout << " + ";
+        std::cout << endl;
     }
-    std::cout << "\n";
-
-    std::cout << "\n0. 나가기\n선택: ";
-    int sel;
-    std::cin >> sel;
-
-    if (sel == 0)
-    {
-        std::cout << "레시피 보기를 종료합니다.\n";
-        return true;
-    }
-    return false;
 }
 
-bool checkrecipe(vector<Item> inputDB, Inventory& inven)
+
+bool checkrecipe(vector<vector<Item>>& inputDB, Inventory& inven, int index)//인벤토리에 재료템이 있는지 확인 하나라도 없으면 리턴
 {
-    for (auto input : inputDB)
+    for (auto& input : inputDB[index])
     {
         int index = inven.findIndex(input.getName());
         if (index == -1 || inven.findItem(index)->getCount() < input.getCount()) return false;
@@ -98,9 +97,9 @@ bool checkrecipe(vector<Item> inputDB, Inventory& inven)
     return true;
 }// 천 인벤 2개 필요한게 3개다
 
-void removeInputinInven(vector<Item> inputDB, Inventory& inven)
+void removeInputinInven(vector<vector<Item>>& inputDB, Inventory& inven, int index)//인벤에 재료 아이템 삭제
 {
-    for (auto input : inputDB)
+    for (auto& input : inputDB[index])
     {
         int index = inven.findIndex(input.getName());
         if (inven.findItem(index)->getCount() == input.getCount()) inven.removeItem(index);
@@ -111,11 +110,10 @@ void removeInputinInven(vector<Item> inputDB, Inventory& inven)
     }
 }
 
-void addOutputItem(vector<Item> outputDB, Inventory& inven)
+void addOutputItem(vector<Item>& outputDB, Inventory& inven, int index)//인벤에 제작 아이템 추가
 {
-    for (auto output : outputDB)
-    {
-        auto outputItem = std::make_unique<Item>(output.getName(), output.getPrice(), 1, output.getType());
-        inven.addItem(std::move(outputItem));
-    }
+
+    auto outputItem = std::make_unique<Item>(outputDB[index].getName(), outputDB[index].getPrice(), 1, outputDB[index].getType());
+    inven.addItem(std::move(outputItem));
+    
 }
