@@ -13,11 +13,11 @@ Shop::~Shop() {
     availableItems.clear();
 }
 
-void Shop::openShop(ItemDB& db, const std::string& category)
+void Shop::openShop(ItemDB& db, const std::string& category) // 상점 열기
 {
-    std::cout << "[디버그] 전달받은 category: [" << category << "]\n"; // ← 이걸 맨 위에 넣기
+    std::cout << "[디버그] 전달받은 category: [" << category << "]\n"; 
 
-    std::string shopKey;
+	std::string shopKey; // 상점 키 변수
 
     if (category == "전사")       shopKey = "shop_warrior";
     else if (category == "궁수")  shopKey = "shop_archer";
@@ -51,32 +51,32 @@ void Shop::openShop(ItemDB& db, const std::string& category)
     }
 
     std::cout << u8"[NPC]: " << category << u8" 상점을 열었네!\n";
-    displayItems();
+	displayItems(); // 진열된 아이템 표시
 }
 
-void Shop::buyItem(int index, Inventory& inven)
+void Shop::buyItem(int index, Inventory& inven) // 아이템 구매
 {
-    if (index < 0 || index >= static_cast<int>(availableItems.size())) {
+	if (index < 0 || index >= static_cast<int>(availableItems.size())) { // 인덱스 유효성 검사
         std::cout << u8"[NPC]: 그런 물건은 없네.\n";
         return;
     }
 
-    Item& item = availableItems[index];
-    if (inven.getGold() < item.getPrice()) {
+	Item& item = availableItems[index]; // 구매할 아이템 참조
+	if (inven.getGold() < item.getPrice()) {  //골드 부족 검사
         std::cout << u8"[NPC]: 골드가 부족하네. 다음에 다시 오게나.\n";
         return;
     }
 
-    inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType()));
-    inven.setGold(inven.getGold() - item.getPrice());
+	inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType())); // 인벤토리에 아이템 추가
+	inven.setGold(inven.getGold() - item.getPrice()); // 골드 차감
 
-    if (item.getCount() > 1) item.setCount(item.getCount() - 1);
-    else availableItems.erase(availableItems.begin() + index);
+	if (item.getCount() > 1) item.setCount(item.getCount() - 1); // 아이템 개수 감소
+	else availableItems.erase(availableItems.begin() + index); // 개수가 0이면 진열 목록에서 제거
 
     std::cout << u8"[NPC]: " << item.getName() << u8"(이)라… 좋은 선택이군!\n";
 }
 
-void Shop::sellItem(int index, Inventory& inven)
+void Shop::sellItem(int index, Inventory& inven) // 아이템 판매
 {
     Item* item = inven.findItem(index);
     if (!item) {
