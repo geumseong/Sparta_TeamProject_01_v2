@@ -4,11 +4,13 @@
 #include "Monster.h"
 #include "Character.h"
 #include "GameManager.h"
+
 #include "Magician.h"
 using namespace std;
 
 int main()
 {
+
     GameManager* Game = GameManager::getInstance();
     Character* Character_;
     Monster* currentMonster;
