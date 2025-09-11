@@ -1,7 +1,7 @@
 ﻿#include "Item.h"
 void Item::printInfo() const
 {
-	cout << u8"[이름: " << name << u8", 가격: " << price << u8"G, " << count << u8"개 보유]" << endl;
+	cout << u8"[이름: " << name << u8", 가격: " << price << u8"G, " << count << u8"개 보유]\n" << endl;
 }
 
 void Item::useItem(Character* character)

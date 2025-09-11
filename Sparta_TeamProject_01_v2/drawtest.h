@@ -119,3 +119,4 @@ extern boxPosition box_ETC;
 extern boxPosition box_status;
 extern boxPosition box_log;
 extern boxPosition box_choose;
+extern boxPosition box_enemystat;
