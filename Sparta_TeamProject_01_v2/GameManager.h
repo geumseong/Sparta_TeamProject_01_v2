@@ -39,8 +39,8 @@ public:
     enum States { Start, Battle, Shopping, Resting, Crafting, End };
     States currentState;
     int roundTracker;
-    int victoryRound = 10;
-    int bossRound = 5;
+    int victoryRound = 7;
+    int bossRound = 7;
     int eventRound = 3;
     //
     vector<string> log;

@@ -132,8 +132,8 @@ Monster* GameManager::generateMonster()
 Monster* GameManager::generateBossMonster(int lvlModif)
 {
     //outputLog(u8"드래곤 몬스터 생성!");
-    //return new Dragon(GameManager::character_->getLevel() + lvlModif);
-    return new Goblin(u8"재벌", 1);
+    return new Dragon(GameManager::character_->getLevel() + lvlModif);
+    //return new Goblin(u8"재벌", 1);
 }
 
 void GameManager::battle(Character* player, Monster* currentMonster)
@@ -224,6 +224,8 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 { // 왼쪽 1
                     player->displayStatus();
                 });
+
+                system("pause");
 
                 if (player->getHealth() <= 0)
                 {

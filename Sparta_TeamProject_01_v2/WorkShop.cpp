@@ -52,6 +52,7 @@ bool WorkShop::CraftItem(const ItemDB& db, Inventory& inv, string tableName, int
         }
         cout << u8"제작에 실패하였습니다." << endl;
     });
+    system("pause");
     return false;
 }
 

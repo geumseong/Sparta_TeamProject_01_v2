@@ -119,6 +119,7 @@ void Warrior::attack(Monster* monster)
         });
 
     }
+    system("pause");
 
     //int damage = finalDamage;
 
@@ -134,7 +135,7 @@ void Warrior::attack(Monster* monster)
             cout << u8"플레이어가 승리 하였습니다." << endl;
         }
     });
-
+    system("pause");
 }
 
 void Warrior::levelUp()

@@ -134,8 +134,8 @@ int main()
     Game->inven->addItem(move(Item(u8"트롤의 재생하는 심장", 100, 1, E_Type::Material)));
     //goblin 000 troll 002
     //workshop.printrecipe(db, "weapon");
-    workshop.CraftItem(db, *Game->inven, "alchemy", 0 );
-    workshop.CraftItem(db, *Game->inven, "alchemy", 1);
+    //workshop.CraftItem(db, *Game->inven, "alchemy", 0 );
+    //workshop.CraftItem(db, *Game->inven, "alchemy", 1);
 
     auto test = Item(u8"테스트용 아이템", 100, 1, E_Type::Equipment);
     //test.addEffect<BuffEffect>()
@@ -428,7 +428,7 @@ int main()
                             {
                                 Game->outputLog(
                                     choiceItem->getName() + u8"의 판매가는 "
-                                    + to_string(static_cast<int>(choiceItem->getPrice() * 0.6)) + u8"G 이네.\n"
+                                    + to_string(static_cast<int>(choiceItem->getPrice())) + u8"G 이네.\n"
                                     + "파실겐가?"
                                 );
                             });
@@ -653,7 +653,7 @@ int main()
                 );
 
             });
-
+            system("pause");
 
 
             Game->battle(Character_, currentMonster);
