@@ -387,14 +387,57 @@ int main()
                 // 인벤토리 확인
                 else if (input == "3" || input == "인벤토리 확인")
                 {
-                    Game->inven->printItemlist();
-                    system("pause");
+                    while(true)
+                    {
+                        Game->inven->printItemlist();
+                        Game->outputLog(u8"0. 뒤로가기");
+                        Game->inputLog(input);
+                        int choice = stoi(input);
+                        if (choice > 0 && choice <= Game->inven->getSize())
+                        {
+                            if (Game->inven->findItem(choice - 1)->getType() == Consumable)
+                            {
+                                Game->outputLog(u8"아이템을 사용하시겠습니까?\n1. 예\n2. 아니오");
+                                Game->inputLog(input);
+                                if (input == "1" || input == "예")
+                                {
+                                    Game->inven->findItem(choice - 1)->useItem(Game->character_);    //아이템 사용
+                                    Game->inven->removeItem(choice - 1);    //아이템 사용 후 삭제
+                                }
+                                else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
+                                else Game->outputLog(u8"잘못된 입력입니다");
+                            }
+                            else if (Game->inven->findItem(choice - 1)->getType() == Material)
+                            {
+                                Game->outputLog(u8"사용 아이템이 아닙니다.");
+                            }
+                            else
+                            {
+                                Game->outputLog(u8"장비를 착용하시겠습니까?\n1. 예\n2. 아니오");
+                                Game->inputLog(input);
+                                if (input == "1" || input == "예")
+                                {
+                                    Game->inven->findItem(choice - 1)->useItem(Game->character_);
+                                }
+                                else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
+                                else Game->outputLog(u8"잘못된 입력입니다");
+                            }
+                        }
+                        else if (input == "0" || input == "뒤로가기")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Game->outputLog(u8"잘못된 입력입니다.");
+                        }
+                    }
                 }
 
                 // 상태창 출력
                 else if (input == "4" || input == "상태창 출력")
                 {
-                    Character_->displayStatus();
+                    Game->character_->displayStatus();
                     system("pause");
                 }
 

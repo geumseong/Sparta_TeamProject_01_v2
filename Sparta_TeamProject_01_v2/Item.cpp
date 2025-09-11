@@ -4,7 +4,7 @@ void Item::printInfo() const
 	cout << u8"[이름: " << name << u8", 가격: " << price << u8"G, " << count << u8"개 보유]" << endl;
 }
 
-void Item::useItem(Character& character)
+void Item::useItem(Character* character)
 {
 	switch (type) //type
 	{
@@ -13,6 +13,9 @@ void Item::useItem(Character& character)
 		// 여기서 추가 기능 구현
 		break;
 	case E_Type::Equipment:
+		for (auto& e : effects) e->onEquip(character);
+		// 여기서 추가 기능 구현
+		break;
 	case E_Type::Accessory:
 		for (auto& e : effects) e->onEquip(character);
 		// 여기서 추가 기능 구현
@@ -23,7 +26,7 @@ void Item::useItem(Character& character)
 	}
 }
 
-void Item::unequipItem(Character& character)
+void Item::unequipItem(Character* character)
 {
 	switch (type) //type
 	{

@@ -37,8 +37,8 @@ public:
 		return raw;
 	}
 
-	void useItem(Character& character);
-	void unequipItem(Character& character);
+	void useItem(Character* character);
+	void unequipItem(Character* character);
 
 	void printInfo() const;
 
