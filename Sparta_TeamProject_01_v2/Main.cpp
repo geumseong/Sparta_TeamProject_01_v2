@@ -47,17 +47,18 @@ void Craft(GameManager* Game, WorkShop workshop, ItemDB db, string craftType)
         setCursorPosition(2, 27); // 커서위치 초기화
         Game->inputLog(input);
 
-        if(isdigit(input[0])) {
+        if (input == "0" || input == "뒤로가기")
+        {
+            break;
+        }
+        else if (isdigit(input[0]))
+        {
             int choice = stoi(input);
             if (choice > 0 && choice <= size)
             {
                 workshop.CraftItem(db, *Game->inven, craftType, choice - 1);
                 cout << "crafted " << craftType << endl;
             }
-        }
-        else if (input == "0" || input == "뒤로가기")
-        {
-            break;
         }
         else if (input == "9" || input == "인벤토리 확인")
         {

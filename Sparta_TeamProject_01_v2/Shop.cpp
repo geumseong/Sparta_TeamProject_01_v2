@@ -105,7 +105,11 @@ void Shop::buyItem(int index, Inventory& inven)
     {
         std::cout << u8"[NPC]: " << item.getName() << u8"(이)라… 좋은 선택이군!\n";
     });
-    system("pause");
+    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+        {
+            setCursorPosition(2, 27); // 커서위치 초기화
+            system("pause");
+        });
 
     if (item.getCount() > 1)  
         item.setCount(item.getCount() - 1); 
