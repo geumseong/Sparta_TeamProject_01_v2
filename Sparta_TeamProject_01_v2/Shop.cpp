@@ -95,6 +95,7 @@ void Shop::buyItem(int index, Inventory& inven)
         {
             std::cout << u8"[NPC]: 골드가 부족하네. 다음에 다시 오게나.\n";
         });
+        system("pause");
         return;
     }
 
@@ -104,6 +105,7 @@ void Shop::buyItem(int index, Inventory& inven)
     {
         std::cout << u8"[NPC]: " << item.getName() << u8"(이)라… 좋은 선택이군!\n";
     });
+    system("pause");
 
     if (item.getCount() > 1)  
         item.setCount(item.getCount() - 1); 
