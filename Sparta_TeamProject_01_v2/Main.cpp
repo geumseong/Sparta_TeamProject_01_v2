@@ -505,7 +505,7 @@ int main()
                                 Game->inputLog(input);
                                 if (input == "1" || input == "예")
                                 {
-                                    Game->inven->findItem(choice - 1)->useItem(Game->character_);    //아이템 사용
+                                    Game->inven->findItem(choice - 1)->useItem(Character_);    //아이템 사용
                                     Game->inven->removeItem(choice - 1);    //아이템 사용 후 삭제
                                 }
                                 else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
@@ -539,7 +539,7 @@ int main()
                                 Game->inputLog(input);
                                 if (input == "1" || input == "예")
                                 {
-                                    Game->inven->findItem(choice - 1)->useItem(Game->character_);
+                                    Game->inven->findItem(choice - 1)->useItem(Character_);
                                 }
                                 else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
                                 else 
