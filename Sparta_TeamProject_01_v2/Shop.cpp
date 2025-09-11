@@ -99,7 +99,7 @@ void Shop::buyItem(int index, Inventory& inven)
         return;
     }
 
-    inven.addItem(Item(item.getName(), item.getPrice(), 1, item.getType()));
+    inven.addItem(std::move(item));
     inven.setGold(inven.getGold() - item.getPrice());
     RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
     {

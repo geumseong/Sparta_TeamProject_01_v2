@@ -3,10 +3,10 @@
 
 void HealEffect::onConsume(Character* character)
 {
-    character->setHealth(min(character->getHealth() + HP, character->getMaxHealth()));
-    character->setMp(min(character->getMp() + MP, character->getMaxMp()));
-    //character.setHealth( std::min(character.getHealth() + int(character.getMaxHealth() * (HP / 100.0f)), character.getMaxHealth()));
-    //character.setMp( std::min(character.getMp() + int(character.getMaxMp() * (MP / 100.0f)), character.getMaxMp()));
+    //character->setHealth(min(character->getHealth() + HP, character->getMaxHealth()));
+    //character->setMp(min(character->getMp() + MP, character->getMaxMp()));
+    character->setHealth( std::min(character->getHealth() + int(character->getMaxHealth() * (HP / 100.0f)), character->getMaxHealth()));
+    character->setMp( std::min(character->getMp() + int(character->getMaxMp() * (MP / 100.0f)), character->getMaxMp()));
     //백분율로 회복되게 변경
 }
 

@@ -1,11 +1,15 @@
 ﻿#pragma once
 #include <algorithm>
+#include <memory>
 //
 class Character;
 
 struct I_Effect
 {
     virtual ~I_Effect() = default;
+
+    virtual std::unique_ptr<I_Effect> clone() const = 0;
+
     virtual void onConsume(Character* character) {}
     virtual void onEquip(Character* character) {}
     virtual void onUnequip(Character* character) {}
@@ -17,6 +21,11 @@ public:
     int HP = 0;
     int MP = 0;
     HealEffect(int hp, int mp) : HP(hp), MP(mp) {}
+
+    std::unique_ptr<I_Effect> clone() const override {
+        return std::make_unique<HealEffect>(*this);
+    }
+
     void onConsume(Character* character) override;
 };
 
@@ -29,6 +38,11 @@ public:
     int hpbuff = 0;
     int mpbuff = 0;
     BuffEffect(int ab, int db, int sb, int hb, int mb) : atkbuff(ab), defbuff(db), spdbuff(sb), hpbuff(hb), mpbuff(mb) {}
+
+    std::unique_ptr<I_Effect> clone() const override {
+        return std::make_unique<BuffEffect>(*this);
+    }
+
     virtual void onEquip(Character* character) override;
     virtual void onUnequip(Character* character) override;
 };

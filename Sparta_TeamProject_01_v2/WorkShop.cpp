@@ -127,7 +127,7 @@ void removeInputinInven(vector<vector<Item>>& inputDB, Inventory& inven, int ind
 void addOutputItem(vector<Item>& outputDB, Inventory& inven, int index)//인벤에 제작 아이템 추가
 {
 
-    auto outputItem = std::make_unique<Item>(outputDB[index].getName(), outputDB[index].getPrice(), 1, outputDB[index].getType());
+    auto outputItem = std::make_unique<Item>(outputDB[index]);
     inven.addItem(std::move(outputItem));
     
 }
