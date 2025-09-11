@@ -184,6 +184,10 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             {
                 AsciiArt::printFromFile(currentMonster->ascii);
             });
+        RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() // 스탯 출력
+            {
+                player->displayStatus();
+            });
         RenderBoxFromCout(box_enemystat.x, box_enemystat.y, box_enemystat.width, box_enemystat.height, [&]() // 적 스탯 출력
             {
                 cout << currentMonster->getName() + u8"\n";

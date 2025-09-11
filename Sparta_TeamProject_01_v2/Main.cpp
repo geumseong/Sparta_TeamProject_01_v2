@@ -111,7 +111,7 @@ int main()
     Shop* shop_ = new Shop();
 
     WorkShop workshop;
-    Game->inven = new Inventory(100, 100);
+    Game->inven = new Inventory(1000, 1000);
     //Inventory inven(100, 100);
     ItemDB db;
 
