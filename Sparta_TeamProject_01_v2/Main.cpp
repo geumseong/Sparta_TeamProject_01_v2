@@ -138,7 +138,7 @@ int main()
     workshop.CraftItem(db, *Game->inven, "alchemy", 1);
 
     auto test = Item(u8"테스트용 아이템", 100, 1, E_Type::Equipment);
-    //test.addEffect<BuffEffect>()
+    test.addEffect<BuffEffect>(5000, 5000, 5000, 50000, 50000);
     Game->inven->addItem(move(test));
 
 
@@ -146,12 +146,12 @@ int main()
     //최초 레이아웃 생성
     RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
     {
-        Game->inven->printItemlist();
+        //Game->inven->printItemlist();
     });
 
     RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]()  // 스탯 창 생성
     { 
-
+        cout<< "test : " << Game->inven->findItem(0)->getEffectsSize();
     });
 
     RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()  // 로그 창 생성
@@ -569,8 +569,18 @@ int main()
                 // 상태창 출력
                 else if (input == "4" || input == "상태창 출력")
                 {
-                    //Game->character_->displayStatus();
-                    //system("pause");
+                    RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() // 스탯 출력	
+                    {
+                        Game->character_->displayStatus();
+
+                    });
+                    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                    {
+                        setCursorPosition(2, 27); // 커서위치 초기화
+                        system("pause");
+                    });
+
+
                 }
 
                 // 던전 입장

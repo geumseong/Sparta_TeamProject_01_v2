@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <string>
 #include <vector>
+#include <memory>
 #include <iostream>
 #include "ItemEffect.h"
 
@@ -28,6 +29,32 @@ private:
 public:
 	Item(string name, int price, int count, E_Type type) : name(name), price(price), count(count), type(type) {}
 
+	Item(const Item& other) : name(other.name), price(other.price), count(other.count), type(other.type) {
+		effects.reserve(other.effects.size());
+		for (const auto& e : other.effects) {
+			effects.emplace_back(e ? e->clone() : nullptr);
+		}
+	}
+
+	Item& operator=(const Item& other) {
+		if (this != &other) {
+			name = other.name;
+			price = other.price;
+			count = other.count;
+			type = other.type;
+
+			effects.clear();
+			effects.reserve(other.effects.size());
+			for (const auto& e : other.effects) {
+				effects.emplace_back(e ? e->clone() : nullptr);
+			}
+		}
+		return *this;
+	}
+
+	// 이동 대입
+	Item& operator=(Item&& other) noexcept = default;
+
 	template <typename T, typename... Args>
 	T* addEffect(Args&&... args)
 	{
@@ -47,6 +74,7 @@ public:
 	int getPrice() { return price; }
 	int getCount() { return count; }
 	E_Type getType() { return type; }
+	int getEffectsSize() { return effects.size(); }
 
 	//setter
 	void setName(string name);
