@@ -16,7 +16,7 @@
 //        this->baseExp = 20;
 //        this->baseGold = 10;
 //        this->attackSpeed = 22;
-//        dropItem.push_back(Item("임프의 작은 뿔", 30, 1, E_Type::Material));
+//        dropItem.push_back(Item("임프의 작은 뿔", 80, 1, E_Type::Material));
 //    }
 //    else if (type == "파이어") {
 //        namePrefix = "파이어 임프";
@@ -25,7 +25,7 @@
 //        this->baseExp = 30;
 //        this->baseGold = 15;
 //        this->attackSpeed = 20;
-//        dropItem.push_back(Item("불의 정수", 80, 1, E_Type::Material));
+//        dropItem.push_back(Item("임프의 정수", 100, 1, E_Type::Material));
 //    }
 //    else if (type == "범생이") {
 //        namePrefix = "범생이 임프";
@@ -34,8 +34,8 @@
 //        this->baseExp = 40;
 //        this->baseGold = 30;
 //        this->attackSpeed = 25;
-//        dropItem.push_back(Item("임프의 낡은 안경", 180, 1, E_Type::Accessory));
-//        dropItem.push_back(Item("지혜의 페이지", 220, 1, E_Type::Material));
+//        dropItem.push_back(Item("임프의 낡은 안경", 120, 1, E_Type::Accessory));
+//        dropItem.push_back(Item("임프의 지혜의 페이지", 150, 1, E_Type::Material));
 //    }
 //
 //    this->health = baseHealth + (this->level * 4);

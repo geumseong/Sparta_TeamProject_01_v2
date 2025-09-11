@@ -19,7 +19,7 @@
 //        this->baseGold = 30;
 //        this->attackSpeed = 4;
 //        this->regenerationAmount = 5; // 턴당 5 회복
-//        //dropItem.push_back(Item("트롤의 질긴 가죽", 50, 1, E_Type::Material));
+//        //dropItem.push_back(Item("트롤의 질긴 가죽", 30, 1, E_Type::Material));
 //    }
 //    else if (type == "재생하는") {
 //        namePrefix = "재생하는 트롤";
@@ -29,8 +29,8 @@
 //        this->baseGold = 45;
 //        this->attackSpeed = 6;
 //        this->regenerationAmount = 15; // 턴당 15 회복
-//        //dropItem.push_back(Item("트롤의 피가 담긴 약병", 120, 1, E_Type::Material));
-//        //dropItem.push_back(Item("트롤의 재생하는 심장", 300, 1, E_Type::Material));
+//        //dropItem.push_back(Item("트롤의 피가 담긴 약병", 50, 1, E_Type::Material));
+//        //dropItem.push_back(Item("트롤의 재생하는 심장", 100, 1, E_Type::Material));
 //    }
 //
 //    this->health = baseHealth + (this->level * 12);

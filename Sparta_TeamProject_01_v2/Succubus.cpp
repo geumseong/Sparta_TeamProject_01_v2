@@ -14,9 +14,9 @@
 //    this->baseGold = 300;
 //    this->attackSpeed = 16;
 //
-//    dropItem.push_back(Item("매혹적인 향수", 150, 1, E_Type::Accessory));
+//    dropItem.push_back(Item("매혹적인 향수", 100, 1, E_Type::Accessory));
 //    dropItem.push_back(Item("검은 박쥐 날개", 80, 1, E_Type::Material));
-//    dropItem.push_back(Item("타락한 영혼석", 500, 1, E_Type::Material));
+//    dropItem.push_back(Item("타락한 영혼석", 300, 1, E_Type::Material));
 //
 //    this->health = baseHealth + (this->level * 18);
 //    this->attack = baseAttack + (this->level * 4);

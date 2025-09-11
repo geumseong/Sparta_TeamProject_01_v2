@@ -16,7 +16,7 @@
 //        this->baseExp = 120;
 //        this->baseGold = 80;
 //        this->attackSpeed = 3;
-//        dropItem.push_back(Item("오거의 대퇴골", 100, 1, E_Type::Material));
+//        dropItem.push_back(Item("오거의 대퇴골", 50, 1, E_Type::Material));
 //    }
 //    else if (type == "투 헤드") {
 //        namePrefix = "투 헤드 오거";
@@ -25,7 +25,7 @@
 //        this->baseExp = 180;
 //        this->baseGold = 110;
 //        this->attackSpeed = 2;
-//        dropItem.push_back(Item("오거의 쌍둥이 목걸이", 250, 1, E_Type::Accessory));
+//        dropItem.push_back(Item("오거의 쌍둥이 목걸이", 100, 1, E_Type::Accessory));
 //    }
 //    else if (type == "풀아머") {
 //        namePrefix = "풀아머 오거";
@@ -34,8 +34,8 @@
 //        this->baseExp = 200;
 //        this->baseGold = 150;
 //        this->attackSpeed = 1;
-//        dropItem.push_back(Item("오염된 강철 주괴", 280, 1, E_Type::Material));
-//        dropItem.push_back(Item("오거의 강화 철갑", 400, 1, E_Type::Material));
+//        dropItem.push_back(Item("오염된 강철 주괴", 200, 1, E_Type::Material));
+//        dropItem.push_back(Item("오거의 강화 철갑", 250, 1, E_Type::Material));
 //    }
 //
 //    this->health = baseHealth + (this->level * 15);
