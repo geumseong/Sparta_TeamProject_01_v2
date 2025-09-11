@@ -13,11 +13,17 @@ void Item::useItem(Character* character)
 		// 여기서 추가 기능 구현
 		break;
 	case E_Type::Equipment:
-		for (auto& e : effects) e->onEquip(character);
-		// 여기서 추가 기능 구현
-		break;
 	case E_Type::Accessory:
-		for (auto& e : effects) e->onEquip(character);
+		if (isequip == false)
+		{
+			isequip = true;
+			for (auto& e : effects) e->onEquip(character);
+		}
+		else if (isequip == true)
+		{
+			isequip = false;
+			for (auto& e : effects) e->onUnequip(character);
+		}
 		// 여기서 추가 기능 구현
 		break;
 	case E_Type::Material:

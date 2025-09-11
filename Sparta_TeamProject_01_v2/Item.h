@@ -20,6 +20,7 @@ enum E_Type
 class Item
 {
 private:
+	bool isequip;
 	string name;
 	int price;
 	int count;
@@ -27,9 +28,10 @@ private:
 	vector<unique_ptr<I_Effect>> effects;
 
 public:
-	Item(string name, int price, int count, E_Type type) : name(name), price(price), count(count), type(type) {}
+	Item(string name, int price, int count, E_Type type) : name(name), price(price), count(count), type(type) { isequip = false; }
 
 	Item(const Item& other) : name(other.name), price(other.price), count(other.count), type(other.type) {
+		isequip = false;
 		effects.reserve(other.effects.size());
 		for (const auto& e : other.effects) {
 			effects.emplace_back(e ? e->clone() : nullptr);
