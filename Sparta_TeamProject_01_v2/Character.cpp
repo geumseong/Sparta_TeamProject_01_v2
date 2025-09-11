@@ -43,7 +43,7 @@ void Character::displayStatus()
 	cout << u8"MP: " << mp  << endl;
 	cout << u8"공격력: " << attackPower << endl;
 	cout << u8"방어력: " << defense << endl;
-	cout << u8"공격속도: " << attackSpeed;
+	cout << u8"속도: " << attackSpeed;
 	cout << u8"        경험치: " << experience << endl;
 }
 

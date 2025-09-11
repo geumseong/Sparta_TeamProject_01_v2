@@ -122,7 +122,7 @@ int Goblin::performAction()
 // 일반 고블린의 행동
 int Goblin::performNormalAction() 
 {
-    std::cout << this->name << u8"가 몽둥이를 휘두릅니다!" << attack << std::endl;
+    std::cout << this->name << u8"가 \n몽둥이를 휘두릅니다!" << attack << std::endl;
 	return this->attack; // 공격력 반환
 
 }
@@ -132,18 +132,18 @@ int Goblin::performCowardlyAction()
 {
     if (turnCount >= 2) {
         if (rand() % 100 < 20) {
-            std::cout << name << u8"가 겁에 질려 도망치려 합니다! (도주 성공!)" << std::endl;
+            std::cout << name << u8"가 \n겁에 질려 도망치려 합니다! (도주 성공!)" << std::endl;
             this->health = 0;
             this->isFled = true;
 			return 0; // 도주 성공, 데미지 없음
         }
         else {
-            std::cout << name << u8"가 도망치려다 실패하고 당신을 공격합니다! 공격력: " << attack << std::endl;
+            std::cout << name << u8"가 \n도망치려다 실패하고 \n당신을 공격합니다! 공격력: " << attack << std::endl;
 			return attack; // 공격력 반환
 		}
     }
     else {
-        std::cout << name << u8"가 겁에 질려 몸을 웅크립니다." << std::endl;
+        std::cout << name << u8"가 \n겁에 질려 몸을 웅크립니다." << std::endl;
 		return 0; // 웅크림, 데미지 없음
     
 	}
@@ -151,7 +151,7 @@ int Goblin::performCowardlyAction()
 
 // 건방진 고블린의 행동
 int Goblin::performCheekyAction() {
-    std::cout << name << u8"가 당신을 향해 손가락질하며 도발합니다! (메시지만 출력)" << std::endl;
+    std::cout << name << u8"가 당신을 향해 \n손가락질하며 도발합니다!" << std::endl;
 	return 0; // 도발, 데미지 없음
 }
 
@@ -159,7 +159,7 @@ int Goblin::performCheekyAction() {
 int Goblin::performFierceAction()
 {
 	int finalDamage = static_cast<int>(this->attack * 1.5);
-    std::cout << name << u8"가 포효하며 무자비한 공격을 퍼붓습니다! 공격력: " << finalDamage << "!" << std::endl;
+    std::cout << name << u8"가 포효하며 \n무자비한 공격을 퍼붓습니다! 공격력: " << finalDamage << "!" << std::endl;
 	return finalDamage; // 강화된 공격력 반환
 
 }
@@ -169,7 +169,7 @@ int Goblin::performRichAction()
 {
     if (turnCount == 3) 
     {
-        std::cout << this->name << u8"가 당신을 비웃으며 도망쳤습니다! (도주 성공!)" << std::endl;
+        std::cout << this->name << u8"가 당신을 비웃으며 \n도망쳤습니다! (도주 성공!)" << std::endl;
         this->health = 0;
         this->isFled = true;
 		return 0; // 도주 성공, 데미지 없음
@@ -177,7 +177,7 @@ int Goblin::performRichAction()
 
     else 
     {
-        std::cout << this->name << u8"가 거만하게 재력을 과시합니다!" << std::endl;
+        std::cout << this->name << u8"가 거만하게 \n재력을 과시합니다!" << std::endl;
 		return 0; // 재력 과시, 데미지 없음
 	}
 }

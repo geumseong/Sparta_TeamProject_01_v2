@@ -3,6 +3,7 @@
 #include "itemDB.h"
 #include <iostream>
 #include "Inventory.h"
+#include "drawtest.h"
 using namespace std;
 
 
@@ -10,14 +11,16 @@ void WorkShop::Open(const ItemDB& db, Inventory& inv )
 {
     int index = 1;
     //while (true) {
-        std::cout << u8"\n=== 제작 공방 ===\n"
+
+        std::cout 
             << u8"1. 포션 제작\n"
             << u8"2. 무기 제작\n"
             << u8"3. 장비 제작\n"
             << u8"4. 액세서리 제작\n"
             /*<< u8"5. 레시피\n"*/
-            << u8"5. 나가기\n"
-            << u8"선택: ";
+            << u8"5. 나가기\n";
+
+
 
         /*int sel = AskIntInRange("", 1, 5);
         if (sel == 1) CraftItem(db, inv, "weapon" , index );
@@ -38,14 +41,17 @@ bool WorkShop::CraftItem(const ItemDB& db, Inventory& inv, string tableName, int
     alchemy
     */
     auto recipelist = db.getRecipeTable(tableName);
-    if (checkrecipe(recipelist.inputs, inv, index))//재료템이 인벤에 있다면
+    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
     {
-        removeInputinInven(recipelist.inputs, inv, index);//인벤에서 아이템 제거
-        addOutputItem(recipelist.outputs, inv, index); //인벤에 아이템 추가
-        cout << u8"제작에 성공하였습니다." << endl;
-        return true;
-    }
-    cout << u8"제작에 실패하였습니다." << endl;
+        if (checkrecipe(recipelist.inputs, inv, index))//재료템이 인벤에 있다면
+        {
+            removeInputinInven(recipelist.inputs, inv, index);//인벤에서 아이템 제거
+            addOutputItem(recipelist.outputs, inv, index); //인벤에 아이템 추가
+            cout << u8"제작에 성공하였습니다." << endl;
+            return true;
+        }
+        cout << u8"제작에 실패하였습니다." << endl;
+    });
     return false;
 }
 
@@ -75,17 +81,21 @@ bool WorkShop::AskYesNo(const std::string& prompt) const
 int WorkShop::printrecipe(const ItemDB& db, string tableName)
 {
     auto vec = db.getRecipeTable(tableName);
-    for (size_t i = 0; i < vec.outputs.size(); i++)
-    {
-        std::cout << vec.outputs[i].getName() << " : ";
-
-        for (size_t j = 0; j < vec.inputs[i].size(); j++)
+    RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]() //etc 출력
+    { // 오른쪽
+        for (size_t i = 0; i < vec.outputs.size(); i++)
         {
-            std::cout << vec.inputs[i][j].getName() << " , ";
-        }
+            std::cout << i <<u8": [이름: " << vec.outputs[i].getName() << "] \n [재료 : ";
 
-        std::cout << endl;
-    }
+            for (size_t j = 0; j < vec.inputs[i].size(); j++)
+            {
+                std::cout << vec.inputs[i][j].getName() << ", ";
+            }
+
+            std::cout << "]" << endl;
+        }
+    });
+
     return vec.outputs.size();
 }
 

@@ -48,6 +48,7 @@ public:
 	std::string getName() const { return name; }
 	int getLevel() const { return level; }
 	int getHealth() const { return health; }
+	int getmaxHealth() const { return maxHealth; }
 	int getAttack() const { return attack; }
 	int getAttackSpeed() const { return attackSpeed; }
 	vector<Item> getDropItems() { return move(dropItem); }

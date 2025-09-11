@@ -147,18 +147,23 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             instance_->outputLog(currentMonster->getName() + u8"의 선제공격!");
             player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
             instance_->outputLog(
-                u8"현재 플레이어의 HP: "
-                + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
-                + " ===> "
-                + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
+                u8"플레이어가 피해를 입었습니다.\n"
+                + to_string(beforeHealth)
+                + " => "
+                + to_string(player->getHealth())
             );
         });
         
 
         RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() // 스탯 출력
-        { // 왼쪽 1
-        // c.displayStatus(); // 기존 코드 그대로 호출
+        {
             player->displayStatus();
+        });
+
+        RenderBoxFromCout(box_enemystat.x, box_enemystat.y, box_enemystat.width, box_enemystat.height, [&]() // 적 스탯 출력
+        {
+                cout << currentMonster->getName() + u8"\n";
+                cout << u8"HP : " << currentMonster->getHealth();
         });
 
 
@@ -166,7 +171,12 @@ void GameManager::battle(Character* player, Monster* currentMonster)
         {
             instance_->updateState(GameManager::End);
         }
-        system("pause");
+        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+        {
+            setCursorPosition(2, 27); // 커서위치 초기화
+            system("pause");
+        });
+
     }
     while (!currentMonster->isDead() && player->getHealth() > 0)  // 어느 한쪽이라도 죽지 않는 한 진행
     {
@@ -202,10 +212,10 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 {// 왼쪽 2
                     player->takeCharacterDamage(currentMonster->performAction());   // 몬스터가 공격
                     instance_->outputLog(
-                        u8"현재 플레이어의 HP: "
-                        + to_string(beforeHealth) + " / " + to_string(player->getMaxHealth())
-                        + " ===> "
-                        + to_string(player->getHealth()) + " / " + to_string(player->getMaxHealth())
+                        u8"플레이어가 피해를 입었습니다.\n"
+                        + to_string(beforeHealth)
+                        + " => "
+                        + to_string(player->getHealth())
                     );
                 });
 
@@ -238,17 +248,25 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                 {
                     // 보상 지급
                         //아이템 지급
-                    outputLog(u8"아래의 아이템들을 획득했습니다.");
-                    vector<Item> a = currentMonster->getDropItems();
-                    for (int i = 0; i < a.size(); i++)
+                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
                     {
-                        a[i].printInfo();
-                        instance_->inven->addItem(move(Item(a[i].getName(), a[i].getPrice(), 1, E_Type::Material)));
-                    }
+                        outputLog(u8"아래의 아이템들을 획득했습니다.");
+                        vector<Item> a = currentMonster->getDropItems();
+                        for (int i = 0; i < a.size(); i++)
+                        {
+                            a[i].printInfo();
+                            instance_->inven->addItem(move(Item(a[i].getName(), a[i].getPrice(), 1, E_Type::Material)));
+                        }
+                    });
+
                         
                         //경험치 + 골드 지급
-                    outputLog(u8"경험치를 " + to_string(currentMonster->getBaseExp()) + u8"exp 만큼 획득했다!");
-                    outputLog(u8"골드를 " + to_string(currentMonster->getBaseGold()) + u8"G 만큼 획득했다!)");
+                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                    {
+                        outputLog(u8"경험치를 " + to_string(currentMonster->getBaseExp()) + u8"exp 만큼 획득했다!");
+                        outputLog(u8"골드를 " + to_string(currentMonster->getBaseGold()) + u8"G 만큼 획득했다!)");
+                    });
+
                     int beforeExp = character_->getExperience();
                     int beforeGold = inven->getGold();
                     int beforeLevel = character_->getLevel();
@@ -258,12 +276,17 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                     {
                         character_->levelUp();
                     }
-                    outputLog(u8"현재 경험치: Lvl. "
-                        + to_string(beforeLevel) + " (" + to_string(beforeExp) + "/100) " + "==> Lvl. "
-                        + to_string(character_->getLevel()) + " (" + to_string(character_->getExperience()) + "/100) "
-                        + "\n"
-                        + u8"현재 골드: " + to_string(beforeGold) + "G ==> " + to_string(inven->getGold()) + "G"    
-                    );
+                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                    {
+                        outputLog(u8"현재 경험치: Lvl. "
+                            + to_string(beforeLevel) + " (" + to_string(beforeExp) + "/100) " + "==> Lvl. "
+                            + to_string(character_->getLevel()) + " (" + to_string(character_->getExperience()) + "/100) "
+                            + "\n"
+                            + u8"현재 골드: " + to_string(beforeGold) + "G ==> " + to_string(inven->getGold()) + "G"
+
+                        );
+                    });
+
                     
                     instance_->updateState(GameManager::Shopping);
                     //break;
