@@ -2,7 +2,8 @@
 //#include "Item.h"
 //#include <iostream>
 //#include <algorithm> // std::min 함수 사용
-//
+//#include "AsciiArt.h"
+// 
 //Troll::Troll(const std::string& type, int level)
 //    : Monster(level), type(type)
 //{
@@ -11,7 +12,7 @@
 //    std::string namePrefix = "";
 //
 //    // '일반' 타입을 가장 먼저 설정
-//    if (type == "일반") {
+//    if (type == "일반") { AsciiArt::printFromFile("troll_art.txt");
 //        namePrefix = "트롤";
 //        baseHealth = 120;
 //        baseAttack = 18;
@@ -21,7 +22,7 @@
 //        this->regenerationAmount = 5; // 턴당 5 회복
 //        //dropItem.push_back(Item("트롤의 질긴 가죽", 50, 1, E_Type::Material));
 //    }
-//    else if (type == "재생하는") {
+//    else if (type == "재생하는") { AsciiArt::printFromFile("troll_art.txt");
 //        namePrefix = "재생하는 트롤";
 //        baseHealth = 100;
 //        baseAttack = 22;

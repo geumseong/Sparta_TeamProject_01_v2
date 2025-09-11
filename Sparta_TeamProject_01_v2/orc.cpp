@@ -2,6 +2,8 @@
 #include "Item.h" 
 #include <iostream> 
 #include <random>   
+#include "AsciiArt.h"
+#include "drawtest.h"
 //
 // --- 생성자 구현 ---
 Orc::Orc(const std::string& type, int level)
@@ -13,6 +15,11 @@ Orc::Orc(const std::string& type, int level)
     std::string namePrefix = "";
 
     if (type == u8"일반") {
+        RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+            {
+                AsciiArt::printFromFile("orc_art_lq.txt");
+            });
+        
         namePrefix = u8"오크";
         baseHealth = 80;
         baseAttack = 15;
@@ -23,6 +30,10 @@ Orc::Orc(const std::string& type, int level)
         dropItem.push_back(Item(u8"오크의 투구 조각", 30, 1, E_Type::Material));
     }
     else if (type == u8"야만적인") {
+        RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+            {
+                AsciiArt::printFromFile("orc_art_lq.txt");
+            });
         namePrefix = u8"야만적인 오크";
         baseHealth = 100;
         baseAttack = 20;
@@ -33,6 +44,10 @@ Orc::Orc(const std::string& type, int level)
         dropItem.push_back(Item(u8"오크의 갑옷 조각", 40, 1, E_Type::Material));
     }
     else if (type == u8"광전사") {
+        RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+            {
+                AsciiArt::printFromFile("orc_art_lq.txt");
+            });
         namePrefix = u8"광전사 오크";
         baseHealth = 150;
         baseAttack = 30;

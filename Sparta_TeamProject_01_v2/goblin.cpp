@@ -1,6 +1,8 @@
 ﻿#include "Goblin.h"
 #include "Item.h"
 #include <iostream>
+#include "AsciiArt.h"
+#include "drawtest.h"
 
 Goblin::Goblin(const std::string& type, int level)
     : Monster(level), type(type), bonusExp(0), bonusGold(0), turnCount(0), isFled(false)
@@ -15,10 +17,17 @@ Goblin::Goblin(const std::string& type, int level)
 
 		if (type == u8"일반")
 		{
+			RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+				{
+					AsciiArt::printFromFile("goblin_art_lq.txt");
+				});
+
+			
 			namePrefix = u8"고블린";
 			baseHealth = 30;
 			baseAttack = 5;
 			attackSpeed = 0;
+
 			
 			this->baseExp = 10;   // 기본 경험치 추가
 			this->baseGold = 5;    // 기본 골드 추가
@@ -31,6 +40,10 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"겁쟁이")
 		{
+			RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+				{
+					AsciiArt::printFromFile("goblin_art_lq.txt");
+				});
 			namePrefix = u8"겁쟁이 고블린";
 			baseHealth = 20;
 			baseAttack = 3;
@@ -48,6 +61,10 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"건방진")
 		{
+			RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+				{
+					AsciiArt::printFromFile("goblin_art_lq.txt");
+				});
 			namePrefix = u8"건방진 고블린";
 			baseHealth = 35;
 			baseAttack = 10;
@@ -65,6 +82,10 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"사나운")
 		{
+			RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+				{
+					AsciiArt::printFromFile("goblin_art_lq.txt");
+				});
 			namePrefix = u8"사나운 고블린";
 			baseHealth = 40;
 			baseAttack = 15;
@@ -82,6 +103,10 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"재벌")
 		{
+			RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+				{
+					AsciiArt::printFromFile("goblin_art_lq.txt");
+				});
 			namePrefix = u8"재벌 고블린";
 			baseHealth = 100;
 			baseAttack = 50;

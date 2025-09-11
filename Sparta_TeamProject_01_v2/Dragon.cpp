@@ -36,16 +36,16 @@
 //    // ▼▼▼ 아스키 아트 출력 전에 창 크기 조절! ▼▼▼
 //    // 예: 가로 120칸, 세로 50칸으로 창 크기를 먼저 키운다
 //    AsciiArt::setConsoleSize(250, 160);
-//
+// 
+//    AsciiArt::printFromFile("dragon_appear_raw_hq.txt");//
 //    AsciiArt::printFromFile("dragon_appear_raw.txt");
+// 
 //    std::cout << this->name << " 등장!" << std::endl;
 //    system("pause");
 //
 //
 //    std::cout << "\n\n... 하늘이 어두워지며 거대한 그림자가 땅을 뒤덮습니다 ...\n\n";
 //    system("pause"); // 잠시 멈춤
-//
-//    AsciiArt::printFromFile("C:\\Chapter\\Chapter2\\Sparta_TeamProject_01_v2\\Sparta_TeamProject_01_v2\\x64\\Debug\\dragon_appear_raw.txt");
 //
 //    std::cout << "\n\n" << this->name << "이(가) 모습을 드러냈다!\n";
 //    system("pause");
@@ -64,14 +64,14 @@
 //        // 2페이즈 진입
 //        // ▼▼▼ 2페이즈 아트 출력 전에도 창 크기 조절! ▼▼▼
 //        AsciiArt::setConsoleSize(250, 160);
-//
+// 
+//		AsciiArt::printFromFile("dragon_phase2_raw_hq.txt");
 //        AsciiArt::printFromFile("dragon_phase2_raw.txt");
 //        std::cout << this->name << " - 2페이즈 돌입!" << std::endl;
 //        system("pause");
 //
 //
 //        isEnraged = true; // 분노 상태로 변경
-//        AsciiArt::printFromFile("C:\\Chapter\\Chapter2\\Sparta_TeamProject_01_v2\\Sparta_TeamProject_01_v2\\x64\\Debug\\dragon_phase2_raw.txt");
 //        std::cout << name << "가 포효하며 형태를 변화합니다! 주변의 공기가 뜨거워집니다!" << std::endl;
 //        system("pause");
 //

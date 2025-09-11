@@ -2,7 +2,8 @@
 //#include "Item.h"
 //#include <iostream>
 //#include <algorithm> // std::min 함수 사용
-//
+//#include "AsciiArt.h"
+// 
 //Succubus::Succubus(const std::string& type, int level)
 //    : Monster(level), type(type), isEnraged(false)
 //{
@@ -22,6 +23,21 @@
 //    this->attack = baseAttack + (this->level * 4);
 //    this->maxHealth = this->health;
 //    this->name = "Lv." + std::to_string(this->level) + " " + namePrefix;
+// 
+//    AsciiArt::printFromFile("dragon_appear_raw_hq.txt");//
+//    AsciiArt::printFromFile("dragon_appear_raw.txt");
+// 
+//    std::cout << this->name << " 등장!" << std::endl;
+//    system("pause");
+//
+//
+//    std::cout << "\n\n... 하늘이 어두워지며 거대한 그림자가 땅을 뒤덮습니다 ...\n\n";
+//    system("pause"); // 잠시 멈춤
+//
+//    std::cout << "\n\n" << this->name << "이(가) 모습을 드러냈다!\n";
+//    system("pause");
+// 
+// 
 //}
 //
 //int Succubus::performAction()
@@ -29,6 +45,8 @@
 //    // 2페이즈 진입 조건 확인
 //    if (!isEnraged && this->health <= this->maxHealth / 2) {
 //        isEnraged = true;
+//		  AsciiArt::printFromFile("succubus_phase2_raw_hq.txt");
+//        AsciiArt::printFromFile("succubus_phase2_raw.txt");
 //        std::cout << this->name << "의 눈빛이 변하며 주변에 사악한 기운이 감돕니다! (2페이즈 돌입!)" << std::endl;
 //        this->attack = static_cast<int>(this->attack * 1.3); // 공격력 30% 증가
 //    }
