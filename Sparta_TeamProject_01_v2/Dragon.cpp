@@ -2,13 +2,16 @@
 #include "Dragon.h"
 #include "Item.h" // .cpp 파일에서 include
 #include <iostream>
+#include "AsciiArt.h"
+#include <thread> // sleep_for 
+#include <chrono>
 
 // --- 생성자 구현 ---
 Dragon::Dragon(int level)
     : Monster(level), turnCount(0), fireBreathCooldown(0), isEnraged(false) // 턴과 쿨타임 초기화
 {
     // 1. 보스에 걸맞은 기본 능력치 설정
-    int baseHealth = 500;
+    int baseHealth = 1;
     int baseAttack = 40;
     
     this->baseExp = 300; // 기본 경험치 추가
@@ -28,6 +31,27 @@ Dragon::Dragon(int level)
     dropItem.push_back(Item("드래곤의 눈알", 5000, 1, E_Type::Material));
     dropItem.push_back(Item("드래곤의 날개", 5000, 1, E_Type::Material));
     dropItem.push_back(Item("드래곤의 심장", 10000, 1, E_Type::Material));*/
+
+
+    // ▼▼▼ 아스키 아트 출력 전에 창 크기 조절! ▼▼▼
+    // 예: 가로 120칸, 세로 50칸으로 창 크기를 먼저 키운다
+    AsciiArt::setConsoleSize(250, 160);
+
+    AsciiArt::printFromFile("dragon_appear_raw.txt");
+    std::cout << this->name << " 등장!" << std::endl;
+    system("pause");
+
+
+    std::cout << "\n\n... 하늘이 어두워지며 거대한 그림자가 땅을 뒤덮습니다 ...\n\n";
+    system("pause"); // 잠시 멈춤
+
+    AsciiArt::printFromFile("C:\\Chapter\\Chapter2\\Sparta_TeamProject_01_v2\\Sparta_TeamProject_01_v2\\x64\\Debug\\dragon_appear_raw.txt");
+
+    std::cout << "\n\n" << this->name << "이(가) 모습을 드러냈다!\n";
+    system("pause");
+
+    AsciiArt::setConsoleSize(120, 50);
+
 }
 
 // --- 행동 AI 구현 ---
@@ -38,11 +62,23 @@ int Dragon::performAction()
     if (!isEnraged && this->health <= this->maxHealth / 2)
     {
         // 2페이즈 진입
-        isEnraged = true; // 분노 상태로 변경
-        std::cout << name << "가 포효하며 형태를 변화합니다! 주변의 공기가 뜨거워집니다!" << std::endl;
+        // ▼▼▼ 2페이즈 아트 출력 전에도 창 크기 조절! ▼▼▼
+        AsciiArt::setConsoleSize(250, 160);
 
-            // 공격력을 영구적으로 50% 상승
-            this->attack = static_cast<int>(this->attack * 1.5);
+        AsciiArt::printFromFile("dragon_phase2_raw.txt");
+        std::cout << this->name << " - 2페이즈 돌입!" << std::endl;
+        system("pause");
+
+
+        isEnraged = true; // 분노 상태로 변경
+        AsciiArt::printFromFile("C:\\Chapter\\Chapter2\\Sparta_TeamProject_01_v2\\Sparta_TeamProject_01_v2\\x64\\Debug\\dragon_phase2_raw.txt");
+        std::cout << name << "가 포효하며 형태를 변화합니다! 주변의 공기가 뜨거워집니다!" << std::endl;
+        system("pause");
+
+        // 공격력을 영구적으로 50% 상승
+
+        this->attack = static_cast<int>(this->attack * 1.5);
+        AsciiArt::setConsoleSize(120, 50);
     }
 
     // 화염 브레스 쿨타임이 0이면 특수 공격 사용

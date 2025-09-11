@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <vector>
 #include "Character.h"
+#include "Inventory.h"
 
 using namespace std;
 class Monster;
@@ -32,12 +33,15 @@ public:
     ~GameManager() {}
 
     Character* character_;
+    Inventory* inven;
+    //Inventory* getInventory() { return inven; }
 
     enum States { Start, Battle, Shopping, Resting, Crafting, End };
     States currentState;
     int roundTracker;
     int victoryRound = 10;
     int bossRound = 5;
+    int eventRound = 3;
 
     vector<string> log;
     void outputLog(string navDialogue);
