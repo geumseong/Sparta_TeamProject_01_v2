@@ -119,7 +119,11 @@ void Warrior::attack(Monster* monster)
         });
 
     }
-    system("pause");
+    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+    {
+        setCursorPosition(2, 27); // 커서위치 초기화
+        system("pause");
+    });
 
     //int damage = finalDamage;
 
@@ -135,7 +139,11 @@ void Warrior::attack(Monster* monster)
             cout << u8"플레이어가 승리 하였습니다." << endl;
         }
     });
-    system("pause");
+    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+    {
+        setCursorPosition(2, 27); // 커서위치 초기화
+        system("pause");
+    });
 }
 
 void Warrior::levelUp()

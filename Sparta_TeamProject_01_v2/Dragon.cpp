@@ -5,6 +5,7 @@
 #include "AsciiArt.h"
 #include <thread> // sleep_for 
 #include <chrono>
+#include "drawtest.h"
 
 // --- 생성자 구현 ---
 Dragon::Dragon(int level)

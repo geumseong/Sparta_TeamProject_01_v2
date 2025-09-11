@@ -225,7 +225,11 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                     player->displayStatus();
                 });
 
-                system("pause");
+                RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                {
+                    setCursorPosition(2, 27); // 커서위치 초기화
+                    system("pause");
+                });
 
                 if (player->getHealth() <= 0)
                 {
@@ -242,14 +246,14 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                     {// 왼쪽 2
                         outputLog(u8"** Victory!!!!");
                     });
-
-                    instance_->updateState(GameManager::End);
-                    //break;
                     RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
                     {
                         setCursorPosition(2, 27); // 커서위치 초기화
                         system("pause");
                     });
+                    instance_->updateState(GameManager::End);
+                    //break;
+
                 }
                 else
                 {
