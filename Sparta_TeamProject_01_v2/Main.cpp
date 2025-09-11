@@ -663,7 +663,11 @@ int main()
                 );
 
             });
-            system("pause");
+            RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                {
+                    setCursorPosition(2, 27); // 커서위치 초기화
+                    system("pause");
+                });
 
 
             Game->battle(Character_, currentMonster);
