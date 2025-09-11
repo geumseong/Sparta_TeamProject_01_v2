@@ -243,6 +243,11 @@ void GameManager::battle(Character* player, Monster* currentMonster)
 
                     instance_->updateState(GameManager::End);
                     //break;
+                    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                    {
+                        setCursorPosition(2, 27); // 커서위치 초기화
+                        system("pause");
+                    });
                 }
                 else
                 {
@@ -257,35 +262,36 @@ void GameManager::battle(Character* player, Monster* currentMonster)
                             a[i].printInfo();
                             instance_->inven->addItem(move(Item(a[i].getName(), a[i].getPrice(), 1, E_Type::Material)));
                         }
-                    });
-
-                        
-                        //경험치 + 골드 지급
-                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
-                    {
+                        //경험치 + 골드 지급               
                         outputLog(u8"경험치를 " + to_string(currentMonster->getBaseExp()) + u8"exp 만큼 획득했다!");
                         outputLog(u8"골드를 " + to_string(currentMonster->getBaseGold()) + u8"G 만큼 획득했다!)");
-                    });
 
-                    int beforeExp = character_->getExperience();
-                    int beforeGold = inven->getGold();
-                    int beforeLevel = character_->getLevel();
-                    character_->setExperience(character_->getExperience() + currentMonster->getBaseExp());
-                    inven->setGold(inven->getGold() + currentMonster->getBaseGold());
-                    if (character_->getExperience() >= 100)
-                    {
-                        character_->levelUp();
-                    }
-                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
-                    {
-                        outputLog(u8"현재 경험치: Lvl. "
+                        int beforeExp = character_->getExperience();
+                        int beforeGold = inven->getGold();
+                        int beforeLevel = character_->getLevel();
+                        character_->setExperience(character_->getExperience() + currentMonster->getBaseExp());
+                        inven->setGold(inven->getGold() + currentMonster->getBaseGold());
+                        if (character_->getExperience() >= 100)
+                        {
+                            character_->levelUp();
+                        }
+
+                        outputLog(u8"Lvl. "
                             + to_string(beforeLevel) + " (" + to_string(beforeExp) + "/100) " + "==> Lvl. "
                             + to_string(character_->getLevel()) + " (" + to_string(character_->getExperience()) + "/100) "
                             + "\n"
-                            + u8"현재 골드: " + to_string(beforeGold) + "G ==> " + to_string(inven->getGold()) + "G"
-
+                            + to_string(beforeGold) + "G ==> " + to_string(inven->getGold()) + "G"
                         );
                     });
+                    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                    {
+                        setCursorPosition(2, 27); // 커서위치 초기화
+                        system("pause");
+                    });
+
+                        
+
+
 
                     
                     instance_->updateState(GameManager::Shopping);
