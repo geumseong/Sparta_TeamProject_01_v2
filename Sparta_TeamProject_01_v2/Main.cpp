@@ -99,7 +99,7 @@ int main()
 
     // 타이틀이 끝나면 화면을 지우고 메인 게임 로직 시작
     system("cls");
-    std::cout << "게임의 다음 단계가 시작됩니다..." << std::endl;
+    //std::cout << "게임의 다음 단계가 시작됩니다..." << std::endl;
 
     // ... (GameManager 생성 및 게임 시작) ...
 
@@ -126,20 +126,17 @@ int main()
     //    inven.addItem(move(item));
     //}
     //inven.printItemlist();
-    Game->inven->addItem(move(Item(u8"슬라임의 끈적한 젤리", 100, 1, E_Type::Material)));
-    Game->inven->addItem(move(Item(u8"슬라임의 반짝이는 조각", 100, 1, E_Type::Material)));
-    //slime 000, 002
-    
-    Game->inven->addItem(move(Item(u8"고블린의 부러진 뼈", 100, 1, E_Type::Material)));
-    Game->inven->addItem(move(Item(u8"트롤의 재생하는 심장", 100, 1, E_Type::Material)));
-    //goblin 000 troll 002
-    //workshop.printrecipe(db, "weapon");
-    //workshop.CraftItem(db, *Game->inven, "alchemy", 0 );
-    //workshop.CraftItem(db, *Game->inven, "alchemy", 1);
+    auto hppotion = Item(u8"소형 HP 포션", 100, 1, E_Type::Consumable);
+    hppotion.addEffect<HealEffect>(30, 0);
+    Game->inven->addItem(std::move(hppotion));
 
-    auto test = Item(u8"테스트용 아이템", 100, 1, E_Type::Equipment);
-    test.addEffect<BuffEffect>(5000, 5000, 5000, 50000, 50000);
-    Game->inven->addItem(move(test));
+    auto mppotion = Item(u8"소형 MP 포션", 100, 1, E_Type::Consumable);
+    hppotion.addEffect<HealEffect>(0, 30);
+    Game->inven->addItem(std::move(mppotion));
+
+
+
+
 
 
 
@@ -151,7 +148,7 @@ int main()
 
     RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]()  // 스탯 창 생성
     { 
-        cout<< "test : " << Game->inven->findItem(0)->getEffectsSize();
+        //cout<< "test : " << Game->inven->findItem(0)->getEffectsSize();
     });
 
     RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]()  // 로그 창 생성
@@ -663,7 +660,11 @@ int main()
                 );
 
             });
-            system("pause");
+            RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+            {
+                setCursorPosition(2, 27); // 커서위치 초기화
+                system("pause");
+            });
 
 
             Game->battle(Character_, currentMonster);
