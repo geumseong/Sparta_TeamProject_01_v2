@@ -1,6 +1,7 @@
 ﻿//#include "Imp.h"
 //#include "Item.h"
 //#include <iostream>
+//#include "AsciiArt.h"
 //
 //Imp::Imp(const std::string& type, int level)
 //    : Monster(level), type(type)
@@ -9,7 +10,7 @@
 //    int baseAttack = 0;
 //    std::string namePrefix = "";
 //
-//    if (type == "일반") {
+//    if (type == "일반") { AsciiArt::printFromFile("imp_art.txt");
 //        namePrefix = "임프";
 //        baseHealth = 30;
 //        baseAttack = 12;
@@ -18,7 +19,7 @@
 //        this->attackSpeed = 22;
 //        dropItem.push_back(Item("임프의 작은 뿔", 80, 1, E_Type::Material));
 //    }
-//    else if (type == "파이어") {
+//    else if (type == "파이어") { AsciiArt::printFromFile("imp_art.txt");
 //        namePrefix = "파이어 임프";
 //        baseHealth = 40;
 //        baseAttack = 10; // 마법 공격이라 기본 공격력은 낮음
@@ -27,7 +28,7 @@
 //        this->attackSpeed = 20;
 //        dropItem.push_back(Item("임프의 정수", 100, 1, E_Type::Material));
 //    }
-//    else if (type == "범생이") {
+//    else if (type == "범생이") { AsciiArt::printFromFile("imp_art.txt");
 //        namePrefix = "범생이 임프";
 //        baseHealth = 35;
 //        baseAttack = 8;

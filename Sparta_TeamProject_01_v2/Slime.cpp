@@ -1,7 +1,8 @@
 ﻿//#include "Slime.h"
 //#include "Item.h"
 //#include <iostream>
-//
+//#include "AsciiArt.h"
+// 
 //Slime::Slime(const std::string& type, int level)
 //    : Monster(level), type(type), turnCount(0)
 //{
@@ -11,7 +12,8 @@
 //
 //    // '일반' 타입을 가장 먼저 설정
 //    if (type == "일반")
-//    {
+//    { AsciiArt::printFromFile("slime_art.txt");
+//
 //        namePrefix = "슬라임";
 //        baseHealth = 25;
 //        baseAttack = 4;
@@ -22,7 +24,7 @@
 //        dropItem.push_back(Item("끈적한 젤리", 10, 1, E_Type::Material));
 //    }
 //    else if (type == "단단한")
-//    {
+//    { AsciiArt::printFromFile("slime_art.txt");
 //        namePrefix = "단단한 슬라임";
 //        baseHealth = 40;
 //        baseAttack = 6;
@@ -33,7 +35,7 @@
 //        dropItem.push_back(Item("슬라임의 핵", 50, 1, E_Type::Material));
 //    }
 //    else if (type == "보석")
-//    {
+//    { AsciiArt::printFromFile("slime_art.txt");
 //        namePrefix = "보석 슬라임";
 //        baseHealth = 60;
 //        baseAttack = 10;

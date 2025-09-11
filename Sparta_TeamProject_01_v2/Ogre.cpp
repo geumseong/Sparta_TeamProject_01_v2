@@ -1,7 +1,8 @@
 ﻿//#include "Ogre.h"
 //#include "Item.h"
 //#include <iostream>
-//
+//#include "AsciiArt.h"
+// 
 //Ogre::Ogre(const std::string& type, int level)
 //    : Monster(level), type(type)
 //{
@@ -9,7 +10,7 @@
 //    int baseAttack = 0;
 //    std::string namePrefix = "";
 //
-//    if (type == "일반") {
+//    if (type == "일반") { AsciiArt::printFromFile("ogre_art.txt");
 //        namePrefix = "오거";
 //        baseHealth = 200;
 //        baseAttack = 30;
@@ -18,7 +19,7 @@
 //        this->attackSpeed = 3;
 //        dropItem.push_back(Item("오거의 대퇴골", 50, 1, E_Type::Material));
 //    }
-//    else if (type == "투 헤드") {
+//    else if (type == "투 헤드") { AsciiArt::printFromFile("ogre_art.txt");
 //        namePrefix = "투 헤드 오거";
 //        baseHealth = 250;
 //        baseAttack = 25;
@@ -27,7 +28,7 @@
 //        this->attackSpeed = 2;
 //        dropItem.push_back(Item("오거의 쌍둥이 목걸이", 100, 1, E_Type::Accessory));
 //    }
-//    else if (type == "풀아머") {
+//    else if (type == "풀아머") { AsciiArt::printFromFile("ogre_art.txt");
 //        namePrefix = "풀아머 오거";
 //        baseHealth = 300;
 //        baseAttack = 20;
