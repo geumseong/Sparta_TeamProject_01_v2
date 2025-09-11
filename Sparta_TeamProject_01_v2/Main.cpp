@@ -51,15 +51,6 @@ void Craft(GameManager* Game, WorkShop workshop, ItemDB db, string craftType)
         {
             break;
         }
-        else if (isdigit(input[0]))
-        {
-            int choice = stoi(input);
-            if (choice > 0 && choice <= size)
-            {
-                workshop.CraftItem(db, *Game->inven, craftType, choice - 1);
-                cout << "crafted " << craftType << endl;
-            }
-        }
         else if (input == "9" || input == "인벤토리 확인")
         {
             RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]() //etc 출력
@@ -73,6 +64,15 @@ void Craft(GameManager* Game, WorkShop workshop, ItemDB db, string craftType)
                 system("pause");
             });
 
+        }
+        else if (isdigit(input[0]))
+        {
+            int choice = stoi(input);
+            if (choice > 0 && choice <= size)
+            {
+                workshop.CraftItem(db, *Game->inven, craftType, choice - 1);
+                cout << "crafted " << craftType << endl;
+            }
         }
         else
         {
