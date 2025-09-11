@@ -13,7 +13,7 @@ Orc::Orc(const std::string& type, int level)
     int baseAttack = 0;
     int attackSpeed = 0;
     std::string namePrefix = "";
-
+    ascii = "orc_art_lq.txt";
     if (type == u8"일반") {
         RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
             {

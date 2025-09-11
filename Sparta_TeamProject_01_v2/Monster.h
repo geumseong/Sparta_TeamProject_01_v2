@@ -42,7 +42,7 @@ public:
 	virtual ~Monster() {} // 가상 소멸자
 	// 멤버 함수
 	//
-
+	string ascii;
 	// getter 함수
 	// 몬스터의 속성값을 리턴
 	std::string getName() const { return name; }

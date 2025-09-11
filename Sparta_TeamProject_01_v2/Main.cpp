@@ -47,11 +47,13 @@ void Craft(GameManager* Game, WorkShop workshop, ItemDB db, string craftType)
         setCursorPosition(2, 27); // 커서위치 초기화
         Game->inputLog(input);
 
-        int choice = stoi(input);
-        if (choice > 0 && choice <= size)
-        {
-            workshop.CraftItem(db, *Game->inven, craftType, choice-1);
-            cout << "crafted " << craftType << endl;
+        if(isdigit(input[0])) {
+            int choice = stoi(input);
+            if (choice > 0 && choice <= size)
+            {
+                workshop.CraftItem(db, *Game->inven, craftType, choice - 1);
+                cout << "crafted " << craftType << endl;
+            }
         }
         else if (input == "0" || input == "뒤로가기")
         {
@@ -326,8 +328,7 @@ int main()
                         u8"1. 아이템 구매\n"
                         u8"2. 아이템 판매\n"
                         u8"3. 인벤토리 확인\n"
-                        u8"4. 상태창 출력\n"
-                        u8"5. 던전 입장"
+                        u8"4. 던전 입장"
                     );
                 });
 
@@ -351,38 +352,41 @@ int main()
                         {
                             break;                      // 상점 입장 씬으로 복귀
                         }
-                        int index = stoi(input);
-                        if (index > 0 && index < shop_->getItemCount() + 1)
+                        else if (isdigit(input[0]))
                         {
-                            //open shop -> index 입력 후 -> showItem(능력치 보여주고) -> 인벤 들어가기
-                            shop_->showItem(index - 1);   // 고른 아이템 정보 출력
-                            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                            int index = stoi(input);
+                            if (index > 0 && index < shop_->getItemCount() + 1)
                             {
-                                Game->outputLog(u8"그래서, 사겠나?");
-                            });
-                            RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
-                            {
-                                Game->outputLog(u8"1. 예 \n2. 아니오");
-                            });
-                            setCursorPosition(2, 27);       // 커서위치 초기화
-                            Game->inputLog(input);          // 아이템 구매 여부 선택
-                            if (input == "1" || input == "예")
-                            {
-                                shop_->buyItem(index - 1, *Game->inven);
-                                //break;                      // 상점 입장 씬으로 복귀
-                            }
-                            else if (input == "2" || input == "아니오")
-                            {
-                                // 아무것도 하지 않음
-                            }
-                            else
-                            {
+                                //open shop -> index 입력 후 -> showItem(능력치 보여주고) -> 인벤 들어가기
+                                shop_->showItem(index - 1);   // 고른 아이템 정보 출력
                                 RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                    {
+                                        Game->outputLog(u8"그래서, 사겠나?");
+                                    });
+                                RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                                    {
+                                        Game->outputLog(u8"1. 예 \n2. 아니오");
+                                    });
+                                setCursorPosition(2, 27);       // 커서위치 초기화
+                                Game->inputLog(input);          // 아이템 구매 여부 선택
+                                if (input == "1" || input == "예")
                                 {
-                                    Game->outputLog(u8"잘못된 입력입니다.");
-                                });
+                                    shop_->buyItem(index - 1, *Game->inven);
+                                    //break;                      // 상점 입장 씬으로 복귀
+                                }
+                                else if (input == "2" || input == "아니오")
+                                {
+                                    // 아무것도 하지 않음
+                                }
+                                else
+                                {
+                                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                        {
+                                            Game->outputLog(u8"잘못된 입력입니다.");
+                                        });
 
-                                
+
+                                }
                             }
                         }
                         else
@@ -419,43 +423,45 @@ int main()
                         {
                             break;
                         }
-
-                        int index = stoi(input);
-                        if (index > 0 && index < Game->inven->getSize() + 1)
+                        else if (isdigit(input[0]))
                         {
-                            Item* choiceItem = Game->inven->findItem(index - 1);
-                            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                            int index = stoi(input);
+                            if (index > 0 && index < Game->inven->getSize() + 1)
                             {
-                                Game->outputLog(
-                                    choiceItem->getName() + u8"의 판매가는 "
-                                    + to_string(static_cast<int>(choiceItem->getPrice())) + u8"G 이네.\n"
-                                    + "파실겐가?"
-                                );
-                            });
-
-                            RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
-                            {
-                                Game->outputLog(u8"1. 예 \n2. 아니오");
-                            });
-
-                            setCursorPosition(2, 27); // 커서위치 초기화
-                            Game->inputLog(input);
-
-                            if (input == "1" || input == "예")
-                            {
-                                shop_->sellItem(index - 1, *Game->inven);
-                                //break;
-                            }
-                            else if (input == "2" || input == "아니오")
-                            {
-                                //아무것도 하지 않는다
-                            }
-                            else
-                            {
+                                Item* choiceItem = Game->inven->findItem(index - 1);
                                 RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                    {
+                                        Game->outputLog(
+                                            choiceItem->getName() + u8"의 판매가는 "
+                                            + to_string(static_cast<int>(choiceItem->getPrice())) + u8"G 이네.\n"
+                                            + "파실겐가?"
+                                        );
+                                    });
+
+                                RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                                    {
+                                        Game->outputLog(u8"1. 예 \n2. 아니오");
+                                    });
+
+                                setCursorPosition(2, 27); // 커서위치 초기화
+                                Game->inputLog(input);
+
+                                if (input == "1" || input == "예")
                                 {
-                                    Game->outputLog(u8"잘못된 입력입니다.");
-                                });
+                                    shop_->sellItem(index - 1, *Game->inven);
+                                    //break;
+                                }
+                                else if (input == "2" || input == "아니오")
+                                {
+                                    //아무것도 하지 않는다
+                                }
+                                else
+                                {
+                                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                        {
+                                            Game->outputLog(u8"잘못된 입력입니다.");
+                                        });
+                                }
                             }
                         }
                         else
@@ -487,73 +493,77 @@ int main()
 
                         setCursorPosition(2, 27); // 커서위치 초기화
                         Game->inputLog(input);
-                        int choice = stoi(input);
-
-                        if (choice > 0 && choice <= Game->inven->getSize())
+                        
+                        if (input == "0" || input == "뒤로가기")
                         {
-                            if (Game->inven->findItem(choice - 1)->getType() == Consumable)
+                            break;
+                        }
+                        else if (isdigit(input[0]))
+                        {
+                            int choice = stoi(input);
+
+                            if (choice > 0 && choice <= Game->inven->getSize())
                             {
-                                RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                if (Game->inven->findItem(choice - 1)->getType() == Consumable)
                                 {
-                                Game->outputLog(u8"아이템을 사용하시겠습니까?\n");
-                                });
-                                RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
-                                {
-                                Game->outputLog(u8"1. 예\n2. 아니오");
-                                });
-                                setCursorPosition(2, 27); // 커서위치 초기화
-                                Game->inputLog(input);
-                                if (input == "1" || input == "예")
-                                {
-                                    Game->inven->findItem(choice - 1)->useItem(Character_);    //아이템 사용
-                                    Game->inven->removeItem(choice - 1);    //아이템 사용 후 삭제
+                                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                        {
+                                            Game->outputLog(u8"아이템을 사용하시겠습니까?\n");
+                                        });
+                                    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                                        {
+                                            Game->outputLog(u8"1. 예\n2. 아니오");
+                                        });
+                                    setCursorPosition(2, 27); // 커서위치 초기화
+                                    Game->inputLog(input);
+                                    if (input == "1" || input == "예")
+                                    {
+                                        Game->inven->findItem(choice - 1)->useItem(Character_);    //아이템 사용
+                                        Game->inven->removeItem(choice - 1);    //아이템 사용 후 삭제
+                                    }
+                                    else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
+                                    else
+                                    {
+                                        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                            {
+                                                Game->outputLog(u8"잘못된 입력입니다");
+                                            });
+                                    }
                                 }
-                                else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
+                                else if (Game->inven->findItem(choice - 1)->getType() == Material)
+                                {
+                                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                        {
+                                            Game->outputLog(u8"사용 아이템이 아닙니다.");
+                                        });
+
+                                }
                                 else
                                 {
                                     RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                        {
+                                            Game->outputLog(u8"장비를 착용하시겠습니까?\n");
+                                        });
+                                    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                                        {
+                                            Game->outputLog(u8"1. 예\n2. 아니오");
+                                        });
+                                    setCursorPosition(2, 27); // 커서위치 초기화
+                                    Game->inputLog(input);
+                                    if (input == "1" || input == "예")
                                     {
-                                        Game->outputLog(u8"잘못된 입력입니다");
-                                    });
-                                }
-                            }
-                            else if (Game->inven->findItem(choice - 1)->getType() == Material)
-                            {
-                                RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
-                                {
-                                    Game->outputLog(u8"사용 아이템이 아닙니다.");
-                                });
-
-                            }
-                            else
-                            {
-                                RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
-                                {
-                                    Game->outputLog(u8"장비를 착용하시겠습니까?\n");
-                                });
-                                RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
-                                {
-                                    Game->outputLog(u8"1. 예\n2. 아니오");
-                                });
-                                setCursorPosition(2, 27); // 커서위치 초기화
-                                Game->inputLog(input);
-                                if (input == "1" || input == "예")
-                                {
-                                    Game->inven->findItem(choice - 1)->useItem(Character_);
-                                }
-                                else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
-                                else 
-                                {
-                                    RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                        Game->inven->findItem(choice - 1)->useItem(Character_);
+                                    }
+                                    else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
+                                    else
                                     {
-                                        Game->outputLog(u8"잘못된 입력입니다");
-                                    });
+                                        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                            {
+                                                Game->outputLog(u8"잘못된 입력입니다");
+                                            });
+                                    }
                                 }
                             }
-                        }
-                        else if (input == "0" || input == "뒤로가기")
-                        {
-                            break;
                         }
                         else
                         {
@@ -563,28 +573,16 @@ int main()
                             });
 
                         }
+                        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                            {
+                                setCursorPosition(2, 27); // 커서위치 초기화
+                                system("pause");
+                            });
                     }
                 }
 
-                // 상태창 출력
-                else if (input == "4" || input == "상태창 출력")
-                {
-                    RenderBoxFromCout(box_status.x, box_status.y, box_status.width, box_status.height, [&]() // 스탯 출력	
-                    {
-                        Game->character_->displayStatus();
-
-                    });
-                    RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
-                    {
-                        setCursorPosition(2, 27); // 커서위치 초기화
-                        system("pause");
-                    });
-
-
-                }
-
                 // 던전 입장
-                else if (input == "5" || input == "던전 입장")
+                else if (input == "4" || input == "던전 입장")
                 {
                     Game->updateState(GameManager::Battle);
                     break;

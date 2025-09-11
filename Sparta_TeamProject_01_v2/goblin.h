@@ -38,7 +38,6 @@ public:
 	// 고블린의 이름, 체력, 공격력을 초기값으로 설정
 	Goblin(const std::string& type, int level);
 
-
 	//
 
 	// Goblin 클래스에서 performAction() 함수명을 performAction()으로 수정하여

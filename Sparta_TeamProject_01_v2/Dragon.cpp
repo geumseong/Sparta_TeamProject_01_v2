@@ -40,7 +40,7 @@ Dragon::Dragon(int level)
  
     AsciiArt::printFromFile("dragon_appear_raw_hq.txt");//
     AsciiArt::printFromFile("dragon_appear_raw.txt");
- 
+    ascii = "dragon_appear_raw.txt";
     std::cout << this->name << u8" 등장!" << std::endl;
     system("pause");
 

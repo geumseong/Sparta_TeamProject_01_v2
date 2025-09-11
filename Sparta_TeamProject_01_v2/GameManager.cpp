@@ -9,7 +9,7 @@
 #include "orc.h"
 #include "goblin.h"
 #include "Dragon.h"
-
+#include "AsciiArt.h"
 #include "drawtest.h"
 
 class Orc;
@@ -180,6 +180,15 @@ void GameManager::battle(Character* player, Monster* currentMonster)
     }
     while (!currentMonster->isDead() && player->getHealth() > 0)  // 어느 한쪽이라도 죽지 않는 한 진행
     {
+        RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
+            {
+                AsciiArt::printFromFile(currentMonster->ascii);
+            });
+        RenderBoxFromCout(box_enemystat.x, box_enemystat.y, box_enemystat.width, box_enemystat.height, [&]() // 적 스탯 출력
+            {
+                cout << currentMonster->getName() + u8"\n";
+                cout << u8"HP : " << currentMonster->getHealth();
+            });
         RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() {// 왼쪽 2
             // c.displayStatus(); // 기존 코드 그대로 호출
             instance_->outputLog(u8"플레이어의 턴입니다. \n");
@@ -314,7 +323,90 @@ void GameManager::battle(Character* player, Monster* currentMonster)
         }
         else if (input == "2" || input == "아이템 사용")
         {
+            RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]() //etc 출력
+                {
+                    instance_->inven->printItemlist();
+                });
 
+            RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                {
+                    instance_->outputLog(u8"0. 뒤로가기");
+                });
+
+            setCursorPosition(2, 27); // 커서위치 초기화
+            instance_->inputLog(input);
+
+            if (input == "0" || input == "뒤로가기")
+            {
+                
+            }
+            else if (isdigit(input[0]))
+            {
+                int choice = stoi(input);
+
+                if (choice > 0 && choice <= instance_->inven->getSize())
+                {
+                    if (instance_->inven->findItem(choice - 1)->getType() == Consumable)
+                    {
+                        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                            {
+                                instance_->outputLog(u8"아이템을 사용하시겠습니까?\n");
+                            });
+                        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                            {
+                                instance_->outputLog(u8"1. 예\n2. 아니오");
+                            });
+                        setCursorPosition(2, 27); // 커서위치 초기화
+                        instance_->inputLog(input);
+                        if (input == "1" || input == "예")
+                        {
+                            instance_->inven->findItem(choice - 1)->useItem(character_);    //아이템 사용
+                            instance_->inven->removeItem(choice - 1);    //아이템 사용 후 삭제
+                        }
+                        else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
+                        else
+                        {
+                            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                {
+                                    instance_->outputLog(u8"잘못된 입력입니다");
+                                });
+                        }
+                    }
+                    else if (instance_->inven->findItem(choice - 1)->getType() == Material)
+                    {
+                        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                            {
+                                instance_->outputLog(u8"사용 아이템이 아닙니다.");
+                            });
+
+                    }
+                    else
+                    {
+                        RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                            {
+                                instance_->outputLog(u8"장비를 착용하시겠습니까?\n");
+                            });
+                        RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                            {
+                                instance_->outputLog(u8"1. 예\n2. 아니오");
+                            });
+                        setCursorPosition(2, 27); // 커서위치 초기화
+                        instance_->inputLog(input);
+                        if (input == "1" || input == "예")
+                        {
+                            instance_->inven->findItem(choice - 1)->useItem(character_);
+                        }
+                        else if (input == "2" || input == "아니오") continue;//아무것도 하지 않음
+                        else
+                        {
+                            RenderBoxFromCout(box_log.x, box_log.y, box_log.width, box_log.height, [&]() //로그 출력
+                                {
+                                    instance_->outputLog(u8"잘못된 입력입니다");
+                                });
+                        }
+                    }
+                }
+            }
         }
         else
         {
@@ -322,6 +414,11 @@ void GameManager::battle(Character* player, Monster* currentMonster)
             {
                 instance_->outputLog(u8"잘못된 입력입니다.");
             });
+            RenderBoxFromCout(box_choose.x, box_choose.y, box_choose.width, box_choose.height, [&]() // 선택지 출력
+                {
+                    setCursorPosition(2, 27); // 커서위치 초기화
+                    system("pause");
+                });
 
 
         }

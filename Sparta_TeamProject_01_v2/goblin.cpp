@@ -14,6 +14,7 @@ Goblin::Goblin(const std::string& type, int level)
 		int attackSpeed = 0; // 기본 공격속도
 		std::string namePrefix = ""; // 이름
 
+		ascii = "goblin_art_lq.txt";
 
 		if (type == u8"일반")
 		{
@@ -40,9 +41,10 @@ Goblin::Goblin(const std::string& type, int level)
 
 		else if (type == u8"겁쟁이")
 		{
+			ascii = "goblin_art_lq.txt";
 			RenderBoxFromCout(box_ETC.x, box_ETC.y, box_ETC.width, box_ETC.height, [&]()  // etc창 생성
 				{
-					AsciiArt::printFromFile("goblin_art_lq.txt");
+					AsciiArt::printFromFile(ascii);
 				});
 			namePrefix = u8"겁쟁이 고블린";
 			baseHealth = 20;
